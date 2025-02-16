@@ -1,3 +1,7 @@
+/* -------------------------------------------------------------------------- */
+/*  GLOBAL & BASE STYLES                                                      */
+/* -------------------------------------------------------------------------- */
+
 * {
   font-family: "Courier New", Courier, monospace;
 }
@@ -19,11 +23,7 @@
   --brown-faded: rgb(207, 129, 15, 0.75);
   --brown-full: rgb(207, 129, 15);
 }
-.homepage{
-  position: absolute;
-  top: calc(-100vh + 75px);
-  width: 99vw;
-}
+
 label,
 input,
 select,
@@ -51,7 +51,7 @@ select {
 body {
   margin: 0; /* removes white border around website*/
   padding: 0;
-  background-color:rgb(20,20,20) ;
+  background-color: rgb(20, 20, 20);
 }
 
 menu {
@@ -77,90 +77,19 @@ Link:link {
   color: white;
 }
 
-.in-session, .events{
-  width: min(65vw, 1350px);
-}
-/* In Session */
-.in-session {
-  position: relative;
-  padding: 0;
-  z-index: 3;
-  margin: 2rem 15vw 3rem 30vw;
-  animation-duration: 0.33s;
-  animation-timing-function: ease-in-out;
-  animation-name: slideDownFade;
-  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-}
-
-.in-session .in-session-box {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  max-height: 400px;
-  background-color: rgb(40,151,159);
-}
-
-.in-session .in-session-text {
-  width: 50%;
-  height: min(40vh, 400px);
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 2rem;
-}
-
-.in-session .in-session-image {
-  width: 50%;
-}
-
-.in-session .in-session-image img {
-  max-height: 400px;
-  min-width: 100%;
-  object-fit: fill;
-  display: block;
-}
-.in-session .in-session-text h1 {
-  font-size: 2rem;
-  margin: 0;
-  color: rgb(166, 27, 27);
-}
-.in-session .in-session-text h2 {
-  font-size: 2rem;
-  margin: 0;
-  color: rgb(75, 75, 75);
-}
-.in-session .in-session-text h3 {
-  font-size: 1.5rem;
-  margin: 0;
-  color: rgb(75, 75, 75);
-}
-.in-session .in-session-text p {
-  font-size: 1.5rem;
-  margin: 0;
-}
-.in-session .in-session-text .in-session-timestamps {
-  margin: 1rem 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-
+/* A general "action-button" class used in multiple places */
 .action-button {
   position: relative;
   top: 10%;
   background-color: rgba(172, 166, 133, 0.5);
   color: white;
-  padding: 0.5rem 1rem 0.5rem 1rem;
+  padding: 2rem 4rem;
   border-radius: 0.2rem;
   border: white 4px double;
   font-family: "Times New Roman", Times, serif;
-  padding: 2rem 4rem;
   font-size: 2rem;
 }
+
 .action-button > a {
   color: white !important;
 }
@@ -176,153 +105,56 @@ Link:link {
   margin-top: 0rem;
 }
 
-/* NAVBAR STYLING */
-.navbar-stack {
-  display: flex;
-  flex-direction: column;
-  max-width: 400px;
-  align-items: flex-start;
-  margin: 20px 0 0 0;
-  color: rgb(167,167,167);
-  top: 0;
-  position: relative;
-  z-index: 1000;
-}
-.nav-bar-logo {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-/* Base navbar menu styles */
-/* Base navbar grid */
-.navbar-menu {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+/* -------------------------------------------------------------------------- */
+/*  BACKGROUND LAYER (TOP-LEVEL)                                              */
+/* -------------------------------------------------------------------------- */
 
-  position: relative;
-  z-index: 1001;
-  pointer-events: auto;
+.background-image {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  width: min(90vw, 1600px);
+  height: 100vh;
+  transform: translateX(-50%);
+  background: url("./assets/home-pagecover.png") no-repeat center / cover;
+  z-index: -1;
 }
 
-/* Direct children styles */
-.navbar-menu > li,
-.navbar-menu > a,
-.navbar-menu > Link {
-  text-align: center;
-  font-size: 1.5rem;
+/* -------------------------------------------------------------------------- */
+/*  HOMEPAGE WRAPPER & HEADER                                                 */
+/* -------------------------------------------------------------------------- */
 
-}
-
-.navbar-menu > a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  text-decoration: none;
-}
-
-.navbar-menu > a:hover {
-  color: var(--blue-full);
-}
-
-
-/* Special background styling for reserve-table containers */
-
-/* Set up each nav link to have extra space on the right */
-.hover-effect {
-  color: rgb(167,167,167);
-  position: relative;
-  z-index: 100;
-  text-align: center;
-  cursor: pointer;
-  padding: 0 20px;
-  height: 40px;
-}
-
-/* Create a vertical divider after every nav link except the last one */
-
-.socials {
+.homepage {
+  position: absolute;
+  top: 0vw;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 20px;
-}
-.socials > a {
-  margin: 0;
-}
-.socials .hover-effect {
-  margin-left: 5px;
-  padding: 5px;
-  color: rgb(167,167,167);
+  min-height: 100vh;
+  width: min(90vw, 1600px);
+  max-width: 1600px;
+  margin: auto;
+  position: relative;
+  z-index: 0;
+  background-color: transparent;
 }
 
-/* Hide mobile elements */
-.mobile {
-  display: none;
-}
-
-/* Burger menu styling */
-.burger {
-  display: none;
-  grid-template-columns: 5fr 1fr;
-}
-
-/* Hover state for nav links */
-.socials .hover-effect:hover {
-  color: var(--blue-full);
-}
-/* .hover-effect:hover, .socials .hover-effect:hover {
-  height: 100%;
-  transition: 0.25s;
-} */
-
-/* Hide mobile elements */
-.mobile {
-  display: none;
-}
-
-/* Burger menu styling */
-.burger {
-  display: none;
-  grid-template-columns: 5fr 1fr;
-}
-
-/* Hover state for links using .hover-effect */
-.hover-effect:hover {
-  transition: 0.25s;
-}
-
-.nav-image {
-  max-height: 5rem;
-}
-.header-menu { 
+.header-menu {
   position: sticky;
-  background-color: rgb(38, 37, 37);
+  box-sizing: border-box;
   top: 2rem;
-  z-index: 2;
-  width: 70vw;
-  margin: 0 15vw;
+  z-index: 3;
+  max-width: 95vw;
   padding: 0 20px;
   height: calc(100vh - 2rem);
   display: flex;
   justify-content: space-between;
-  clip-path: polygon(
-    60% 0,       
-    100% 0,       
-    100% 100%,   
-    0 100%,      
-    0 15%       
-  );
 }
 
+/* -------------------------------------------------------------------------- */
+/*  CALL TO ACTION / HEADER BOX / LOGO / BAR INFO                             */
+/* -------------------------------------------------------------------------- */
 
-
-/* CALL TO ACTION */
 .header-box {
-  background-color: rgb(38, 37, 37);
   display: flex;
   position: relative;
   z-index: 6;
@@ -333,6 +165,7 @@ Link:link {
   height: 100%;
   width: 10vw;
 }
+
 .header-box nav,
 .header-box .bar-info,
 .header-box .call-to-action,
@@ -340,12 +173,14 @@ Link:link {
   position: relative;
   z-index: 10000;
 }
-.header-box .side-nav-bar{
+
+.header-box .side-nav-bar {
   width: 25vw;
   max-width: 300px;
   position: relative;
   z-index: 10000;
 }
+
 .logo-title {
   display: inline-flex;
   position: relative;
@@ -353,15 +188,17 @@ Link:link {
   justify-content: center;
   top: 0rem;
   justify-content: center;
-  -webkit-text-stroke: 1px var(--white-full); /* Apply a blue outline */
+  -webkit-text-stroke: 1px var(--white-full); /* Apply a white outline */
   color: transparent;
   font-family: "Times New Roman", Times, serif;
   height: 2rem;
 }
+
 .logo-title h1 {
   align-items: center;
   font-size: 2rem;
 }
+
 .bar-info {
   display: flex;
   flex-direction: column;
@@ -372,31 +209,37 @@ Link:link {
   width: 100%;
   max-width: 300px;
   justify-content: center;
-  color: rgb(167,167,167);
+  color: rgb(167, 167, 167);
 }
-.bar-info .footer-info{
+
+.bar-info .footer-info {
   width: 100%;
 }
+
 .bar-info .footer-info h3 {
-  color: rgb(167,167,167);
+  color: rgb(167, 167, 167);
   font-family: "Times New Roman", Times, serif;
   font-size: 1rem;
   max-width: 30rem;
   text-overflow: clip;
   margin-bottom: 0rem;
 }
-.bar-info .footer-menu{
+
+.bar-info .footer-menu {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-content: flex-start;
 }
-.bar-info .footer-menu .footer-links{
+
+.bar-info .footer-menu .footer-links {
   height: 25px;
 }
-.bar-info .footer-menu .footer-links a{
-  color: rgb(167,167,167);
+
+.bar-info .footer-menu .footer-links a {
+  color: rgb(167, 167, 167);
 }
+
 .call-to-action {
   position: relative;
   top: 8rem;
@@ -407,13 +250,16 @@ Link:link {
   padding: 1.25rem 0rem;
   align-items: center;
 }
+
 .call-to-action > .hero-text > a {
   position: relative;
 }
+
 .call-to-action > .hero-text {
   position: relative;
   left: 20%;
 }
+
 .bar-info > h1 {
   font-size: 2rem;
   margin-top: 0rem;
@@ -443,23 +289,8 @@ Link:link {
   height: 100%;
   object-fit: cover;
 }
-/* Keyframes for the bounce effect */
-@keyframes bounce {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-20px);
-  }
-  60% {
-    transform: translateY(-10px);
-  }
-}
 
+/* Animated arrow (bounce effect) */
 .arrow {
   position: absolute;
   background-color: transparent;
@@ -470,6 +301,7 @@ Link:link {
   border-radius: 50%;
   animation: bounce 2s infinite;
 }
+
 .arrow > svg > path {
   stroke: rgba(255, 255, 255, 0.7);
   margin-top: 10px;
@@ -480,17 +312,207 @@ Link:link {
     drop-shadow(0px 6px 0 rgba(255, 255, 255, 0.7));
 }
 
-/* Events */
+/* -------------------------------------------------------------------------- */
+/*  NAVBAR STYLING                                                            */
+/* -------------------------------------------------------------------------- */
+
+.navbar-stack {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  align-items: flex-start;
+  margin: 20px 0 0 0;
+  color: rgb(167, 167, 167);
+  top: 0;
+  position: relative;
+  z-index: 1000;
+}
+
+.nav-bar-logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navbar-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1001;
+  pointer-events: auto;
+}
+
+/* Direct children styles */
+.navbar-menu > li,
+.navbar-menu > a,
+.navbar-menu > Link {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.navbar-menu > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.navbar-menu > a:hover {
+  color: var(--blue-full);
+}
+
+/* Hover link styling */
+.hover-effect {
+  color: rgb(167, 167, 167);
+  position: relative;
+  z-index: 100;
+  text-align: center;
+  cursor: pointer;
+  padding: 0 20px;
+  height: 40px;
+}
+
+.socials {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.socials > a {
+  margin: 0;
+}
+
+.socials .hover-effect {
+  margin-left: 5px;
+  padding: 5px;
+  color: rgb(167, 167, 167);
+}
+
+.socials .hover-effect:hover {
+  color: var(--blue-full);
+}
+
+.mobile {
+  display: none;
+}
+
+.burger {
+  display: none;
+  grid-template-columns: 5fr 1fr;
+}
+
+/* Hover state for links using .hover-effect */
+.hover-effect:hover {
+  transition: 0.25s;
+}
+
+.nav-image {
+  max-height: 5rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  MAIN CONTENT                                                              */
+/* -------------------------------------------------------------------------- */
+
+.homepage-main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 2rem;
+  overflow: hidden;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  IN SESSION SECTION                                                        */
+/* -------------------------------------------------------------------------- */
+
+.in-session {
+  position: relative;
+  z-index: 3;
+  margin: auto;
+  animation-duration: 0.33s;
+  animation-timing-function: ease-in-out;
+  animation-name: slideDownFade;
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+
+.in-session .in-session-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  max-height: 400px;
+  background-color: rgb(40, 151, 159);
+}
+
+.in-session .in-session-text {
+  width: 50%;
+  height: min(40vh, 400px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 2rem;
+}
+
+.in-session .in-session-image img {
+  max-height: 400px;
+  min-width: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+.in-session .in-session-text h1 {
+  font-size: 2rem;
+  margin: 0;
+  color: rgb(166, 27, 27);
+}
+
+.in-session .in-session-text h2 {
+  font-size: 2rem;
+  margin: 0;
+  color: rgb(75, 75, 75);
+}
+
+.in-session .in-session-text h3 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: rgb(75, 75, 75);
+}
+
+.in-session .in-session-text p {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.in-session .in-session-text .in-session-timestamps {
+  margin: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  EVENTS SECTION                                                            */
+/* -------------------------------------------------------------------------- */
+
 .events {
   position: relative;
-  padding: 0;
   z-index: 3;
   margin: 0 auto;
-  margin-left: 30vw;
   animation-duration: 0.33s;
   animation-timing-function: ease-in-out;
   animation-name: slideDownFade;
 }
+
 .events-cards {
   display: flex;
   width: 100%;
@@ -498,7 +520,9 @@ Link:link {
   justify-content: center;
   flex-wrap: nowrap;
 }
-.events-up-next, .events-soon{
+
+.events-up-next,
+.events-soon{
   padding: 0;
   width: 100%;
 }
@@ -509,7 +533,7 @@ Link:link {
   height: 250px;
   margin: auto;
   position: relative;
-  background-color: rgb(63,61,60);
+  background-color: rgb(63, 61, 60);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -518,10 +542,6 @@ Link:link {
 .menu-card:hover {
   background-color: rgba(149, 149, 156, 0.28);
 }
-
-
-/* Rest of your card styles remain the same */
-
 
 .menu-card-content {
   background-color: transparent;
@@ -533,19 +553,20 @@ Link:link {
 .menu-card-content > h1 {
   z-index: 4;
   font-size: 0.5rem;
-
 }
+
 .menu-card-content > h2 {
   z-index: 4;
   font-size: 1.2rem;
   margin: 5px 0;
   color: rgb(149, 149, 156);
 }
+
 .menu-card-content > p {
   z-index: 4;
   font-size: 2.4rem;
   margin-top: 0.7rem;
-  color: rgb(40,151,159)
+  color: rgb(40, 151, 159);
 }
 
 .menu-card-content > h3 {
@@ -554,56 +575,44 @@ Link:link {
   margin: 0;
 }
 
+/* -------------------------------------------------------------------------- */
+/*  SPECIALS                                                                  */
+/* -------------------------------------------------------------------------- */
+
 .specials {
-  padding: 0rem 5rem 0 5rem;
+  padding: 0rem;
   animation-duration: 0.33s;
   animation-timing-function: ease-in-out;
   animation-name: slideDownFade;
   width: 100%;
-  margin: 0 auto;
+  margin: 0;
+  height: auto;
 }
 
-.events-topbar{
+.events-topbar {
   text-align: left;
   align-items: left;
-  margin: 1rem;
+  box-sizing: border-box;
+  margin: 1rem 0rem;
   width: 100%;
+  display: block;
 }
+
 .events-topbar > div {
   display: inline-flex;
   margin-top: 1rem;
-  height: 6rem;
+  height: 2rem;
   color: var(--white-full);
   font-family: EuroExt;
 }
-.events-topbar {
-  display: block;
-  text-align: left;
-}
 
-.events-topbar > div > h1{
+.events-topbar > div > h1 {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  color: #495e57;
-  font-size: 4rem;
+  color: rgb(167, 167, 167);
+  font-size: 2rem;
   margin: 0rem;
   padding: 0rem;
 }
-
-
-
-/* Optional: Change the number of columns on smaller screens */
-@media screen and (max-width: 1300px) {
-  .events-cards {
-    grid-template-columns: repeat(2, auto);
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .events-cards {
-    grid-template-columns: 1fr;
-  }
-}
-
 
 .special-button {
   display: block;
@@ -617,9 +626,10 @@ Link:link {
 }
 
 .special-button:hover {
-  color: rgb(40,151,159);
+  color: rgb(40, 151, 159);
   cursor: pointer;
 }
+
 .special-button:focus {
   outline: none;
   cursor: pointer;
@@ -629,8 +639,9 @@ Link:link {
   display: none;
 }
 
-/* TESTIMONIAL CARDS */
-
+/* -------------------------------------------------------------------------- */
+/*  TESTIMONIAL CARDS                                                         */
+/* -------------------------------------------------------------------------- */
 
 .testimonials-topbar > h1 {
   text-align: left;
@@ -647,7 +658,7 @@ Link:link {
   justify-content: center;
 }
 
-.testimonial-card{
+.testimonial-card {
   border: #110d45 0.2rem double;
   display: flex;
   height: 25rem;
@@ -659,6 +670,7 @@ Link:link {
   max-width: 20rem;
   white-space: wrap;
 }
+
 .testimonial-card > .description {
   margin-top: 1rem;
   overflow: hidden;
@@ -674,6 +686,7 @@ Link:link {
   overflow: hidden;
   display: block;
 }
+
 .testimonial-card > .ratings {
   display: inline-flex;
   flex-direction: row;
@@ -681,14 +694,17 @@ Link:link {
   justify-content: space-between;
   align-items: center;
 }
+
 .testimonial-card > .ratings > h3 {
   font-size: 1.5rem;
 }
+
 .testimonial-card > img {
   width: 3rem;
   height: 3rem;
   object-fit: contain;
 }
+
 .testimonial-card > a {
   text-align: right;
   color: black;
@@ -696,6 +712,7 @@ Link:link {
   font-weight: bold;
   margin: 1.5rem 0rem;
 }
+
 .testimonial-card > .ratings > span {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
@@ -707,35 +724,50 @@ Link:link {
   display: none;
 }
 
-.specials-carousel {
-  margin: 0 2rem 0 2rem;
-}
+/* -------------------------------------------------------------------------- */
+/*  ABOUT US                                                                  */
+/* -------------------------------------------------------------------------- */
 
-/* ABOUT */
 .about-us {
-  background-color: #f4ce14;
+  position: relative; /* Needed so ::before is positioned relative to this container */
+  background-color: transparent;
   display: grid;
+  box-sizing: border-box;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 2vh;
   grid-row-gap: 2vh;
-  padding: 1.25rem 5rem 2.5rem 5rem;
-  min-height: 22rem;
+  padding: 4rem;       /* Universal padding */
   margin-bottom: -1rem;
-  height: 100vh;
+  margin: 0 auto;
+  color: rgb(167, 167, 167);
+  z-index: 0;         /* Ensure the text sits above the ::before background */
+}
+
+.about-us::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Place behind the .about-us content */
+  background: #4c4a4a; /* Or use an image/gradient if desired */
+
+  /* Example: diagonal clip from top-left to halfway across the top,
+     then to the right side (cutting off the top-right corner).
+     Adjust the polygon points to get the exact shape you want. */
+  clip-path: polygon(0 0 , 0% 0, 100% 10%, 90% 90%, 3% 90%);
 }
 
 .about-subtext {
   margin-top: -1.5rem;
 }
+
 .about-us > .hero-text,
 .about-us > .hero-text-2 {
-  margin-left: 1rem;
-  text-align: left;
-}
-.about-us > .hero-text-2 {
-  margin-left: 10rem;
-  text-align: left;
+  margin-left: 0;
+  text-align: left; 
 }
 
 .about-us > .hero-text > h1,
@@ -743,42 +775,47 @@ Link:link {
   font-size: 2rem;
   margin-bottom: 0;
 }
+
 .about-us > .hero-text > h2,
 .about-us > .hero-text-2 > h2 {
   margin-bottom: 4rem;
   margin-top: 0rem;
 }
+
 .about-us > .hero-text > p,
 .about-us > .hero-text-2 > p {
   font-size: 2vh;
 }
+
+
 .double-image {
-  max-height: 25vh;
-  position: relative;
-  top: 4rem;
-  left: 2rem;
+  max-height: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
 }
 
 .double-image > img {
   width: 70%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
+  display: block;
+  margin: 0 auto; 
 }
 
-.about-1 {
-  margin-left: -1rem;
-  position: relative;
-  top: 0;
-  left: 0;
+
+/* -------------------------------------------------------------------------- */
+/*  Merch                                                                 */
+/* -------------------------------------------------------------------------- */
+
+.merch-display{
+  margin: auto;
 }
 
-.about-2 {
-  position: absolute;
-  top: -3.5rem;
-  left: 5rem;
-}
-
-/* FOOTER STYLING */
+/* -------------------------------------------------------------------------- */
+/*  FOOTER                                                                    */
+/* -------------------------------------------------------------------------- */
 
 .footer-header {
   margin-bottom: -1.25rem;
@@ -819,13 +856,13 @@ Link:link {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   margin-right: 3rem;
-
   background-color: #2a2664;
   padding: 0.5rem;
 }
 
-/* RESERVE A TABLE */
-
+/* -------------------------------------------------------------------------- */
+/*  RESERVE A TABLE                                                           */
+/* -------------------------------------------------------------------------- */
 
 .header-reserve {
   width: 100vw; /* width of container */
@@ -843,6 +880,7 @@ Link:link {
   font-size: 25px;
   border-radius: 0.5rem;
 }
+
 .reservation-block .reservation-form {
   border: double var(--blue-full) 0.5rem;
   max-width: 40rem;
@@ -859,6 +897,7 @@ Link:link {
   max-width: 15rem;
   height: 10rem;
 }
+
 .reservation-form {
   padding: 2rem 0 0.5rem 0;
   text-align: left;
@@ -871,6 +910,7 @@ Link:link {
 .reservation-form > div {
   margin-bottom: 1.5rem;
 }
+
 .reservation-form .action-button {
   position: relative;
   left: -35%;
@@ -878,6 +918,7 @@ Link:link {
   font-size: 1.5rem;
   padding: 1rem;
 }
+
 .reservation-form .action-button:hover {
   background-color: wheat;
   color: var(--blue-full);
@@ -926,7 +967,10 @@ Link:link {
   transition: 0.2s;
 }
 
-/* MEDIA QUERIES*/
+/* -------------------------------------------------------------------------- */
+/*  MEDIA QUERIES                                                             */
+/* -------------------------------------------------------------------------- */
+
 @media screen and (max-width: 60rem) {
   .action-button {
     font-size: 1.2rem;
@@ -963,6 +1007,12 @@ Link:link {
 
   .about-us {
     grid-gap: 12vw;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .events-cards {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1109,6 +1159,26 @@ Link:link {
   }
 }
 
+/* -------------------------------------------------------------------------- */
+/*  KEYFRAMES                                                                 */
+/* -------------------------------------------------------------------------- */
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
 @keyframes slideDownFade {
   0% {
     transform: translateY(-15%);
@@ -1122,4 +1192,14 @@ Link:link {
 
 .carousel > .thumbs-wrapper {
   display: none;
+}
+
+/* -------------------------------------------------------------------------- */           
+/* important contstraints */
+/* -------------------------------------------------------------------------- */           
+.in-session,
+.events,
+.merch-display, .about-us {
+  width: min(65vw, 1200px);
+  margin-bottom: 2rem;
 }

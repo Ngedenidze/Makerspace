@@ -1,5 +1,5 @@
 import Carousel from "./TestimonialCarousel";
-import TestimonialCard from "./CardInfo/TestimonialCard";
+import SpecialCard from "./CardInfo/SpecialCard";
 export default function Testimonials() {
   return (
     <section className="events-soon">
@@ -10,29 +10,27 @@ export default function Testimonials() {
       </article>
 
       <section className="events-cards">
-        <TestimonialCard
-          link="https://maps.app.goo.gl/Q8dLY1YYCdHmQ98R7"
-          name="Elias Creeley"
-          description=" ''The food was 
-               ''"
-        />
-        <TestimonialCard
-          link="https://maps.app.goo.gl/6wsK9NUhxQR3Noeq9"
-          name="Jane Aa"
-          description="''Really nice diner!!!
-                "
-        />
-        <TestimonialCard
-          link="https://maps.app.goo.gl/bRWHECmX7yPn9FAp7"
-          name="Isabel Kaul"
-          description="''I've had 
-          '"
-        />
-        <TestimonialCard
-          link="https://maps.app.goo.gl/ucXRRwrcJz7YVn8Z6"
-          name="Jennifer Evans"
-          description="''This place was "
-        />
+<SpecialCard 
+  weekday="Week day" 
+  date="13.02.2025" 
+  djName="DJ Name" 
+  link="/event-details"
+/><SpecialCard 
+  weekday="Week day" 
+  date="13.02.2025" 
+  djName="DJ Name" 
+  link="/event-details"
+/><SpecialCard 
+  weekday="Week day" 
+  date="13.02.2025" 
+  djName="DJ Name" 
+  link="/event-details"
+/><SpecialCard 
+  weekday="Week day" 
+  date="13.02.2025" 
+  djName="DJ Name" 
+  link="/event-details"
+/>
       </section>
 
       <section className="testimonials-carousel">

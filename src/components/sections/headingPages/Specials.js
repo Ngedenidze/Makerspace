@@ -1,14 +1,5 @@
 import Carousel from "./SpecialsCarousel";
-import GreekSalad from "../../../assets/food/greek-salad.webp";
-import LemonDessert from "../../../assets/food/lemon-dessert.webp";
-import Test from "../../../assets/food/test.jpg";
-import CroqueMadame from "../../../assets/food/croque-madame.jpg";
 import SpecialCard from "./CardInfo/SpecialCard";
-import AvocadoToast from "../../../assets/food/avocado-toast.jpg";
-import RedWhiteBlue from "../../../assets/food/red-white-blue.jpg";
-import SweetFrench from "../../../assets/food/sweet-french.webp";
-import BreakfastCroissant from "../../../assets/food/breakfast-croissant.jpg";
-import BreakfastBurrito from "../../../assets/food/breakfast-burrito.jpg";
 
 export default function Specials() {
   return (
