@@ -72,6 +72,7 @@ button {
 
 Link:visited,
 a:link,
+a:visited,
 Link:link {
   text-decoration: none;
   color: white;
@@ -123,14 +124,21 @@ Link:link {
 /* -------------------------------------------------------------------------- */
 /*  HOMEPAGE WRAPPER & HEADER                                                 */
 /* -------------------------------------------------------------------------- */
+.layout-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: min(90vw, 1600px);
+  margin: auto;
+  justify-content: center;
+  height: 100%;
+}
 
-.homepage {
-  position: absolute;
-  top: 0vw;
+.main-content {
   display: flex;
   flex-direction: row;
   min-height: 100vh;
-  width: min(90vw, 1600px);
   max-width: 1600px;
   margin: auto;
   position: relative;
@@ -140,10 +148,11 @@ Link:link {
 
 .header-menu {
   position: sticky;
-  box-sizing: border-box;
+  align-self: flex-start;
   top: 2rem;
+  box-sizing: border-box;
+  flex-shrink: 0; 
   z-index: 3;
-  max-width: 95vw;
   padding: 0 20px;
   height: calc(100vh - 2rem);
   display: flex;
@@ -210,15 +219,17 @@ Link:link {
   max-width: 300px;
   justify-content: center;
   color: rgb(167, 167, 167);
+  padding: 0 20px;
 }
 
 .bar-info .footer-info {
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 }
 .bar-info .footer-info h2{
   margin-bottom: 0.5rem;
-  color: rgb(196, 193, 193);
+  color: rgb(208, 207, 207);
+  font-size: 1rem;
 }
 .bar-info .footer-info h3 {
   color: rgb(167, 167, 167);
@@ -237,11 +248,27 @@ Link:link {
 }
 
 .bar-info .footer-menu .footer-links {
-  height: 25px;
+  height: auto;
+  margin: 0;
+}
+.bar-info .footer-menu .footer-links a {
+  text-decoration: none;
 }
 
-.bar-info .footer-menu .footer-links a {
+.bar-info .footer-menu .footer-links a:hover{
+  background-color: transparent;
+}
+.bar-info .footer-menu .footer-links h3 {
   color: rgb(167, 167, 167);
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1rem;
+  max-width: 30rem;
+  text-overflow: clip;
+  margin: 0rem;
+  text-decoration: none;
+}
+.bar-info .footer-menu .footer-links h3:hover{
+  color: var(--white-full);
 }
 
 .call-to-action {
@@ -365,7 +392,7 @@ Link:link {
 }
 
 .navbar-menu > a:hover {
-  color: var(--blue-full);
+  color: var(--white-full);
 }
 
 /* Hover link styling */
@@ -375,10 +402,13 @@ Link:link {
   z-index: 100;
   text-align: center;
   cursor: pointer;
-  padding: 0 20px;
-  height: 40px;
-}
+  padding: 0 15px;
 
+}
+.hover-effect h1{
+  line-height: 1.2rem;
+  margin: 5px;
+}
 .socials {
   display: flex;
   flex-direction: row;
@@ -451,6 +481,7 @@ Link:link {
   padding: 0.5rem 1rem;
   cursor: pointer;
   font-weight: bold;
+  font-size: 1rem;
   background-color: transparent;
 }
 
@@ -484,14 +515,13 @@ Link:link {
   justify-content: space-around;
   align-items: flex-start;
   max-height: 500px;
-  width: 1200px;
+  width: min(65vw, 1200px);
   background-color: rgb(40, 151, 159);
 }
 
 /* Left side text */
 .in-session-text {
   width: 50%;
-  height: min(40vh, 400px);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -501,6 +531,13 @@ Link:link {
 }
 
 /* Right side image */
+.in-session-image {
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 10% 100%);
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
 .in-session-image img {
   object-fit: cover;
   display: block;
@@ -512,17 +549,18 @@ Link:link {
 .in-session .in-session-text h1 {
   font-size: 2rem;
   margin: 0;
-  color: rgb(166, 27, 27);
+  color: rgb(176, 40, 40);
 }
 
 .in-session .in-session-text h2 {
-  font-size: 2rem;
+  font-size: 1.6rem;
   margin: 0;
   color: rgb(75, 75, 75);
 }
 
 .in-session .in-session-text h3 {
   font-size: 1.5rem;
+  line-height: 1rem;
   margin: 0;
   color: rgb(75, 75, 75);
 }
@@ -533,7 +571,7 @@ Link:link {
 }
 
 .in-session .in-session-text .in-session-timestamps {
-  margin: 1rem 2rem;
+  margin: 10px 2rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -590,6 +628,9 @@ Link:link {
   padding: 1rem 2rem 1rem 1rem;
   height: 100%;
 }
+.menu-card-content a{
+  text-decoration: none;
+}
 
 .menu-card-content > h1 {
   z-index: 4;
@@ -605,7 +646,7 @@ Link:link {
 
 .menu-card-content > p {
   z-index: 4;
-  font-size: 2.4rem;
+  font-size: 1.5rem;
   margin-top: 0.7rem;
   color: rgb(40, 151, 159);
 }
@@ -644,13 +685,13 @@ Link:link {
   margin-top: 1rem;
   height: 2rem;
   color: var(--white-full);
-  font-family: EuroExt;
+  font-family: "Times New Roman", Times, serif;
 }
 
 .events-topbar > div > h1 {
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-family: "Times New Roman", serif;
   color: rgb(167, 167, 167);
-  font-size: 2rem;
+  font-size: 1rem;
   margin: 0rem;
   padding: 0rem;
 }

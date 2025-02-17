@@ -4,6 +4,7 @@ import About from "./pages/About";
 import Reservation from "./pages/BookingPage";
 import Order from "./pages/Order";
 import Confirmation from "./pages/Confirmation";
+import EventDetails from "./pages/Events";
 
 export default function Routing() {
   return (
@@ -17,6 +18,8 @@ export default function Routing() {
       <Route path="/order" element={<Order />} />
 
       <Route path="/confirmation" element={<Confirmation />} />
+
+      <Route path="/event-details/:id" element={<EventDetails />} />
     </Routes>
   );
 }

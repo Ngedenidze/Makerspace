@@ -8,7 +8,6 @@ export default function InsessionTabs() {
   const [error, setError] = useState(null);
   const [image, setImage] = useState("");
 
- // Fetch (or mock) data on mount
  useEffect(() => {
   // New mockResponse shape
   const mockResponse = {
@@ -64,25 +63,19 @@ export default function InsessionTabs() {
   */
 }, []);
 
-  // Handle loading or error
+
   if (loading) return <p>Loading stages...</p>;
   if (error) return <p>Error: {error}</p>;
   if (stages.length === 0) return <p>No stage data available.</p>;
 
-  // The currently active stage
   const activeStage = stages[activeStageIndex];
 
   return (
     <section className="in-session">
-      
-
-      {/* -- Main Content (Text on left, Image on right) -- */}
       <div className="in-session-box">
-        {/* Left side text */}
         <article className="in-session-text">
           <h1>{activeStage.title}</h1>
           <h2>MAKERSPACE</h2>
-          {/* -- Tabs -- */}
       <div className="stage-tabs">
         {stages.map((stage, index) => (
           <button
@@ -103,10 +96,7 @@ export default function InsessionTabs() {
             </div>
           ))}
         </article>
-
-        {/* Right side image */}
         <section className="in-session-image">
-          {/* Single image for all stages */}
           <img src={image} alt="In Session" />
         </section>
       </div>

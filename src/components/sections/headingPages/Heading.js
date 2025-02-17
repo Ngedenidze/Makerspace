@@ -4,7 +4,7 @@ import Hamburger from "../../../assets/hamburger.png";
 import Close from "../../../assets/close.png";
 import { Link } from "react-router-dom";
 
-export default function Heading({ scrollToSpecials, scrollToAbout }) {
+export default function Heading() {
   const [navbarOpen, setNavbarOpen] = useState(false);
   function handleToggle() {
     setNavbarOpen(!navbarOpen);
@@ -12,7 +12,7 @@ export default function Heading({ scrollToSpecials, scrollToAbout }) {
 
   return (
     <>
-      <header className="header-menu">
+
         <section className="header-box">
           <nav className="side-nav-bar">
             <nav className="burger">
@@ -29,12 +29,10 @@ export default function Heading({ scrollToSpecials, scrollToAbout }) {
                 />
               </button>
             </nav>
-            <Navigation device="desktop" onAboutClick={scrollToAbout} />
+            <Navigation device="desktop" />
             {navbarOpen ? (
               <Navigation
                 device="mobile"
-                onSpecialsClick={scrollToSpecials}
-                onAboutClick={scrollToAbout}
               />
             ) : (
               ""
@@ -50,7 +48,6 @@ export default function Heading({ scrollToSpecials, scrollToAbout }) {
             <section className="footer-menu">
               <Link className="footer-links">
                 <a href="" >
-            
                   <h3>Comercial Renting</h3>
                 </a>
               </Link>
@@ -69,7 +66,6 @@ export default function Heading({ scrollToSpecials, scrollToAbout }) {
             </section>
           </section>
         </section>
-      </header>
     </>
   );
 }

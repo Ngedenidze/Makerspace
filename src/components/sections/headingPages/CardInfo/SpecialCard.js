@@ -7,7 +7,7 @@ export default function SpecialCard(props) {
         <h2>{props.weekday}</h2> 
         <h2>{props.date}</h2> 
         <p>{props.djName}</p> 
-        <Link to={props.link} className="special-button" target="_blank" rel="noopener noreferrer">
+        <Link to={props.link} className="special-button" rel="noopener noreferrer">
           View
         </Link>
       </section>
