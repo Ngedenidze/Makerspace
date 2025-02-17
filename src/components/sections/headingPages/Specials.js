@@ -11,30 +11,30 @@ export default function Specials() {
       </article>
 
       <section className="events-cards">
-      <SpecialCard 
-  weekday="Week day" 
-  date="13.02.2025" 
-  djName="DJ Name" 
-  link="/event-details"
-/>
-<SpecialCard 
-  weekday="Week day" 
-  date="13.02.2025" 
-  djName="DJ Name" 
-  link="/event-details"
-/>
-<SpecialCard 
-  weekday="Week day" 
-  date="13.02.2025" 
-  djName="DJ Name" 
-  link="/event-details"
-/>
-<SpecialCard 
-  weekday="Week day" 
-  date="13.02.2025" 
-  djName="DJ Name" 
-  link="/event-details"
-/>
+        <SpecialCard
+          weekday="Saturday"
+          date="01.02.2025"
+          djName="ROOTRHYME + BEQA"
+          link="/event-details"
+        />
+        <SpecialCard
+          weekday="Friday"
+          date="07.02.2025"
+          djName="LEVI LOVE DISCO"
+          link="/event-details"
+        />
+        <SpecialCard
+          weekday="Saturday"
+          date="08.02.2025"
+          djName="RASHIO"
+          link="/event-details"
+        />
+        <SpecialCard
+          weekday="Friday"
+          date="14.02.2025"
+          djName="ELENE + KASHIA"
+          link="/event-details"
+        />
       </section>
 
       <section className="specials-carousel">

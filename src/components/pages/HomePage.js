@@ -38,7 +38,7 @@ export default function Homepage() {
 
   return (
     <>
-      <div className="background-image"></div>
+   
       <main className="main">
         <section className="homepage">
           {/* Pass scroll handlers to Heading if needed */}

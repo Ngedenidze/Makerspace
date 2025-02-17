@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Navigation from "../../Navigation";
 import Hamburger from "../../../assets/hamburger.png";
 import Close from "../../../assets/close.png";
-import ScrollDownArrow from "./ScrollDownArrow";
 import { Link } from "react-router-dom";
 
 export default function Heading({ scrollToSpecials, scrollToAbout }) {
@@ -18,7 +17,7 @@ export default function Heading({ scrollToSpecials, scrollToAbout }) {
           <nav className="side-nav-bar">
             <nav className="burger">
               <img
-                src={require("../../../assets/nav-logo.png")}
+                src={require("../../../assets/makerspace.JPG")}
                 alt="Oasis Diner logo"
                 className="nav-image"
               ></img>
@@ -44,26 +43,27 @@ export default function Heading({ scrollToSpecials, scrollToAbout }) {
           <section className="bar-info">
             <section className="footer-info">
               <h2>Location</h2>
-              <h3>Butler, NJ</h3>
-              <h3>1277 NJ-23</h3>
+              <h3>Lado Gudiashvili Square</h3>
+              <h3>Tbilisi 0162</h3>
+              <h3>Georgia</h3>
             </section>
             <section className="footer-menu">
               <Link className="footer-links">
                 <a href="" >
             
-                  <h3>Footer 1</h3>
+                  <h3>Comercial Renting</h3>
                 </a>
               </Link>
               <Link className="footer-links">
                 <a href="" >
               
-                  <h3>Footer 2</h3>
+                  <h3>Careers</h3>
                 </a>
               </Link>
               <Link className="footer-links">
                 <a href="" >
           
-                  <h3>Footer 3</h3>
+                  <h3>Contact</h3>
                 </a>
               </Link>
             </section>

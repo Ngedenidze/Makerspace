@@ -9,7 +9,7 @@ export default function Navigation({ device, onSpecialsClick, onAboutClick }) {
       ) : (
         <Link className="nav-bar-logo" to="/">
           <img
-            src={require("../assets/nav-logo.png")}
+            src={require("../assets/Logo.jpg")}
             alt="Little Lemon logo"
             className="nav-image"
           ></img>
@@ -20,7 +20,10 @@ export default function Navigation({ device, onSpecialsClick, onAboutClick }) {
           <h1>Home</h1>
         </Link>
         <Link className="hover-effect" to="/reservations">
-          <h1>Reservations</h1>
+          <h1>Events</h1>
+        </Link>
+        <Link className="hover-effect" to="/About">
+          <h1>About Us</h1>
         </Link>
         <Link className="hover-effect" to="/Account">
           <h1>Account</h1>

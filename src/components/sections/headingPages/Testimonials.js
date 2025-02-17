@@ -1,4 +1,4 @@
-import Carousel from "./TestimonialCarousel";
+import Carousel from "./SpecialsCarousel";
 import SpecialCard from "./CardInfo/SpecialCard";
 export default function Testimonials() {
   return (
@@ -11,24 +11,24 @@ export default function Testimonials() {
 
       <section className="events-cards">
 <SpecialCard 
-  weekday="Week day" 
-  date="13.02.2025" 
+  weekday="Friday" 
+  date="21.02.2025" 
+  djName="MARK CHEZ" 
+  link="/event-details"
+/><SpecialCard 
+  weekday="Saturday" 
+  date="22.02.2025" 
   djName="DJ Name" 
   link="/event-details"
 /><SpecialCard 
-  weekday="Week day" 
-  date="13.02.2025" 
-  djName="DJ Name" 
+  weekday="Friday" 
+  date="28.02.2025" 
+  djName="GIO SHENGELIA B2B TOMA" 
   link="/event-details"
 /><SpecialCard 
-  weekday="Week day" 
-  date="13.02.2025" 
-  djName="DJ Name" 
-  link="/event-details"
-/><SpecialCard 
-  weekday="Week day" 
-  date="13.02.2025" 
-  djName="DJ Name" 
+  weekday="Saturday" 
+  date="29.02.2025" 
+  djName="BEBUR" 
   link="/event-details"
 />
       </section>

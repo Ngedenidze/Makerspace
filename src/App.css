@@ -51,7 +51,7 @@ select {
 body {
   margin: 0; /* removes white border around website*/
   padding: 0;
-  background-color: rgb(20, 20, 20);
+  background-color: rgb(10, 10, 10);
 }
 
 menu {
@@ -116,7 +116,7 @@ Link:link {
   width: min(90vw, 1600px);
   height: 100vh;
   transform: translateX(-50%);
-  background: url("./assets/home-pagecover.png") no-repeat center / cover;
+  background: url("./assets/homepage-cover.png") no-repeat center / cover;
   z-index: -1;
 }
 
@@ -214,15 +214,19 @@ Link:link {
 
 .bar-info .footer-info {
   width: 100%;
+  margin-bottom: 1rem;
 }
-
+.bar-info .footer-info h2{
+  margin-bottom: 0.5rem;
+  color: rgb(196, 193, 193);
+}
 .bar-info .footer-info h3 {
   color: rgb(167, 167, 167);
   font-family: "Times New Roman", Times, serif;
   font-size: 1rem;
   max-width: 30rem;
   text-overflow: clip;
-  margin-bottom: 0rem;
+  margin: 0rem;
 }
 
 .bar-info .footer-menu {
@@ -413,6 +417,7 @@ Link:link {
 
 .nav-image {
   max-height: 5rem;
+  margin-left: 1rem;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -432,26 +437,59 @@ Link:link {
 /*  IN SESSION SECTION                                                        */
 /* -------------------------------------------------------------------------- */
 
+/* Tab Buttons */
+.stage-tabs {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.stage-tabs button {
+  color: rgb(78, 78, 78);
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: transparent;
+}
+
+.stage-tabs button.active,
+.stage-tabs button:hover {
+  border-bottom: #000000 solid 2px;
+}
+
+/* Where InsessionCards get displayed */
+.stage-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
 .in-session {
   position: relative;
   z-index: 3;
   margin: auto;
+  /* optional clipping if you want the angled shape */
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
   animation-duration: 0.33s;
   animation-timing-function: ease-in-out;
   animation-name: slideDownFade;
-  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
 }
 
-.in-session .in-session-box {
+/* The container that holds text and image side by side */
+.in-session-box {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  max-height: 400px;
+  justify-content: space-around;
+  align-items: flex-start;
+  max-height: 500px;
+  width: 1200px;
   background-color: rgb(40, 151, 159);
 }
 
-.in-session .in-session-text {
+/* Left side text */
+.in-session-text {
   width: 50%;
   height: min(40vh, 400px);
   box-sizing: border-box;
@@ -462,12 +500,14 @@ Link:link {
   padding: 2rem;
 }
 
-.in-session .in-session-image img {
-  max-height: 400px;
-  min-width: 100%;
-  object-fit: fill;
+/* Right side image */
+.in-session-image img {
+  object-fit: cover;
   display: block;
+  /* Use width: auto or max-width: 100% if you don't want it stretched */
+  max-width: 800px;
 }
+
 
 .in-session .in-session-text h1 {
   font-size: 2rem;
@@ -541,6 +581,7 @@ Link:link {
 
 .menu-card:hover {
   background-color: rgba(149, 149, 156, 0.28);
+  cursor: pointer;
 }
 
 .menu-card-content {
