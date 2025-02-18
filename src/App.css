@@ -408,13 +408,14 @@ Link:link {
 .hover-effect h1{
   line-height: 1.2rem;
   margin: 5px;
+  color: rgb(167, 167, 167);
 }
 .socials {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  padding-left: 20px;
+  margin-top: 1rem;
 }
 
 .socials > a {
@@ -422,13 +423,13 @@ Link:link {
 }
 
 .socials .hover-effect {
-  margin-left: 5px;
-  padding: 5px;
   color: rgb(167, 167, 167);
+  padding: 5px;
+  padding-left: 0;
 }
 
 .socials .hover-effect:hover {
-  color: var(--blue-full);
+  color: var(--white-full);
 }
 
 .mobile {
@@ -446,7 +447,7 @@ Link:link {
 }
 
 .nav-image {
-  max-height: 5rem;
+  max-height: 8rem;
   margin-left: 1rem;
 }
 
@@ -805,6 +806,76 @@ Link:link {
 .testimonials-carousel {
   display: none;
 }
+/* -------------------------------------------------------------------------- */
+/*  Commercial Renting                                                                    */
+/* -------------------------------------------------------------------------- */
+.commercial-renting {
+  position: relative; /* Needed so ::before is positioned relative to this container */
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 4rem 0;       /* Universal padding */
+  margin-bottom: -1rem;
+  margin: 0 auto;
+  color: rgb(167, 167, 167);
+  z-index: 0;         /* Ensure the text sits above the ::before background */
+  width: min(65vw, 1200px);
+}
+
+
+.commercial-renting .commercial-renting-text-container{
+  position: relative;
+  z-index: -1;
+  max-width: 35%;
+  box-sizing: border-box;
+  padding: 4rem;
+  text-decoration: none;
+  overflow: visible;
+  
+}
+.commercial-renting .commercial-renting-text-container h1{
+  font-size: 1.5rem;
+}
+.commercial-renting .commercial-renting-text-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 140%;
+  z-index: -2; /* Place behind the .about-us content */
+  background: #4c4a4a; /* Or use an image/gradient if desired */
+  
+  /* Example: diagonal clip from top-left to halfway across the top,
+     then to the right side (cutting off the top-right corner).
+     Adjust the polygon points to get the exact shape you want. */
+  clip-path: polygon(0 0 , 0% 0, 100% 0, 90% 90%, 0 80%);
+  filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
+}
+.commercial-renting .commercial-renting-text-container .special-button{
+  color: whitesmoke;
+  display: block;
+  width: auto;
+  background-color: transparent;
+}
+
+
+.commercial-renting .commercial-renting-image{
+  padding-top: 2rem;
+  z-index: 0;
+  max-width: 50%;
+  object-fit: cover;
+}
+.commercial-renting .commercial-renting-image img{
+
+  max-height: 600px;
+  width: auto;
+}
+
 
 /* -------------------------------------------------------------------------- */
 /*  ABOUT US                                                                  */

@@ -5,6 +5,7 @@ import Testimonials from "../sections/headingPages/Testimonials";
 import Insession from "../sections/headingPages/Insession";
 import About from "../sections/headingPages/About";
 import ImageGrid from "../reusable/Image Grid/ImageGrid";
+import CommercialRenting from "./CommercialRenting";
 
 export default function Homepage() {
 
@@ -39,8 +40,11 @@ export default function Homepage() {
               <Testimonials />
             </section>
 
-            <section className="merch-display">
+            {/* <section className="merch-display">
               <ImageGrid images={images} />
+            </section> */}
+            <section>
+              <CommercialRenting />
             </section>
 
             <section ref={aboutRef}>

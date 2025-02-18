@@ -1,6 +1,6 @@
 export default function About() {
     return (
-        <article className="about-us">
+      <article className="about-us">
             <section className="hero-text">
                 <h1>MakerSpace</h1>
                 <br/>
