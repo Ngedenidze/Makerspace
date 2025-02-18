@@ -51,7 +51,7 @@ select {
 body {
   margin: 0; /* removes white border around website*/
   padding: 0;
-  background-color: rgb(10, 10, 10);
+  background-color: #141414;
 }
 
 menu {
@@ -507,6 +507,7 @@ Link:link {
   animation-duration: 0.33s;
   animation-timing-function: ease-in-out;
   animation-name: slideDownFade;
+
 }
 
 /* The container that holds text and image side by side */
@@ -517,7 +518,8 @@ Link:link {
   align-items: flex-start;
   max-height: 500px;
   width: min(65vw, 1200px);
-  background-color: rgb(40, 151, 159);
+  background-color: #B9C0DA;
+  
 }
 
 /* Left side text */
@@ -537,13 +539,16 @@ Link:link {
   width: 50%;
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
+
 }
 .in-session-image img {
   object-fit: cover;
   display: block;
   /* Use width: auto or max-width: 100% if you don't want it stretched */
   max-width: 800px;
+  overflow: visible;
+  object-position: 10%;
 }
 
 
@@ -612,7 +617,7 @@ Link:link {
   height: 250px;
   margin: auto;
   position: relative;
-  background-color: rgb(63, 61, 60);
+  background-color: #73667A;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -622,7 +627,6 @@ Link:link {
   background-color: rgba(149, 149, 156, 0.28);
   cursor: pointer;
 }
-
 .menu-card-content {
   background-color: transparent;
   z-index: 3;
@@ -642,14 +646,14 @@ Link:link {
   z-index: 4;
   font-size: 1.2rem;
   margin: 5px 0;
-  color: rgb(149, 149, 156);
+  color: #C4E7D4;
 }
 
 .menu-card-content > p {
   z-index: 4;
   font-size: 1.5rem;
   margin-top: 0.7rem;
-  color: rgb(40, 151, 159);
+  color: #E2F3EA;
 }
 
 .menu-card-content > h3 {
@@ -835,10 +839,11 @@ Link:link {
   padding: 4rem;
   text-decoration: none;
   overflow: visible;
-  
+  color: #E2F3EA;
 }
 .commercial-renting .commercial-renting-text-container h1{
   font-size: 1.5rem;
+  color: #C4E7D4;
 }
 .commercial-renting .commercial-renting-text-container::before {
   content: "";
@@ -848,7 +853,7 @@ Link:link {
   width: 200%;
   height: 140%;
   z-index: -2; /* Place behind the .about-us content */
-  background: #4c4a4a; /* Or use an image/gradient if desired */
+  background: #73667A; /* Or use an image/gradient if desired */
   
   /* Example: diagonal clip from top-left to halfway across the top,
      then to the right side (cutting off the top-right corner).
@@ -857,7 +862,7 @@ Link:link {
   filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
 }
 .commercial-renting .commercial-renting-text-container .special-button{
-  color: whitesmoke;
+  color: #E2F3EA;
   display: block;
   width: auto;
   background-color: transparent;
@@ -884,12 +889,8 @@ Link:link {
 .about-us {
   position: relative; /* Needed so ::before is positioned relative to this container */
   background-color: transparent;
-  display: grid;
+  display: flex;
   box-sizing: border-box;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  grid-column-gap: 2vh;
-  grid-row-gap: 2vh;
   padding: 4rem;       /* Universal padding */
   margin-bottom: -1rem;
   margin: 0 auto;
@@ -903,58 +904,53 @@ Link:link {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 90%;
   z-index: -1; /* Place behind the .about-us content */
-  background: #4c4a4a; /* Or use an image/gradient if desired */
+  background: #73667A; /* Or use an image/gradient if desired */
 
   /* Example: diagonal clip from top-left to halfway across the top,
      then to the right side (cutting off the top-right corner).
      Adjust the polygon points to get the exact shape you want. */
-  clip-path: polygon(0 0 , 0% 0, 100% 10%, 90% 90%, 3% 90%);
+  clip-path: polygon(3% 90% , 0% 0, 100% 10%, 100% 80%, 3% 90%);
 }
 
 .about-subtext {
-  margin-top: -1.5rem;
+  margin-bottom: 5rem;
 }
-
-.about-us > .hero-text,
-.about-us > .hero-text-2 {
+.about-us .about-top-part img{
+  max-width: 550px;
+}
+.about-us .hero-text,
+.about-us .hero-text-2 {
   margin-left: 0;
   text-align: left; 
+  width: 80%;
+  color: #D4EDE0;
 }
 
-.about-us > .hero-text > h1,
-.about-us > .hero-text-2 > h1 {
-  font-size: 2rem;
+.about-us .hero-text h1,
+.about-us .hero-text-2 h1 {
+  font-size: 1.5rem;
   margin-bottom: 0;
+  color: #C4E7D4;
 }
 
-.about-us > .hero-text > h2,
-.about-us > .hero-text-2 > h2 {
+.about-us .hero-text > h2,
+.about-us .hero-text-2 > h2 {
   margin-bottom: 4rem;
   margin-top: 0rem;
+  color: #C5E7D6;
 }
-
-.about-us > .hero-text > p,
-.about-us > .hero-text-2 > p {
-  font-size: 2vh;
+.about-us .hero-text-2{
+  width: 40%;
+  padding: 2rem;
 }
-
-
-.double-image {
-  max-height: 700px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
- 
-}
-
 .double-image > img {
-  width: 70%;
   height: auto;
-  object-fit: cover;
+  max-height: 450px;
+  object-fit: contain;
   display: block;
-  margin: 0 auto; 
+  margin-right: 1remq;
 }
 
 

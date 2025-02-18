@@ -10,6 +10,7 @@ export default function SpecialCard(props) {
         <Link to={props.link} className="special-button" rel="noopener noreferrer">
           View
         </Link>
+       
       </section>
     </article>
   );
