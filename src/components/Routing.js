@@ -5,6 +5,7 @@ import Reservation from "./pages/BookingPage";
 import Order from "./pages/Order";
 import Confirmation from "./pages/Confirmation";
 import EventDetails from "./pages/Events";
+import EventPage from "./sections/eventProfile/EventPage";
 
 export default function Routing() {
   return (
@@ -20,6 +21,7 @@ export default function Routing() {
       <Route path="/confirmation" element={<Confirmation />} />
 
       <Route path="/event-details/:id" element={<EventDetails />} />
+      <Route path="/event/:id" element={<EventPage />} /> 
     </Routes>
   );
 }
