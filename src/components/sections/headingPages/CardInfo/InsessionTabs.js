@@ -9,6 +9,9 @@ export default function InsessionTabs() {
   const [image, setImage] = useState("");
 
   useEffect(() => {
+    {/*
+      TODO: FIX IF NOT IN SESSION TO FETCH THE IMAGES*/}
+      
     const fetchEvent = async (eventId) => {
       try {
         const res = await fetch(`/api/Events/${eventId}`);
