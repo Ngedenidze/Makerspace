@@ -8,7 +8,7 @@ export default function InsessionTabs() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [image, setImage] = useState("");
-
+{/* TODO: AXIOSIT GAAKETE AN trpc.project.list.useQuery()*/ }
   useEffect(() => {
     const fetchEvent = async (eventId) => {
       try {
@@ -70,8 +70,13 @@ export default function InsessionTabs() {
       <div className="in-session-box">
         {error ? (
           <section className="default-image">
-            <img src={defaultImage} alt="Default" />
-          </section>
+            <div className="image-wrapper">
+          <img src={defaultImage} alt="Default Cover Art" />
+          </div>
+          <div className="text-overlay">
+            <h1>MAKERSPACE</h1>
+          </div>
+        </section>
         ) : (
           <>
             {stages.length === 0 ? (

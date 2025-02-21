@@ -7,7 +7,7 @@ export default function EventPage() {
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+{/* TODO: AXIOSIT GAAKETE AN trpc.project.list.useQuery()*/ }
   useEffect(() => {
     fetch(`/api/Events/${id}`)
       .then((res) => {

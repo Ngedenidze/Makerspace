@@ -7,7 +7,7 @@ export default function Specials() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+{/* TODO: AXIOSIT GAAKETE AN trpc.project.list.useQuery()*/ }
   useEffect(() => {
     fetch("/api/Events")
     .then((res) => {

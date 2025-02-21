@@ -8,6 +8,8 @@ export default function Testimonials() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  {/* TODO: AXIOSIT GAAKETE AN trpc.project.list.useQuery()*/ }
+  // Fetch events from the API
   useEffect(() => {
     // ---- MOCK DATA FOR DEVELOPMENT ----
     const mockData = [
