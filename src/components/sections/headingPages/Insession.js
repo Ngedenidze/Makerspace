@@ -1,11 +1,9 @@
-import { Link } from "react-router-dom";
-import InsessionCard from "./CardInfo/InsessionCard";
-import InsessionTabs from "./CardInfo/InsessionTabs";
 
+import InsessionTabs from "./CardInfo/InSessionTabs";
 export default function Insession() {
   return (
     <section className="in-session-box">
-     <InsessionTabs />
+      <InsessionTabs />
     </section>
   );
 }

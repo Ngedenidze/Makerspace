@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import localImage from "../../../../assets/art-cover.jpg";
+import defaultImage from "../../../../assets/cover-art-default.jpg";
 
 export default function InsessionTabs() {
   const [stages, setStages] = useState([]);
@@ -9,9 +10,6 @@ export default function InsessionTabs() {
   const [image, setImage] = useState("");
 
   useEffect(() => {
-    {/*
-      TODO: FIX IF NOT IN SESSION TO FETCH THE IMAGES*/}
-      
     const fetchEvent = async (eventId) => {
       try {
         const res = await fetch(`/api/Events/${eventId}`);
@@ -21,6 +19,7 @@ export default function InsessionTabs() {
         const data = await res.json();
         return data;
       } catch (err) {
+        console.error("Error fetching event:", err);
         return null;
       }
     };
@@ -65,41 +64,50 @@ export default function InsessionTabs() {
   }, []);
 
   if (loading) return <p>Loading stages...</p>;
-  if (error) return <p>Error: {error}</p>;
-  if (stages.length === 0) return <p>No stage data available.</p>;
-
-  const activeStage = stages[activeStageIndex];
 
   return (
     <section className="in-session">
       <div className="in-session-box">
-        <article className="in-session-text">
-          <h1>In Session</h1>
-          <h2>MAKERSPACE</h2>
-          <div className="stage-tabs">
-            {stages.map((stage, index) => (
-              <button
-                key={stage.id}
-                onClick={() => setActiveStageIndex(index)}
-                className={index === activeStageIndex ? "active" : ""}
-              >
-                {stage.id.toUpperCase()}
-              </button>
-            ))}
-          </div>
+        {error ? (
+          <section className="default-image">
+            <img src={defaultImage} alt="Default" />
+          </section>
+        ) : (
+          <>
+            {stages.length === 0 ? (
+              <p>No stage data available.</p>
+            ) : (
+              <>
+                <article className="in-session-text">
+                  <h1>In Session</h1>
+                  <h2>MAKERSPACE</h2>
+                  <div className="stage-tabs">
+                    {stages.map((stage, index) => (
+                      <button
+                        key={stage.id}
+                        onClick={() => setActiveStageIndex(index)}
+                        className={index === activeStageIndex ? "active" : ""}
+                      >
+                        {stage.id.toUpperCase()}
+                      </button>
+                    ))}
+                  </div>
 
-          {activeStage.events.map((evt, idx) => (
-            <div key={idx} className="in-session-timestamps">
-              <h3>
-                {evt.startTime} {evt.djName}
-              </h3>
-            </div>
-          ))}
-        </article>
-        <section className="in-session-image">
-          {/* TODO:   Use the image from the event data */}
-          <img src={localImage} alt="In Session" />
-        </section>
+                  {stages[activeStageIndex].events.map((evt, idx) => (
+                    <div key={idx} className="in-session-timestamps">
+                      <h3>
+                        {evt.startTime} {evt.djName}
+                      </h3>
+                    </div>
+                  ))}
+                </article>
+                <section className="in-session-image">
+                  <img src={image} alt="In Session" />
+                </section>
+              </>
+            )}
+          </>
+        )}
       </div>
     </section>
   );
