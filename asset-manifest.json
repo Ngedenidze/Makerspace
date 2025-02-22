@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.9f71ef01.css",
-    "main.js": "/static/js/main.0fa31190.js",
+    "main.js": "/static/js/main.0a67c95f.js",
     "static/js/787.e0deafbd.chunk.js": "/static/js/787.e0deafbd.chunk.js",
     "static/media/cover-art-4.jpg": "/static/media/cover-art-4.55a412d85409d706ba38.jpg",
     "static/media/cover-art-default.jpg": "/static/media/cover-art-default.a9e9afdf794756a0093c.jpg",
@@ -12,7 +12,6 @@
     "static/media/greek-salad.webp": "/static/media/greek-salad.0630522a827a5188a66d.webp",
     "static/media/food4.webp": "/static/media/food4.aef154ce876c762e864c.webp",
     "static/media/Sweety Valentine.otf": "/static/media/Sweety Valentine.b9ae8320fd5086b44658.otf",
-    "static/media/menu.webp": "/static/media/menu.9b7e092be47f16ae049f.webp",
     "static/media/inside.jpg": "/static/media/inside.225b1a648b3d3c507c7f.jpg",
     "static/media/outside.jpg": "/static/media/outside.3186046e6fa30a970978.jpg",
     "static/media/space.jpg": "/static/media/space.bbcd681c9b474e3e6009.jpg",
@@ -20,11 +19,11 @@
     "static/media/makerspace.JPG": "/static/media/makerspace.815f0d84f897a0a51147.JPG",
     "index.html": "/index.html",
     "main.9f71ef01.css.map": "/static/css/main.9f71ef01.css.map",
-    "main.0fa31190.js.map": "/static/js/main.0fa31190.js.map",
+    "main.0a67c95f.js.map": "/static/js/main.0a67c95f.js.map",
     "787.e0deafbd.chunk.js.map": "/static/js/787.e0deafbd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9f71ef01.css",
-    "static/js/main.0fa31190.js"
+    "static/js/main.0a67c95f.js"
   ]
 }
