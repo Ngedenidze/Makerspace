@@ -11,48 +11,12 @@ export default function Testimonials() {
   {/* TODO: AXIOSIT GAAKETE AN trpc.project.list.useQuery()*/ }
   // Fetch events from the API
   useEffect(() => {
-    // ---- MOCK DATA FOR DEVELOPMENT ----
-    const mockData = [
-      {
-        id: 10,
-        weekday: "Friday",
-        date: "21.02.2025",
-        djName: "MARK CHEZ",
-      },
-      {
-        id: 11,
-        weekday: "Saturday",
-        date: "22.02.2025",
-        djName: "DJ Name",
-      },
-      {
-        id: 12,
-        weekday: "Friday",
-        date: "28.02.2025",
-        djName: "GIO SHENGELIA B2B TOMA",
-      },
-      {
-        id: 13,
-        weekday: "Saturday",
-        date: "29.02.2025",
-        djName: "BEBUR",
-      },
-      {
-        id: 14,
-        weekday: "Friday",
-        date: "06.03.2025",
-        djName: "SPECIAL GUEST",
-      },
-    ];
-
-    setTimeout(() => {
-      setEvents(mockData);
-      setLoading(false);
-    }, 500);
-
-    // ---- REAL API FETCH ----
-    /*
-    fetch("https://api.example.com/testimonials?limit=4")
+    const apiUrl =
+      process.env.NODE_ENV === "production"
+        ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/Events"
+        : "/api/Events"; // still use proxy in dev
+  
+    fetch(apiUrl)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`Network response was not ok. Status: ${res.status}`);
@@ -60,16 +24,17 @@ export default function Testimonials() {
         return res.json();
       })
       .then((data) => {
-        // 'data' should be an array of event objects
-        setEvents(data.slice(0, 4)); // ensure only 4
+        console.log("Fetched events:", data);
+        setEvents(data);
         setLoading(false);
       })
       .catch((err) => {
+        console.error("Error fetching events:", err);
         setError(err.message);
         setLoading(false);
       });
-    */
   }, []);
+  
 
 
   if (loading) return <p>Loading events...</p>;
@@ -87,15 +52,26 @@ export default function Testimonials() {
       </article>
 
       <section className="events-cards">
-        {displayedEvents.map((event) => (
+        
+        {displayedEvents.map((event) => {
+                 const startDate = new Date(event.startDate);
+                 const weekday = startDate.toLocaleDateString("en-US", { weekday: "long" });
+                 const date = startDate.toLocaleDateString("en-US", {
+                   month: "long",
+                   day: "numeric",
+                   year: "numeric",
+                 });
+                 const djName = event.lineUps?.length ? event.lineUps[0].artistName : event.name;
+
+                 return (
           <SpecialCard
             key={event.id}
-            weekday={event.weekday}
-            date={event.date}
-            djName={event.djName}
-            link={`/event-details/${event.id}`}
-          />
-        ))}
+            weekday={weekday}
+            date={date}
+            djName={djName}
+            link={`/Events/${event.id}`}
+          />);
+})}
       </section>
 
       <section className="testimonials-carousel">

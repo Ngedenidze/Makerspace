@@ -10,9 +10,13 @@ export default function InsessionTabs() {
   const [image, setImage] = useState("");
 
   useEffect(() => {
+    const apiUrl =
+    process.env.NODE_ENV === "production"
+      ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/Events"
+      : "/api/Events"; // still use proxy in dev
     const fetchAllEvents = async () => {
       try {
-        const res = await fetch("/api/Events");
+        const res = await fetch(apiUrl);
         if (!res.ok) {
           throw new Error(`Network response was not ok. Status: ${res.status}`);
         }

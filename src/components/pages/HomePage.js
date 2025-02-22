@@ -14,15 +14,6 @@ export default function Homepage() {
   const specialsRef = useRef(null);
   const testimonialsRef = useRef(null);
   const aboutRef = useRef(null);
-
-  // fetch images once on mount
-  useEffect(() => {
-    fetch("/api/Events")
-      .then((response) => response.json())
-      .then((data) => setImages(data))
-      .catch((error) => console.error("Error fetching images:", error));
-  }, []);
-
   return (
     <>
       <main>

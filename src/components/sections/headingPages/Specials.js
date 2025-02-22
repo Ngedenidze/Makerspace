@@ -8,8 +8,13 @@ export default function Specials() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 {/* TODO: AXIOSIT GAAKETE AN trpc.project.list.useQuery()*/ }
-  useEffect(() => {
-    fetch("/api/Events")
+useEffect(() => {
+  const apiUrl =
+    process.env.NODE_ENV === "production"
+      ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/Events"
+      : "/api/Events"; // still use proxy in dev
+
+  fetch(apiUrl)
     .then((res) => {
       if (!res.ok) {
         throw new Error(`Network response was not ok. Status: ${res.status}`);
@@ -17,7 +22,7 @@ export default function Specials() {
       return res.json();
     })
     .then((data) => {
-      console.log("Fetched events:", data); 
+      console.log("Fetched events:", data);
       setEvents(data);
       setLoading(false);
     })
@@ -26,7 +31,7 @@ export default function Specials() {
       setError(err.message);
       setLoading(false);
     });
-  }, []);
+}, []);
 
   if (loading) return <p>Loading events...</p>;
   if (error) return <p>Error: {error}</p>;

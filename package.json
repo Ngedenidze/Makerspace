@@ -1,7 +1,8 @@
 {
-  "name": "little-lemon-restaurant",
+  "name": "Makerspace",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ngedenidze.github.io/Makerspace",
   "proxy": "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",

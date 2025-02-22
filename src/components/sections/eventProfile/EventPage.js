@@ -9,7 +9,11 @@ export default function EventPage() {
   const [error, setError] = useState(null);
 {/* TODO: AXIOSIT GAAKETE AN trpc.project.list.useQuery()*/ }
   useEffect(() => {
-    fetch(`/api/Events/${id}`)
+    const apiUrl =
+      process.env.NODE_ENV === "production"
+        ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/Events"
+        : "/api/Events"; 
+    fetch(`${apiUrl}/${id}`)
       .then((res) => {
         if (!res.ok) {
           console.error("Error fetching event:", res.statusText);
