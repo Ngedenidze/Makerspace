@@ -1355,6 +1355,9 @@ Link:link {
 }
 
 @media screen and (max-width: 600px) {
+  .nav-bar-logo{
+  display: none;
+  }
   .hero-text > h1 {
     font-size: 2.2rem;
     margin-top: 0rem;

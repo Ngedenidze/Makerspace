@@ -15,7 +15,7 @@ export default function Heading() {
             <nav className="burger">
               <img
                 src={require("../../../assets/nav-logo.png")}
-                alt="Oasis Diner logo"
+                alt="Makerspace  logo"
                 className="nav-image"
               ></img>
 

@@ -5,7 +5,7 @@ export default function Heading() {
       <img
         className="header-reserve"
         src={HeroImage}
-        alt="Oasis Diner Ingredients"
+        alt="Makerspace"
       ></img>
       <div className="reserve-header-text">
         <h1>About us</h1>

@@ -5,9 +5,11 @@
   "homepage": "https://makerspaceclub.com",
   "proxy": "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net",
   "dependencies": {
+    "@blackbox-vision/react-qr-reader": "^5.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.7.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-responsive-carousel": "^3.2.23",

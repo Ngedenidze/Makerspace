@@ -2,6 +2,7 @@ import Heading from "../sections/reservePages/Heading";
 import ReservationForm from "../sections/reservePages/BookingForm";
 import { useReducer } from "react";
 import { fetchAPI } from "../../bookingsAPI";
+import QRScanner from "../reusable/QR/QRScanner";
 export default function BookingPage() {
   function updateTimes(date) {
     return fetchAPI(date);
@@ -13,7 +14,7 @@ export default function BookingPage() {
 
   return (
     <>
-      <ReservationForm availableTimes={availableTimes} updateTimes={dispatch} />
+     <QRScanner />
     </>
   );
 }

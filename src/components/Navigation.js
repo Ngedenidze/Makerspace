@@ -19,7 +19,7 @@ export default function Navigation({ device, onSpecialsClick, onAboutClick }) {
         <Link className="hover-effect" to="/">
           <h1>Home</h1>
         </Link>
-        <Link className="hover-effect" to="/reservations">
+        <Link className="hover-effect" to="/Events">
           <h1>Events</h1>
         </Link>
         <Link className="hover-effect" to="/Account">
@@ -30,7 +30,7 @@ export default function Navigation({ device, onSpecialsClick, onAboutClick }) {
         </Link>
         <a
           className="hover-effect"
-          href="https://www.instagram.com/makerspace_club/"
+          href="/Account"
           target="_blank"
           rel="noopener noreferrer"
         >

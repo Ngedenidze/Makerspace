@@ -176,7 +176,7 @@ useEffect(() => {
     <section className="events-soon">
       <article className="events-topbar">
         <div>
-          <h1>Soon</h1>
+          <h1>Next Up</h1>
         </div>
       </article>
 
