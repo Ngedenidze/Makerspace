@@ -17,7 +17,7 @@ export default function Homepage() {
 
   // fetch images once on mount
   useEffect(() => {
-    fetch("https://api.example.com/merch")
+    fetch("/api/Events")
       .then((response) => response.json())
       .then((data) => setImages(data))
       .catch((error) => console.error("Error fetching images:", error));

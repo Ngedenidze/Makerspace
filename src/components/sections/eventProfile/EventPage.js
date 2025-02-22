@@ -12,6 +12,7 @@ export default function EventPage() {
     fetch(`/api/Events/${id}`)
       .then((res) => {
         if (!res.ok) {
+          console.error("Error fetching event:", res.statusText);
           throw new Error(`Network response was not ok. Status: ${res.status}`);
         }
         return res.json();
@@ -21,6 +22,7 @@ export default function EventPage() {
         setLoading(false);
       })
       .catch((err) => {
+        console.error("Error fetching event:", err);
         setError(err.message);
         setLoading(false);
       });

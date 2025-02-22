@@ -19,9 +19,9 @@ export default function Routing() {
       <Route path="/order" element={<Order />} />
 
       <Route path="/confirmation" element={<Confirmation />} />
-
-      <Route path="/event-details/:id" element={<EventDetails />} />
-      <Route path="/event/:id" element={<EventPage />} /> 
+{/* 
+      <Route path="/Events/:id" element={<EventDetails />} /> */}
+      <Route path="/Events/:id" element={<EventPage />} /> 
     </Routes>
   );
 }

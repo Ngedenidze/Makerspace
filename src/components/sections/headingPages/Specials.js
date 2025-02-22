@@ -22,6 +22,7 @@ export default function Specials() {
       setLoading(false);
     })
     .catch((err) => {
+      console.error("Error fetching events:", err);
       setError(err.message);
       setLoading(false);
     });
@@ -60,7 +61,7 @@ export default function Specials() {
               weekday={weekday}
               date={date}
               djName={djName}
-              link={`/event/${event.id}`}
+              link={`/Events/${event.id}`}
             />
           );
         })}
