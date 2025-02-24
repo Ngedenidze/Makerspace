@@ -5,7 +5,7 @@ export default function About() {
         <section className="hero-text">
           <h1>MakerSpace</h1>
           <br />
-          <h2>
+          <h2 className="desktop-location">
             Lado Gudiashvili Square
             <br />
             Tbilisi 0162
@@ -35,23 +35,36 @@ export default function About() {
         </section>
       </section>
       <section className="about-botton-part">
-      <section className="double-image">
-        <img
-          src={require("../../../assets/outside.jpg")}
-          alt="Little Lemon Ingredients"
-        ></img>
-      </section>
-      <section className="hero-text-2">
-        <h1>Opening Hours</h1>
-        <br></br>
-        <p className="subsection">
-          Friday: 11 PM - 12:00 AM
-          <br></br>
-          Saturday: 12:00 AM - 7:00 AM, 11PM - 12:00 AM
-          <br></br>
-          Sunday: 12:00 AM - 7:00 AM
-        </p>
-      </section>
+        <section className="double-image">
+          <img
+            src={require("../../../assets/outside.jpg")}
+            alt="Little Lemon Ingredients"
+          ></img>
+        </section>
+        <section className="hero-text-2">
+        <section className="mobile-location">
+          <h1>Location</h1>
+          <p>
+            Lado Gudiashvili Square
+            <br />
+            Tbilisi 0162
+            <br />
+            Georgia
+          </p>
+          </section>
+          <section className="info-text">
+            <h1>Opening Hours</h1>
+            <br></br>
+            <p className="subsection">
+              Friday: 11 PM - 12:00 AM
+              <br></br>
+              Saturday: 12:00 AM - 7:00 AM, 11PM - 12:00 AM
+              <br></br>
+              Sunday: 12:00 AM - 7:00 AM
+            </p>
+          </section>
+         
+        </section>
       </section>
     </article>
   );
