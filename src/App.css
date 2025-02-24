@@ -246,6 +246,9 @@ Link:link {
   flex-direction: column;
   align-content: flex-start;
 }
+.bar-info .footer-toggle-icon{
+  display: none;
+}
 
 .bar-info .footer-menu .footer-links {
   height: auto;
@@ -269,6 +272,46 @@ Link:link {
 }
 .bar-info .footer-menu .footer-links h3:hover{
   color: var(--white-full);
+}
+/* Three Dots Toggle Button */
+.three-dots-toggle {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: rgb(167, 167, 167);
+  transition: color 0.2s;
+}
+
+.three-dots-toggle:hover {
+  color: var(--white-full);
+}
+
+/* Info Box Styling */
+.info-box {
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #eeeeee;
+  border: 1px solid var(--blue-full);
+  border-radius: 8px;
+  padding: 1rem;
+  width: 90vw;
+  max-width: 600px;
+  max-height: 60vh;
+  overflow-y: auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  font-family: "Courier New", Courier, monospace;
+  white-space: pre-wrap;
+  text-align: left;
+}
+
+.info-box pre {
+  overflow-x: auto;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 .call-to-action {
@@ -1425,42 +1468,7 @@ Link:link {
   }
 }
 @media screen and (max-width: 60rem) {
-  .action-button {
-    font-size: 1.2rem;
-  }
-
-  .specials {
-    margin: 0 -2rem 0 -2rem;
-  }
-
-  .events-topbar {
-    flex-wrap: wrap;
-    margin-left: 2rem;
-  }
-
-  .events-cards {
-    display: none;
-  }
-
-  .specials-carousel {
-    display: block;
-  }
-
-  .menu-card {
-    padding-bottom: 2rem;
-  }
-
-  .testimonials-topbar > h1 {
-    margin: 2rem 0 1rem 0;
-  }
-
-  .double-image {
-    max-height: 16rem;
-  }
-
-  .about-us {
-    grid-gap: 12vw;
-  }
+ 
 }
 
 @media screen and (max-width: 800px) {
@@ -1469,235 +1477,168 @@ Link:link {
   }
 }
 @media (max-width: 768px) { /* Tablet styles */
-  /* Global Adjustments */
-  .action-button {
-    padding: 1rem 2rem;
-    font-size: 1.5rem;
-  }
-
-  /* Header & Navigation */
-  .header-menu {
-    position: relative;
-    top: 0;
-    height: auto;
-    padding: 1rem;
-  }
-
-  .header-box {
-    width: 100%;
-    margin-top: 1rem;
-    flex-direction: column;
-  }
-
-  .burger-icon {
-    display: block !important;
-  }
-
-  .desktop {
-    display: none;
-  }
-
-  .mobile {
-    display: block;
-  }
-
-  /* Main Content Areas */
-  .layout-container {
-    flex-direction: column;
-  }
-
-  .main-content {
-    flex-direction: column;
-    padding-top: 4rem;
-  }
-
-  /* In-Session Section */
-  .in-session-box {
-    flex-direction: column;
-    width: 90vw;
-    max-height: none;
-  }
-
-  .in-session-text,
-  .in-session-image {
-    width: 100%;
-    clip-path: none;
-  }
-
-  .in-session-image img {
-    max-height: 300px;
-  }
-
-  /* Events Section */
-  .events-cards {
-    flex-wrap: wrap;
-  }
-
-  .menu-card-link {
-    flex: 1 1 100%;
-    max-width: 100%;
-    margin-bottom: 1rem;
-  }
-
-  /* Commercial Renting */
-  .commercial-renting {
-    flex-direction: column;
-    width: 90vw;
-  }
-
-  .commercial-renting-text-container {
-    max-width: 100%;
-    padding: 2rem;
-  }
-
-  .commercial-renting-image {
-    max-width: 100%;
-    padding-top: 0;
-  }
+  
 }
 @media screen and (max-width: 50rem) {
-  .hero-text > p {
-    font-size: 0.8rem;
-  }
-
-  .reserve-header-text {
-    font-size: 20px;
-  }
-
-  .testimonials-carousel {
-    display: block;
-    background-color: #edefee;
-    padding-bottom: 0;
-  }
-
-  .testimonials-cards {
-    display: none;
-  }
-
-  .testimonial-card > p {
-    margin-top: -1rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .about-us {
-    grid-gap: 8vw;
-  }
-
-  .double-image {
-    max-height: 16rem;
-  }
+  
 }
 
 @media screen and (max-width: 600px) {
+  body{
+    background-color: #191919;
+  }
+  .background-image{
+    display: none;
+  }
+  .homepage-main-content{
+    width: 100vw;
+    padding: 0;
+  }
   .nav-bar-logo{
   display: none;
   }
-  .hero-text > h1 {
-    font-size: 2.2rem;
-    margin-top: 0rem;
-    margin-bottom: -2rem;
+  .bar-info .footer-toggle-icon{
+    display: block;
   }
-
-  .hero-text > h2 {
-    font-size: 1.8rem;
-    margin-bottom: 2rem;
+  .info-box {
+    width: 80vw;
+    max-height: 50vh;
   }
-
-  .confirmation-header {
-    margin-top: 0rem;
+  .three-dots-toggle {
+    font-size: 1.5rem;
   }
-
-  .reserve-header-text {
-    font-size: 15px;
-  }
-
-  .desktop {
+  .bar-info .footer-info, .bar-info .footer-menu, .bar-info .socials {
     display: none;
   }
-
-  .mobile {
-    display: grid;
-    grid-template: auto auto auto auto auto auto auto / auto;
-    align-items: center;
-    padding-left: 0;
+  .bar-info{
+    flex-direction: row;
+    justify-content: flex-end;
   }
-
-  .call-to-action {
-    margin: 0;
-    padding: 1.25rem 2rem 1.2rem 2rem;
+  .layout-container{
+    flex-direction: column;
   }
-
-  .specials {
-    padding: 0 2rem 0 2rem;
+  .main-content, .homepage, .in-session, .events, .merch-display, .about-us {
+    width: 95vw;
+    justify-content: center;
   }
-
-  .testimonials {
-    padding: 0 2rem 0 2rem;
-  }
-
-  .about-us {
-    padding: 1rem 2rem 0 2rem;
-    margin-top: 2rem;
-    grid-gap: 1vw;
-  }
-
-  .double-image {
-    max-height: 14rem;
-    position: relative;
-    top: 4rem;
-    left: 2rem;
-  }
-
-  .double-image > img {
-    width: 60%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .about-1 {
-    position: relative;
+  .header-menu{
+    height: 100px;
+    width: 100%;
+    padding: 0;
+    background-color: #191919;
     top: 0;
-    left: 0;
   }
-
-  .about-2 {
-    position: absolute;
-    top: -3rem;
-    left: 4.5rem;
+  .header-box{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    margin-top: 0;
   }
-
-  footer > menu {
-    grid-template-columns: repeat(3, 1fr);
+  .side-nav-bar{
+    display: flex;
+    flex-direction: row;
   }
-
-  .contact {
-    display: none;
+  .navbar-menu{
+    flex-direction: row;
+    align-items: center;
   }
-
-  .img-footer > img {
-    margin-top: 0.5rem;
+  .navbar-menu > a{
+    font-size: 1rem;
   }
-
-  ul > * {
-    font-size: 14px;
+  .nav-image{
+    max-height: 100px;
   }
-
-  .burger {
-    display: grid;
+  .three-dots-toggle{
+    max-width: 50px;
+    margin: 0;
   }
+  .in-session{
 
-  .burger > img {
-    margin-top: 1.5rem;
-    margin-left: 0.5rem;
   }
-
-  .reserve-table {
-    margin-top: 0rem;
+  .in-session .in-session-text h1 {
+    font-size: 1.5rem;
   }
-
-  .redirect-button {
-    padding: 1vh 2rem 1vh 2rem;
-    font-size: 14px;
+  .in-session .in-session-text h2 {
+    font-size: 1.3rem;
+  }
+  .in-session .in-session-text h3 {
+    font-size: 1.2rem;
+  }
+  .events-topbar {
+    margin: 2px;
+  }
+  .events-topbar > div > h1 {
+    font-size: 0.9rem;
+  }
+  .events-cards {
+    flex-wrap: wrap;
+  }
+  .menu-card-link {
+    flex: 1 1 calc(50% - 2px); /* 2 per row */
+    max-width: calc(50% - 2px); /* 2 per row */
+  }
+  .commercial-renting{
+    width: 99vw;
+    margin: 0;
+    flex-direction: column;
+  }
+  .commercial-renting .commercial-renting-image{
+    /* display: none; */
+  }
+  .commercial-renting .commercial-renting-image img{
+    max-height: 300px;
+  }
+  .commercial-renting .commercial-renting-text-container{
+    width: 100%;
+    padding: 1rem;
+    margin: 0;
+    margin-left: 1rem;
+    max-width: 100%;
+    height: 30vh;
+    min-height: 30vh;
+  
+  }
+  .commercial-renting .commercial-renting-text-container h1{
+    font-size: 1.2rem;
+  }
+  .commercial-renting .commercial-renting-text-container p{
+    font-size: 0.9rem;
+  }
+  .commercial-renting .commercial-renting-text-container::before {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  .about-us{
+    padding: 1rem;
+  }
+  .about-us .about-top-part{
+    flex-direction: column;
+    align-items: center;
+    padding: 0; 
+  }
+  .about-us .about-top-part .about-subtext{
+    margin: 0;
+  }
+  .about-us .about-top-part .hero-text{
+    width: 100%;
+    margin: 1rem;
+    box-sizing: border-box;
+  }
+  .about-us .about-top-part .hero-text h1{
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+  .about-us .about-top-part .double-image{
+    width: 100%;
+    max-width: 100%;
+  }
+  .about-us .about-top-part img{
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    object-fit: cover;
   }
 }
 

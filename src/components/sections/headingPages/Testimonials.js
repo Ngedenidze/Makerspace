@@ -207,10 +207,6 @@ export default function Testimonials() {
           />);
 })}
       </section>
-
-      <section className="testimonials-carousel">
-        <Carousel />
-      </section>
     </section>
   );
 }

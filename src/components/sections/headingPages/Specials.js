@@ -204,10 +204,6 @@ useEffect(() => {
           );
         })}
       </section>
-
-      <section className="testimonials-carousel">
-        <Carousel />
-      </section>
     </section>
   );
 }
