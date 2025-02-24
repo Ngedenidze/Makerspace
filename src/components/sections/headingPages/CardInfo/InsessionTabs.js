@@ -8,12 +8,14 @@ export default function InsessionTabs() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [image, setImage] = useState("");
+  const [eventStatus, setEventStatus] = useState("");
 
   useEffect(() => {
     const apiUrl =
-    process.env.NODE_ENV === "production"
-      ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/Events"
-      : "/api/Events"; // still use proxy in dev
+      process.env.NODE_ENV === "production"
+        ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/Events"
+        : "/api/Events"; // still use proxy in dev
+
     const fetchAllEvents = async () => {
       try {
         const res = await fetch(apiUrl);
@@ -22,20 +24,32 @@ export default function InsessionTabs() {
         }
         const data = await res.json();
 
-        // Find the FIRST event in the array that is currently in session
+        // Get the current time
         const now = new Date();
-        const inSessionEvent = data.find((event) => {
-          const start = new Date(event.startDate);
-          const end = new Date(event.endDate);
-          return now >= start && now <= end;
-        });
 
-        if (inSessionEvent) {
+        // Find the FIRST upcoming event by sorting and checking the start date
+        const upcomingEvent = data
+          .filter((event) => new Date(event.endDate) > now) // Filter events that haven't ended yet
+          .sort((a, b) => new Date(a.startDate) - new Date(b.startDate))[0]; // Get the closest one
+
+        if (upcomingEvent) {
+          const start = new Date(upcomingEvent.startDate);
+          const end = new Date(upcomingEvent.endDate);
+
+          // Determine the status of the event
+          if (now < start) {
+            setEventStatus("Coming Soon");
+          } else if (now >= start && now <= end) {
+            setEventStatus("In Session");
+          } else {
+            setEventStatus("Ended");
+          }
+
           // Separate lineups by floor (1 = main, 2 = space, etc.)
           const mainStage = {
             id: "main",
             title: "Main Stage",
-            events: inSessionEvent.lineUps
+            events: upcomingEvent.lineUps
               .filter((lineUp) => lineUp.floor === 1)
               .map((lineUp) => ({
                 startTime: new Date(lineUp.startTime).toLocaleTimeString([], {
@@ -49,7 +63,7 @@ export default function InsessionTabs() {
           const spaceStage = {
             id: "space",
             title: "Space Stage",
-            events: inSessionEvent.lineUps
+            events: upcomingEvent.lineUps
               .filter((lineUp) => lineUp.floor === 2)
               .map((lineUp) => ({
                 startTime: new Date(lineUp.startTime).toLocaleTimeString([], {
@@ -61,9 +75,9 @@ export default function InsessionTabs() {
           };
 
           setStages([mainStage, spaceStage]);
-          setImage(inSessionEvent.eventPhotoUrl || localImage);
+          setImage(upcomingEvent.eventPhotoUrl || localImage);
         } else {
-          setError("No events currently in session.");
+          setError("No upcoming or in-session events.");
         }
       } catch (err) {
         console.error("Error fetching events:", err);
@@ -95,7 +109,7 @@ export default function InsessionTabs() {
         ) : (
           <>
             <article className="in-session-text">
-              <h1>In Session</h1>
+              <h1>{eventStatus}</h1> {/* Display Event Status */}
               <h2>MAKERSPACE</h2>
 
               {/* Stage Tabs */}

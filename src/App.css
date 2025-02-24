@@ -1271,11 +1271,74 @@ Link:link {
   color: #464646 !important;
   transition: 0.2s;
 }
-
+/* -------------------------------------------------------------------------- */           
+/* important contstraints */
+/* -------------------------------------------------------------------------- */           
+.in-session,
+.events,
+.merch-display, .about-us {
+  width: min(65vw, 1200px);
+  margin-bottom: 2rem;
+}
 /* -------------------------------------------------------------------------- */
 /*  MEDIA QUERIES                                                             */
 /* -------------------------------------------------------------------------- */
+@media screen and (max-width: 90rem) {
+  .background-image{
+    width: 95vw;
+  }
+  .layout-container{
+    margin: 0rem;
+    width: 100%;
+  }
+  .in-session{
+    clip-path: none;
+    margin-bottom: 0rem;
+  }
+  .in-session-box {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-height: 800px;
+    width: 100%;
 
+  }
+  .in-session-text{
+    width: 100%;
+    max-height: 400px;
+    height: 300px;
+  }
+  .in-session-text h1, .in-session-text h2{
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  .in-session-image{
+    width: 100%;
+    clip-path:none;
+  }
+  .in-session-image img {
+    width: 100%;
+    max-width: 1200px;
+    max-height: 400px;
+    object-fit: cover;
+    overflow: hidden;
+  }
+  .side-nav-bar{
+    transform: scale(0.9);
+  }
+  .bar-info .footer-info h3{
+    font-size: 0.8rem;
+  }
+  .bar-info .footer-menu .footer-links h3 {
+    font-size: 0.9rem;
+  }
+  .main-content{
+
+  }
+  .in-session, .events, .merch-display, .about-us {
+    width: 75vw;
+  }
+}
 @media screen and (max-width: 60rem) {
   .action-button {
     font-size: 1.2rem;
@@ -1320,7 +1383,93 @@ Link:link {
     grid-template-columns: 1fr;
   }
 }
+@media (max-width: 768px) { /* Tablet styles */
+  /* Global Adjustments */
+  .action-button {
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+  }
 
+  /* Header & Navigation */
+  .header-menu {
+    position: relative;
+    top: 0;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .header-box {
+    width: 100%;
+    margin-top: 1rem;
+    flex-direction: column;
+  }
+
+  .burger-icon {
+    display: block !important;
+  }
+
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: block;
+  }
+
+  /* Main Content Areas */
+  .layout-container {
+    flex-direction: column;
+  }
+
+  .main-content {
+    flex-direction: column;
+    padding-top: 4rem;
+  }
+
+  /* In-Session Section */
+  .in-session-box {
+    flex-direction: column;
+    width: 90vw;
+    max-height: none;
+  }
+
+  .in-session-text,
+  .in-session-image {
+    width: 100%;
+    clip-path: none;
+  }
+
+  .in-session-image img {
+    max-height: 300px;
+  }
+
+  /* Events Section */
+  .events-cards {
+    flex-wrap: wrap;
+  }
+
+  .menu-card-link {
+    flex: 1 1 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  /* Commercial Renting */
+  .commercial-renting {
+    flex-direction: column;
+    width: 90vw;
+  }
+
+  .commercial-renting-text-container {
+    max-width: 100%;
+    padding: 2rem;
+  }
+
+  .commercial-renting-image {
+    max-width: 100%;
+    padding-top: 0;
+  }
+}
 @media screen and (max-width: 50rem) {
   .hero-text > p {
     font-size: 0.8rem;
@@ -1502,12 +1651,3 @@ Link:link {
   display: none;
 }
 
-/* -------------------------------------------------------------------------- */           
-/* important contstraints */
-/* -------------------------------------------------------------------------- */           
-.in-session,
-.events,
-.merch-display, .about-us {
-  width: min(65vw, 1200px);
-  margin-bottom: 2rem;
-}
