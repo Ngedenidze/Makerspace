@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.bb4a4668.css",
+    "main.css": "/static/css/main.fd28eecf.css",
     "main.js": "/static/js/main.0b8d76f5.js",
     "static/js/787.e0deafbd.chunk.js": "/static/js/787.e0deafbd.chunk.js",
     "static/media/cover-art-4.jpg": "/static/media/cover-art-4.55a412d85409d706ba38.jpg",
@@ -19,12 +19,12 @@
     "static/media/makerspace.JPG": "/static/media/makerspace.815f0d84f897a0a51147.JPG",
     "static/media/Cocktail.ttf": "/static/media/Cocktail.bc60ed2a56ad2a003dc7.ttf",
     "index.html": "/index.html",
-    "main.bb4a4668.css.map": "/static/css/main.bb4a4668.css.map",
+    "main.fd28eecf.css.map": "/static/css/main.fd28eecf.css.map",
     "main.0b8d76f5.js.map": "/static/js/main.0b8d76f5.js.map",
     "787.e0deafbd.chunk.js.map": "/static/js/787.e0deafbd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bb4a4668.css",
+    "static/css/main.fd28eecf.css",
     "static/js/main.0b8d76f5.js"
   ]
 }
