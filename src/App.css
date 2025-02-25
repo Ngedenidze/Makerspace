@@ -1737,12 +1737,13 @@ Link:link {
   /* Example: diagonal clip from top-left to halfway across the top,
      then to the right side (cutting off the top-right corner).
      Adjust the polygon points to get the exact shape you want. */
-  clip-path: polygon(0% 0, 100% 0, 100% 80%, 0 100%);
+  clip-path: polygon(0% 0, 100% 0, 100% 90%, 0 100%);
 }
   .about-us .about-top-part{
     flex-direction: column;
     align-items: center;
     padding: 0; 
+    margin-bottom: 1rem;
   }
   .about-us .about-top-part .about-subtext{
     margin: 0;
@@ -1761,8 +1762,9 @@ Link:link {
   }
   .about-us .about-top-part .double-image{
     width: 100%;
-    max-width: 100%;
-    clip-path: polygon(3% 90% , 0% 0, 100% 10%, 90% 80%, 3% 90%);
+    max-width: 100%;  
+    margin-left: 1rem;
+    clip-path: polygon(0 100%, 100% 90%, 100% 0, 0 0);
   }
   .about-us .about-top-part img{
     width: 100%;
@@ -1780,7 +1782,7 @@ Link:link {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 95%;
     z-index: -1; /* Place behind the .about-us content */
     background: #73667A; /* Or use an image/gradient if desired */
     clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 10%);
@@ -1791,7 +1793,7 @@ Link:link {
   .about-us .hero-text-2 .info-text{
     width: 100%;
     padding: 1rem 1rem 1rem 0rem;
-    margin: 2rem 1rem 1rem 1rem;
+    margin: 0rem 1rem 1rem 1rem;
     box-sizing: border-box;
   }
   .about-us .hero-text-2 .info-text p{
