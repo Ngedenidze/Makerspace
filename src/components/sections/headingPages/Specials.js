@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Carousel from "./SpecialsCarousel";
 import SpecialCard from "./CardInfo/SpecialCard";
+import Testimonials from "./Testimonials";
 
 export default function Specials() {
   const [events, setEvents] = useState([]);
@@ -173,6 +174,7 @@ useEffect(() => {
   const displayedEvents = events.slice(0, 4);
 
   return (
+    <>
     <section className="events-soon">
       <article className="events-topbar">
         <div>
@@ -204,6 +206,9 @@ useEffect(() => {
           );
         })}
       </section>
+      <Testimonials />
     </section>
+  
+    </>
   );
 }

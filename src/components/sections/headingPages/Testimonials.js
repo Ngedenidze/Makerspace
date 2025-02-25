@@ -178,6 +178,7 @@ export default function Testimonials() {
   const displayedEvents = events.slice(0, 4);
 
   return (
+    <>
     <section className="events-soon">
       <article className="events-topbar">
         <div>
@@ -208,5 +209,6 @@ export default function Testimonials() {
 })}
       </section>
     </section>
+    </>
   );
 }

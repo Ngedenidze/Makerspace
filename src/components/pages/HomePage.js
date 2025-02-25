@@ -27,9 +27,9 @@ export default function Homepage() {
               <Specials />
             </section>
 
-            <section ref={testimonialsRef} className="events">
+            {/* <section ref={testimonialsRef} className="events">
               <Testimonials />
-            </section>
+            </section> */}
 
             {/* <section className="merch-display">
               <ImageGrid images={images} />

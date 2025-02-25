@@ -2,16 +2,26 @@
 /*  GLOBAL & BASE STYLES                                                      */
 /* -------------------------------------------------------------------------- */
 
-* {
-  font-family: "Courier New", Courier, monospace;
-}
-
 @font-face {
   font-family: "Valentine Font";
-  src: url("./assets/fonts/Sweety\ Valentine.otf") format("woff2");
+  src: url("./assets/fonts/Sweety\ Valentine.otf") format('truetype');
+  font-display: swap;
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "Cocktail Font";
+  src: url("./assets/fonts/Cocktail.ttf") format('opentype');
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  font-family: "Cocktail Font", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+
 
 :root {
   --blue-faded: rgb(13, 22, 73, 0.75);
@@ -29,7 +39,7 @@ input,
 select,
 textarea,
 p {
-  font-family: "Karla";
+  font-family: "Cocktail Font";
 }
 
 input,
@@ -180,14 +190,22 @@ Link:link {
 .header-box .call-to-action,
 .arrow {
   position: relative;
-  z-index: 10000;
+  z-index: 1;
+  width: auto;
 }
 
 .header-box .side-nav-bar {
-  width: 25vw;
+
   max-width: 300px;
   position: relative;
-  z-index: 10000;
+  z-index: 2;
+}
+.header-box .bar-info .three-dots-toggle{
+  display: none;
+}
+
+.header-box .side-nav-bar > img{
+  display: none;
 }
 
 .logo-title {
@@ -199,7 +217,6 @@ Link:link {
   justify-content: center;
   -webkit-text-stroke: 1px var(--white-full); /* Apply a white outline */
   color: transparent;
-  font-family: "Times New Roman", Times, serif;
   height: 2rem;
 }
 
@@ -233,7 +250,6 @@ Link:link {
 }
 .bar-info .footer-info h3 {
   color: rgb(167, 167, 167);
-  font-family: "Times New Roman", Times, serif;
   font-size: 1rem;
   max-width: 30rem;
   text-overflow: clip;
@@ -263,7 +279,6 @@ Link:link {
 }
 .bar-info .footer-menu .footer-links h3 {
   color: rgb(167, 167, 167);
-  font-family: "Times New Roman", Times, serif;
   font-size: 1rem;
   max-width: 30rem;
   text-overflow: clip;
@@ -303,7 +318,6 @@ Link:link {
   bottom: 2rem;
   right: 2rem;
   z-index: 1000;
-  font-family: "Courier New", Courier, monospace;
   white-space: pre-wrap;
   text-align: left;
 }
@@ -342,14 +356,12 @@ Link:link {
 
 .bar-info h1 {
   font-size: 1rem;
-  font-family: "Times New Roman", Times, serif;
   margin-top: 0rem;
   margin-bottom: -1rem;
 }
 
 .bar-info > h2 {
   font-size: 5.5rem;
-  font-family: "Times New Roman", Times, serif;
   font-weight: bold;
 }
 
@@ -401,6 +413,17 @@ Link:link {
   position: relative;
   z-index: 1000;
 }
+.nav-bar-title{
+  padding: 0 10px;
+  width: 100%;
+
+  }
+  .nav-bar-title > h1{
+    font-size: 1.2rem;
+    text-align: left;
+    margin: 1rem;
+  }
+
 
 .nav-bar-logo {
   display: flex;
@@ -495,7 +518,7 @@ Link:link {
 }
 
 .nav-image {
-  max-height: 8rem;
+  max-height: 12vh;
   margin-left: 1rem;
 }
 
@@ -782,11 +805,9 @@ Link:link {
   margin-top: 1rem;
   height: 2rem;
   color: var(--white-full);
-  font-family: "Times New Roman", Times, serif;
 }
 
 .events-topbar > div > h1 {
-  font-family: "Times New Roman", serif;
   color: rgb(167, 167, 167);
   font-size: 1rem;
   margin: 0rem;
@@ -1192,7 +1213,6 @@ Link:link {
   display: block;
   color: white;
   padding-top: 0.2rem;
-  font-family: "Karla", "Sans Serif";
 }
 
 .footer-links > a:hover,
@@ -1316,7 +1336,6 @@ Link:link {
   padding: 2vh 2rem 2vh 2rem;
   border-radius: 0.5rem;
   min-width: 12vw;
-  font-family: "Karla";
   font-size: 18px;
 }
 
@@ -1516,9 +1535,11 @@ Link:link {
   }
   .layout-container{
     flex-direction: column;
+    overflow: hidden;
   }
   .main-content, .homepage, .in-session, .events, .merch-display, .about-us {
-    width: 95vw;
+    width: 90vw;
+    margin: 0;
     justify-content: center;
   }
   .header-menu{
@@ -1540,9 +1561,19 @@ Link:link {
     display: flex;
     flex-direction: row;
   }
+  .header-box .bar-info .three-dots-toggle{
+    display: block;
+  }
+ .nav-bar-title{
+  display: none;
+ }
   .navbar-menu{
     flex-direction: row;
     align-items: center;
+  }
+  .header-box .side-nav-bar > img{
+    display: block;
+    margin: 0;
   }
   .navbar-menu > a{
     font-size: 1rem;
@@ -1578,6 +1609,16 @@ Link:link {
   .menu-card-link {
     flex: 1 1 calc(50% - 2px); /* 2 per row */
     max-width: calc(50% - 2px); /* 2 per row */
+    max-height: 200px;
+  }
+  .menu-card-content > h1 {
+    font-size: 0.8rem;
+  }
+  .menu-card-content > h2 {
+    font-size: 1.2rem;
+  }
+  .menu-card-content > p {
+    font-size: 1rem;
   }
   .commercial-renting{
     width: 99vw;
@@ -1585,17 +1626,19 @@ Link:link {
     flex-direction: column;
   }
   .commercial-renting .commercial-renting-image{
-    /* display: none; */
+    max-width: 90%;
+    overflow: hidden;
+    max-height: 40vh;
   }
   .commercial-renting .commercial-renting-image img{
-    max-height: 300px;
+    object-fit: cover;
   }
   .commercial-renting .commercial-renting-text-container{
     width: 100%;
     padding: 1rem;
     margin: 0;
     margin-left: 1rem;
-    max-width: 100%;
+    max-width: 90%;
     height: 30vh;
     min-height: 30vh;
   
@@ -1608,6 +1651,7 @@ Link:link {
   }
   .commercial-renting .commercial-renting-text-container::before {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    width: 100%;
   }
   .about-us{
     padding: 1rem;
@@ -1622,7 +1666,7 @@ Link:link {
   }
   .about-us .about-top-part .hero-text{
     width: 100%;
-    margin: 1rem;
+    margin: 2rem 1rem 1rem 1rem;
     box-sizing: border-box;
   }
   .about-us .about-top-part .hero-text h1{

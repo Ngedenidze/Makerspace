@@ -6,6 +6,7 @@ import Order from "./pages/Order";
 import Confirmation from "./pages/Confirmation";
 import EventDetails from "./pages/Events";
 import EventPage from "./sections/eventProfile/EventPage";
+import Specials from "./sections/headingPages/Specials";
 
 export default function Routing() {
   return (
@@ -21,6 +22,7 @@ export default function Routing() {
       <Route path="/confirmation" element={<Confirmation />} />
 {/* 
       <Route path="/Events/:id" element={<EventDetails />} /> */}
+      <Route path="/Events" element={<Specials />} />
       <Route path="/Events/:id" element={<EventPage />} /> 
     </Routes>
   );
