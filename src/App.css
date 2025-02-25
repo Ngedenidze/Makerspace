@@ -304,19 +304,20 @@ Link:link {
 
 /* Info Box Styling */
 .info-box {
-  background-color: rgba(0, 0, 0, 0.85);
-  color: #eeeeee;
-  border: 1px solid var(--blue-full);
+  background-color: rgba(19,19,19);
+  color: rgb(167, 167, 167);
+  position: absolute;
+  top: 75px;
+  right: 0;
+  border: 0.1px solid rgba(167, 167, 167, 0.404);
   border-radius: 8px;
   padding: 1rem;
-  width: 90vw;
-  max-width: 600px;
+  width: 40vw;
+  max-width: 45vw;
   max-height: 60vh;
   overflow-y: auto;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+
   z-index: 1000;
   white-space: pre-wrap;
   text-align: left;
@@ -326,6 +327,25 @@ Link:link {
   overflow-x: auto;
   word-wrap: break-word;
   white-space: pre-wrap;
+}
+.info-box h2{
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: rgb(75, 75, 75);
+}
+.info-box h3 {
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  color: rgb(167, 167, 167);
+}
+.info-box pre .hover-effect{
+  padding: 0;
+}
+.info-box pre .hover-effect svg {
+  height: 25px;
+}
+.info-box .hover-effect .socials {
+  width: 100%;
 }
 
 .call-to-action {
@@ -1520,7 +1540,6 @@ Link:link {
     display: block;
   }
   .info-box {
-    width: 80vw;
     max-height: 50vh;
   }
   .three-dots-toggle {
@@ -1529,9 +1548,15 @@ Link:link {
   .bar-info .footer-info, .bar-info .footer-menu, .bar-info .socials {
     display: none;
   }
-  .bar-info{
-    flex-direction: row;
-    justify-content: flex-end;
+  .header-box .bar-info{
+    flex-direction: column;
+    justify-content: center;
+    height: 100px;
+    position: absolute;
+    right: 0;
+  }
+  .footer-menu-mobile{
+    margin-top: 2rem;
   }
   .layout-container{
     flex-direction: column;
@@ -1557,9 +1582,10 @@ Link:link {
     height: 100px;
     margin-top: 0;
   }
-  .side-nav-bar{
+  .header-box .side-nav-bar{
     display: flex;
     flex-direction: row;
+    max-width: 100vw;
   }
   .header-box .bar-info .three-dots-toggle{
     display: block;
@@ -1588,14 +1614,43 @@ Link:link {
   .in-session{
 
   }
+  .in-session .in-session-box{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-height: 50vh;
+    overflow: hidden;
+    width: 100%;
+  }
+  .in-session .in-session-text{
+    width: 100%;
+    max-height: 22vh;
+    height: 22vh;
+    padding: 1rem;
+    overflow: hidden;
+  }
+  .in-session-image img {
+    width: 100%;
+    max-width: 100%;
+    max-height: 20vh;
+    object-fit: cover;
+    overflow: hidden;
+  }
+  .stage-tabs{
+    margin: 5px;
+  }
   .in-session .in-session-text h1 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
   .in-session .in-session-text h2 {
-    font-size: 1.3rem;
+    font-size: 1rem;
+    margin-top: 5px;
   }
   .in-session .in-session-text h3 {
-    font-size: 1.2rem;
+    font-size: 0.8rem;
+  }
+  .in-session .in-session-text .in-session-timestamps{
+    margin: 5px 1rem;
   }
   .events-topbar {
     margin: 2px;

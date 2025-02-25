@@ -112,6 +112,7 @@ export default function Heading() {
             </a>
           </section>
           <section className="footer-menu-mobile">
+          <h2>Company</h2>
             <Link className="footer-links" to="/jobs">
               <h3>Jobs</h3>
             </Link>
@@ -142,7 +143,7 @@ export default function Heading() {
               </a>
               <a
                 className="hover-effect"
-                href="https://www.instagram.com/makerspace_club/"
+                href="https://www.facebook.com/Makerspacebar?mibextid=LQQJ4d"
                 target="_blank"
                 rel="noopener noreferrer"
               >
