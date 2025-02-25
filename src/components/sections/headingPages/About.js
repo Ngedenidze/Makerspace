@@ -42,7 +42,7 @@ export default function About() {
           ></img>
         </section>
         <section className="hero-text-2">
-        <section className="mobile-location">
+        {/* <section className="mobile-location">
           <h1>Location</h1>
           <p>
             Lado Gudiashvili Square
@@ -51,14 +51,14 @@ export default function About() {
             <br />
             Georgia
           </p>
-          </section>
+          </section> */}
           <section className="info-text">
             <h1>Opening Hours</h1>
             <br></br>
             <p className="subsection">
               Friday: 11 PM - 12:00 AM
               <br></br>
-              Saturday: 12:00 AM - 7:00 AM, 11PM - 12:00 AM
+              Saturday: 12:00 AM - 7:00 AM / 11PM - 12:00 AM
               <br></br>
               Sunday: 12:00 AM - 7:00 AM
             </p>

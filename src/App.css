@@ -1482,7 +1482,7 @@ Link:link {
     display: flex;
     flex-direction: row;
     width: 100%;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
     box-sizing: border-box;
    padding: 0 2rem;
@@ -1719,8 +1719,26 @@ Link:link {
     position: relative;
   }
   .about-us{
-    padding: 1rem;
+    padding: 0;
   }
+  .about-us::before {
+    height: 0;
+  }
+.about-top-part::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70%;
+  z-index: -1; /* Place behind the .about-us content */
+  background: #73667A; /* Or use an image/gradient if desired */
+
+  /* Example: diagonal clip from top-left to halfway across the top,
+     then to the right side (cutting off the top-right corner).
+     Adjust the polygon points to get the exact shape you want. */
+  clip-path: polygon(0% 0, 100% 0, 100% 80%, 0 100%);
+}
   .about-us .about-top-part{
     flex-direction: column;
     align-items: center;
@@ -1728,6 +1746,8 @@ Link:link {
   }
   .about-us .about-top-part .about-subtext{
     margin: 0;
+    padding: 1rem;
+    margin: 1rem;
   }
   .about-us .about-top-part .hero-text{
     width: 100%;
@@ -1736,11 +1756,13 @@ Link:link {
   }
   .about-us .about-top-part .hero-text h1{
     font-size: 1.5rem;
-    margin: 1rem 0;
+    margin: 0;
+    text-align: center;
   }
   .about-us .about-top-part .double-image{
     width: 100%;
     max-width: 100%;
+    clip-path: polygon(3% 90% , 0% 0, 100% 10%, 90% 80%, 3% 90%);
   }
   .about-us .about-top-part img{
     width: 100%;
@@ -1748,6 +1770,33 @@ Link:link {
     margin: 0;
     padding: 0;
     object-fit: cover;
+  }
+  .about-botton-part{
+    position: relative;
+  }
+  .about-botton-part::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Place behind the .about-us content */
+    background: #73667A; /* Or use an image/gradient if desired */
+    clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 10%);
+  }
+  .about-us .hero-text-2 {
+    padding: 1em;
+  }
+  .about-us .hero-text-2 .info-text{
+    width: 100%;
+    padding: 1rem 1rem 1rem 0rem;
+    margin: 2rem 1rem 1rem 1rem;
+    box-sizing: border-box;
+  }
+  .about-us .hero-text-2 .info-text p{
+    font-size: 0.75rem;
+    margin: 0;
   }
 }
 
