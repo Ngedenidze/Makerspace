@@ -967,7 +967,11 @@ Link:link {
 .commercial-renting .commercial-renting-text-container{
   position: relative;
   z-index: -1;
-  max-width: 35%;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
   box-sizing: border-box;
   padding: 2rem;
   text-decoration: none;
@@ -999,6 +1003,7 @@ Link:link {
   filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
 }
 .commercial-renting .commercial-renting-text-container .special-button{
+  position: relative;
   margin-top: 1rem;
   color: #E2F3EA;
   display: block;
@@ -1689,14 +1694,16 @@ Link:link {
     object-fit: cover;
   }
   .commercial-renting .commercial-renting-text-container{
+    display: flex;
+    flex-direction: column;
     width: 100%;
     padding: 1rem;
     margin: 0;
     margin-left: 1rem;
     max-width: 90%;
-    height: 30vh;
-    min-height: 30vh;
-  
+    height: 40vh;
+    min-height: 40vh;
+    align-items: flex-start;
   }
   .commercial-renting .commercial-renting-text-container h1{
     font-size: 1.2rem;
@@ -1707,6 +1714,9 @@ Link:link {
   .commercial-renting .commercial-renting-text-container::before {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     width: 100%;
+  }
+  .commercial-renting .commercial-renting-text-container .special-button {
+    position: relative;
   }
   .about-us{
     padding: 1rem;
