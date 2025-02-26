@@ -113,9 +113,6 @@ export default function Heading() {
           </section>
           <section className="footer-menu-mobile">
           <h2>Company</h2>
-            <Link className="footer-links" to="/jobs">
-              <h3>Jobs</h3>
-            </Link>
             <Link className="footer-links" to="/contact">
               <h3>Contact Us</h3>
             </Link>

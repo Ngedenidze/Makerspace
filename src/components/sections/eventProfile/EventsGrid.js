@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Carousel from "./SpecialsCarousel";
-import SpecialCard from "./CardInfo/SpecialCard";
-import Testimonials from "./Testimonials";
+import Carousel from "../headingPages/SpecialsCarousel";
+import SpecialCard from "../headingPages/CardInfo/SpecialCard";
+import Testimonials from "../headingPages/Testimonials";
 
-export default function Specials() {
+export default function EventsGrid() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

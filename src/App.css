@@ -815,7 +815,7 @@ Link:link {
   text-align: left;
   align-items: left;
   box-sizing: border-box;
-  margin: 1rem 0rem;
+  margin: 0rem;
   width: 100%;
   display: block;
 }
@@ -955,7 +955,7 @@ Link:link {
   box-sizing: border-box;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 4rem 0;       /* Universal padding */
+  padding: 1rem 0;       /* Universal padding */
   margin-bottom: -1rem;
   margin: 0 auto;
   color: rgb(167, 167, 167);
@@ -992,7 +992,7 @@ Link:link {
   top: 0;
   left: 0;
   width: 200%;
-  height: 140%;
+  height: 150%;
   z-index: -2; /* Place behind the .about-us content */
   background: #73667A; /* Or use an image/gradient if desired */
   
@@ -1041,7 +1041,7 @@ Link:link {
 /* Diagonal background similar to About Us */
 
 .event-info {
-  padding: 5rem 4rem;
+  padding: 4rem 2rem;
   position: relative;
   z-index: 1;
   background-color: tr;
@@ -1056,11 +1056,11 @@ Link:link {
   left: 0;
   z-index: -1;
   background: #73667A;
-  clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
 }
 
 .event-image-wrapper {
-  margin: 0 auto 2rem;
+  margin: 0 auto;
   max-width: 1200px;
   overflow: hidden;
 }
@@ -1070,7 +1070,7 @@ Link:link {
   max-height: 500px;
   width: 100%;
   object-fit: cover;
-  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 94%, 0 100%);
 }
 
 .event-description {
@@ -1078,20 +1078,20 @@ Link:link {
 }
 
 .description-text {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   line-height: 1.6;
   color: #E2F3EA;
 }
 
 .event-dates {
-  margin-bottom: 2rem;
-  font-size: 1rem;
-  color: #E2F3EA;
+  margin-bottom: 0rem;
+  font-size: 1.2rem;
+  color: rgb(25, 25, 25);
 }
 
 .start-date,
 .end-date {
-  margin: 0.5rem 0;
+  margin: 0;
 }
 
 .date-label {
@@ -1103,13 +1103,21 @@ Link:link {
 }
 
 .lineups-heading {
-  font-size: 1.75rem;
+  font-size: 2rem;
   margin-bottom: 1rem;
   color: #C5E7D6;
 }
 .event-title{
   color: #C5E7D6;
   font-size: 2rem;
+  margin: 0.4rem 0;
+}
+.lineup-floor h3{
+   font-size: 1.3rem;
+   margin: 0.6rem 0;
+}
+.floor-name{
+  color: rgb(25, 25, 25);
 }
 
 .lineups-list {
@@ -1119,18 +1127,167 @@ Link:link {
 }
 
 .lineup-item {
-  padding: 0.5rem 4rem;
+  padding: 0.5rem 2rem;
+  font-size: 1.5rem;
 }
 
 .lineup-artist {
   font-weight: 600;
   color: #E2F3EA;
+
 }
 
 .lineup-time {
   font-style: italic;
   color: #E2F3EA;
 }
+/* -------------------------------------------------------------------------- */
+/*  EVENT PAGE                                                                */
+/* -------------------------------------------------------------------------- */
+.all-events-page
+{
+  position: relative;
+  background-color: transparent;
+  padding: 0rem;
+  margin: 2rem auto;
+  width: min(65vw, 1200px);
+  box-sizing: border-box;
+  color: #333;
+  overflow: hidden;
+}
+.all-events-image-wrapper{
+  margin: 0 auto;
+  max-width: 1200px;
+  overflow: hidden;
+}
+.all-events-image{
+  display: block;
+  max-height: 500px;
+  width: 100%;
+  object-fit: cover;
+  clip-path: polygon(0 10%, 80% 0, 100% 10%, 100% 100%, 0 100%);
+  filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
+}
+.all-events-image-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 500px;
+  background-color: rgba(0, 0, 0, 0.3); /* 50% black overlay */
+  clip-path: polygon(0 10%, 80% 0, 100% 10%, 100% 100%, 0 100%);
+  z-index: 1;
+}
+
+.events-grid{
+  margin-top: 2px;
+  padding: 2px 0;
+  position: relative;
+  z-index: 1;
+  background-color: tr;
+  min-height: 400px;
+}
+.events-grid::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: transparent;
+}
+.events-slices{
+  width: 100%;
+}
+
+.events-slices .menu-card-link{
+  width: 100%;
+  margin:0;
+  margin-bottom: 2px;
+  background-color: #73667A;
+  max-width: 100%;
+  height: 150px;
+}
+.events-slices .menu-card-link .menu-card-content h2{
+  color: #191919;
+}
+.events-slices .menu-card-link .menu-card-content h3{
+  color: #E2F3EA;
+}
+.events-slices .menu-card-link .menu-card-content p{
+  color: #edefee;
+  font-size: 1.2rem;
+}
+.events-slices .menu-card-link .special-button{
+  display: none;
+}
+.events-slices .menu-card-link:hover {
+  background-color: rgba(149, 149, 156, 0.28);
+  cursor: pointer;
+}
+/* -------------------------------------------------------------------------- */
+/*  Rentals page                                                              */
+/* -------------------------------------------------------------------------- */
+.rentals-page{
+  position: relative;
+  background-color: transparent;
+  padding: 0rem;
+  margin: 2rem auto;
+  width: min(65vw, 1200px);
+  box-sizing: border-box;
+  color: #333;
+  overflow: hidden;
+}
+.rentals-cover-image-wrapper{
+  margin: 0 auto;
+  max-width: 1200px;
+  overflow: hidden;
+}
+
+.rentals-cover-image{
+  display: block;
+  max-height: 500px;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.2s, clip-path 0.2s;
+  clip-path: polygon(0 0, 70% 0, 100% 10%, 100% 100%, 50% 100%, 0 100%);
+  filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
+}
+.rentals-main-container{
+  position: relative;
+  padding: 5px;
+  margin: 0 auto;
+  width: min(65vw, 1200px);
+  box-sizing: border-box;
+  color: #333;
+  overflow: hidden;
+  background-color: #73667A;
+}
+.rentals-top-bar{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 3rem;
+  color: #E2F3EA;
+  margin: 2px 0;
+  background-color: #73667A;
+}
+.rentals-top-bar h1{
+  font-size: 3rem;
+  margin: 0;
+  text-align: left;
+  width: 100%;
+}
+.rentals-top-bar p{
+  font-size: 1.5rem;
+  margin: 5px;
+  margin-top: 1rem;
+  width: 100%;
+}
+
 
 /* -------------------------------------------------------------------------- */
 /*  ABOUT US                                                                  */
@@ -1209,6 +1366,114 @@ Link:link {
   margin-right: 1remq;
 }
 
+/* -------------------------------------------------------------------------- */
+/*  Rentals Contact Section                                                    */
+/* -------------------------------------------------------------------------- */
+.rentals-contact {
+  padding: 1rem;
+  margin: 2px auto;
+  width: min(65vw, 1200px);
+  box-sizing: border-box;
+  color: #E2F3EA;
+  background-color: #73667A;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+}
+.rentals-contact-heading{
+  text-align: center;
+  margin: 0;
+  max-width: 50%;
+  padding: 2rem;
+  align-content: center;
+}
+.rentals-contact-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #F9F9F9;
+  text-align: center;
+}
+
+.rentals-contact-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  color: #E2F3EA;
+  text-align: center;
+}
+
+.rentals-contact-form {
+  background-color: #5F4B66;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.rentals-contact-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rentals-contact-form input[type="text"],
+.rentals-contact-form input[type="email"],
+.rentals-contact-form textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #73667A;
+  border-radius: 5px;
+  background-color: #F9F9F9;
+  color: #333;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.rentals-contact-form input[type="text"]:focus,
+.rentals-contact-form input[type="email"]:focus,
+.rentals-contact-form textarea:focus {
+  border-color: #E2F3EA;
+  outline: none;
+  box-shadow: 0 0 10px rgba(226, 243, 234, 0.5);
+}
+
+.rentals-contact-form textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.rentals-contact-form button {
+  background-color: #E2F3EA;
+  color: #333;
+  padding: 0.8rem 2rem;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.rentals-contact-form button:hover {
+  background-color: #d1e8d7;
+}
+
+.rentals-contact-info {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #F9F9F9;
+  text-align: center;
+}
+
+.rentals-contact-info a {
+  color: #E2F3EA;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.rentals-contact-info a:hover {
+  color: #d1e8d7;
+}
 
 /* -------------------------------------------------------------------------- */
 /*  Merch                                                                 */
@@ -1629,15 +1894,18 @@ Link:link {
   }
   .in-session .in-session-text{
     width: 100%;
-    max-height: 22vh;
-    height: 22vh;
+height: 12rem;
     padding: 1rem;
+    overflow: hidden;
+  }
+  .in-session-image {
+    max-height: 20vh;
     overflow: hidden;
   }
   .in-session-image img {
     width: 100%;
     max-width: 100%;
-    max-height: 20vh;
+    ;
     object-fit: cover;
     overflow: hidden;
   }
@@ -1799,6 +2067,150 @@ Link:link {
   .about-us .hero-text-2 .info-text p{
     font-size: 0.75rem;
     margin: 0;
+  }
+  /* -------------------------------------------------------------------------- */
+/*  Events                                                                 */
+/* -------------------------------------------------------------------------- */
+  .event-page{
+    margin: 0;
+    width: 100%;
+  }
+  .event-info{
+    padding: 1rem;
+  }
+  .event-dates{
+    font-size: 0.9rem;
+  }
+  .event-image{
+    clip-path: none;
+    max-height: 25vh;
+  }
+  .event-info::before {
+    clip-path: none;
+  }
+  .event-page h1{
+    font-size: 1.2rem;
+  }
+  .event-page h3{
+    font-size: 1rem;
+  }
+  .lineup-item{
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+  .lineup-artist, .lineup-time{
+    font-size: 1.1rem;
+  }
+  .description-text{
+    font-size: 0.8rem;
+  }
+  .event-lineups{
+    margin-bottom: 5px;
+  }
+  .main-content{
+    width: 95vw;
+  }
+  /* -------------------------------------------------------------------------- */
+/*  All EVENT PAGE                                                                */
+/* -------------------------------------------------------------------------- */
+  .all-events-page{
+    margin: 0;
+    width: 100%;
+  }
+  .all-events-image-wrapper {
+    max-height: 20vh;
+  }
+  .all-events-image-wrapper img{
+    max-height: 20vh;
+    object-fit: cover;
+  }
+  .all-events-image-wrapper::before {
+    display: none;
+  }
+  .events-slices .menu-card-link .menu-card-content h2{
+    font-size: 0.8rem;
+  }
+  .events-slices .menu-card-link .menu-card-content h3{
+    font-size: 1.2rem;
+  }
+  .events-slices .menu-card-link .menu-card-content p{
+    color: #edefee;
+    font-size: 0.9rem;
+  }
+  /* -------------------------------------------------------------------------- */
+/*  Rentals page                                                              */
+/* -------------------------------------------------------------------------- */
+  .rentals-page{
+    margin: 0;
+    width: 100%;
+  }
+  .rentals-page .rentals-image-wrapper{
+    max-height: 20vh;
+  }
+  .rentals-page .rentals-image-wrapper img{
+    max-height: 20vh;
+    object-fit: cover;
+  }
+  .rentals-page .rentals-image-wrapper::before {
+    display: none;
+  }
+  .rentals-page .rentals-text{
+    font-size: 0.8rem;
+  }
+  .rentals-top-bar{
+    padding: 1rem;
+  }
+  .rentals-top-bar h1{
+    font-size: 2rem;
+  }
+  .rentals-top-bar p{
+    font-size: 1rem;
+  }
+  .rentals-main-container{
+    margin: 5px 0;
+    width: 100%;
+  }
+  .image-grid{
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  .image-item{
+    overflow: hidden;
+    width: 100%;
+  }
+  .rentals-contact{
+    margin: 5px 0;
+    width: 100%;
+
+  }
+  .rentals-contact-heading{
+    padding: 2px;
+    max-width: 70%;
+    
+  }
+  .rentals-contact-title{
+    font-size: 1.2rem;
+    text-align: left;
+  }
+  .rentals-contact-description{
+    font-size: 0.9rem;
+    text-align: left;
+    padding: 0;
+  }
+  .rentals-contact h2{
+    font-size: 1.2rem;
+    text-align: left;
+    margin: 0;
+  }
+  .rentals-contact-form{
+    padding: 1rem;
+  }
+  .rentals-contact-form textarea{
+    min-height: 100px;
+  }
+  .rentals-contact-info p{
+    font-size: 0.6rem;
   }
 }
 

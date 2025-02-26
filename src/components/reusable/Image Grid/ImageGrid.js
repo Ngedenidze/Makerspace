@@ -9,12 +9,6 @@ function ImageGrid({ images }) {
   };
   const imagesToRender = images.length > 0 ? images : [defaultImage];
   return (
-    <>
-    <article className="events-topbar">
-        <div>
-          <h1>Gallery</h1>
-        </div>
-      </article>
     <div className="image-grid">
       {imagesToRender.map((img, idx) => (
         <div key={idx} className="image-item">
@@ -22,7 +16,6 @@ function ImageGrid({ images }) {
         </div>
       ))}
     </div>
-    </> 
     );
 }
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CommercialRenting = () => {
   return (
@@ -12,7 +13,7 @@ const CommercialRenting = () => {
           designed to leave a lasting impression. Ready to make your event
           unforgettable?
         </p>
-        <button className="special-button">Book Now &#x2192;</button>
+        <Link className="special-button" to="/Rentals">Book Now &#x2192;</Link>
       </div>
 
       <div className="commercial-renting-image">

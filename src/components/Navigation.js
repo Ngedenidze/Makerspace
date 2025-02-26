@@ -22,7 +22,7 @@ export default function Navigation({ device, onSpecialsClick, onAboutClick }) {
         <Link className="hover-effect" to="/">
           <h1>Home</h1>
         </Link>
-        <Link className="hover-effect" to="/Events">
+        <Link className="hover-effect" to="/AllEvents">
           <h1>Events</h1>
         </Link>
   

@@ -110,7 +110,6 @@ export default function InsessionTabs() {
           <>
             <article className="in-session-text">
               <h1>{eventStatus}</h1> {/* Display Event Status */}
-              <h2>MAKERSPACE</h2>
 
               {/* Stage Tabs */}
               <div className="stage-tabs">

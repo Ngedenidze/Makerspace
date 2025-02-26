@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import Heading from "../sections/headingPages/Heading";
-import Specials from "../sections/headingPages/Specials";
+import Specials from "../sections/eventProfile/EventsGrid";
 import Testimonials from "../sections/headingPages/Testimonials";
 import Insession from "../sections/headingPages/Insession";
 import About from "../sections/headingPages/About";
