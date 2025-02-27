@@ -996,6 +996,7 @@ Link:link {
 }
 .commercial-renting .commercial-renting-text-container p, .dj-booking .dj-booking-text-container p{
   font-size: 1.2rem;
+  color: #E2F3EA;
 }
 .commercial-renting .commercial-renting-text-container::before, .dj-booking .dj-booking-text-container::before{
   content: "";
@@ -2175,6 +2176,7 @@ height: 12rem;
     height: 40vh;
     min-height: 40vh;
     align-items: flex-start;
+    justify-content: space-around;
   }
   .dj-booking .dj-booking-text-container{
     height: fit-content;
