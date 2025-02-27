@@ -6,6 +6,7 @@ import Insession from "../sections/headingPages/Insession";
 import About from "../sections/headingPages/About";
 import ImageGrid from "../reusable/Image Grid/ImageGrid";
 import CommercialRenting from "./CommercialRenting";
+import DJBooking from "./DJBooking";
 
 export default function Homepage() {
 
@@ -37,7 +38,9 @@ export default function Homepage() {
             <section>
               <CommercialRenting />
             </section>
-
+              <section>
+                <DJBooking />
+              </section>
             <section ref={aboutRef}>
               <About />
             </section>

@@ -8,6 +8,7 @@ import EventDetails from "./pages/Events";
 import EventPage from "./pages/EventPage";
 import Rentals from "./pages/Rentals";
 import Events from "./pages/Events";
+import DJs from "./pages/DJs";
 
 export default function Routing() {
   return (
@@ -26,6 +27,7 @@ export default function Routing() {
       <Route path="/Rentals" element = {<Rentals />} />
       <Route path="/AllEvents" element={<Events />} />
       <Route path="/Events/:id" element={<EventPage />} /> 
+      <Route path="/DJs" element={<DJs />} />
     </Routes>
   );
 }
