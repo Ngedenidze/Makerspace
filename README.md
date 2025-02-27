@@ -291,14 +291,6 @@ This project is licensed under the **MIT License**.
 
 ---
 
-## 📸 Screenshots
-
-| Home Page | DJ Booking | Rentals |
-|-----------|------------|---------|
-| ![Home](https://makerspaceclub.com) | ![DJ Booking](https://makerspaceclub.com/DJs) | ![Rentals](https://makerspaceclub.com/Rentals) |
-
----
-
 ## 📈 Future Enhancements
 
 - Integration with a backend CMS for event management.
