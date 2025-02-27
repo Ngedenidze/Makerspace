@@ -765,7 +765,7 @@ Link:link {
 .menu-card-link {
   flex: 1 1 calc(25% - 1px); /* Each card takes up 25% minus the gap */
   max-width: calc(25% - 1px); /* Prevents growing past 4 per row */
-  height: 250px;
+  height: 180px;
   margin: auto;
   position: relative;
   background-color: #73667A;
@@ -1877,7 +1877,7 @@ Link:link {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-height: 60vh;
+    max-height: 70vh;
     width: 100%;
   }
   .in-session-text{
