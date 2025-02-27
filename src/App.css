@@ -163,7 +163,7 @@ Link:link {
   box-sizing: border-box;
   flex-shrink: 0; 
   z-index: 3;
-  padding: 0 20px;
+  padding: 0 25px;
   height: calc(100vh - 2rem);
   display: flex;
   justify-content: space-between;
@@ -191,7 +191,6 @@ Link:link {
 .arrow {
   position: relative;
   z-index: 1;
-  width: auto;
 }
 
 .header-box .side-nav-bar {
@@ -282,7 +281,7 @@ Link:link {
   font-size: 1rem;
   max-width: 30rem;
   text-overflow: clip;
-  margin: 0rem;
+  margin: 5px;
   text-decoration: none;
 }
 .bar-info .footer-menu .footer-links h3:hover{
@@ -1991,6 +1990,9 @@ Link:link {
   .in-session, .events, .merch-display, .about-us {
     width: 75vw;
   }
+  .event-image{
+    max-height: 40vh;
+  }
 }
 @media screen and (max-width: 60rem) {
  
@@ -2037,6 +2039,7 @@ Link:link {
   .header-box .bar-info{
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     height: 100px;
     position: absolute;
     right: 0;

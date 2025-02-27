@@ -26,21 +26,17 @@ export default function Heading() {
 
         {/* Footer Section */}
         <section className="bar-info">
-          <section className="footer-info">
-            <a
-              className="footer-links"
-              href="https://www.google.com/maps?sca_esv=0c36c686c589dc21&output=search&q=makerspace+tbilisi&source=lnms"
-            >
-              <h2>Location</h2>
-              <h3>Lado Gudiashvili Square</h3>
-              <h3>Tbilisi 0162</h3>
-              <h3>Georgia</h3>
-            </a>
-          </section>
+      
           <section className="footer-menu">
             <Link className="footer-links" to="/About">
               <h3>About us</h3>
             </Link>
+            <a
+              className="footer-links"
+              href="https://www.google.com/maps/dir//Makerspace,+Lado+Gudiashvili+Square,+Tbilisi+0162,+Georgia/@41.6909958,44.8035254,17z/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x40440d9a3542444f:0xc579f4ed091da767!3e0?source=lnms"
+            >
+              <h3>Location</h3>
+            </a>
             <Link className="footer-links" to="/contact">
               <h3>Contact Us</h3>
             </Link>
@@ -122,22 +118,17 @@ export default function Heading() {
                         <h1>DJ Booking</h1>
                       </Link>
                     </section>
-                    <section className="footer-info-mobile">
-                      <a
-                        className="footer-links"
-                        href="https://www.google.com/maps?sca_esv=0c36c686c589dc21&output=search&q=makerspace+tbilisi&source=lnms"
-                      >
-                        <h2>Location</h2>
-                        <h3>Lado Gudiashvili Square</h3>
-                        <h3>Tbilisi 0162</h3>
-                        <h3>Georgia</h3>
-                      </a>
-                    </section>
                     <section className="footer-menu-mobile">
                       <h2>Company</h2>
                       <Link className="footer-links" to="/About">
                         <h3>About us</h3>
                       </Link>
+                      <a
+              className="footer-links"
+              href="https://www.google.com/maps/dir//Makerspace,+Lado+Gudiashvili+Square,+Tbilisi+0162,+Georgia/@41.6909958,44.8035254,17z/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x40440d9a3542444f:0xc579f4ed091da767!3e0?source=lnms"
+            >
+              <h3>Location</h3>
+            </a>
                       <Link className="footer-links" to="/contact">
                         <h3>Contact Us</h3>
                       </Link>
