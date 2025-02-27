@@ -333,6 +333,11 @@ Link:link {
   width: 100%;
   align-items: flex-start;
 }
+.info-box pre .mobile-menu .mobile-menu-login .hover-effect{
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
 .desktop-menu{
   display: flex;
   flex-direction: column;
@@ -341,7 +346,7 @@ Link:link {
   align-items: flex-start;
 }
 .desktop-menu h1{
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 .info-box h2{
   font-size: 1rem;
@@ -1030,9 +1035,10 @@ Link:link {
 
 }
 .dj-booking .dj-booking-text-container::before{
-  height: 100%;
+  height: 80%;
   width: 70%;
   left: 30%;
+  top: 10%;
   clip-path: none;
 }
 .commercial-renting .commercial-renting-text-container .special-button, .dj-booking .dj-booking-text-container .special-button{
@@ -2043,6 +2049,7 @@ Link:link {
     height: 100px;
     position: absolute;
     right: 0;
+    width: auto;
   }
   .footer-menu-mobile{
     margin-top: 2rem;

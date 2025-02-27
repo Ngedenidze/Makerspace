@@ -19,18 +19,13 @@ export default function Navigation({ device, onSpecialsClick, onAboutClick }) {
         </Link>
       )}
       <menu className={`navbar-menu ${device}`}>
-        <Link className="hover-effect" to="/">
-          <h1>Home</h1>
-        </Link>
         <Link className="hover-effect" to="/AllEvents">
           <h1>Events</h1>
         </Link>
-  
-
-        <section className="desktop-menu">
         <Link className="hover-effect" to="/Rentals">
           <h1>Rentals</h1>
         </Link>
+        <section className="desktop-menu">
         <Link className="hover-effect" to="/Djs">
           <h1>DJs</h1>
         </Link>
