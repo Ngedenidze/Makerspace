@@ -1011,7 +1011,7 @@ Link:link {
      then to the right side (cutting off the top-right corner).
      Adjust the polygon points to get the exact shape you want. */
   clip-path: polygon(0 0 , 0% 0, 100% 0, 90% 90%, 0 80%);
-  filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
+
 }
 .dj-booking .dj-booking-text-container::before{
   height: 100%;
@@ -2151,10 +2151,14 @@ height: 12rem;
     margin: 0;
     flex-direction: column;
   }
+  .dj-booking{
+    flex-direction: column-reverse;
+  }
   .commercial-renting .commercial-renting-image, .dj-booking .dj-booking-image{
     max-width: 90%;
     overflow: hidden;
     max-height: 40vh;
+    padding: 0;
   }
   .commercial-renting .commercial-renting-image img, .dj-booking .dj-booking-image img{
     object-fit: cover;
@@ -2164,13 +2168,21 @@ height: 12rem;
     flex-direction: column;
     width: 100%;
     padding: 1rem;
-    margin: 0;
+    padding-bottom: 0;
+    margin: 2rem 0 0 0;
     margin-left: 1rem;
     max-width: 90%;
     height: 40vh;
     min-height: 40vh;
     align-items: flex-start;
   }
+  .dj-booking .dj-booking-text-container{
+    height: fit-content;
+    max-height: auto;
+    min-height: auto;
+    margin-bottom: 0;
+  }
+
   .commercial-renting .commercial-renting-text-container h1, .dj-booking .dj-booking-text-container h1{
     font-size: 1.2rem;
   }
@@ -2178,9 +2190,23 @@ height: 12rem;
     font-size: 0.9rem;
   }
   .commercial-renting .commercial-renting-text-container::before, .dj-booking .dj-booking-text-container::before{
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    clip-path: none;
     width: 100%;
   }
+  .dj-booking .dj-booking-text-container::before{
+    height: 60%;
+    left: 1rem;
+    clip-path: none;
+  }
+  .dj-booking .dj-booking-image{
+    position: relative;
+    clip-path: none;
+    left: -2rem;
+    padding: 0;
+  }
+  .dj-booking .dj-booking-image img{
+    width: 100%;
+  }  
   .commercial-renting .commercial-renting-text-container .special-button, .dj-booking .dj-booking-text-container .special-button{
     position: relative;
   }
