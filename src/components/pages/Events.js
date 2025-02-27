@@ -173,7 +173,7 @@ export default function Events() {
   if (loading) return <p>Loading event...</p>;
 
   // If event data is available, group the lineups by floor
-  const displayedEvents = events.slice(0, 8);
+  const displayedEvents = events;
 
 return (
   <div className="all-events-page">

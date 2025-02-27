@@ -26,10 +26,15 @@ export default function Navigation({ device, onSpecialsClick, onAboutClick }) {
           <h1>Events</h1>
         </Link>
   
-        <Link className="hover-effect" to="/About">
-          <h1>About</h1>
+
+        <section className="desktop-menu">
+        <Link className="hover-effect" to="/Rentals">
+          <h1>Rentals</h1>
         </Link>
-       
+        <Link className="hover-effect" to="/Djs">
+          <h1>DJs</h1>
+        </Link>
+       </section>
       </menu>
     </section>
   );

@@ -328,6 +328,22 @@ Link:link {
   word-wrap: break-word;
   white-space: pre-wrap;
 }
+.info-box pre .mobile-menu{
+  display:flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+}
+.desktop-menu{
+  display: flex;
+  flex-direction: column;
+ 
+  width: 100%;
+  align-items: flex-start;
+}
+.desktop-menu h1{
+  font-size: 1.2rem;
+}
 .info-box h2{
   font-size: 1rem;
   margin-bottom: 0.5rem;
@@ -607,7 +623,7 @@ Link:link {
   flex-direction: row;
   justify-content: space-around;
   align-items: flex-start;
-  max-height: 500px;
+  max-height: 40vh;
   width: min(65vw, 1200px);
   background-color: #B9C0DA;
   
@@ -684,7 +700,7 @@ Link:link {
   /* Use width: auto or max-width: 100% if you don't want it stretched */
   max-width: 800px;
   overflow: visible;
-  object-position: 10%;
+  object-position: 0%;
 }
 
 
@@ -1861,9 +1877,8 @@ Link:link {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-height: 800px;
+    max-height: 60vh;
     width: 100%;
-
   }
   .in-session-text{
     width: 100%;
@@ -1877,6 +1892,8 @@ Link:link {
   .in-session-image{
     width: 100%;
     clip-path:none;
+    overflow: hidden;
+    max-height: 50%;
   }
   .in-session-image img {
     width: 100%;
@@ -2146,6 +2163,9 @@ height: 12rem;
   }
   .menu-card-content > p {
     font-size: 1rem;
+  }
+  .desktop-menu{
+    display: none;
   }
   .commercial-renting, .dj-booking{
     width: 99vw;
