@@ -116,7 +116,7 @@ export default function Heading() {
                       <section className="mobile-menu-login">
                       <a
                         className="hover-effect"
-                        href="/Account"
+                        href="/login"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
