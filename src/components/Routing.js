@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, HashRouter, Navigate } from "react-router-dom";
 import Homepage from "./pages/HomePage";
 import About from "./pages/About";
 import Reservation from "./pages/BookingPage";
@@ -18,6 +18,7 @@ function PrivateRoute({ children }) {
 }
 export default function Routing() {
   return (
+    <HashRouter>
     <Routes>
       <Route path="/" element={<Homepage />} />
 
@@ -47,5 +48,6 @@ export default function Routing() {
           }
         />
     </Routes>
+    </HashRouter>
   );
 }
