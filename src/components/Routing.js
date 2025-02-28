@@ -18,7 +18,7 @@ function PrivateRoute({ children }) {
 }
 export default function Routing() {
   return (
-    <HashRouter>
+    
     <Routes>
       <Route path="/" element={<Homepage />} />
 
@@ -48,6 +48,5 @@ export default function Routing() {
           }
         />
     </Routes>
-    </HashRouter>
   );
 }
