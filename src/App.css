@@ -513,6 +513,7 @@ Link:link {
 }
 .hover-effect h1, .hover-effect svg{
   line-height: 1.2rem;
+  font-size: 1.2rem;
   margin: 5px;
   color: rgb(167, 167, 167);
 }
@@ -1462,6 +1463,7 @@ Link:link {
 
 .rentals-contact-form input[type="text"],
 .rentals-contact-form input[type="email"],
+.rentals-contact-form input[type="url"],
 .rentals-contact-form textarea {
   width: 100%;
   padding: 0.8rem;
@@ -1637,6 +1639,7 @@ Link:link {
 
 .djs-contact-form input[type="text"],
 .djs-contact-form input[type="email"],
+.djs-contact-form input[type="url"],
 .djs-contact-form textarea {
   width: 100%;
   padding: 0.8rem;

@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Homepage from "./pages/HomePage";
 import About from "./pages/About";
 import Reservation from "./pages/BookingPage";
@@ -9,7 +9,13 @@ import EventPage from "./pages/EventPage";
 import Rentals from "./pages/Rentals";
 import Events from "./pages/Events";
 import DJs from "./pages/DJs";
+import AuthPage from "./sections/authPage/AuthPage";
+import Profile from "./pages/user profile/Profile";
 
+function PrivateRoute({ children }) {
+  const token = localStorage.getItem("authToken");
+  return token ? children : <Navigate to="/login" />;
+}
 export default function Routing() {
   return (
     <Routes>
@@ -20,7 +26,7 @@ export default function Routing() {
       <Route path="/reservations" element={<Reservation />} />
 
       <Route path="/order" element={<Order />} />
-
+    
       <Route path="/confirmation" element={<Confirmation />} />
 {/* 
       <Route path="/Events/:id" element={<EventDetails />} /> */}
@@ -28,6 +34,18 @@ export default function Routing() {
       <Route path="/AllEvents" element={<Events />} />
       <Route path="/Events/:id" element={<EventPage />} /> 
       <Route path="/DJs" element={<DJs />} />
+      <Route path="/login" element={<AuthPage page="login" />} />
+      <Route path="/register" element={<AuthPage page="register" />} />
+      <Route path="/forgot-password" element={<AuthPage page="forgot-password" />} />
+      {/* Private routes */}
+      <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        />
     </Routes>
   );
 }

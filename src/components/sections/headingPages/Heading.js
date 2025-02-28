@@ -81,7 +81,7 @@ export default function Heading() {
             </a>
             <a
               className="hover-effect"
-              href="/Account"
+              href="/login"
               target="_blank"
               rel="noopener noreferrer"
               viewBox="0 0 24 24"
