@@ -98,7 +98,7 @@ export default function InsessionTabs() {
         {error ? (
           <section className="default-image">
             <div className="image-wrapper">
-              <img src={defaultImage} alt="Default Cover Art" />
+              <img src={"https://myphotostorage.blob.core.windows.net/mymakerphotos/bf080f0e-a1fb-430c-998d-cc336ace2fcd.jpg"} alt="Default Cover Art" />
             </div>
             <div className="text-overlay">
               <h1>MAKERSPACE</h1>
@@ -136,7 +136,7 @@ export default function InsessionTabs() {
 
             {/* Event Image */}
             <section className="in-session-image">
-              <img src={localImage} alt="In Session" />
+              <img src={"https://myphotostorage.blob.core.windows.net/mymakerphotos/bf080f0e-a1fb-430c-998d-cc336ace2fcd.jpg"} alt="In Session" />
             </section>
           </>
         )}

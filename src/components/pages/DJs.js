@@ -15,11 +15,11 @@ const DJs = () => {
       description: "Master of underground beats.",
       images: [
         {
-          url: require("../../assets/DJs/dj-1.jpg"),
+          url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/a15aa0b9-127e-4089-81f2-090d2adcd862.jpg",
           alt: "DJ Shadow",
         },
         {
-          url: require("../../assets/DJs/dj-2.jpg"),
+          url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/06f053e0-65a7-48f4-870c-e7e5a75c1110.jpg",
           alt: "DJ Shadow Performance",
         },
       ],
@@ -30,11 +30,11 @@ const DJs = () => {
       description: "Futuristic vibes and neon rhythms.",
       images: [
         {
-          url: require("../../assets/DJs/dj-3.jpg"),
+          url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/91028cc5-b14f-4a47-b4b2-f01ef4d5496b.jpg",
           alt: "Neon Beats",
         },
         {
-          url: require("../../assets/DJs/dj-4.jpg"),
+          url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/7fd3953c-2be8-4b6e-a14f-3b272a3b33d0.jpg",
           alt: "Neon Beats Live",
         },
       ],
@@ -50,7 +50,7 @@ const DJs = () => {
   return (
     <div className="djs-page">
       <div className="djs-cover-image-wrapper">
-        <img className="djs-cover-image" src={localImg} alt="DJs Cover" />
+        <img className="djs-cover-image" src={"https://myphotostorage.blob.core.windows.net/mymakerphotos/cceab12c-a24e-427b-ad37-9a75768cbb07.jpg"} alt="DJs Cover" />
       </div>
 
       <div className="djs-top-bar">

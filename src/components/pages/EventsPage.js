@@ -22,6 +22,7 @@ export default function EventsPage() {
         return res.json();
       })
       .then((data) => {
+        console.log(data);
         setEvent(data);
         setLoading(false);
       })
@@ -53,7 +54,7 @@ export default function EventsPage() {
         <img
           className="event-image"
           // src={event ? event.eventPhotoUrl : localImg}
-          src={localImg}
+          src={event ? event.eventPhotoUrl : localImg}
           alt={event ? event.name : "Default"}
         />
       </div>

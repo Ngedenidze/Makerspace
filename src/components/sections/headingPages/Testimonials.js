@@ -146,8 +146,8 @@ export default function Testimonials() {
 
     const apiUrl =
       process.env.NODE_ENV === "production"
-        ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/Events"
-        : "/api/Events"; // still use proxy in dev
+        ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/SoonEvents"
+        : "/api/SoonEvents"; // still use proxy in dev
   
     fetch(apiUrl)
       .then((res) => {
@@ -157,7 +157,7 @@ export default function Testimonials() {
         return res.json();
       })
       .then((data) => {
-        console.log("Fetched events:", data);
+        console.log("Fetched events1:", data);
         setEvents(data);
         setLoading(false);
       })
@@ -189,18 +189,21 @@ export default function Testimonials() {
       <section className="events-cards">
         
         {displayedEvents.map((event) => {
-                 const startDate = new Date(event.startDate);
+                 const startDate = new Date(event.event.startDate);
                  const weekday = startDate.toLocaleDateString("en-US", { weekday: "long" });
                  const date = startDate.toLocaleDateString("en-US", {
                    month: "long",
                    day: "numeric",
                    year: "numeric",
                  });
-                 const djName = event.lineUps?.length ? event.lineUps[0].artistName : event.name;
 
+                  const headerLineup = event.event.lineUps?.find(
+                    (lineUp) => lineUp.isHeaderLineUp === true
+                  );
+                  const djName = headerLineup ? headerLineup.artistName : event.name;
                  return (
           <SpecialCard
-            key={event.id}
+            key={event.event.id}
             weekday={weekday}
             date={date}
             djName={djName}

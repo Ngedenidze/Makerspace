@@ -17,7 +17,7 @@ export default function Heading() {
         {/* Regular Navigation */}
         <Link className="side-nav-bar" to="/">
           <img
-            src={require("../../../assets/makerspace.JPG")}
+            src={"https://myphotostorage.blob.core.windows.net/mymakerphotos/7d69a115-b47f-4803-a627-485f86ef5c95.jpg"}
             alt="Makerspace logo"
             className="nav-image"
           />

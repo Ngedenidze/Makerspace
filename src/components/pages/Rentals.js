@@ -11,31 +11,31 @@ const Rentals = () => {
     const mockRentals = [
         {
             id: 1,
-            title: "Premium Sound System",
+            title: "Rental Space",
             description: "High-quality sound system for events.",
             images: [
                 {
-                    url: require("../../assets/rentals/rental-1.jpg"),
-                    alt: "Premium Sound System 1"
+                    url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/9f957364-a118-4eae-89cd-8e91e71b3d45.jpg",
+                    alt: "Rental space 1"
                 },
                 {
-                    url: require("../../assets/rentals/rental-2.jpg"),
-                    alt: "Premium Sound System 2"
+                    url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/31c24eb2-69f6-4439-8997-ca4cc733e307.jpg",
+                    alt: "Rental Space 2"
                 }
             ]
         },
         {
             id: 2,
-            title: "Outdoor Speaker Setup",
+            title: "Rental Space",
             description: "Perfect for outdoor parties and gatherings.",
             images: [
                 {
-                    url: require("../../assets/rentals/rental-3.jpg"),
-                    alt: "Outdoor Speaker Setup 1"
+                    url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/4f7a89f9-c149-4d94-84cd-7054403b7272.jpg",
+                    alt: "Rental Space 1"
                 },
                 {
-                    url: require("../../assets/rentals/rental-4.jpg"),
-                    alt: "Outdoor Speaker Setup 2"
+                    url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/e13915dc-3af2-43d6-a696-29a6f20958a8.jpg",
+                    alt: "Rental Space 2"
                 }
             ]
         }
@@ -77,7 +77,7 @@ const Rentals = () => {
             <div className="rentals-cover-image-wrapper">
                 <img
                     className="rentals-cover-image"
-                    src={localImg}
+                    src={"https://myphotostorage.blob.core.windows.net/mymakerphotos/e70e7838-7094-4a75-99ef-2b9ad69d3427.jpg"}
                     alt="Rentals Cover"
                 />
             </div>

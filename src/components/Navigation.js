@@ -12,7 +12,7 @@ export default function Navigation({ device, onSpecialsClick, onAboutClick }) {
       ) : (
         <Link className="nav-bar-logo" to="/">
           <img
-            src={require("../assets/Logo.jpg")}
+            src={"https://myphotostorage.blob.core.windows.net/mymakerphotos/7d69a115-b47f-4803-a627-485f86ef5c95.jpg"}
             alt="Little Lemon logo"
             className="nav-image"
           ></img>

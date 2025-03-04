@@ -2192,10 +2192,10 @@ height: 12rem;
     max-width: 90%;
     overflow: hidden;
     max-height: 40vh;
-    padding: 0;
   }
   .commercial-renting .commercial-renting-image img, .dj-booking .dj-booking-image img{
     object-fit: cover;
+    height: 400px;
   }
   .commercial-renting .commercial-renting-text-container, .dj-booking .dj-booking-text-container{
     display: flex;

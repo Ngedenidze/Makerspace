@@ -52,8 +52,8 @@ export default function EventPage() {
       <div className="event-image-wrapper">
         <img
           className="event-image"
-          // src={event ? event.eventPhotoUrl : localImg}
-          src={localImg}
+           src={event ? event.eventPhotoUrl : localImg}
+          // src={localImg}
           alt={event ? event.name : "Default"}
         />
       </div>
