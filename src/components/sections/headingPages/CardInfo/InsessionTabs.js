@@ -9,7 +9,7 @@ export default function InsessionTabs() {
   const [error, setError] = useState(null);
   const [image, setImage] = useState("");
   const [eventStatus, setEventStatus] = useState("");
-
+  
   useEffect(() => {
     const apiUrl =
       process.env.NODE_ENV === "production"
@@ -136,7 +136,7 @@ export default function InsessionTabs() {
 
             {/* Event Image */}
             <section className="in-session-image">
-              <img src={"https://myphotostorage.blob.core.windows.net/mymakerphotos/bf080f0e-a1fb-430c-998d-cc336ace2fcd.jpg"} alt="In Session" />
+              <img src={image} alt="In Session" />
             </section>
           </>
         )}
