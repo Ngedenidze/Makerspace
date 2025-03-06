@@ -53,7 +53,6 @@ export default function EventPage() {
         <img
           className="event-image"
            src={event ? event.eventPhotoUrl : localImg}
-          // src={localImg}
           alt={event ? event.name : "Default"}
         />
       </div>
@@ -93,18 +92,18 @@ export default function EventPage() {
                       <li key={lineUp.id} className="lineup-item">
                         <span className="lineup-artist">
                           {lineUp.isHeaderLineUp ? (
-                            <strong>{lineUp.artistName}</strong>
+                            <strong>{lineUp.artistName} </strong>
                           ) : (
                             lineUp.artistName
                           )}
                         </span>
-                        {/* {" - "}
+                        {" - "}
                         <span className="lineup-time">
                           {new Date(lineUp.startTime).toLocaleTimeString([], {
                             hour: "2-digit",
                             minute: "2-digit",
                           })}
-                        </span> */}
+                        </span>
                       </li>
                     ))}
                   </ul>

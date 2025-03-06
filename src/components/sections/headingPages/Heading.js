@@ -36,9 +36,10 @@ export default function Heading() {
             >
               <h3>Location</h3>
             </a>
-            <Link className="footer-links" to="/contact">
+            {/* <Link className="footer-links" to="/contact">
               <h3>Contact Us</h3>
-            </Link>
+            </Link> */}
+   
           </section>
           <section className="socials">
             <a
@@ -145,9 +146,9 @@ export default function Heading() {
                       >
                         <h3>Location</h3>
                       </a>
-                      <Link className="footer-links" to="/contact">
+                      {/* <Link className="footer-links" to="/contact">
                         <h3>Contact Us</h3>
-                      </Link>
+                      </Link> */}
                     </section>
                     <section className="socials-mobile">
                       <a

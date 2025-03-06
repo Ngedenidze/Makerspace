@@ -11,6 +11,7 @@ import Events from "./pages/Events";
 import DJs from "./pages/DJs";
 import AuthPage from "./sections/authPage/AuthPage";
 import Profile from "./pages/user profile/Profile";
+import Gallery from "./pages/Gallery/Gallery";
 
 function PrivateRoute({ children }) {
   const token = localStorage.getItem("authToken");
@@ -35,8 +36,10 @@ export default function Routing() {
       <Route path="/AllEvents" element={<Events />} />
       <Route path="/Events/:id" element={<EventPage />} /> 
       <Route path="/DJs" element={<DJs />} />
+      <Route path="/gallery" element={<Gallery />} />
       <Route path="/login" element={<AuthPage page="login" />} />
       <Route path="/register" element={<AuthPage page="register" />} />
+  
       <Route path="/forgot-password" element={<AuthPage page="forgot-password" />} />
       {/* Private routes */}
       <Route
