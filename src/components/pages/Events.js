@@ -210,7 +210,7 @@ return (
             <SpecialSlice
               key={event.id}
               weekday={formattedDate}
-              eventName={event.name}
+              eventName={event.name} 
               djName={djNames}
               link={`/Events/${event.id}`}
             />

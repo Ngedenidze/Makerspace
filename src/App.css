@@ -1549,6 +1549,28 @@ Link:link {
   clip-path: polygon(0 0, 70% 0, 100% 10%, 100% 100%, 50% 100%, 0 100%);
   filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
 }
+.djs-stage-image-wrapper {
+  margin: 0 auto;
+  max-width: 1190px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+}
+.djs-stage-image{
+  max-width: 50%;
+  margin: 2px;
+  height: 40vh;
+
+}
+.djs-stage-image-wrapper img{
+  width: 100%;
+  object-fit: cover;
+  object-position: 0px 80%;
+}
+.djs-stage-image .stage-1{
+
+}
+
 
 .djs-main-container {
   position: relative;

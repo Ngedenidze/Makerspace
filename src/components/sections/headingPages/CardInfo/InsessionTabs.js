@@ -12,7 +12,7 @@ export default function InsessionTabs() {
   
   useEffect(() => {
     const apiUrl =
-      process.env.NODE_ENV === "production"
+      process.env.NODE_ENV === "production" 
         ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/Events"
         : "/api/Events"; // still use proxy in dev
 
