@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import localImage from "../../../../assets/art-cover.jpg";
 import defaultImage from "../../../../assets/cover-art-default.jpg";
+import { Link } from "react-router-dom";
 
 export default function InsessionTabs() {
   const [stages, setStages] = useState([]);
@@ -8,6 +9,7 @@ export default function InsessionTabs() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [image, setImage] = useState("");
+  const [eventID, setEventID] = useState("");
   const [eventStatus, setEventStatus] = useState("");
   
   useEffect(() => {
@@ -75,6 +77,7 @@ export default function InsessionTabs() {
           };
 
           setStages([mainStage, spaceStage]);
+          setEventID(upcomingEvent.id);
           setImage(upcomingEvent.eventPhotoUrl || localImage);
         } else {
           setError("No upcoming or in-session events.");
@@ -126,11 +129,11 @@ export default function InsessionTabs() {
 
               {/* Display the events for the active stage */}
               {stages[activeStageIndex].events.map((evt, idx) => (
-                <div key={idx} className="in-session-timestamps">
+                <Link to={`/Events/${eventID}`} key={idx} className="in-session-timestamps">
                   <h3>
                     {evt.startTime} {evt.djName}
                   </h3>
-                </div>
+                </Link>
               ))}
             </article>
 
