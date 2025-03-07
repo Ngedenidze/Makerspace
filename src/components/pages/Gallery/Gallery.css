@@ -64,7 +64,7 @@
 /* Instagram-style image grid */
 .image-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   grid-gap: 5px;
   padding: 10px;
   background-color: #73667a;

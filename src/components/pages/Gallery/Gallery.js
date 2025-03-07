@@ -9,36 +9,35 @@ const Gallery = () => {
 
   // New mock data: every image is now a separate event with its own id.
   const mockEvents = [
-  
     {
       id: 1,
-      url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/a98e8d28-5796-46cd-83c0-5e9ff6cd67c5.jpg",
-      alt: "Raw image 1",
+      url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/a15aa0b9-127e-4089-81f2-090d2adcd862.jpg",
+      alt: "DJ Shadow",
     },
     {
       id: 2,
-      url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/6b1cde09-87db-41dd-b867-6b8cdc429c79.jpg",
-      alt: "Raw image 2",
+      url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/06f053e0-65a7-48f4-870c-e7e5a75c1110.jpg",
+      alt: "DJ Shadow Performance",
     },
     {
-      id: 7,
-      url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/4e3b28d0-ef54-489b-aa17-6c29294b16a5.jpg",
-      alt: "Raw image 3",
+      id: 3,
+      url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/91028cc5-b14f-4a47-b4b2-f01ef4d5496b.jpg",
+      alt: "Neon Beats",
     },
     {
-      id: 8,
-      url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/8f21b35a-b13c-4232-8f0d-ded29972acb5.jpg",
-      alt: "Raw image 4",
+      id: 4,
+      url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/ed66d953-48ca-4fba-bc72-d2409613039b.jpeg",
+      alt: "Neon Beats Live",
     },
     {
-      id: 9,
-      url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/9a8cd166-795a-4150-b3c0-d7568df275e9.jpg",
-      alt: "Raw image 5",
+      id: 5,
+      url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/bd69a397-cf8b-4ee4-bd98-c4c6e0fd4f73.jpeg",
+      alt: "Neon Beats Live",
     },
     {
-      id: 10,
-      url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/8f3208dd-8ad7-4fd5-88b8-3ec77b8a5e6b.jpg",
-      alt: "Raw image 6",
+      id: 6,
+      url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/ed66d953-48ca-4fba-bc72-d2409613039b.jpeg",
+      alt: "Neon Beats Live",
     },
   ];
 
@@ -112,7 +111,7 @@ const Gallery = () => {
             src={images[activeImageIndex].url}
             alt={images[activeImageIndex].alt}
           />
-          <div className="modal-caption">{images[activeImageIndex].alt}</div>
+          {/* <div className="modal-caption">{images[activeImageIndex].alt}</div> */}
           <button className="prev" onClick={prevImage}>
             &#10094;
           </button>
