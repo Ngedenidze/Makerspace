@@ -5,13 +5,9 @@ export default function SpecialCard(props) {
     <Link to={props.link} className="menu-card-link">
     <article className="menu-card">
       <section className="menu-card-content">
-        <h2>{props.weekday}</h2> 
-        <h2>{props.date}</h2> 
-        <p>{props.djName}</p> 
-        <Link to={props.link} className="special-button" rel="noopener noreferrer">
-          View
-        </Link>
-       
+        <time className="weekday">{props.weekday}</time> 
+        <time className="date">{props.date}</time> 
+        <h4>{props.djName}</h4> 
       </section>
     </article>
   </Link>

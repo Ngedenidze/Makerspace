@@ -93,7 +93,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 100000;
 }
 
 .modal-content {
@@ -135,4 +135,17 @@
 
 .next {
   right: 20px;
+}
+
+@media screen and (max-width: 600px) {
+  .gallery-page {
+    width: 100%;
+  }
+  .gallery-main-container {
+    width: 100%;
+  }
+  .image-grid {
+    margin: auto;
+    padding: 0;
+  }
 }
