@@ -1024,7 +1024,7 @@ Link:link {
   width: 200%;
   height: 130%;
   z-index: -2; /* Place behind the .about-us content */
-  background: #73667A; /* Or use an image/gradient if desired */
+  background: #536878; /* Or use an image/gradient if desired */
   
   /* Example: diagonal clip from top-left to halfway across the top,
      then to the right side (cutting off the top-right corner).
@@ -1097,7 +1097,7 @@ Link:link {
   top: 0;
   left: 0;
   z-index: -1;
-  background: #73667A;
+  background: #536878;
   clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
 }
 
@@ -1248,7 +1248,7 @@ Link:link {
   width: 100%;
   margin:0;
   margin-bottom: 2px;
-  background-color: #73667A;
+  background-color: #536878;
   max-width: 100%;
   height: 150px;
 }
@@ -1305,7 +1305,7 @@ Link:link {
   box-sizing: border-box;
   color: #333;
   overflow: hidden;
-  background-color: #73667A;
+  background-color: #536878;
 }
 .rentals-top-bar{
   display: flex;
@@ -1315,7 +1315,7 @@ Link:link {
   padding: 3rem;
   color: #E2F3EA;
   margin: 2px 0;
-  background-color: #73667A;
+  background-color: #536878;
 }
 .rentals-top-bar h1{
   font-size: 3rem;
@@ -1355,7 +1355,7 @@ Link:link {
   width: 100%;
   height: 100%;
   z-index: -1; /* Place behind the .about-us content */
-  background: #73667A; /* Or use an image/gradient if desired */
+  background: #536878; /* Or use an image/gradient if desired */
 
   /* Example: diagonal clip from top-left to halfway across the top,
      then to the right side (cutting off the top-right corner).
@@ -1417,7 +1417,7 @@ Link:link {
   width: min(65vw, 1200px);
   box-sizing: border-box;
   color: #E2F3EA;
-  background-color: #73667A;
+  background-color: #536878;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   display: flex;
 }
@@ -1464,7 +1464,7 @@ Link:link {
 .rentals-contact-form textarea {
   width: 100%;
   padding: 0.8rem;
-  border: 1px solid #73667A;
+  border: 1px solid #536878;
   border-radius: 5px;
   background-color: #F9F9F9;
   color: #333;
@@ -1577,7 +1577,7 @@ Link:link {
   box-sizing: border-box;
   color: #333;
   overflow: hidden;
-  background-color: #73667A;
+  background-color: #536878;
 }
 
 .djs-top-bar {
@@ -1588,7 +1588,7 @@ Link:link {
   padding: 3rem;
   color: #E2F3EA;
   margin: 2px 0;
-  background-color: #73667A;
+  background-color: #536878;
 }
 
 .djs-top-bar h1 {
@@ -1613,7 +1613,7 @@ Link:link {
   width: min(65vw, 1200px);
   box-sizing: border-box;
   color: #E2F3EA;
-  background-color: #73667A;
+  background-color: #536878;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   display: flex;
 }
@@ -1662,7 +1662,7 @@ Link:link {
 .djs-contact-form textarea {
   width: 100%;
   padding: 0.8rem;
-  border: 1px solid #73667A;
+  border: 1px solid #536878;
   border-radius: 5px;
   background-color: #F9F9F9;
   color: #333;
@@ -2297,7 +2297,7 @@ height: 12rem;
   width: 100%;
   height: 70%;
   z-index: -1; /* Place behind the .about-us content */
-  background: #73667A; /* Or use an image/gradient if desired */
+  background: #536878; /* Or use an image/gradient if desired */
 
   /* Example: diagonal clip from top-left to halfway across the top,
      then to the right side (cutting off the top-right corner).
@@ -2349,7 +2349,7 @@ height: 12rem;
     width: 100%;
     height: 95%;
     z-index: -1; /* Place behind the .about-us content */
-    background: #73667A; /* Or use an image/gradient if desired */
+    background: #536878; /* Or use an image/gradient if desired */
     clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 10%);
   }
   .about-us .hero-text-2 {
