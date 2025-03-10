@@ -589,7 +589,7 @@ Link:link {
 .stage-tabs button {
   color: rgb(78, 78, 78);
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0 2px;
   cursor: pointer;
   font-weight: bold;
   font-size: 1rem;
@@ -598,7 +598,7 @@ Link:link {
 
 .stage-tabs button.active,
 .stage-tabs button:hover {
-  border-bottom: #000000 solid 2px;
+  border-bottom: #0000007b solid 0.5px;
 }
 
 /* Where InsessionCards get displayed */
@@ -711,7 +711,7 @@ Link:link {
 
 
 .in-session .in-session-text h1 {
-  font-size: 2rem;
+  font-size: 1.625rem;
   margin: 0;
   color: rgb(176, 40, 40);
 }
@@ -723,9 +723,10 @@ Link:link {
 }
 
 .in-session .in-session-text h3 {
-  font-size: 1.5rem;
-  line-height: 1rem;
+  font-size: 1.625rem;
+  line-height: 1.05;
   margin: 0;
+  font-weight: 600;
   color: rgb(75, 75, 75);
 }
 
@@ -735,7 +736,7 @@ Link:link {
 }
 
 .in-session .in-session-text .in-session-timestamps {
-  margin: 10px 2rem;
+  margin: 5px 2rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -1203,7 +1204,7 @@ Link:link {
   max-width: 1200px;
   overflow: hidden;
   max-height: 40vh;
-  min-height: 30vh;
+  min-height: 20vh;
 }
 .all-events-image{
   display: block;
@@ -1887,7 +1888,7 @@ Link:link {
 .events,
 .merch-display, .about-us {
   width: min(65vw, 1200px);
-  margin-bottom: 5px;
+  margin: 0.875rem 0;
 }
 /* -------------------------------------------------------------------------- */
 /*  MEDIA QUERIES                                                             */
@@ -2093,6 +2094,7 @@ Link:link {
   .main-content, .homepage, .in-session, .events, .merch-display, .about-us {
     width: 95vw;
     margin: 0;
+    margin-bottom: 20px;
     justify-content: center;
   }
   .header-menu{
@@ -2165,6 +2167,7 @@ Link:link {
     max-height: 50vh;
     overflow: hidden;
     width: 100%;
+    margin-bottom: 20px;
   }
   .in-session .in-session-text{
     width: 100%;
@@ -2210,6 +2213,7 @@ height: 12rem;
     flex-wrap: wrap;
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
+    margin-bottom: 20px;
   }
   .menu-card-link {
  
@@ -2227,6 +2231,7 @@ height: 12rem;
   .commercial-renting, .dj-booking{
     width: 99vw;
     margin: 0;
+    margin-bottom: 20px;
     flex-direction: column;
   }
   .dj-booking{
@@ -2244,10 +2249,9 @@ height: 12rem;
   .commercial-renting .commercial-renting-text-container, .dj-booking .dj-booking-text-container{
     display: flex;
     flex-direction: column;
-    width: 100%;
     padding: 1rem;
     padding-bottom: 0;
-    margin: 2rem 0 0 0;
+    margin: 0;
     margin-left: 1rem;
     max-width: 90%;
     height: 40vh;
@@ -2256,12 +2260,11 @@ height: 12rem;
     justify-content: space-around;
   }
   .dj-booking .dj-booking-text-container{
-    height: fit-content;
-    max-height: auto;
-    min-height: auto;
-    margin-bottom: 0;
+    padding: 1rem;
   }
-
+  .dj-booking .dj-booking-text-container::before{
+    top: 0;
+  }
   .commercial-renting .commercial-renting-text-container h1, .dj-booking .dj-booking-text-container h1{
     font-size: 1.2rem;
   }
@@ -2292,6 +2295,9 @@ height: 12rem;
   .about-us{
     padding: 0;
   }
+  .about-us .about-top-part .hero-text {
+    padding: 0;
+  }
   .about-us::before {
     height: 0;
   }
@@ -2319,7 +2325,6 @@ height: 12rem;
   .about-us .about-top-part .about-subtext{
     margin: 0;
     padding: 1rem;
-    margin: 1rem;
   }
   .about-us .about-top-part .hero-text{
     width: 100%;
@@ -2359,18 +2364,22 @@ height: 12rem;
     clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 10%);
   }
   .about-us .hero-text-2 {
-    padding: 1em;
+    padding: 1rem;
+    padding-bottom: 2rem;
   }
   .about-us .hero-text-2 .info-text{
     width: 100%;
-    padding: 1rem 1rem 1rem 0rem;
-    margin: 0rem 1rem 1rem 1rem;
     box-sizing: border-box;
+  }
+  .about-us .hero-text-2 h1{
+    width: 100%;
+    text-align: center;
   }
   .about-us .hero-text-2 .info-text p{
     font-size: 0.75rem;
     margin: 0;
   }
+  
   /* -------------------------------------------------------------------------- */
 /*  Events                                                                 */
 /* -------------------------------------------------------------------------- */

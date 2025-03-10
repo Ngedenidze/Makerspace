@@ -40,7 +40,7 @@ export default function InsessionTabs() {
 
           // Determine the status of the event
           if (now < start) {
-            setEventStatus("Coming Soon");
+            setEventStatus("Starting Soon");
           } else if (now >= start && now <= end) {
             setEventStatus("In Session");
           } else {
