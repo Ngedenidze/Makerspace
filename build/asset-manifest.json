@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.7747e50b.css",
-    "main.js": "/static/js/main.308d7ef3.js",
+    "main.css": "/static/css/main.952f2d0a.css",
+    "main.js": "/static/js/main.b9667780.js",
     "static/js/787.e0deafbd.chunk.js": "/static/js/787.e0deafbd.chunk.js",
     "static/media/cover-art-4.jpg": "/static/media/cover-art-4.55a412d85409d706ba38.jpg",
     "static/media/cover-art-default.jpg": "/static/media/cover-art-default.a9e9afdf794756a0093c.jpg",
@@ -14,18 +14,18 @@
     "static/media/gallery.jpg": "/static/media/gallery.73fc95b36a160df1a6fc.jpg",
     "static/media/food4.webp": "/static/media/food4.aef154ce876c762e864c.webp",
     "static/media/Sweety Valentine.otf": "/static/media/Sweety Valentine.b9ae8320fd5086b44658.otf",
+    "static/media/Montserrat-Medium.ttf": "/static/media/Montserrat-Medium.d3f3d769c2fc1af5c0b4.ttf",
     "static/media/inside.jpg": "/static/media/inside.225b1a648b3d3c507c7f.jpg",
     "static/media/outside.jpg": "/static/media/outside.3186046e6fa30a970978.jpg",
     "static/media/dj-stage.jpg": "/static/media/dj-stage.1bd80039fc3bcba9cbc3.jpg",
     "static/media/space.jpg": "/static/media/space.bbcd681c9b474e3e6009.jpg",
-    "static/media/Cocktail.ttf": "/static/media/Cocktail.bc60ed2a56ad2a003dc7.ttf",
     "index.html": "/index.html",
-    "main.7747e50b.css.map": "/static/css/main.7747e50b.css.map",
-    "main.308d7ef3.js.map": "/static/js/main.308d7ef3.js.map",
+    "main.952f2d0a.css.map": "/static/css/main.952f2d0a.css.map",
+    "main.b9667780.js.map": "/static/js/main.b9667780.js.map",
     "787.e0deafbd.chunk.js.map": "/static/js/787.e0deafbd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7747e50b.css",
-    "static/js/main.308d7ef3.js"
+    "static/css/main.952f2d0a.css",
+    "static/js/main.b9667780.js"
   ]
 }
