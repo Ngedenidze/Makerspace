@@ -2571,13 +2571,13 @@ height: 12rem;
   font-size: 1.2rem;
 }
 .rentals-contact-info p{
-  font-size: 0.8rem;
+  font-size: 0.875rem;
 }
 .rentals-contact-info a{
   font-size: 0.8rem;
 }
 .rentals-contact-heading{
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
   /* -------------------------------------------------------------------------- */
@@ -2609,10 +2609,10 @@ height: 12rem;
   padding: 1rem;
 }
 .djs-top-bar h1{
-  font-size: 2rem;
+  font-size: 1.2rem;
 }
 .djs-top-bar p{
-  font-size: 1rem;
+  font-size: 0.875rem;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -2641,13 +2641,14 @@ height: 12rem;
 .djs-contact-heading{
   padding: 2px;
   max-width: 100%;
+  margin-bottom: 20px;
 }
 .djs-contact-title{
   font-size: 1.4rem;
   text-align: left;
 }
 .djs-contact-description{
-  font-size: 1rem;
+  font-size: 0.875rem;
   text-align: left;
   padding: 0;
 }

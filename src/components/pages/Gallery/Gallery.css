@@ -148,4 +148,24 @@
     margin: auto;
     padding: 0;
   }
+  .gallery-cover-image{
+    max-height: 20vh;
+  }
+  .gallery-top-bar {
+    padding: 1rem;
+  }
+  .gallery-top-bar h1 {
+    font-size: 1.2rem;
+  }
+  .gallery-top-bar p {
+    font-size: 0.875rem;
+  }
+  .image-grid{
+    grid-template-columns: repeat(1, 1fr);
+
+  }
+  .image-grid-item{
+    max-height: 275px;
+    overflow: hidden;
+  }
 }
