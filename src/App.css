@@ -2443,11 +2443,13 @@ height: 12rem;
   .events-slices .menu-card-link .menu-card-content h2{
     font-size: 0.8rem;
   }
+  .menu-card-content > .weekday {
+    font-size: 0.875rem;
+  }
   .events-slices .menu-card-link .menu-card-content h3{
     font-size: 1.2rem;
   }
   .events-slices .menu-card-link .menu-card-content p{
-    color: #edefee;
     font-size: 0.9rem;
   }
  /* -------------------------------------------------------------------------- */
