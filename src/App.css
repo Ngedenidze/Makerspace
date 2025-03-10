@@ -813,7 +813,7 @@ Link:link {
   z-index: 4;
   font-size: 1.625rem;
   margin-top: 0.7rem;
-  color: #E2F3EA;
+  color: #1b2a49;
 }
 /* -------------------------------------------------------------------------- */
 /*  SPECIALS                                                                  */
@@ -2214,6 +2214,7 @@ height: 12rem;
   }
   .menu-card-content > h4 {
     font-size: 1.1875rem;
+    color: #1b2a49;
   }
   .desktop-menu{
     display: none;
