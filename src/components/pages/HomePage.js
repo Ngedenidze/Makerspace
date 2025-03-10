@@ -7,6 +7,7 @@ import About from "../sections/headingPages/About";
 import ImageGrid from "../reusable/Image Grid/ImageGrid";
 import CommercialRenting from "./CommercialRenting";
 import DJBooking from "./DJBooking";
+import InsessionTabs from "../sections/headingPages/CardInfo/InSessionTabs";
 
 export default function Homepage() {
 
@@ -20,9 +21,7 @@ export default function Homepage() {
       <main>
         <section className="homepage">
           <section className="homepage-main-content">
-            <section ref={inSessionRef} className="in-session">
-              <Insession />
-            </section>
+            <InsessionTabs />   
 
             <section ref={specialsRef} className="events">
               <Specials />
