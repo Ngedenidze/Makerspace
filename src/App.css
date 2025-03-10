@@ -1006,10 +1006,17 @@ Link:link {
   min-height: 450px;
 }
 .dj-booking .dj-booking-text-container{
+  position: relative;
   z-index: -1;
-  padding: 0 2rem;
-  max-height: 40vh;
-  top: 50%;
+  padding: 2rem;
+  max-width: 50%;
+  min-height: 450px;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  box-sizing: border-box;
 }
 .commercial-renting .commercial-renting-text-container h1, .dj-booking .dj-booking-text-container h1{
   font-size: 1.8rem;
@@ -1036,11 +1043,7 @@ Link:link {
 
 }
 .dj-booking .dj-booking-text-container::before{
-  height: 80%;
-  width: 70%;
-  left: 30%;
-  top: 10%;
-  clip-path: none;
+  left: -80%;
 }
 .commercial-renting .commercial-renting-text-container .special-button, .dj-booking .dj-booking-text-container .special-button{
   position: relative;
@@ -1058,11 +1061,12 @@ Link:link {
   z-index: 0;
   max-width: 50%;
   object-fit: cover;
+  overflow: hidden;
 }
 .dj-booking .dj-booking-image{
   z-index: 1;
-  clip-path: polygon(0 0, 0% 0, 100% 0, 90% 100%, 0 100%);
-  max-height: 60vh;
+  clip-path: none;
+  
 }
 .commercial-renting .commercial-renting-image img, .dj-booking .dj-booking-image img{
   max-height: 600px;
@@ -2258,7 +2262,7 @@ height: 12rem;
     margin: 0;
     margin-left: 1rem;
     max-width: 90%;
-    height: 40vh;
+    height: fit-content;
     min-height: 40vh;
     align-items: flex-start;
     justify-content: space-around;
@@ -2280,8 +2284,8 @@ height: 12rem;
     width: 100%;
   }
   .dj-booking .dj-booking-text-container::before{
-    height: 60%;
-    left: 1rem;
+    /* height: 60%; */
+    left: 0;
     clip-path: none;
   }
   .dj-booking .dj-booking-image{
