@@ -315,7 +315,7 @@ Link:link {
   overflow-y: auto;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
 
-  z-index: 1000;
+  z-index: 1010;
   white-space: pre-wrap;
   text-align: left;
 }
@@ -330,6 +330,7 @@ Link:link {
   flex-direction: column;
   width: 100%;
   align-items: flex-start;
+
 }
 .info-box pre .mobile-menu .mobile-menu-login .hover-effect{
   width: 100%;
@@ -2103,6 +2104,7 @@ Link:link {
     padding: 0;
     background-color: #191919;
     top: 0;
+    z-index: 100;
   }
   .header-box{
     flex-direction: row;
@@ -2124,9 +2126,11 @@ Link:link {
   }
   .header-box .bar-info{
     padding: 0 1.2rem;
+    z-index: 2;
   }
   .header-box .bar-info .three-dots-toggle{
     display: block;
+
   }
  .nav-bar-title{
   display: none;
@@ -2484,7 +2488,7 @@ height: 12rem;
   font-size: 1.2rem;
 }
 .rentals-top-bar p{
-  font-size: 1rem;
+  font-size: 0.875rem;
 }
 
 /* -------------------------------------------------------------------------- */

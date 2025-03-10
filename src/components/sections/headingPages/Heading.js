@@ -113,6 +113,9 @@ export default function Heading() {
                       <Link className="hover-effect" to="/Djs">
                         <h1>DJ Booking</h1>
                       </Link>
+                      <Link className="hover-effect" to="/Gallery">
+                        <h1>Gallery</h1>
+                      </Link>
                       {/* <section className="mobile-menu-login">
                       <a
                         className="hover-effect"
