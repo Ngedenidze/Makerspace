@@ -2160,6 +2160,8 @@ Link:link {
   .header-box .bar-info{
     padding: 0 1.2rem;
     z-index: 2;
+    position: relative;
+    top: 0;
   }
   .header-box .bar-info .three-dots-toggle{
     display: block;

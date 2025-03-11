@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navigation from "../../Navigation";
 import { Link } from "react-router-dom";
-
+import Hamburger from "../../reusable/Hamburger/Hamburger";
 export default function Heading() {
   // State to toggle the info box
   const [infoBoxOpen, setInfoBoxOpen] = useState(false);
@@ -103,9 +103,7 @@ export default function Heading() {
           </section>
 
           {/* 3 Dots Toggle for Info Box */}
-          <button className="three-dots-toggle" onClick={handleInfoToggle}>
-            ...
-          </button>
+          <Hamburger onClick={handleInfoToggle} open={infoBoxOpen} />
           {infoBoxOpen && (
             <section className="info-box">
               <pre>
