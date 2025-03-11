@@ -628,10 +628,27 @@ Link:link {
   flex-direction: row;
   justify-content: space-around;
   align-items: flex-start;
-  height: 40vh;
+  height: 48vh;
   width: min(65vw, 1200px);
   background-color: #B9C0DA;
   
+}
+.in-session-stages{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin-top: 1rem;
+}
+.stage{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 50%;
+  flex-wrap: wrap;
 }
 /* default background if event not found */
 .default-image {
@@ -724,7 +741,7 @@ Link:link {
 }
 
 .in-session .in-session-text h3 {
-  font-size: 1.625rem;
+  font-size: 1.125rem;
   line-height: 1.05;
   margin: 0;
   font-weight: 600;
@@ -737,7 +754,7 @@ Link:link {
 }
 
 .in-session .in-session-text .in-session-timestamps {
-  margin: 5px 2rem;
+  margin: 5px 0rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -2208,8 +2225,11 @@ height: 12rem;
   .in-session .in-session-text h3 {
     font-size: 0.8rem;
   }
+  .stage h2{
+    text-align: left;
+  }
   .in-session .in-session-text .in-session-timestamps{
-    margin: 5px 1rem;
+    margin: 5px 0;
   }
   .events-topbar {
     margin: 2px;

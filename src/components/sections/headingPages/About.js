@@ -3,7 +3,7 @@ export default function About() {
     <article className="about-us">
       <section className="about-top-part">
         <section className="hero-text">
-          <h1>MakerSpace</h1>
+          <h1>Makerspace</h1>
           <br />
           <h2 className="desktop-location">
             Lado Gudiashvili Square

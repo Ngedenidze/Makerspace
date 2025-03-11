@@ -5,7 +5,7 @@ const CommercialRenting = () => {
   return (
     <section className="commercial-renting">
       <div className="commercial-renting-text-container">
-        <h1>Elevate Your Event at MakerSpace</h1>
+        <h1>Elevate Your Event at Makerspace</h1>
         <p>
           Unlock the potential of our dynamic two-floor venue in the heart of
           Tbilisi. Perfect for corporate functions or private celebrations, our

@@ -145,6 +145,8 @@ export default function Heading() {
                       </Link>
                       <a
                         className="footer-links"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         href="https://www.google.com/maps/dir//Makerspace,+Lado+Gudiashvili+Square,+Tbilisi+0162,+Georgia/@41.6909958,44.8035254,17z/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x40440d9a3542444f:0xc579f4ed091da767!3e0?source=lnms"
                       >
                         <h3>Location</h3>

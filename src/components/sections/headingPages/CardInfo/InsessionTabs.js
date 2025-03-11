@@ -77,6 +77,7 @@ export default function InsessionTabs() {
           };
 
           setStages([mainStage, spaceStage]);
+          console.log("stages", stages);  
           setEventID(upcomingEvent.id);
           setImage(upcomingEvent.eventPhotoUrl || localImage);
         } else {
@@ -112,31 +113,29 @@ export default function InsessionTabs() {
         ) : (
           <>
             <article className="in-session-text">
-              <h1>{eventStatus}</h1> {/* Display Event Status */}
-
-              {/* Stage Tabs */}
-              <div className="stage-tabs">
-                {stages.map((stage, index) => (
-                  <button
-                    key={stage.id}
-                    onClick={() => setActiveStageIndex(index)}
-                    className={index === activeStageIndex ? "active" : ""}
-                  >
-                    {stage.id.toUpperCase()}
-                  </button>
-                ))}
-              </div>
-
-              {/* Display the events for the active stage */}
-              {stages[activeStageIndex].events.map((evt, idx) => (
-                <Link to={`/Events/${eventID}`} key={idx} className="in-session-timestamps">
-                  <h3>
-                    {evt.startTime} {evt.djName}
-                  </h3>
-                </Link>
-              ))}
-            </article>
-
+  <h1>{eventStatus}</h1>
+  <div className="in-session-stages">
+  {stages.map((stage, stageIndex) => (
+    <div className="stage" key={stage.id}>
+      {/* Stage title */}
+      <h2>{stage.title}</h2>
+      
+      {/* List out each DJ */}
+      {stage.events?.map((evt, evtIndex) => (
+        <Link
+          key={`${stageIndex}-${evtIndex}`}
+          to={`/Events/${eventID}`}
+          className="in-session-timestamps"
+        >
+          <h3>
+            {evt.startTime} {evt.djName}
+          </h3>
+        </Link>
+      ))}
+    </div>
+  ))}
+</div>
+</article>
             {/* Event Image */}
             <section className="in-session-image">
               <img src={image} alt="In Session" />
