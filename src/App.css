@@ -873,7 +873,7 @@ Link:link {
   padding: 0rem;
 }
 
-.special-button {
+.special-button, .gallery-button {
   display: block;
   width: 2rem;
   margin-bottom: 1rem;
@@ -883,7 +883,18 @@ Link:link {
   position: absolute;
   bottom: 0;
 }
-
+.gallery-button{
+  position: relative;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  color: #E2F3EA;
+  font-size: 1.3rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: auto;
+}
 .special-button:hover {
   color: rgb(40, 151, 159);
   cursor: pointer;
@@ -1406,6 +1417,7 @@ Link:link {
   text-align: left; 
   width: 80%;
   color: #D4EDE0;
+  margin-bottom: 1rem;
 }
 
 .about-us .hero-text h1,
@@ -1433,8 +1445,8 @@ Link:link {
 }
 .double-image > img {
   height: auto;
-  max-height: 450px;
-  object-fit: contain;
+  max-height: 400px;
+  object-fit: fill;
   display: block;
   margin-right: 1remq;
 }
@@ -1978,7 +1990,7 @@ Link:link {
     padding-right: 2rem;
   }
   .about-us .hero-text .about-subtext{
-    margin: 2rem 0;
+    margin: 1rem 0;
     font-size: 0.9rem;
   }
   .about-us .hero-text-2 {
@@ -1994,7 +2006,7 @@ Link:link {
     margin-top: 2rem;
   }
   .about-us .about-top-part .double-image{
-    max-width: 50%;
+    width: 50%;
     overflow: hidden;
   }
   .about-us .about-top-part img{

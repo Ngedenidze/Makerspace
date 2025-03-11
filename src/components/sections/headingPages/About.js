@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function About() {
   return (
     <article className="about-us">
@@ -12,6 +14,7 @@ export default function About() {
             <br />
             Georgia
           </h2>
+         
           <p className="about-subtext">
             Makerspace is a uniquely designed bar located in the heart of
             Tbilisi, offering an exciting blend of electronic music and a
@@ -25,6 +28,7 @@ export default function About() {
             bar, it’s the perfect space for any celebration. We’re always ready
             to welcome you!
           </p>
+          <a className="gallery-button" to="/Gallery">Gallery &#x2192;</a>
         </section>
 
         <section className="double-image">
