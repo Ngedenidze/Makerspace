@@ -60,11 +60,9 @@ export default function About() {
             <h1>Opening Hours</h1>
             <br></br>
             <p className="subsection">
-              Friday: 11 PM - 12:00 AM
+              Friday: 23:00 - 07:00
               <br></br>
-              Saturday: 12:00 AM - 7:00 AM / 11PM - 12:00 AM
-              <br></br>
-              Sunday: 12:00 AM - 7:00 AM
+              Saturday: 19:00 - 07:00
             </p>
           </section>
          
