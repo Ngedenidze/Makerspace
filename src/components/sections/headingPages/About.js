@@ -28,7 +28,7 @@ export default function About() {
             bar, it’s the perfect space for any celebration. We’re always ready
             to welcome you!
           </p>
-          <a className="gallery-button" to="/Gallery">Gallery &#x2192;</a>
+          <a className="gallery-button" href="#/Gallery">Gallery &#x2192;</a>
         </section>
 
         <section className="double-image">

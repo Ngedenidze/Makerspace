@@ -1,8 +1,8 @@
 .hamburger {
+  display: none;
     background: none;
     border: none;
     cursor: pointer;
-    display: flex;
     flex-direction: column;
     justify-content: space-around;
     width: 30px;
@@ -30,4 +30,10 @@
   .hamburger.open .bar:nth-child(3) {
     transform: rotate(-45deg) translate(6px, -3px);
   }
+
+@media screen and (max-width: 600px) {
+  .hamburger{
+    display: flex;
+  }
+}
   

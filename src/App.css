@@ -85,7 +85,6 @@ a:link,
 a:visited,
 Link:link {
   text-decoration: none;
-  color: white;
 }
 
 /* A general "action-button" class used in multiple places */
@@ -886,7 +885,7 @@ Link:link {
 .gallery-button{
   position: relative;
   bottom: 0;
-  margin: 0;
+  margin: 2rem 0;
   padding: 0;
   color: #E2F3EA;
   font-size: 1.3rem;
@@ -1406,7 +1405,7 @@ Link:link {
 }
 
 .about-subtext {
-  margin-bottom: 5rem;
+  margin-bottom: 1rem;
 }
 .about-us .about-top-part img{
   max-width: 550px;
@@ -1449,6 +1448,9 @@ Link:link {
   object-fit: fill;
   display: block;
   margin-right: 1remq;
+}
+.about-us .about-top-part .double-image{
+  margin-top: 5rem;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -2097,6 +2099,7 @@ Link:link {
   .bar-info .footer-toggle-icon{
     display: block;
   }
+
   .info-box {
     max-height: 50vh;
   }
@@ -2366,11 +2369,12 @@ height: 12rem;
   }
   .about-us .about-top-part .about-subtext{
     margin: 0;
-    padding: 1rem;
+    padding: 0;
   }
   .about-us .about-top-part .hero-text{
     width: 100%;
     margin: 2rem 1rem 1rem 1rem;
+    padding: 1rem;
     box-sizing: border-box;
   }
   .about-us .about-top-part .hero-text h1{
@@ -2378,10 +2382,14 @@ height: 12rem;
     margin: 0;
     text-align: center;
   }
+  .about-us .about-top-part .hero-text .gallery-button{
+    margin-bottom: 1rem;
+  }
+
   .about-us .about-top-part .double-image{
     width: 100%;
     max-width: 100%;  
-    margin-left: 1rem;
+    margin: 0;
     clip-path: polygon(0 100%, 100% 90%, 100% 0, 0 0);
   }
   .about-us .about-top-part img{
