@@ -223,7 +223,7 @@ const DJs = () => {
             For direct inquiries, reach us at +995 511 172 817.
             <br />
             Or email us at{" "}
-            <a href="mailto:contact@makerspaceclub.com">contact@makerspaceclub.com</a>
+            <a href="mailto:contacts@makerspaceclub.com">contacts@makerspaceclub.com</a>
           </p>
         </section>
       </section>
