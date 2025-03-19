@@ -720,7 +720,7 @@ Link:link {
   object-fit: cover;
   height: 100%;
   display: block;
-  /* Use width: auto or max-width: 100% if you don't want it stretched */
+ width: 100%;
   max-width: 800px;
   overflow: visible;
   object-position: 0%;
