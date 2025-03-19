@@ -98,7 +98,7 @@ function Profile() {
         onClick={() => {
           // Logout logic
           localStorage.removeItem("authToken");
-          navigate("/login");
+          window.location.reload();
         }}
       >
         Logout

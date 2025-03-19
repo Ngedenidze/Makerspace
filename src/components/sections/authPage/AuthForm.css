@@ -78,3 +78,14 @@ body {
   color: #777;
   margin-top: 1rem;
 }
+
+@media screen and (max-width: 600px) {
+  .auth-container{
+    min-height: 50vh;
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+  .auth-box{
+   position: relative;
+  }
+}
