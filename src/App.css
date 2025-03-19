@@ -86,6 +86,38 @@ a:visited,
 Link:link {
   text-decoration: none;
 }
+/* -------------------------------------------------------------------------- */
+/*  LOADER                                                                   */
+/* -------------------------------------------------------------------------- */
+/* Global loader container */
+.global-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff; /* Or any background color you prefer */
+  z-index: 9999; /* Ensure it sits on top */
+}
+
+/* Spinner style */
+.spinner {
+  border: 12px solid #f3f3f3;  /* Light gray */
+  border-top: 12px solid #3498db;  /* Blue */
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* -------------------------------------------------------------------------- */
 
 /* A general "action-button" class used in multiple places */
 .action-button {
@@ -615,10 +647,6 @@ Link:link {
   margin-bottom: 0;
   /* optional clipping if you want the angled shape */
   clip-path: polygon(0 0, 100% 0, 100% 80%, 20% 100%, 0% 90%);
-  animation-duration: 0.33s;
-  animation-timing-function: ease-in-out;
-  animation-name: slideDownFade;
-
 }
 
 /* The container that holds text and image side by side */
@@ -768,9 +796,6 @@ Link:link {
   position: relative;
   z-index: 3;
   margin: 0 auto;
-  animation-duration: 0.33s;
-  animation-timing-function: ease-in-out;
-  animation-name: slideDownFade;
 }
 
 .events-cards {
@@ -843,9 +868,6 @@ Link:link {
 
 .specials {
   padding: 0rem;
-  animation-duration: 0.33s;
-  animation-timing-function: ease-in-out;
-  animation-name: slideDownFade;
   width: 100%;
   margin: 0;
   height: auto;
