@@ -81,6 +81,7 @@ export default function InsessionTabs({ eventsData }) {
               <img
                 src="https://myphotostorage.blob.core.windows.net/mymakerphotos/bf080f0e-a1fb-430c-998d-cc336ace2fcd.jpg"
                 alt="Default Cover Art"
+                image="lazy"
               />
             </div>
             <div className="text-overlay">
@@ -113,7 +114,7 @@ export default function InsessionTabs({ eventsData }) {
               </div>
             </article>
             <section className="in-session-image">
-              <img src={image} alt="In Session" />
+              <img src={image} alt="In Session" loading="lazy" />
             </section>
           </>
         )}
