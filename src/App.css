@@ -2187,6 +2187,26 @@ Link:link {
   .in-session{
 
   }
+  .default-image{
+    width: 100%;
+  }
+  .default-image img{
+    height: 100%;
+  }
+  .default-image .text-overlay{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-content: center;
+    position: absolute;
+    top: 0;
+    left: 24%;
+    align-items: center;
+    transform: none
+  }
+  .default-image .text-overlay h1{
+    font-size: 2rem;
+  }
   .in-session .in-session-box{
     flex-direction: column;
     align-items: center;
@@ -2268,7 +2288,7 @@ height: 12rem;
     flex-direction: column-reverse;
   }
   .commercial-renting .commercial-renting-image, .dj-booking .dj-booking-image{
-    max-width: 90%;
+    width: 100%;
     overflow: hidden;
     max-height: 40vh;
   }

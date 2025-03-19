@@ -1,4 +1,3 @@
-// InsessionTabs.js
 import React, { useState, useEffect } from "react";
 import localImage from "../../../../assets/art-cover.jpg";
 import { Link } from "react-router-dom";
@@ -8,6 +7,7 @@ export default function InsessionTabs({ eventsData }) {
   const [eventID, setEventID] = useState("");
   const [eventStatus, setEventStatus] = useState("");
   const [image, setImage] = useState("");
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     if (!eventsData || eventsData.length === 0) return;
@@ -64,36 +64,59 @@ export default function InsessionTabs({ eventsData }) {
     }
   }, [eventsData]);
 
-  if (!eventsData || stages.length === 0)
-    return <p>No stage data available.</p>;
+  useEffect(() => {
+    if (!eventsData || stages.length === 0) {
+      setError(true);
+    } else {
+      setError(false);
+    }
+  }, [eventsData, stages]);
 
   return (
     <section className="in-session">
       <div className="in-session-box">
-        <article className="in-session-text">
-          <h1>{eventStatus}</h1>
-          <div className="in-session-stages">
-            {stages.map((stage, stageIndex) => (
-              <div className="stage" key={stage.id}>
-                <h2>{stage.title}</h2>
-                {stage.events?.map((evt, evtIndex) => (
-                  <Link
-                    key={`${stageIndex}-${evtIndex}`}
-                    to={`/Events/${eventID}`}
-                    className="in-session-timestamps"
-                  >
-                    <h3>
-                      {evt.startTime} {evt.djName}
-                    </h3>
-                  </Link>
+        {error ? (
+          <section className="default-image">
+            <div className="image-wrapper">
+              <img
+                src="https://myphotostorage.blob.core.windows.net/mymakerphotos/bf080f0e-a1fb-430c-998d-cc336ace2fcd.jpg"
+                alt="Default Cover Art"
+              />
+            </div>
+            <div className="text-overlay">
+              <h1>MAKERSPACE</h1>
+            </div>
+          </section>
+        ) : stages.length === 0 ? (
+          <p>No stage data available.</p>
+        ) : (
+          <>
+            <article className="in-session-text">
+              <h1>{eventStatus}</h1>
+              <div className="in-session-stages">
+                {stages.map((stage) => (
+                  <div className="stage" key={stage.id}>
+                    <h2>{stage.title}</h2>
+                    {stage.events?.map((evt, evtIndex) => (
+                      <Link
+                        key={`${stage.id}-${evtIndex}`}
+                        to={`/Events/${eventID}`}
+                        className="in-session-timestamps"
+                      >
+                        <h3>
+                          {evt.startTime} {evt.djName}
+                        </h3>
+                      </Link>
+                    ))}
+                  </div>
                 ))}
               </div>
-            ))}
-          </div>
-        </article>
-        <section className="in-session-image">
-          <img src={image} alt="In Session" loading="lazy" />
-        </section>
+            </article>
+            <section className="in-session-image">
+              <img src={image} alt="In Session" />
+            </section>
+          </>
+        )}
       </div>
     </section>
   );
