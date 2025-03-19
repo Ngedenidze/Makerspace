@@ -1,49 +1,32 @@
-import React, { useRef, useState, useEffect } from "react";
-import Heading from "../sections/headingPages/Heading";
+import React, { useRef } from "react";
+import { useQuery } from "react-query";
 import Specials from "../sections/eventProfile/EventsGrid";
-import Testimonials from "../sections/headingPages/Testimonials";
-import Insession from "../sections/headingPages/Insession";
-import About from "../sections/headingPages/About";
-import ImageGrid from "../reusable/Image Grid/ImageGrid";
+import InsessionTabs from "../sections/headingPages/CardInfo/InSessionTabs";
 import CommercialRenting from "./CommercialRenting";
 import DJBooking from "./DJBooking";
-import InsessionTabs from "../sections/headingPages/CardInfo/InSessionTabs";
+import About from "../sections/headingPages/About";
 
 export default function Homepage() {
-  const [eventsData, setEventsData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  // Define refs for sections
+  // Define refs for sections if needed
   const specialsRef = useRef(null);
   const aboutRef = useRef(null);
 
-  useEffect(() => {
+  // Use React Query to fetch and cache events data
+  const { data: eventsData, isLoading, error } = useQuery("events", async () => {
     const apiUrl =
       process.env.NODE_ENV === "production"
         ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/Events"
         : "/api/Events";
 
-    fetch(apiUrl)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`Network error: ${res.status}`);
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setEventsData(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching events:", err);
-        setError(err.message);
-        setLoading(false);
-      });
-  }, []); // no onLoaded dependency
+    const res = await fetch(apiUrl);
+    if (!res.ok) {
+      throw new Error(`Network error: ${res.status}`);
+    }
+    return res.json();
+  });
 
-  if (loading) return <div></div>;
-  if (error) return <div>Error: {error}</div>;
+  if (isLoading) return <div>Loading homepage data...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <main>
@@ -56,18 +39,6 @@ export default function Homepage() {
             {/* Pass the same events data to Specials */}
             <Specials events={eventsData} />
           </section>
-
-          {/*
-          <section ref={testimonialsRef} className="events">
-            <Testimonials />
-          </section>
-          */}
-
-          {/*
-          <section className="merch-display">
-            <ImageGrid images={images} />
-          </section>
-          */}
 
           <section>
             <CommercialRenting />

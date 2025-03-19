@@ -3,6 +3,8 @@ import BackgroundPoly from "./components/reusable/Background/backgroundPoly";
 import Routing from "./components/Routing";
 import Heading from "./components/sections/headingPages/Heading";
 import ScrollToTop from "./components/ScrollToTop";
+import { QueryClient, QueryClientProvider } from 'react-query';
+const queryClient = new QueryClient();
 function App() {
   return (
     <>
@@ -16,9 +18,12 @@ function App() {
           <Heading />
         </aside>
         {/* main content */}
+        <QueryClientProvider client={queryClient}>
+
         <main className="main-content">
           <Routing />
         </main>
+        </QueryClientProvider>
       </div>
     </>
   );

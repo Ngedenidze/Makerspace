@@ -85,7 +85,7 @@ a:link,
 a:visited,
 Link:link {
   text-decoration: none;
-
+}
 
 /* A general "action-button" class used in multiple places */
 .action-button {
@@ -996,17 +996,12 @@ Link:link {
   justify-content: flex-start;
   padding: 1rem 0;       /* Universal padding */
   padding-top: 0;
-  margin: 0 auto;
+  margin: 1rem auto;
   color: rgb(167, 167, 167);
   z-index: 0;         /* Ensure the text sits above the ::before background */
   width: min(65vw, 1200px);
 }
 
-.dj-booking {
-  margin: 1rem 0 ;
-  padding-top: 1rem;
-  align-items: center;
-}
 .commercial-renting .commercial-renting-text-container{
   position: relative;
   z-index: -1;
@@ -1076,7 +1071,7 @@ Link:link {
 .commercial-renting .commercial-renting-image, .dj-booking .dj-booking-image{
   padding-top: 2rem;
   z-index: 0;
-  max-width: 50%;
+  width: 50%;
   object-fit: cover;
   overflow: hidden;
 }
