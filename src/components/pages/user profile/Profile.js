@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./Profile.css"; // Make sure to import the CSS
 
 const apiUrl =
   process.env.NODE_ENV === "production"
@@ -14,7 +15,6 @@ function Profile() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Retrieve token from localStorage
     const token = localStorage.getItem("authToken");
     if (!token) {
       // If no token, redirect to login
@@ -26,40 +26,77 @@ function Profile() {
     axios
       .get(`${apiUrl}/api/users/me`, {
         headers: {
-          Authorization: `Bearer ${token}`, // or however your backend expects the token
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
-        setProfile(response.data);
-        setLoading(false);
+        const data = response.data;
+        setProfile(data);
       })
       .catch((error) => {
         console.error("Profile fetch error:", error.response?.data || error.message);
         // If unauthorized or error, remove token and redirect to login
         localStorage.removeItem("authToken");
         navigate("/login");
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [navigate]);
 
   if (loading) {
-    return <div style={{ color: "#ccc" }}>Loading profile...</div>;
+    return <div className="profile-container">Loading profile...</div>;
   }
 
   if (!profile) {
-    return <div style={{ color: "#ccc" }}>Could not load profile data.</div>;
+    return <div className="profile-container">Could not load profile data.</div>;
   }
 
+  // Format the dates if needed
+  const createdAtFormatted = new Date(profile.createdAt).toLocaleString();
+  const birthdateFormatted = new Date(profile.birthdate).toLocaleDateString();
+
   return (
-    <div style={{ color: "#ccc" }}>
-      <h1>Welcome, {profile.firstName}</h1>
-      <p>Name: {profile.firstName} {profile.lastName}</p>
-      <p>Email: {profile.email}</p>
-      <p>Phone: {profile.phoneNumber}</p>
-      {/* ...render other user fields as needed... */}
+    <div className="profile-container">
+      <h1 className="profile-header">Welcome, {profile.firstName}!</h1>
+      <div className="profile-info">
+        <p>
+          <strong>Name:</strong> {profile.firstName} {profile.lastName}
+        </p>
+        <p>
+          <strong>Email:</strong> {profile.email}
+        </p>
+        <p>
+          <strong>Phone:</strong> {profile.phoneNumber}
+        </p>
+        <p>
+          <strong>Verified:</strong> {profile.isVerified ? "Yes" : "No"}
+        </p>
+        <p>
+          <strong>Role:</strong> {profile.role}
+        </p>
+        <p>
+          <strong>Country:</strong> {profile.country}
+        </p>
+        <p>
+          <strong>Personal Number:</strong> {profile.personalNumber}
+        </p>
+        <p>
+          <strong>Birthdate:</strong> {birthdateFormatted}
+        </p>
+        <p>
+          <strong>Social Media Link:</strong>{" "}
+          {profile.socialMediaProfileLink || "N/A"}
+        </p>
+        <p>
+          <strong>Created At:</strong> {createdAtFormatted}
+        </p>
+      </div>
 
       <button
+        className="profile-logout-button"
         onClick={() => {
-          // Optionally provide a logout button
+          // Logout logic
           localStorage.removeItem("authToken");
           navigate("/login");
         }}
