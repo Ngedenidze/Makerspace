@@ -124,6 +124,7 @@ const DJs = () => {
           className="djs-cover-image"
           src="https://myphotostorage.blob.core.windows.net/mymakerphotos/9c3df2a7-c1f9-47e4-9c42-010a74ccc92b.jpeg"
           alt="DJs Cover"
+          loading="lazy"
         />
       </div>
 
@@ -142,11 +143,13 @@ const DJs = () => {
           className="djs-stage-image stage-1"
           src="https://myphotostorage.blob.core.windows.net/mymakerphotos/31bf474b-1b6d-4cbd-b525-7e96924de72f.jpeg"
           alt="DJs Cover"
+          loading="lazy"
         />
         <img
           className="djs-stage-image stage-2"
           src="https://myphotostorage.blob.core.windows.net/mymakerphotos/54373832-23cf-4c23-bd2a-7cdc23d13277.jpeg"
           alt="DJs Cover"
+          loading="lazy"
         />
       </div>
 

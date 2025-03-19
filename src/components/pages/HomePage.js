@@ -5,19 +5,23 @@ import InsessionTabs from "../sections/headingPages/CardInfo/InSessionTabs";
 import CommercialRenting from "./CommercialRenting";
 import DJBooking from "./DJBooking";
 import About from "../sections/headingPages/About";
+import PastEvents from "../sections/headingPages/PastEvents";
+import SoonEvents from "../sections/headingPages/SoonEvents";
 
 export default function Homepage() {
-  // Define refs for sections if needed
   const specialsRef = useRef(null);
   const aboutRef = useRef(null);
 
-  // Use React Query to fetch and cache events data
-  const { data: eventsData, isLoading, error } = useQuery("events", async () => {
+  // Fetch events data
+  const {
+    data: eventsData,
+    isLoading: eventsLoading,
+    error: eventsError,
+  } = useQuery("events", async () => {
     const apiUrl =
       process.env.NODE_ENV === "production"
         ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/Events"
         : "/api/Events";
-
     const res = await fetch(apiUrl);
     if (!res.ok) {
       throw new Error(`Network error: ${res.status}`);
@@ -25,19 +29,43 @@ export default function Homepage() {
     return res.json();
   });
 
-  if (isLoading) return <div>Loading homepage data...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  // Fetch soon events data and transform it by extracting the nested event object
+  const {
+    data: soonEventsData,
+    isLoading: soonLoading,
+    error: soonError,
+  } = useQuery("soonEvents", async () => {
+    const apiUrl =
+      process.env.NODE_ENV === "production"
+        ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/SoonEvents"
+        : "/api/SoonEvents";
+    const res = await fetch(apiUrl);
+    if (!res.ok) {
+      throw new Error(`Network error: ${res.status}`);
+    }
+    const data = await res.json();
+    // Map the soon events array to extract the inner event objects
+    return data.map((item) => item.event);
+  });
+
+  if (eventsLoading || soonLoading) return <div>Loading homepage data...</div>;
+  if (eventsError) return <div>Error: {eventsError.message}</div>;
+  if (soonError) return <div>Error: {soonError.message}</div>;
 
   return (
     <main>
       <section className="homepage">
         <section className="homepage-main-content">
-          {/* Pass the preloaded data to InsessionTabs */}
           <InsessionTabs eventsData={eventsData} />
 
           <section ref={specialsRef} className="events">
-            {/* Pass the same events data to Specials */}
             <Specials events={eventsData} />
+          </section>
+          <section>
+            <SoonEvents events={soonEventsData} />
+          </section>
+          <section>
+            <PastEvents events={eventsData} />
           </section>
 
           <section>

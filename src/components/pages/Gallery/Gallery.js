@@ -81,6 +81,7 @@ const Gallery = () => {
           className="gallery-cover-image"
           src={localImg}
           alt="Gallery Cover"
+          loading="lazy"
         />
       </div>
       <div className="gallery-top-bar">
@@ -94,7 +95,7 @@ const Gallery = () => {
         <div className="image-grid">
           {images.map((img, index) => (
             <div key={img.id} className="image-grid-item">
-              <img src={img.url} alt={img.alt} onClick={() => openModal(index)} />
+              <img src={img.url} alt={img.alt} onClick={() => openModal(index)} loading="lazy" />
             </div>
           ))}
         </div>

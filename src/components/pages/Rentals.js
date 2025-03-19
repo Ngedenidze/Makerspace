@@ -120,6 +120,7 @@ const Rentals = () => {
                     className="rentals-cover-image"
                     src="https://myphotostorage.blob.core.windows.net/mymakerphotos/e70e7838-7094-4a75-99ef-2b9ad69d3427.jpg"
                     alt="Rentals Cover"
+                    loading="lazy"
                 />
             </div>
             <div className="rentals-top-bar">

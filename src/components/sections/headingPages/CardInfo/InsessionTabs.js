@@ -92,7 +92,7 @@ export default function InsessionTabs({ eventsData }) {
           </div>
         </article>
         <section className="in-session-image">
-          <img src={image} alt="In Session" />
+          <img src={image} alt="In Session" loading="lazy" />
         </section>
       </div>
     </section>

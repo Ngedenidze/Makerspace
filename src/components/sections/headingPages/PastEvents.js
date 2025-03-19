@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Carousel from "../headingPages/SpecialsCarousel";
 import SpecialCard from "../headingPages/CardInfo/SpecialCard";
-import Testimonials from "../headingPages/SoonEvents";
+import Testimonials from "./SoonEvents";
 
-export default function EventsGrid({ events }) {
+export default function PastEvents({ events }) {
   if (!events || events.length === 0) {
     return (
       <div>
@@ -19,7 +19,7 @@ export default function EventsGrid({ events }) {
     <section className="events-soon">
       <article className="events-topbar">
         <div>
-          <h1>Next Up</h1>
+          <h1>Past Events</h1>
         </div>
       </article>
 
@@ -47,6 +47,7 @@ export default function EventsGrid({ events }) {
           );
         })}
       </section>
+
     </section>
   
     </>

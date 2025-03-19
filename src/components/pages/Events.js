@@ -208,6 +208,7 @@ export default function Events() {
           className="all-events-image"
           src={localImg}
           alt={events ? events.name : "Default"}
+          loading="lazy"
         />
       </div>
       <section className="events-grid">

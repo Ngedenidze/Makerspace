@@ -12,7 +12,7 @@ function ImageGrid({ images }) {
     <div className="image-grid">
       {imagesToRender.map((img, idx) => (
         <div key={idx} className="image-item">
-          <img src={img.url} alt={img.alt || `Image ${idx}`} />
+          <img src={img.url} alt={img.alt || `Image ${idx}`} loading="lazy" />
         </div>
       ))}
     </div>
