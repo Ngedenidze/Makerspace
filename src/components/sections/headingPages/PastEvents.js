@@ -47,7 +47,9 @@ export default function PastEvents({ events }) {
           );
         })}
       </section>
-
+        <Link to="/PastEvents" className="view-more">
+          View More
+      </Link>
     </section>
   
     </>

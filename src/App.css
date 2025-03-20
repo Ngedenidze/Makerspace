@@ -501,7 +501,7 @@ Link:link {
 }
 
 /* Hover link styling */
-.hover-effect {
+.hover-effect{
   color: rgb(167, 167, 167);
   position: relative;
   z-index: 100;
@@ -509,6 +509,20 @@ Link:link {
   cursor: pointer;
   padding: 0 15px;
 
+}
+.translate-icon{
+  color: rgb(167, 167, 167);
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.translate-icon .lang-text{
+  height: 100%;
+  padding: 5px;
+  font-size: 1rem;
+  margin: 0 5px;
 }
 .hover-effect h1, .hover-effect svg{
   line-height: 1.2rem;
@@ -650,7 +664,7 @@ Link:link {
 .default-image {
   position: relative;             /* Enables absolute positioning inside */
   width: min(65vw, 1200px);
-  height: 500px;
+  height: 100%;
   margin: 0 auto;
 }
 
@@ -660,11 +674,10 @@ Link:link {
   width: 100%;
   height: auto;
   object-fit: cover;
-  height: 500px;
 }
 .image-wrapper {
   position: relative; 
-  height: 500px; 
+  height: 100%; 
   overflow: hidden; 
 }
 .image-wrapper::before {
@@ -673,8 +686,8 @@ Link:link {
   top: 0;
   left: 0;
   width: 100%;
-  height: 500px;
-  background-color: rgba(0, 0, 0, 0.3); /* 50% black overlay */
+  height: 100%;
+  background-color: #000000e6;
   z-index: 1;
 }
 
@@ -743,6 +756,15 @@ Link:link {
   font-weight: 600;
   color: rgb(75, 75, 75);
 }
+.in-session .in-session-text h3 .djStartTime{
+
+  font-weight: 100;
+}
+.in-session .in-session-text h3 .djName{
+  color: #2a2664;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
 
 .in-session .in-session-text p {
   font-size: 1.5rem;
@@ -764,7 +786,7 @@ Link:link {
 .events {
   position: relative;
   z-index: 3;
-  margin: 0 auto;
+  margin: 1.625rem auto;
 }
 
 .events-cards {
@@ -774,7 +796,7 @@ Link:link {
   gap: 2px;
   justify-content: center;
   flex-wrap: nowrap;
-  margin-bottom: 50px;
+  margin-bottom: 0.625rem;
 }
 
 .events-up-next,
@@ -851,12 +873,12 @@ Link:link {
   display: block;
 }
 
-.events-topbar > div {
+.events-topbar > div, .events-topbar > a {
   display: inline-flex;
   color: var(--white-full);
 }
 
-.events-topbar > div > h1 {
+.events-topbar > div > h1, .events-topbar > a > h1 {
   color: rgb(167, 167, 167);
   font-size: 1rem;
   margin: 0rem;
@@ -898,7 +920,12 @@ Link:link {
 .specials-carousel {
   display: none;
 }
-
+.view-more{
+  color: #E2F3EA;
+  text-decoration: none;
+  display: block;
+  text-align: right;
+}
 /* -------------------------------------------------------------------------- */
 /*  TESTIMONIAL CARDS                                                         */
 /* -------------------------------------------------------------------------- */
@@ -983,6 +1010,8 @@ Link:link {
 .testimonials-carousel {
   display: none;
 }
+
+
 /* -------------------------------------------------------------------------- */
 /*  Commercial Renting , DJ Booking                                                                   */
 /* -------------------------------------------------------------------------- */
@@ -997,7 +1026,7 @@ Link:link {
   justify-content: flex-start;
   padding: 1rem 0;       /* Universal padding */
   padding-top: 0;
-  margin: 1rem auto;
+  margin: 1.625rem auto;
   color: rgb(167, 167, 167);
   z-index: 0;         /* Ensure the text sits above the ::before background */
   width: min(65vw, 1200px);
@@ -1910,7 +1939,6 @@ Link:link {
 .events,
 .merch-display, .about-us {
   width: min(65vw, 1200px);
-  margin: 0.875rem 0;
 }
 /* -------------------------------------------------------------------------- */
 /*  MEDIA QUERIES                                                             */
@@ -1935,9 +1963,6 @@ Link:link {
   }
   .main-content{
 
-  }
-  .commercial-renting, .dj-booking{
-    margin: 0;
   }
   .commercial-renting .commercial-renting-text-container, .dj-booking .dj-booking-text-container{
     padding: 1rem 2rem;
@@ -2092,7 +2117,7 @@ Link:link {
   .three-dots-toggle {
     font-size: 1.5rem;
   }
-  .bar-info .footer-info, .bar-info .footer-menu, .bar-info .socials {
+  .bar-info .footer-info, .bar-info .footer-menu, .bar-info .socials, .translate-icon {
     display: none;
   }
   .header-box .bar-info{
@@ -2117,7 +2142,7 @@ Link:link {
   .main-content, .homepage, .in-session, .events, .merch-display, .about-us {
     width: 95vw;
     margin: 0;
-    margin-bottom: 20px;
+    margin-bottom: 1.625rem;
     justify-content: center;
   }
   .header-menu{
@@ -2190,6 +2215,7 @@ Link:link {
   }
   .default-image{
     width: 100%;
+    height: 100%;
   }
   .default-image img{
     height: 100%;

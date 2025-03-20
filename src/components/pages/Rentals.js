@@ -180,11 +180,13 @@ const Rentals = () => {
                         </p>
                     )}
                     <p className="rentals-contact-info">
-                        For immediate assistance, call us at +995 511 172 817.
+                        For immediate assistance, call us at +995 577 900 061.
+                        For direct inquiries, reach us at +995 577 900 061.
+           
                         <br />
                         Or email us at&nbsp;
-                        <a href="mailto:contacts@makerspaceclub.com">
-                        contacts@makerspaceclub.com
+                        <a href="mailto:contact@makerspaceclub.com">
+                        contact@makerspaceclub.com
                         </a>
                     </p>
                 </section>

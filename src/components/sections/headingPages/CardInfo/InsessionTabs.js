@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import localImage from "../../../../assets/art-cover.jpg";
+import logoName from "../../../../assets/ms-name-red.png";
 import { Link } from "react-router-dom";
 
 export default function InsessionTabs({ eventsData }) {
@@ -82,10 +83,16 @@ export default function InsessionTabs({ eventsData }) {
                 src="https://myphotostorage.blob.core.windows.net/mymakerphotos/bf080f0e-a1fb-430c-998d-cc336ace2fcd.jpg"
                 alt="Default Cover Art"
                 image="lazy"
+                loading="lazy"
               />
             </div>
             <div className="text-overlay">
-              <h1>MAKERSPACE</h1>
+              <img
+                src="https://myphotostorage.blob.core.windows.net/mymakerphotos/3a1c4464-b245-4ad5-ad09-a2b01fbbbe6b.png"
+                alt="Default Cover Art"
+                image="lazy"
+              loading="lazy"
+              />
             </div>
           </section>
         ) : stages.length === 0 ? (
@@ -105,7 +112,7 @@ export default function InsessionTabs({ eventsData }) {
                         className="in-session-timestamps"
                       >
                         <h3>
-                          {evt.startTime} {evt.djName}
+                          <span className="djStartTime">{evt.startTime} </span> <span className="djName">{evt.djName} </span>
                         </h3>
                       </Link>
                     ))}

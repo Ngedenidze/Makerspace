@@ -18,9 +18,9 @@ export default function EventsGrid({ events }) {
     <>
     <section className="events-soon">
       <article className="events-topbar">
-        <div>
+        <Link to="/AllEvents">
           <h1>Next Up</h1>
-        </div>
+        </Link>
       </article>
 
       <section className="events-cards">
