@@ -2117,9 +2117,12 @@ Link:link {
   .three-dots-toggle {
     font-size: 1.5rem;
   }
-  .bar-info .footer-info, .bar-info .footer-menu, .bar-info .socials, .translate-icon {
+  .bar-info .footer-info, .bar-info .footer-menu, .bar-info .socials, .bar-info .translate-icon {
     display: none;
   }
+  /* .info-box > pre > .translate-icon{
+    display: flex;
+  } */
   .header-box .bar-info{
     flex-direction: column;
     justify-content: center;
