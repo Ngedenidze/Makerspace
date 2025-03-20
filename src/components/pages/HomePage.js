@@ -61,10 +61,10 @@ export default function Homepage() {
           <section ref={specialsRef} className="events">
             <Specials events={eventsData} />
           </section>
-          <section>
+          <section className="events">
             <SoonEvents events={soonEventsData} />
           </section>
-          <section>
+          <section className="events">
             <PastEvents events={eventsData} />
           </section>
 

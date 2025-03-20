@@ -174,7 +174,7 @@ export default function Events() {
     const apiUrl =
       process.env.NODE_ENV === "production"
         ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/Events"
-        : "/api/Events";
+        : "/api/SoonEvents";
 
     fetch(apiUrl)
       .then((res) => {

@@ -41,7 +41,7 @@ export default function PastEvents({ events }) {
               key={event.id}
               weekday={weekday}
               date={date}
-              djName={djName}
+              eventName={event.name}
               link={`/Events/${event.id}`}
             />
           );

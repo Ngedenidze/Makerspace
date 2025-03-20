@@ -7,7 +7,7 @@ export default function SpecialCard(props) {
       <section className="menu-card-content">
         <time className="weekday">{props.weekday}</time> 
         <time className="date">{props.date}</time> 
-        <h4>{props.djName}</h4> 
+        <h4>{props.eventName}</h4> 
       </section>
     </article>
   </Link>
