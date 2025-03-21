@@ -53,16 +53,11 @@ const AuthPage = ({ page }) => {
             headers: { "Content-Type": "application/json" },
           }
         );
-  
-        // 2. Extract token from response
         const { token } = response.data;
-  
-        // 3. Store token in localStorage (or sessionStorage)
         localStorage.setItem("authToken", token);
-  
-        // 4. Redirect or do something after login
+        
         alert("Login Successful");
-        navigate("/");
+        window.location.replace("/#/Profile");
       } else if (page === "forgot-password") {
         const { email } = form;
         const response = await axios.post(

@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Carousel from "./SpecialsCarousel";
 import SpecialCard from "./CardInfo/SpecialCard";
+import { useTranslation } from "react-i18next";
 
 export default function SoonEvents({ events }) {
+   const { t, i18n } = useTranslation();
   // Normalize the events: if an item has a nested "event" property, use it.
   const normalizedEvents =
     events && events.length > 0
@@ -16,7 +18,7 @@ export default function SoonEvents({ events }) {
       <section className="events-soon">
         <article className="events-topbar">
           <div>
-            <h1>Coming Soon</h1>
+            <h1>{t("coming_soon")}</h1>
           </div>
         </article>
         <section className="events-cards">
@@ -28,16 +30,18 @@ export default function SoonEvents({ events }) {
             link="#"
           />
         </section>
+        
       </section>
     );
   }
 
   const displayedEvents = normalizedEvents.slice(0, 4);
   return (
+    <>
     <section className="events-soon">
       <article className="events-topbar">
         <div>
-          <h1>Coming Soon</h1>
+          <h1>{t("coming_soon")}</h1>
         </div>
       </article>
       <section className="events-cards">
@@ -70,6 +74,10 @@ export default function SoonEvents({ events }) {
           );
         })}
       </section>
+        <Link to="/AllEvents/upcoming" className="view-more">
+                {t("view_more")}
+        </Link>
     </section>
+    </>
   );
 }

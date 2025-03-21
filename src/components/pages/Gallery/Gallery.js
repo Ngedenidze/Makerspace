@@ -7,43 +7,41 @@ const Gallery = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState(null);
 
-  // New mock data: every image is now a separate event with its own id.
-  const mockEvents = [
-    {
-      id: 1,
-      url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/a15aa0b9-127e-4089-81f2-090d2adcd862.jpg",
-      alt: "DJ Shadow",
-    },
-    {
-      id: 2,
-      url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/06f053e0-65a7-48f4-870c-e7e5a75c1110.jpg",
-      alt: "DJ Shadow Performance",
-    },
-    {
-      id: 3,
-      url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/91028cc5-b14f-4a47-b4b2-f01ef4d5496b.jpg",
-      alt: "Neon Beats",
-    },
-    {
-      id: 4,
-      url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/ed66d953-48ca-4fba-bc72-d2409613039b.jpeg",
-      alt: "Neon Beats Live",
-    },
-    {
-      id: 5,
-      url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/bd69a397-cf8b-4ee4-bd98-c4c6e0fd4f73.jpeg",
-      alt: "Neon Beats Live",
-    },
-    {
-      id: 6,
-      url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/ed66d953-48ca-4fba-bc72-d2409613039b.jpeg",
-      alt: "Neon Beats Live",
-    },
-  ];
+  // Fetch and convert Google Drive URLs to blob URLs
+  const fetchImageAsBlob = async (url) => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      return URL.createObjectURL(blob);
+    } catch (error) {
+      console.error("Error fetching image:", error);
+      return null;
+    }
+  };
 
-  // On component mount, set images from the mockEvents array.
   useEffect(() => {
-    setImages(mockEvents);
+    const fetchImages = async () => {
+      try {
+        const response = await fetch(
+          "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/google-drive/images"
+        );
+        const data = await response.json();
+        
+        // Convert all URLs to blob URLs
+        const imagesWithBlobUrls = await Promise.all(
+          (data.images || []).map(async (img) => ({
+            ...img,
+            url: await fetchImageAsBlob(img.url),
+          }))
+        );
+
+        setImages(imagesWithBlobUrls);
+      } catch (error) {
+        console.error("Error fetching images:", error);
+      }
+    };
+
+    fetchImages();
   }, []);
 
   // Open modal on image click
@@ -73,7 +71,13 @@ const Gallery = () => {
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
   };
-
+  useEffect(() => {
+    return () => {
+      images.forEach((img) => {
+        if (img.url) URL.revokeObjectURL(img.url);
+      });
+    };
+  }, [images]);
   return (
     <div className="gallery-page">
       <div className="gallery-image-wrapper">
@@ -92,10 +96,24 @@ const Gallery = () => {
         </p>
       </div>
       <section className="gallery-main-container">
+      <div>
+  <img
+    src="https://drive.google.com/uc?export=view&id=1p8lrPy5VXhn-j1tIW9Y00DmRvQkB8gED"
+    alt="Gallery"
+    loading="lazy"
+  />
+</div>
+
         <div className="image-grid">
           {images.map((img, index) => (
-            <div key={img.id} className="image-grid-item">
-              <img src={img.url} alt={img.alt} onClick={() => openModal(index)} loading="lazy" />
+            <div key={index} className="image-grid-item">
+              {/* Use img.url for src and img.name for alt text */}
+              <img
+                src={img.url}
+                alt={img.name}
+                onClick={() => openModal(index)}
+                loading="lazy"
+              />
             </div>
           ))}
         </div>
@@ -110,9 +128,8 @@ const Gallery = () => {
           <img
             className="modal-content"
             src={images[activeImageIndex].url}
-            alt={images[activeImageIndex].alt}
+            alt={images[activeImageIndex].name}
           />
-          {/* <div className="modal-caption">{images[activeImageIndex].alt}</div> */}
           <button className="prev" onClick={prevImage}>
             &#10094;
           </button>

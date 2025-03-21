@@ -47,6 +47,7 @@ export default function Homepage() {
     // Map the soon events array to extract the inner event objects
     return data.map((item) => item.event);
   });
+  
 
   if (eventsLoading || soonLoading) return <div>Loading homepage data...</div>;
   if (eventsError) return <div>Error: {eventsError.message}</div>;

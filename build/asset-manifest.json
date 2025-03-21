@@ -1,9 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.c415b307.css",
-    "main.js": "/static/js/main.15e687d8.js",
+    "main.css": "/static/css/main.b7cf6925.css",
+    "main.js": "/static/js/main.ce070765.js",
     "static/js/787.e0deafbd.chunk.js": "/static/js/787.e0deafbd.chunk.js",
     "static/media/cover-art-4.jpg": "/static/media/cover-art-4.55a412d85409d706ba38.jpg",
+    "static/media/ms-name-red.png": "/static/media/ms-name-red.106ebabe6fa0ecd6c1d0.png",
     "static/media/cover-art-default.jpg": "/static/media/cover-art-default.a9e9afdf794756a0093c.jpg",
     "static/media/cover-art-5.jpg": "/static/media/cover-art-5.ab030ed80901e9de65e5.jpg",
     "static/media/art-cover.jpg": "/static/media/art-cover.fe6b7bcb8779815c92ad.jpg",
@@ -20,12 +21,12 @@
     "static/media/dj-stage.jpg": "/static/media/dj-stage.1bd80039fc3bcba9cbc3.jpg",
     "static/media/space.jpg": "/static/media/space.bbcd681c9b474e3e6009.jpg",
     "index.html": "/index.html",
-    "main.c415b307.css.map": "/static/css/main.c415b307.css.map",
-    "main.15e687d8.js.map": "/static/js/main.15e687d8.js.map",
+    "main.b7cf6925.css.map": "/static/css/main.b7cf6925.css.map",
+    "main.ce070765.js.map": "/static/js/main.ce070765.js.map",
     "787.e0deafbd.chunk.js.map": "/static/js/787.e0deafbd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c415b307.css",
-    "static/js/main.15e687d8.js"
+    "static/css/main.b7cf6925.css",
+    "static/js/main.ce070765.js"
   ]
 }

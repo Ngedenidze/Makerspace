@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import localImage from "../../../../assets/art-cover.jpg";
-import logoName from "../../../../assets/ms-name-red.png";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function InsessionTabs({ eventsData }) {
+  const { t } = useTranslation();
   const [stages, setStages] = useState([]);
   const [eventID, setEventID] = useState("");
   const [eventStatus, setEventStatus] = useState("");
@@ -24,16 +25,16 @@ export default function InsessionTabs({ eventsData }) {
       const end = new Date(upcomingEvent.endDate);
 
       if (now < start) {
-        setEventStatus("Starting Soon");
+        setEventStatus(t("starting_soon"));
       } else if (now >= start && now <= end) {
-        setEventStatus("In Session");
+        setEventStatus(t("in_session"));
       } else {
-        setEventStatus("Ended");
+        setEventStatus(t("ended"));
       }
 
       const mainStage = {
         id: "main",
-        title: "Main Stage",
+        title: t("main_stage"),
         events: upcomingEvent.lineUps
           .filter((lineUp) => lineUp.floor === 1)
           .map((lineUp) => ({
@@ -47,7 +48,7 @@ export default function InsessionTabs({ eventsData }) {
 
       const spaceStage = {
         id: "space",
-        title: "Space Stage",
+        title: t("space_stage"),
         events: upcomingEvent.lineUps
           .filter((lineUp) => lineUp.floor === 2)
           .map((lineUp) => ({
@@ -63,7 +64,7 @@ export default function InsessionTabs({ eventsData }) {
       setEventID(upcomingEvent.id);
       setImage(upcomingEvent.eventPhotoUrl || localImage);
     }
-  }, [eventsData]);
+  }, [eventsData, t]);
 
   useEffect(() => {
     if (!eventsData || stages.length === 0) {
@@ -81,22 +82,20 @@ export default function InsessionTabs({ eventsData }) {
             <div className="image-wrapper">
               <img
                 src="https://myphotostorage.blob.core.windows.net/mymakerphotos/bf080f0e-a1fb-430c-998d-cc336ace2fcd.jpg"
-                alt="Default Cover Art"
-                image="lazy"
+                alt={t("default_cover_art")}
                 loading="lazy"
               />
             </div>
             <div className="text-overlay">
               <img
                 src="https://myphotostorage.blob.core.windows.net/mymakerphotos/3a1c4464-b245-4ad5-ad09-a2b01fbbbe6b.png"
-                alt="Default Cover Art"
-                image="lazy"
-              loading="lazy"
+                alt={t("default_cover_art")}
+                loading="lazy"
               />
             </div>
           </section>
         ) : stages.length === 0 ? (
-          <p>No stage data available.</p>
+          <p>{t("no_stage_data_available")}</p>
         ) : (
           <>
             <article className="in-session-text">
@@ -112,7 +111,8 @@ export default function InsessionTabs({ eventsData }) {
                         className="in-session-timestamps"
                       >
                         <h3>
-                          <span className="djStartTime">{evt.startTime} </span> <span className="djName">{evt.djName} </span>
+                          <span className="djStartTime">{evt.startTime} </span>
+                          <span className="djName">{evt.djName} </span>
                         </h3>
                       </Link>
                     ))}
@@ -121,7 +121,7 @@ export default function InsessionTabs({ eventsData }) {
               </div>
             </article>
             <section className="in-session-image">
-              <img src={image} alt="In Session" loading="lazy" />
+              <img src={image} alt={t("in_session_image_alt")} loading="lazy" />
             </section>
           </>
         )}

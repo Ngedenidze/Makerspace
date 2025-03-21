@@ -34,6 +34,7 @@ export default function Routing() {
       <Route path="/Events/:id" element={<EventDetails />} /> */}
       <Route path="/Rentals" element = {<Rentals />} />
       <Route path="/AllEvents" element={<Events />} />
+      <Route path="/AllEvents/:tab" element={<Events />} />
       <Route path="/Events/:id" element={<EventPage />} /> 
       <Route path="/DJs" element={<DJs />} />
       <Route path="/gallery" element={<Gallery />} />

@@ -3,14 +3,18 @@ import { Link } from "react-router-dom";
 import Carousel from "../headingPages/SpecialsCarousel";
 import SpecialCard from "../headingPages/CardInfo/SpecialCard";
 import Testimonials from "../headingPages/SoonEvents";
+import { useTranslation } from "react-i18next";
 
 export default function EventsGrid({ events }) {
+  const { t, i18n } = useTranslation();
+
   if (!events || events.length === 0) {
     return (
       <div>
-        <h2>No events found</h2>
+        <h2>{t("no_events_found")}</h2>
       </div>
-  );};
+    );
+  }
 
   const displayedEvents = events.slice(0, 4);
 
@@ -19,7 +23,7 @@ export default function EventsGrid({ events }) {
     <section className="events-soon">
       <article className="events-topbar">
         <Link to="/AllEvents">
-          <h1>Next Up</h1>
+          <h1>{t("next_up")}</h1>
         </Link>
       </article>
 
@@ -47,6 +51,9 @@ export default function EventsGrid({ events }) {
           );
         })}
       </section>
+        <Link to="/AllEvents" className="view-more">
+            {t("view_more")}
+        </Link>
     </section>
   
     </>
