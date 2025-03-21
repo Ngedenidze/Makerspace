@@ -6,18 +6,8 @@ const Gallery = () => {
   const [images, setImages] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState(null);
-
-  // Fetch and convert Google Drive URLs to blob URLs
-  const fetchImageAsBlob = async (url) => {
-    try {
-      const response = await fetch(url);
-      const blob = await response.blob();
-      return URL.createObjectURL(blob);
-    } catch (error) {
-      console.error("Error fetching image:", error);
-      return null;
-    }
-  };
+  // State to track whether each image in the grid has loaded
+  const [loadedImages, setLoadedImages] = useState({});
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -26,16 +16,9 @@ const Gallery = () => {
           "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/google-drive/images"
         );
         const data = await response.json();
-        
-        // Convert all URLs to blob URLs
-        const imagesWithBlobUrls = await Promise.all(
-          (data.images || []).map(async (img) => ({
-            ...img,
-            url: await fetchImageAsBlob(img.url),
-          }))
-        );
-
-        setImages(imagesWithBlobUrls);
+        console.log(data);
+        // Directly set images from the API response
+        setImages(data.images || []);
       } catch (error) {
         console.error("Error fetching images:", error);
       }
@@ -71,22 +54,26 @@ const Gallery = () => {
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
   };
-  useEffect(() => {
-    return () => {
-      images.forEach((img) => {
-        if (img.url) URL.revokeObjectURL(img.url);
-      });
-    };
-  }, [images]);
+
+  // Handle image load to remove blur placeholder
+  const handleImageLoad = (index) => {
+    setLoadedImages((prev) => ({ ...prev, [index]: true }));
+  };
+
   return (
     <div className="gallery-page">
       <div className="gallery-image-wrapper">
-        <img
-          className="gallery-cover-image"
-          src={localImg}
-          alt="Gallery Cover"
-          loading="lazy"
-        />
+        {/* Using picture element for responsive cover image */}
+        <picture>
+          {/* Replace with an optimized WebP if available */}
+          <source srcSet={localImg} type="image/webp" />
+          <img
+            className="gallery-cover-image"
+            src={localImg}
+            alt="Gallery Cover"
+            loading="lazy"
+          />
+        </picture>
       </div>
       <div className="gallery-top-bar">
         <h1 className="gallery-title">Gallery of Makerspace</h1>
@@ -96,23 +83,16 @@ const Gallery = () => {
         </p>
       </div>
       <section className="gallery-main-container">
-      <div>
-  <img
-    src="https://drive.google.com/uc?export=view&id=1p8lrPy5VXhn-j1tIW9Y00DmRvQkB8gED"
-    alt="Gallery"
-    loading="lazy"
-  />
-</div>
-
         <div className="image-grid">
           {images.map((img, index) => (
             <div key={index} className="image-grid-item">
-              {/* Use img.url for src and img.name for alt text */}
               <img
                 src={img.url}
                 alt={img.name}
                 onClick={() => openModal(index)}
                 loading="lazy"
+                onLoad={() => handleImageLoad(index)}
+                className={`grid-image ${loadedImages[index] ? "loaded" : "loading"}`}
               />
             </div>
           ))}

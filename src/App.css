@@ -709,10 +709,7 @@ Link:link {
   z-index: 2;
 }
 
-.default-image .text-overlay h1{
-  font-size: 4rem;
-  color: #E2F3EA; 
-}
+
 /* Left side text */
 .in-session-text {
   width: 50%;
@@ -2235,7 +2232,7 @@ Link:link {
   }
   .default-image{
     width: 100%;
-    height: 100%;
+    height: 30vh;
   }
   .default-image img{
     height: 100%;
@@ -2243,22 +2240,21 @@ Link:link {
   .default-image .text-overlay{
     height: 100%;
     width: 100%;
-    display: flex;
-    align-content: center;
     position: absolute;
     top: 0;
-    left: 24%;
-    align-items: center;
+    left: 0;
     transform: none
   }
-  .default-image .text-overlay h1{
-    font-size: 2rem;
+  .default-image .text-overlay img{
+    max-width: 99vw;
+    object-fit: contain;
   }
   .in-session .in-session-box{
     flex-direction: column;
     align-items: center;
     justify-content: center;
     max-height: 50vh;
+    height: max-content;
     overflow: hidden;
     width: 100%;
     margin-bottom: 20px;
