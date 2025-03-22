@@ -9,7 +9,11 @@ body {
   align-items: center;
   min-height: 100vh;
 }
-
+.error-text {
+  color: #ff6b6b; /* or #f00 */
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
 .auth-box {
   background-color: #1f1f1f;
   padding: 2rem;

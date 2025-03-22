@@ -79,11 +79,16 @@ function Profile() {
       <h1 className="profile-header">Welcome, {profile.firstName}!</h1>
 
       {/* Verification Status Block */}
-      {profile.isVerified ? (
-        <div className="verification-status verified">Verified</div>
-      ) : (
-        <div className="verification-status rejected">Rejected</div>
-      )}
+      {profile.status === "Verified" && (
+  <div className="verification-status verified">Verified</div>
+)}
+{profile.status === "Rejected" && (
+  <div className="verification-status rejected">Rejected</div>
+)}
+{profile.status === "Pending" && (
+  <div className="verification-status pending">Pending</div>
+)}
+
 
       <div className="profile-info">
         <p>

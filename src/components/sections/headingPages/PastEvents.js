@@ -19,34 +19,37 @@ export default function PastEvents({ events }) {
     <>
     <section className="events-soon">
       <article className="events-topbar">
-        <div>
+        <Link to="/AllEvents/past">
           <h1>{t("past_events")}</h1>
-        </div>
+        </Link>
       </article>
 
       <section className="events-cards">
-        {displayedEvents.map((event) => {
-          const startDate = new Date(event.startDate);
-          const weekday = startDate.toLocaleDateString("en-US", { weekday: "long" });
-          const date = startDate.toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-          });
+      {displayedEvents.map((event) => {
+  if (!event || !event.startDate) return null; // skip if invalid
 
-          // If lineUps exist, use the first artist name. Otherwise, fallback to event.name
-          const djName = event.lineUps?.length ? event.lineUps[0].artistName : event.name;
+  const startDate = new Date(event.startDate);
+  const weekday = startDate.toLocaleDateString("en-US", { weekday: "long" });
+  const date = startDate.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
 
-          return (
-            <SpecialCard
-              key={event.id}
-              weekday={weekday}
-              date={date}
-              eventName={event.name}
-              link={`/Events/${event.id}`}
-            />
-          );
-        })}
+  const eventName = event.lineUps?.length > 0
+    ? event.lineUps[0].artistName
+    : event.name;
+
+  return (
+    <SpecialCard
+      key={event.id}
+      weekday={weekday}
+      date={date}
+      eventName={eventName}
+      link={`/Events/${event.id}`}
+    />
+  );
+})}
       </section>
         <Link to="/AllEvents/past" className="view-more">
           {t("view_more")}

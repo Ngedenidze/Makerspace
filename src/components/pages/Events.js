@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useQuery } from "react-query";
 import localImg from "../../assets/cover-art-default.jpg";
 import SpecialSlice from "../sections/headingPages/CardInfo/SpecialSlice";
 
@@ -26,7 +27,7 @@ export default function Events() {
     } else {
       setActiveTab(defaultTab);
     }
-  }, [tab, navigate]);
+  }, [tab, navigate, validTabs]);
 
   useEffect(() => {
     const apiUrl =
@@ -53,13 +54,31 @@ export default function Events() {
       });
   }, []);
 
+  const {
+    data: pastEventsData,
+    isLoading: pastLoading,
+    error: pastError,
+  } = useQuery("pastEvents", async () => {
+    const apiUrl =
+      process.env.NODE_ENV === "production"
+        ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/PastEvents"
+        : "/api/Events/PastEvents";
+  
+    const res = await fetch(apiUrl);
+    if (!res.ok) {
+      throw new Error(`Network error: ${res.status}`);
+    }
+    const data = await res.json();
+    return data;
+  });
+
   if (loading) return <p>Loading event...</p>;
   if (error) return <p>Error: {error}</p>;
 
 
   const now = new Date();
   const upcomingEvents = events.filter((e) => new Date(e.startDate) >= now);
-  const pastEvents = events.filter((e) => new Date(e.startDate) < now);
+  const pastEvents = pastEventsData || [];
 
   const formatEventData = (event) => {
     const startDate = new Date(event.startDate);

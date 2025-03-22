@@ -69,3 +69,7 @@
   background-color: red;
   color: white;
 }
+.verification-status.pending {
+  background-color: gray;
+  color: white;
+}

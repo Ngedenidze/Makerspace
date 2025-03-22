@@ -47,11 +47,28 @@ export default function Homepage() {
     // Map the soon events array to extract the inner event objects
     return data.map((item) => item.event);
   });
+  const {
+    data: pastEventsData,
+    isLoading: pastLoading,
+    error: pastError,
+  } = useQuery("pastEvents", async () => {
+    const apiUrl =
+      process.env.NODE_ENV === "production"
+        ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/SoonEvents"
+        : "/api/Events/PastEvents";
+    const res = await fetch(apiUrl);
+    if (!res.ok) {
+      throw new Error(`Network error: ${res.status}`);
+    }
+    const data = await res.json();
+    // Map the soon events array to extract the inner event objects
+    return data;
+  });
   
 
-  if (eventsLoading || soonLoading) return <div>Loading homepage data...</div>;
   if (eventsError) return <div>Error: {eventsError.message}</div>;
   if (soonError) return <div>Error: {soonError.message}</div>;
+  if (pastError) return <div>Error: {pastError.message}</div>;
 
   return (
     <main>
@@ -66,7 +83,7 @@ export default function Homepage() {
             <SoonEvents events={soonEventsData} />
           </section>
           <section className="events">
-            <PastEvents events={eventsData} />
+            <PastEvents events={pastEventsData} />
           </section>
 
           <section>
