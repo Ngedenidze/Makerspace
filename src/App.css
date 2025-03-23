@@ -1468,6 +1468,7 @@ Link:link {
 
 .about-us .hero-text > h2,
 .about-us .hero-text-2 > h2 {
+  width: 70%;
   margin-bottom: 4rem;
   margin-top: 0rem;
   color: var(--highlighted-text-color-light);

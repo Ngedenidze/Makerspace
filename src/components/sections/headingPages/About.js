@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-
+import { useTranslation } from "react-i18next";
 export default function About() {
+  const { t, i18n } = useTranslation();
   return (
     <article className="about-us">
       <section className="about-top-part">
@@ -8,27 +9,13 @@ export default function About() {
           <h1>Makerspace</h1>
           <br />
           <h2 className="desktop-location">
-            Lado Gudiashvili Square
-            <br />
-            Tbilisi 0162
-            <br />
-            Georgia
+            {t("address")}
           </h2>
          
           <p className="about-subtext">
-            Makerspace is a uniquely designed bar located in the heart of
-            Tbilisi, offering an exciting blend of electronic music and a
-            welcoming atmosphere. Join us on Fridays and Saturdays for
-            unforgettable nights, where our professional DJs and friendly staff
-            ensure you have an incredible experience. Makerspace is more than
-            just a bar—it’s a community open to new friendships and meaningful
-            connections. During the week, our versatile 400m² venue is available
-            for private and corporate events. With dedicated areas including a
-            dancing stage, chill-out rooms, a cocktail bar, and an open yard
-            bar, it’s the perfect space for any celebration. We’re always ready
-            to welcome you!
+            {t("about_me_text")}
           </p>
-          <a className="gallery-button" href="#/Gallery">Gallery &#x2192;</a>
+          <a className="gallery-button" href="#/Gallery">{t("about_me_action")} &#x2192;</a>
         </section>
 
         <section className="double-image">
@@ -57,12 +44,12 @@ export default function About() {
           </p>
           </section> */}
           <section className="info-text">
-            <h1>Opening Hours</h1>
+            <h1>{t("opening_hours")}</h1>
             <br></br>
             <p className="subsection">
-              Friday: 23:00 - 07:00
+              {t("friday")}: 23:00 - 07:00
               <br></br>
-              Saturday: 19:00 - 07:00
+              {t("saturday")}: 19:00 - 07:00
             </p>
           </section>
          
