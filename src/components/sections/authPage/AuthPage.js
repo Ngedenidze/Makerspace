@@ -66,7 +66,8 @@ const AuthPage = ({ page }) => {
         newErrors.birthdate = "Birthdate is required.";
       }
       if (!form.socialMediaProfileLink.trim()) {
-        newErrors.socialMediaProfileLink = "Social Media Profile Link is required.";
+        newErrors.socialMediaProfileLink =
+          "Social Media Profile Link is required.";
       }
       if (!form.country.trim()) {
         newErrors.country = "Country is required.";
@@ -77,6 +78,41 @@ const AuthPage = ({ page }) => {
       }
     }
 
+    if (page === "register") {
+      if (
+        !form.password.match(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,})/
+        )
+      ) {
+        newErrors.password =
+          "Password must be at least 8 characters long, with uppercase, lowercase, and a special character.";
+      }
+      // Social media link must be Instagram or Facebook
+      if (
+        !form.socialMediaProfileLink.match(
+          /^(https?:\/\/)?(www\.)?(facebook\.com|instagram\.com)\/[A-Za-z0-9_.-]+\/?$/
+        )
+      ) {
+        newErrors.socialMediaProfileLink =
+          "Only Facebook or Instagram profile links are allowed.";
+      }
+      // Birthdate must be 18+
+      const birthdate = new Date(form.birthdate);
+      const today = new Date();
+      const age = today.getFullYear() - birthdate.getFullYear();
+      const m = today.getMonth() - birthdate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthdate.getDate())) {
+        age--;
+      }
+      if (age < 18) {
+        newErrors.birthdate = "You must be at least 18 years old.";
+      }
+
+      // Personal Number = 10 digits
+      if (!/^\d{10}$/.test(form.personalNumber)) {
+        newErrors.personalNumber = "Personal Number must be exactly 10 digits.";
+      }
+    }
     return newErrors;
   };
 
@@ -118,14 +154,14 @@ const AuthPage = ({ page }) => {
         window.location.replace("/#/Profile");
         window.location.reload();
       } else if (page === "forgot-password") {
-        response =await axios.post(
+        response = await axios.post(
           `${apiUrl}/api/users/request-password-reset`,
-          JSON.stringify(form.email),       // <--- Just the raw email string in JSON
+          JSON.stringify(form.email), // <--- Just the raw email string in JSON
           {
             headers: { "Content-Type": "application/json" },
           }
         );
-        
+
         console.log("Reset Email Sent:", response.data);
         // Optionally show a success message
       }
@@ -183,7 +219,9 @@ const AuthPage = ({ page }) => {
             onChange={handleChange}
           />
           {/* Field-specific error */}
-          {errors.password && <div className="error-text">{errors.password}</div>}
+          {errors.password && (
+            <div className="error-text">{errors.password}</div>
+          )}
         </div>
 
         <button type="submit" className="auth-button">
@@ -206,14 +244,12 @@ const AuthPage = ({ page }) => {
       { name: "lastName", label: "Last Name" },
       { name: "email", label: "Email", type: "email" },
       { name: "password", label: "Password", type: "password" },
-      { name: "phoneNumber", label: "Phone Number" },
       { name: "personalNumber", label: "Personal Number" },
       { name: "birthdate", label: "Birthdate", type: "date" },
       {
         name: "socialMediaProfileLink",
         label: "Social Media Profile Link",
       },
-      { name: "country", label: "Country" },
     ];
 
     return (
@@ -240,6 +276,70 @@ const AuthPage = ({ page }) => {
               {errors[name] && <div className="error-text">{errors[name]}</div>}
             </div>
           ))}
+          <div className="form-group">
+            <label htmlFor="country" className="form-label">
+              Country
+            </label>
+            <select
+              name="country"
+              id="country"
+              className="form-input"
+              onChange={handleChange}
+              value={form.country}
+            >
+              <option value="">Select a country</option>
+              <option value="Georgia">Georgia</option>
+              <option value="USA">United States</option>
+              <option value="Germany">Germany</option>
+              <option value="France">France</option>
+              {/* Add more as needed */}
+            </select>
+            {errors.country && (
+              <div className="error-text">{errors.country}</div>
+            )}
+          </div>
+
+          {/* Phone Number with Country Code Selector */}
+          <div className="form-group">
+            <label htmlFor="phoneNumber" className="form-label">
+              Phone Number
+            </label>
+            <div style={{ display: "flex", gap: "0.5rem" }}>
+              <select
+                name="countryCode"
+                className="form-input"
+                style={{ width: "30%" }}
+                onChange={(e) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    phoneNumber: `${e.target.value}${prev.phoneNumber.replace(
+                      /^\+\d+/,
+                      ""
+                    )}`,
+                  }))
+                }
+              >
+                <option value="+995">🇬🇪</option>
+                <option value="+1">🇺🇸</option>
+                <option value="+49">🇩🇪</option>
+                <option value="+33">🇫🇷</option>
+                {/* Add more as needed */}
+              </select>
+              <input
+                type="text"
+                name="phoneNumber"
+                id="phoneNumber"
+                className="form-input"
+                style={{ width: "70%" }}
+                placeholder="5XXXXXXXX"
+                onChange={handleChange}
+                value={form.phoneNumber}
+              />
+            </div>
+            {errors.phoneNumber && (
+              <div className="error-text">{errors.phoneNumber}</div>
+            )}
+          </div>
           <button type="submit" className="auth-button">
             Register
           </button>

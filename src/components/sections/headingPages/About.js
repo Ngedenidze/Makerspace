@@ -33,7 +33,7 @@ export default function About() {
 
         <section className="double-image">
           <img
-            src={require("../../../assets/inside.jpg")}
+            src="https://myphotostorage.blob.core.windows.net/mymakerphotos/badaca7a-094f-4b02-bdc3-d742dc39f888.jpeg"
             alt="Little Lemon Ingredients"
           ></img>
         </section>

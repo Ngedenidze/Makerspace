@@ -22,7 +22,7 @@
 
 /* Label styling (optional) */
 .profile-info{
-  background-color: #4b4b4b;
+  background-color: var(--main-color);
   padding: 2rem;
   border-radius: 1rem;
 }
@@ -35,7 +35,7 @@
 /* Logout button styling */
 .profile-logout-button {
   display: inline-block;
-  margin-top: 1rem;
+  margin: 1rem 0 0 1rem;
   padding: 0.6rem 1.2rem;
   background-color: #f44336;
   color: #fff;

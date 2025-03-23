@@ -24,6 +24,14 @@
 
 
 :root {
+  --main-color: #344653;
+  --main-text-color: #1b2a49;
+  --seconday-text-color: #a7a7a7;
+  --light-text-color: #E2F3EA;
+  --seconday-color: #B9C0DA;
+  --highlighted-text-color: #2a2664;
+  --highlighted-text-color-light: #C5E7D6;
+  --forms-color: #5F4B66;
   --blue-faded: rgb(13, 22, 73, 0.75);
   --blue-more-faded: rgb(13, 22, 73, 0.3);
   --blue-full: rgb(13, 22, 73);
@@ -231,7 +239,7 @@ Link:link {
   width: 100%;
   max-width: 300px;
   justify-content: center;
-  color: rgb(167, 167, 167);
+  color: var(--seconday-text-color);
   padding: 0 20px;
 }
 
@@ -245,7 +253,7 @@ Link:link {
   font-size: 1rem;
 }
 .bar-info .footer-info h3 {
-  color: rgb(167, 167, 167);
+  color: var(--seconday-text-color);
   font-size: 1rem;
   max-width: 30rem;
   text-overflow: clip;
@@ -274,7 +282,7 @@ Link:link {
   background-color: transparent;
 }
 .bar-info .footer-menu .footer-links h3 {
-  color: rgb(167, 167, 167);
+  color: var(--seconday-text-color);
   font-size: 1rem;
   max-width: 30rem;
   text-overflow: clip;
@@ -290,7 +298,7 @@ Link:link {
   border: none;
   font-size: 2rem;
   cursor: pointer;
-  color: rgb(167, 167, 167);
+  color: var(--seconday-text-color);
   transition: color 0.2s;
 }
 
@@ -301,7 +309,7 @@ Link:link {
 /* Info Box Styling */
 .info-box {
   background-color: rgba(19,19,19);
-  color: rgb(167, 167, 167);
+  color: var(--seconday-text-color);
   position: absolute;
   top: 75px;
   right: 0;
@@ -354,7 +362,7 @@ Link:link {
 .info-box h3 {
   font-size: 0.8rem;
   margin-bottom: 0.5rem;
-  color: rgb(167, 167, 167);
+  color: var(--seconday-text-color);
 }
 .info-box pre .hover-effect{
   padding: 0;
@@ -446,7 +454,7 @@ Link:link {
   max-width: 400px;
   align-items: flex-start;
   margin: 0;
-  color: rgb(167, 167, 167);
+  color: var(--seconday-text-color);
   top: 0;
   position: relative;
   z-index: 1000;
@@ -506,7 +514,7 @@ Link:link {
 
 /* Hover link styling */
 .hover-effect{
-  color: rgb(167, 167, 167);
+  color: var(--seconday-text-color);
   position: relative;
   z-index: 100;
   text-align: center;
@@ -515,7 +523,7 @@ Link:link {
 
 }
 .translate-icon{
-  color: rgb(167, 167, 167);
+  color: var(--seconday-text-color);
   padding: 5px;
   display: flex;
   flex-direction: row;
@@ -528,13 +536,13 @@ Link:link {
   font-size: 1rem;
   margin: 0 5px;
   background-color: transparent;
-  color: rgb(167, 167, 167);
+  color: var(--seconday-text-color);
 }
 .hover-effect h1, .hover-effect svg{
   line-height: 1rem;
   font-size: 1rem;
   margin: 5px;
-  color: rgb(167, 167, 167);
+  color: var(--seconday-text-color);
 }
 
 .hover-effect h1:hover, .hover-effect svg:hover{
@@ -554,7 +562,7 @@ Link:link {
 }
 
 .socials .hover-effect {
-  color: rgb(167, 167, 167);
+  color: var(--seconday-text-color);
   padding: 5px;
   padding-left: 0;
 }
@@ -648,7 +656,7 @@ Link:link {
   align-items: flex-start;
   height: 48vh;
   width: min(65vw, 1200px);
-  background-color: #B9C0DA;
+  background-color: var(--seconday-color);
   
 }
 .in-session-stages{
@@ -766,7 +774,7 @@ Link:link {
   font-weight: 100;
 }
 .in-session .in-session-text h3 .djName{
-  color: #2a2664;
+  color: var(--highlighted-text-color);
   font-weight: bold;
   font-size: 1.2rem;
 }
@@ -812,7 +820,7 @@ Link:link {
 .menu-card-link {
   flex: 1 1 calc(25% - 1px); /* Each card takes up 25% minus the gap */
   position: relative;
-  background-color: #536878;
+  background-color: var(--main-color);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -856,7 +864,7 @@ Link:link {
   z-index: 4;
   font-size: 1.625rem;
   margin-top: 0.7rem;
-  color: #1b2a49;
+  color: var(--main-text-color);
 }
 /* -------------------------------------------------------------------------- */
 /*  SPECIALS                                                                  */
@@ -884,7 +892,7 @@ Link:link {
 }
 
 .events-topbar > div > h1, .events-topbar > a > h1 {
-  color: rgb(167, 167, 167);
+  color: var(--seconday-text-color);
   font-size: 1rem;
   margin: 0rem;
   padding: 0rem;
@@ -905,7 +913,7 @@ Link:link {
   bottom: 0;
   margin: 2rem 0;
   padding: 0;
-  color: #E2F3EA;
+  color: var( --light-text-color);
   font-size: 1.3rem;
   background-color: transparent;
   border: none;
@@ -926,7 +934,7 @@ Link:link {
   display: none;
 }
 .view-more{
-  color: #E2F3EA;
+  color: var( --light-text-color);
   text-decoration: none;
   display: block;
   text-align: right;
@@ -1032,7 +1040,7 @@ Link:link {
   padding: 1rem 0;       /* Universal padding */
   padding-top: 0;
   margin: 1.625rem auto;
-  color: rgb(167, 167, 167);
+  color: var(--seconday-text-color);
   z-index: 0;         /* Ensure the text sits above the ::before background */
   width: min(65vw, 1200px);
 }
@@ -1049,7 +1057,7 @@ Link:link {
   padding: 2rem;
   text-decoration: none;
   overflow: visible;
-  color: #E2F3EA;
+  color: var( --light-text-color);
   min-height: 450px;
 }
 .dj-booking .dj-booking-text-container{
@@ -1071,7 +1079,7 @@ Link:link {
 }
 .commercial-renting .commercial-renting-text-container p, .dj-booking .dj-booking-text-container p{
   font-size: 1.2rem;
-  color: #E2F3EA;
+  color: var( --light-text-color);
 }
 .commercial-renting .commercial-renting-text-container::before, .dj-booking .dj-booking-text-container::before{
   content: "";
@@ -1081,7 +1089,7 @@ Link:link {
   width: 200%;
   height: 130%;
   z-index: -2; /* Place behind the .about-us content */
-  background: #536878; /* Or use an image/gradient if desired */
+  background: var(--main-color); /* Or use an image/gradient if desired */
   
   /* Example: diagonal clip from top-left to halfway across the top,
      then to the right side (cutting off the top-right corner).
@@ -1096,7 +1104,7 @@ Link:link {
   position: relative;
   margin-top: 1rem;
   font-size: 1.3rem;
-  color: #E2F3EA;
+  color: var( --light-text-color);
   display: block;
   width: auto;
   background-color: transparent;
@@ -1151,7 +1159,7 @@ Link:link {
   top: 0;
   left: 0;
   z-index: -1;
-  background: #536878;
+  background: var(--main-color);
   clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
 }
 
@@ -1176,7 +1184,7 @@ Link:link {
 .description-text {
   font-size: 1.3rem;
   line-height: 1.6;
-  color: #E2F3EA;
+  color: var( --light-text-color);
 }
 
 .event-dates {
@@ -1201,10 +1209,10 @@ Link:link {
 .lineups-heading {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: #C5E7D6;
+  color: var(--highlighted-text-color-light);
 }
 .event-title{
-  color: #C5E7D6;
+  color: var(--highlighted-text-color-light);
   font-size: 2rem;
   margin: 0.4rem 0;
 }
@@ -1229,13 +1237,13 @@ Link:link {
 
 .lineup-artist {
   font-weight: 600;
-  color: #E2F3EA;
+  color: var( --light-text-color);
 
 }
 
 .lineup-time {
   font-style: italic;
-  color: #E2F3EA;
+  color: var( --light-text-color);
 }
 /* -------------------------------------------------------------------------- */
 /*  EVENT PAGE                                                                */
@@ -1270,7 +1278,7 @@ Link:link {
 .tabs{
   display: flex;
   width: 100%;
-  background: #3a4779;
+  background: var(--seconday-color);
   height: 2rem;
   margin-top: 2px;
   
@@ -1302,7 +1310,7 @@ Link:link {
   top: 0;
   left: 0;
   z-index: -1;
-  background: #3a4779;
+  background: var(--seconday-color);
 }
 .events-slices{
   width: 100%;
@@ -1312,7 +1320,7 @@ Link:link {
   width: 100%;
   margin:0;
   margin-bottom: 2px;
-  background-color: #536878;
+  background-color: var(--main-color);
   max-width: 100%;
   height: fit-content;
 }
@@ -1373,7 +1381,7 @@ Link:link {
   box-sizing: border-box;
   color: #333;
   overflow: hidden;
-  background-color: #536878;
+  background-color: var(--main-color);
 }
 .rentals-top-bar{
   display: flex;
@@ -1381,9 +1389,9 @@ Link:link {
   justify-content: space-between;
   align-items: flex-start;
   padding: 3rem;
-  color: #E2F3EA;
+  color: var( --light-text-color);
   margin: 2px 0;
-  background-color: #536878;
+  background-color: var(--main-color);
 }
 .rentals-title{
   font-size: 1.625rem;
@@ -1413,7 +1421,7 @@ Link:link {
   padding: 4rem;       /* Universal padding */
   margin-bottom: -1rem;
   margin: 0 auto;
-  color: rgb(167, 167, 167);
+  color: var(--seconday-text-color);
   z-index: 0;         /* Ensure the text sits above the ::before background */
 }
 
@@ -1425,7 +1433,7 @@ Link:link {
   width: 100%;
   height: 100%;
   z-index: -1; /* Place behind the .about-us content */
-  background: #536878; /* Or use an image/gradient if desired */
+  background: var(--main-color); /* Or use an image/gradient if desired */
 
   /* Example: diagonal clip from top-left to halfway across the top,
      then to the right side (cutting off the top-right corner).
@@ -1444,7 +1452,7 @@ Link:link {
   margin-left: 0;
   text-align: left; 
   width: 80%;
-  color: #D4EDE0;
+  color: var(--highlighted-text-color-light);
   margin-bottom: 1rem;
 }
 
@@ -1452,7 +1460,7 @@ Link:link {
 .about-us .hero-text-2 h1 {
   font-size: 1.5rem;
   margin-bottom: 0;
-  color: #C4E7D4;
+  color: var(--highlighted-text-color);
 }
 .about-us .hero-text .mobile-location{
   display: none;
@@ -1462,7 +1470,7 @@ Link:link {
 .about-us .hero-text-2 > h2 {
   margin-bottom: 4rem;
   margin-top: 0rem;
-  color: #C5E7D6;
+  color: var(--highlighted-text-color-light);
 }
 .about-us .hero-text-2{
   width: 40%;
@@ -1490,8 +1498,8 @@ Link:link {
   margin: 2px auto;
   width: min(65vw, 1200px);
   box-sizing: border-box;
-  color: #E2F3EA;
-  background-color: #536878;
+  color: var( --light-text-color);
+  background-color: var(--main-color);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   display: flex;
 }
@@ -1515,12 +1523,12 @@ Link:link {
   line-height: 1.6;
   margin-bottom: 2rem;
   padding: 2rem;
-  color: #E2F3EA;
+  color: var( --light-text-color);
   text-align: center;
 }
 
 .rentals-contact-form {
-  background-color: #5F4B66;
+  background-color: var(--forms-color);
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -1538,7 +1546,7 @@ Link:link {
 .rentals-contact-form textarea {
   width: 100%;
   padding: 0.8rem;
-  border: 1px solid #536878;
+  border: 1px solid var(--main-color);
   border-radius: 5px;
   background-color: #F9F9F9;
   color: #333;
@@ -1550,7 +1558,7 @@ Link:link {
 .rentals-contact-form input[type="text"]:focus,
 .rentals-contact-form input[type="email"]:focus,
 .rentals-contact-form textarea:focus {
-  border-color: #E2F3EA;
+  border-color: var( --light-text-color);
   outline: none;
   box-shadow: 0 0 10px rgba(226, 243, 234, 0.5);
 }
@@ -1561,7 +1569,7 @@ Link:link {
 }
 
 .rentals-contact-form button {
-  background-color: #E2F3EA;
+  background-color: var( --light-text-color);
   color: #333;
   padding: 0.8rem 2rem;
   border: none;
@@ -1583,7 +1591,7 @@ Link:link {
 }
 
 .rentals-contact-info a {
-  color: #E2F3EA;
+  color: var( --light-text-color);
   text-decoration: underline;
   transition: color 0.3s ease;
 }
@@ -1647,7 +1655,7 @@ Link:link {
   box-sizing: border-box;
   color: #333;
   overflow: hidden;
-  background-color: #536878;
+  background-color: var(--main-color);
 }
 
 .djs-top-bar {
@@ -1656,9 +1664,9 @@ Link:link {
   justify-content: space-between;
   align-items: flex-start;
   padding: 3rem;
-  color: #E2F3EA;
+  color: var( --light-text-color);
   margin: 2px 0;
-  background-color: #536878;
+  background-color: var(--main-color);
 }
 
 .djs-top-bar h1 {
@@ -1682,8 +1690,8 @@ Link:link {
   margin: 2px auto;
   width: min(65vw, 1200px);
   box-sizing: border-box;
-  color: #E2F3EA;
-  background-color: #536878;
+  color: var( --light-text-color);
+  background-color: var(--main-color);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   display: flex;
 }
@@ -1709,12 +1717,12 @@ Link:link {
   line-height: 1.6;
   margin-bottom: 2rem;
   padding: 2rem;
-  color: #E2F3EA;
+  color: var( --light-text-color);
   text-align: center;
 }
 
 .djs-contact-form {
-  background-color: #5F4B66;
+  background-color: var(--forms-color);
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -1732,7 +1740,7 @@ Link:link {
 .djs-contact-form textarea {
   width: 100%;
   padding: 0.8rem;
-  border: 1px solid #536878;
+  border: 1px solid var(--main-color);
   border-radius: 5px;
   background-color: #F9F9F9;
   color: #333;
@@ -1744,7 +1752,7 @@ Link:link {
 .djs-contact-form input[type="text"]:focus,
 .djs-contact-form input[type="email"]:focus,
 .djs-contact-form textarea:focus {
-  border-color: #E2F3EA;
+  border-color: var( --light-text-color);
   outline: none;
   box-shadow: 0 0 10px rgba(226, 243, 234, 0.5);
 }
@@ -1755,7 +1763,7 @@ Link:link {
 }
 
 .djs-contact-form button {
-  background-color: #E2F3EA;
+  background-color: var( --light-text-color);
   color: #333;
   padding: 0.8rem 2rem;
   border: none;
@@ -1777,7 +1785,7 @@ Link:link {
 }
 
 .djs-contact-info a {
-  color: #E2F3EA;
+  color: var( --light-text-color);
   text-decoration: underline;
   transition: color 0.3s ease;
 }
@@ -1837,7 +1845,7 @@ Link:link {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   margin-right: 3rem;
-  background-color: #2a2664;
+  background-color: var(--highlighted-text-color);
   padding: 0.5rem;
 }
 
@@ -2315,7 +2323,7 @@ Link:link {
   }
   .menu-card-content > h4 {
     font-size: 1.1875rem;
-    color: #1b2a49;
+    color: var(--main-text-color);
   }
   .desktop-menu{
     display: none;
@@ -2401,7 +2409,7 @@ Link:link {
   width: 100%;
   height: 70%;
   z-index: -1; /* Place behind the .about-us content */
-  background: #536878; /* Or use an image/gradient if desired */
+  background: var(--main-color); /* Or use an image/gradient if desired */
 
   /* Example: diagonal clip from top-left to halfway across the top,
      then to the right side (cutting off the top-right corner).
@@ -2457,7 +2465,7 @@ Link:link {
     width: 100%;
     height: 95%;
     z-index: -1; /* Place behind the .about-us content */
-    background: #536878; /* Or use an image/gradient if desired */
+    background: var(--main-color); /* Or use an image/gradient if desired */
     clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 10%);
   }
   .about-us .hero-text-2 {

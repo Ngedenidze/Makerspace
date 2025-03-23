@@ -6,7 +6,7 @@ const DJBooking = () => {
     <section className="dj-booking">
     <div className="dj-booking-image">
         <img
-          src={require("../../assets/DJs/dj-stage.jpg")}
+          src="https://myphotostorage.blob.core.windows.net/mymakerphotos/969ab696-226c-4b4f-8385-2d683e868612.jpeg"
           alt="DJ Stage"
         ></img>
       </div>
