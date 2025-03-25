@@ -14,7 +14,7 @@ import Profile from "./pages/user profile/Profile";
 import Gallery from "./pages/Gallery/Gallery";
 
 function PrivateRoute({ children }) {
-  const token = localStorage.getItem("authToken");
+  const token = localStorage.getItem("accessToken");
   return token ? children : <Navigate to="/login" />;
 }
 export default function Routing() {

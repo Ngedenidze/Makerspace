@@ -1,13 +1,9 @@
 // src/components/Profile.js
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../sections/authPage/utils/AxiosInstance"; // Import the Axios instance
 import "./Profile.css"; // Import the CSS
 
-const apiUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net"
-    : "";
     function formatDate(dateString) {
       const date = new Date(dateString);
       const day = date.getDate();
@@ -33,34 +29,29 @@ function Profile() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem("accessToken");
     if (!token) {
+      console.log("no token");
       // If no token, redirect to login
       navigate("/login");
       return;
-    }
+    } 
+    console.log("token exsists", token);
 
     // Fetch user profile from protected endpoint
-    axios
-      .get(`${apiUrl}/api/users/me`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        const data = response.data;
-        setProfile(data);
-      })
-      .catch((error) => {
-        console.error("Profile fetch error:", error.response?.data || error.message);
-        // If unauthorized or error, remove token and redirect to login
-        localStorage.removeItem("authToken");
-        navigate("/login");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [navigate]);
+    api.get("/auth/me")
+    .then((response) => {
+      setProfile(response.data);
+    })
+    .catch((error) => {
+      console.error("Profile fetch error:", error.response?.data || error.message);
+      localStorage.removeItem("accessToken");
+      navigate("/login");
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+  }, []); 
 
   if (loading) {
     return <div className="profile-container">Loading profile...</div>;
@@ -129,7 +120,7 @@ function Profile() {
         className="profile-logout-button"
         onClick={() => {
           // Logout logic
-          localStorage.removeItem("authToken");
+          localStorage.removeItem("accessToken");
           window.location.reload();
         }}
       >

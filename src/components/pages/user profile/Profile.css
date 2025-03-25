@@ -73,3 +73,19 @@
   background-color: gray;
   color: white;
 }
+@media screen and (max-width: 900px) {
+  .profile-container {
+    width: 70%;
+  }
+  .profile-info{
+    
+  }
+  
+}
+
+@media screen and (max-width: 600px) {
+  .profile-container {
+    width: 99vw;
+  }
+  
+}

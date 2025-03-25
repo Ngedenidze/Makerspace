@@ -1,14 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./AuthForm.css";
-import axios from "axios";
+import api from "./utils/AxiosInstance";
 
 const apiUrl =
   process.env.NODE_ENV === "production"
     ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net"
     : "";
-
+const getFriendlyErrorMessage = (status, defaultMessage) => {
+      switch (status) {
+        case 400:
+          return "Bad Request. Please check your input.";
+        case 401:
+          return "Invalid credentials. Please try again.";
+        case 403:
+          return "You don’t have permission to perform this action.";
+        case 404:
+          return "Resource not found.";
+        case 500:
+          return "Server error. Please try again later.";
+        case 0:
+          return "Network error. Please check your internet connection.";
+        default:
+          return defaultMessage || "Something went wrong. Please try again.";
+      }
+    };
+    
 const AuthPage = ({ page }) => {
+
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -25,10 +44,13 @@ const AuthPage = ({ page }) => {
 
   // We'll store any validation or server errors in this state
   const [errors, setErrors] = useState({});
-
+  useEffect(() => {
+    setErrors({});
+  }, [page]);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+
   };
 
   // Simple helper to do minimal "required" checks
@@ -99,7 +121,7 @@ const AuthPage = ({ page }) => {
       // Birthdate must be 18+
       const birthdate = new Date(form.birthdate);
       const today = new Date();
-      const age = today.getFullYear() - birthdate.getFullYear();
+      let age = today.getFullYear() - birthdate.getFullYear();
       const m = today.getMonth() - birthdate.getMonth();
       if (m < 0 || (m === 0 && today.getDate() < birthdate.getDate())) {
         age--;
@@ -109,8 +131,8 @@ const AuthPage = ({ page }) => {
       }
 
       // Personal Number = 10 digits
-      if (!/^\d{10}$/.test(form.personalNumber)) {
-        newErrors.personalNumber = "Personal Number must be exactly 10 digits.";
+      if (!/^\d{11}$/.test(form.personalNumber)) {
+        newErrors.personalNumber = "Personal Number must be exactly 11 digits.";
       }
     }
     return newErrors;
@@ -130,54 +152,36 @@ const AuthPage = ({ page }) => {
     try {
       let response;
       if (page === "register") {
-        response = await axios.post(`${apiUrl}/api/users/register`, form, {
-          headers: { "Content-Type": "application/json" },
-        });
-        console.log("Registration Successful:", response.data);
-        // Optionally show a success message
-        // or navigate right away
-        navigate("/login");
+        response = await api.post("/auth/register", form);
+      console.log("Registration Successful:", response.data);
+      navigate("/login");
       } else if (page === "login") {
-        response = await axios.post(
-          `${apiUrl}/api/auth/login`,
-          {
-            email: form.email,
-            password: form.password,
-          },
-          {
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-        const { token } = response.data;
-        localStorage.setItem("authToken", token);
-
-        window.location.replace("/#/Profile");
-        window.location.reload();
+        response = await api.post("/auth/login", {
+          email: form.email,
+          password: form.password,
+        });
+        const { accessToken: token } = response.data;
+        console.log("Login Successful:", token);
+        localStorage.setItem("accessToken", token);
+        navigate("/profile");
       } else if (page === "forgot-password") {
-        response = await axios.post(
-          `${apiUrl}/api/users/request-password-reset`,
-          JSON.stringify(form.email), // <--- Just the raw email string in JSON
-          {
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-
+        response = await api.post("/auth/request-password-reset", {
+          email: form.email,
+        });
         console.log("Reset Email Sent:", response.data);
-        // Optionally show a success message
       }
-    } catch (error) {
-      console.error("Error:", error.response?.data || error.message);
-
-      // 3) Check if server returned structured validation errors
-      //    e.g. { errors: { email: "Invalid email", password: "Too short" } }
+    }  catch (error) {
+      const status = error.response?.status || 0;
+      const friendlyMessage = getFriendlyErrorMessage(
+        status,
+        error.response?.data?.message
+      );
+    
+      // Structured errors from backend (field-specific)
       if (error.response?.data?.errors) {
         setErrors(error.response.data.errors);
       } else {
-        // Otherwise, set a general error
-        // e.g. { general: "Invalid credentials" }
-        setErrors({
-          general: error.response?.data?.message || error.message,
-        });
+        setErrors({ general: friendlyMessage });
       }
     }
   };
