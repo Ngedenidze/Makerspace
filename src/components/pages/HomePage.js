@@ -54,7 +54,7 @@ export default function Homepage() {
   } = useQuery("pastEvents", async () => {
     const apiUrl =
       process.env.NODE_ENV === "production"
-        ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/SoonEvents"
+        ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/Events/PastEvents"
         : "/api/Events/PastEvents";
     const res = await fetch(apiUrl);
     if (!res.ok) {
