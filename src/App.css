@@ -50,6 +50,7 @@ p {
   font-family: "Cocktail Font";
 }
 
+
 input,
 select,
 option,
@@ -65,6 +66,12 @@ input,
 select {
   width: 10rem;
 }
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
 
 body {
   margin: 0; /* removes white border around website*/
