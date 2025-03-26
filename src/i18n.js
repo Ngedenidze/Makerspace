@@ -19,6 +19,7 @@ const resources = {
       ended: "Ended",
       main_stage: "Main Stage",
       space_stage: "Space Stage",
+      stage:"Stage",
       default_cover_art: "Default Cover Art",
       no_stage_data_available: "No stage data available.",
       in_session_image_alt: "In Session",
@@ -40,7 +41,193 @@ const resources = {
       opening_hours: "Opening Hours",
       address: "Lado Gudiashvili Square, Tbilisi 0162, Georgia",
       contact: "Contact",
-    }
+      gallery_text: "Welcome to the makerspace gallery! Check out our collection of creative projects and inspiring ideas from our members.",
+      gallery_title: "Gallery of Makerspace",
+      gallery_action: "View More",
+      rental_form_title: "Interested in renting our space?",
+      rental_form_description: "Fill out the form to get in touch with our team and discuss your event requirements. We look forward to helping you create a memorable experience at Makerspace!",
+      rental_form_name: "Your Name",
+      rental_form_email: "Your Email",
+      rental_form_event_description: "Tell us about your event",
+      rental_form_submit: "Submit",
+      rental_form_thank_you: "Thank you for your interest!",
+      rental_form_success: "Your message has been successfully sent. We will contact you soon!",
+      rental_form_submitting:"Submitting...",
+      contact_info_sub:"For direct inquiries, reach out to us at:",
+      contact_info_sub2:"For DJ bookings, please reach out to us at:",
+      contact_email_sub:" or email us at: ",
+      dj_perform: "Perform at Makerspace",
+      dj_perform_info:"Become a part of Tbilisi's vibrant music scene. Makerspace is the hub for emerging and established DJs looking to showcase their talent. Whether you spin underground beats or mainstream hits, our venue offers the perfect stage." ,
+      dj_perform_title: "Interested in Performing?",
+      dj_perform_text: "Ready to take the stage? Submit your details below, and our team will get in touch to discuss your set. Let's make your performance unforgettable!",
+      dj_perform_see_you_on_dancefloor: "See you on the dance floor!",
+      dj_form_full_name: "Full Name",
+      dj_form_stage_name: "Stage Name",
+      dj_form_social: "Social Network Link",
+      dj_form_music: "Music Platform Link",
+      dj_form_motivation: "Motivation",
+      dj_form_submit: "Submit",
+      dj_form_thank_you: "Thank you for your interest!",
+      dj_form_success: "Your message has been successfully sent. We will contact you soon!",
+      dj_form_submitting:"Submitting...",
+      dj_form_error:"An error occurred while submitting the form. Please try again later.",
+      dj_form_name_error:"Please enter your full name.",
+      dj_form_stage_name_error:"Please enter your stage name.",
+      dj_form_social_error:"Please enter your social network link.",
+      dj_form_music_error:"Please enter your music platform link.",
+      dj_form_motivation_error:"Please enter your motivation.",
+      dj_form_submit_error:"An error occurred while submitting the form. Please try again later.",
+      "weekdays": {
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday",
+        "sunday": "Sunday"
+      },
+      "months": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
+  },  starts_at: "starts at",
+  "loading_profile": "Loading profile...",
+  "profile_not_loaded": "Could not load profile data.",
+  "welcome": "Welcome, {{name}}!",
+  "verified": "Verified",
+  "rejected": "Rejected",
+  "pending": "Pending",
+  "name": "Name",
+  "email": "Email",
+  "phone": "Phone",
+  "country": "Country",
+  "personal_number": "Personal Number",
+  "birthdate": "Birthdate",
+  "social_media_link": "Social Media Link",
+  "n_a": "N/A",
+  "logout": "Logout",
+    "error":{
+      "bad_request":"Bad Request",
+      "invalid_credentials":"Invalid credentials",
+      "no_permission":"You don’t have permission to perform this action",
+      "resource_not_found":"Resource not found",
+      "server_error":"Server error",
+      "network_error":"Network error",
+      "generic":"Something went wrong",
+      "fetching_countries":"Fetching countries",
+    },
+    "validation":{
+      "email_required":"Email is required",
+      "password_required":"Password is required",
+      "first_name_required":"First Name is required",
+      "last_name_required":"Last Name is required",
+      "phone_required":"Phone is required",
+      "country_required":"Country is required",
+      "personal_number_required":"Personal Number is required",
+      "birthdate_required":"Birthdate is required",
+      "social_media_required":"Social Media Link is required",
+      "password_mismatch":"Passwords do not match",
+      "password_complexity" :"Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+      "social_media_format":"Social Media Link must be a valid URL",
+      "age_requirement" :"You must be at least 18 years old to use this service",
+      "personal_number_format":"Personal Number must be a valid Georgian personal number",
+      "invalid_email":"Invalid email",
+    },
+    "success":{
+      "registration":"Registration successful! Redirecting to login...",
+    },
+    // auth.login_title
+
+    // auth.email_label
+    
+    // auth.email_placeholder
+    
+    // auth.password_label
+    
+    // auth.sign_in
+    
+    // auth.no_account
+    
+    // auth.register_here
+    
+    // auth.forgot_password
+    
+    // auth.reset_here
+    
+    // auth.first_name
+    
+    // auth.last_name
+    
+    // auth.confirm_password
+    
+    // auth.personal_number
+    
+    // auth.birthdate
+    
+    // auth.social_media_link
+    
+    // auth.country
+    
+    // auth.select_country
+    
+    // auth.phone_number
+    
+    // auth.select_code
+    
+    // auth.phone_placeholder
+    
+    // auth.register
+    
+    // auth.already_have_account
+    
+    // auth.login_here
+    
+    // auth.reset_password
+    
+    // auth.remembered
+    "auth":{
+      "login_title":"Login",
+      "email_lable":"Email",
+      "email_placeholder":"user@example.com",
+      "password_label":"Password",
+      "sign_in":"Sign In",
+      "no_account":"Don't have an account?",
+      "register_here":"Register here",
+      "forgot_password":"Forgot Password",
+      "reset_here":"Reset here",
+      "first_name":"First Name",
+      "last_name":"Last Name",
+      "confirm_password":"Confirm Password",
+      "personal_number":"Personal Number",
+      "birthdate":"Birthdate",
+      "social_media_link":"Social Media Link",
+      "country":"Country",
+      "select_country":"Select Country",
+      "phone_number":"Phone Number",
+      "select_code":"Select Code",
+      "phone_placeholder":"+995 5 123 4567",
+      "register":"Register",
+      "already_have_account":"Already have an account?",
+      "login_here":"Login here",
+      "reset_password":"Reset Password",
+      "remembered":"Remembered?",
+      "passwords_match" :"Passwords match",
+      "passwords_do_not_match":"Passwords do not match",
+    },
+    "password_rules":{
+      "length":"Password must be at least 8 characters long",
+      "uppercase":"Password must contain at least one uppercase letter",
+      "lowercase":"Password must contain at least one lowercase letter",
+      "special":"Password must contain at least one special character",
   },
   ka: {
     translation: {
@@ -57,6 +244,7 @@ const resources = {
       starting_soon: "იწყბება მალე",
       in_session: "მიმდინარე სესია",
       ended: "დასრულებული",
+      stage: "",
       main_stage: "მთავარი სცენა",
       space_stage: "Space სცენა",
       default_cover_art: "ნაგულისხმებული ფარი ხელოვნება",
@@ -66,7 +254,7 @@ const resources = {
       next_up: "მომდევნო ივენთები",
       view_more: "ყველა ივენთი",
       coming_soon: "შემდეგი ივენთები",
-      past_events: "წარსული ივენთები",
+      past_events: "გასული ივენთები",
       rental_title:"მოაწყე შენი წვეულება Makerspace-ში",
       rental_info:"მოაწყე ღონისძიება თბილისის შუაგულში, ჩვენთან ულამაზეს გარემოში, შენ შეგიძლია დახურული ივენთების მოწყობა, კორპორატიული წვეულებების გამართვა და რაც მთავარია კვირის ბოლოს მეგობრებთან ერთად დაუვიწყარი გართობა. ამ ყველაფერში დაგეხმარებათ  ჩვენი ორი საცეკვაო სცენა, მრავალფეროვანი ბარი, VOID ის აუდიო სისტემა და განსატვირთი ზონები, სადაც შერწყმულია თანამედროვე ხელოვნებისა და ელექტრონული კოლაბორაციისა და ჯავშნისთვის დაგვიკავშირდით მეილზე.",
       rental_action:"დაჯავშნა",
@@ -80,7 +268,126 @@ const resources = {
       opening_hours: "სამუშაო საათები",
       address: "ლადო გუდიაშვილის მოედანი, თბილისი 0162, საქართველო",
       contact: "კონტაქტი",
+      gallery_text: "მოგესალმებით Makerspace-ის გალერეაში! გაეცანით ჩვენი წევრების მიერ შექმნილი შემოქმედებითი პროექტების და შთაგონების იდეების კოლექციას.",
+      gallery_title: "Makerspace-ის გალერეა",
+      rental_form_title: "გსურთ ჩვენთან სივრცის ქირაობა?",
+      rental_form_description: "შეავსეთ ფორმა, რომ დაგვიკავშირდეთ და განვიხილოთ თქვენი ღონისძიების მოთხოვნები. ველით თქვენს შეტყობინებას!",
+      rental_form_name: "თქვენი სახელი",
+      rental_form_email: "თქვენი ელფოსტა",
+      rental_form_event_description: "გვითხარით თქვენი ღონისძიების შესახებ",
+      rental_form_submit: "გაგზავნა",
+      rental_form_thank_you: "გმადლობთ თქვენი ინტერესისთვის!",
+      rental_form_success: "თქვენი შეტყობინება წარმატებით გაიგზავნა. მალე დაგიკავშირდებით!",
+      rental_form_submitting:"მიმდინარეობს გაგზავნა...",
+      contact_info_sub:"დასაკონტაქტებლად დაგვიკავშირდით ნომერზე:",
+      contact_info_sub2:"DJ-ების დაჯავშნისთვის მოგვწერეთ:",
+      contact_email_sub:" ან მოგვწერეთ: ",
+      dj_perform: "დაუკარი Makerspace-ში",
+      dj_perform_info:"Makerspace გთავაზობთ ყველაზე გამორჩეულ მუსიკალურ სცენას თბილისში. Makerspace არის ადგილი, სადაც ახალგაზრდა და გამოცდილი DJ-ები აქვთ შესაძლებლობა აჩვენონ თავიანთო ნიჭი. თუ თქვენ ხართ DJ, რომელიც უკრავს როგორც თანამედროვე მუსიკას ასევე Underground მუსიკას, ჩვენი სივრცე არის იდეალური ადგილი თქვენი გამოსვლისთვის.",
+      dj_perform_title: "გსურთ სცენაზე გამოსვლა?",
+      dj_perform_text: "მზად ხართ Makerspace-ის სცენაზე გამოსასვლელად? შეავსეთ ქვემოთ მოცემული ფორმა და ჩვენი გუნდი დაგიკავშირდებათ თქვენი სეტის განხილვისთვის. ერთად გავხადოთ თქვენი გამოსვლა დაუვიწყარი!",
+      dj_perform_see_you_on_dancefloor: "შევხვდებით სცენაზე!",
+      dj_form_full_name: "სრული სახელი",
+      dj_form_stage_name: "სცენის სახელი",
+      dj_form_social: "სოციალური ქსელის ბმული",
+      dj_form_music: "მუსიკალური პლატფორმის ბმული",
+      dj_form_motivation: "მოტივაცია",
+      dj_form_submit: "გაგზავნა",
+      dj_form_thank_you: "გმადლობთ თქვენი ინტერესისთვის!",
+      dj_form_success: "თქვენი შეტყობინება წარმატებით გაიგზავნა. მალე დაგიკავშირდებით!",
+      dj_form_submitting:"მიმდინარეობს გაგზავნა...",
+      dj_form_error:"შეტყობინების გაგზავნისას მოხდა შეცდომა. გთხოვთ, სცადოთ მოგვიანებით.",
+      dj_form_name_error:"გთხოვთ, შეიყვანოთ თქვენი სრული სახელი.",
+      dj_form_stage_name_error:"გთხოვთ, შეიყვანოთ თქვენი სცენის სახელი.",
+      dj_form_social_error:"გთხოვთ, შეიყვანოთ თქვენი სოციალური ქსელის ბმული.",
+      dj_form_music_error:"გთხოვთ, შეიყვანოთ თქვენი მუსიკალური პლატფორმის ბმული.",
+      dj_form_motivation_error:"გთხოვთ, შეიყვანოთ თქვენი მოტივაცია.",
+      dj_form_submit_error:"შეტყობინების გაგზავნისას მოხდა შეცდომა. გთხოვთ, სცადოთ მოგვიანებით.",
+      "weekdays": {
+        "monday": "ორშაბათი",
+        "tuesday": "სამშაბათი",
+        "wednesday": "ოთხშაბათი",
+        "thursday": "ხუთშაბათი",
+        "friday": "პარასკევი",
+        "saturday": "შაბათი",
+        "sunday": "კვირა"        
+      },
+      "months": {
+        "january": "იანვარი",
+        "february": "თებერვალი",
+        "march": "მარტი",
+        "april": "აპრილი",
+        "may": "მაისი",
+        "june": "ივნისი",
+        "july": "ივლისი",
+        "august": "აგვისტო",
+        "september": "სექტემბერი",
+        "october": "ოქტომბერი",
+        "november": "ნოემბერი",
+        "december": "დეკემბერი"
+      },
+      starts_at: "იწყება",
+      "loading_profile": "მიმდინარეობს პროფილის ატვირთვა...",
+      "profile_not_loaded": "პროფილის მონაცემების ატვირთვა ვერ მოხერხდა.",
+      "welcome": "კეთილი იყოს თქვენი მობრძანება, {{name}}!",
+      "profile": "პროფილი",
+      "profile_picture": "პროფილის სურათი",
+      "edit_profile": "პროფილის რედაქტირება",
+      "save_changes": "შენახვა",
+      "cancel": "გაუქმება",
+      "profile_updated": "პროფილი წარმატებით განახლდა.",
+      "profile_update_failed": "პროფილის განახლება ვერ მოხერხდა.",
+      "name": "სახელი",
+      "email": "ელფოსტა",
+      "password": "პაროლი",
+      "phone": "ტელეფონი",
+      "address": "მისამართი",
+      "social_media_link": "სოციალური მედიის ბმული",
+
+      "birthdate": "დაბადების თარიღი",
+      "personal_number": "პირადი ნომერი",
+      "confirm_password": "დაადასტურეთ პაროლი",
+      "current_password": "მიმდინარე პაროლი",
+      "new_password": "ახალი პაროლი",
+      "confirm_new_password": "დაადასტურეთ ახალი პაროლი",
+      "update_password": "პაროლის განახლება",
+      "password_updated": "პაროლი წარმატებით განახლდა.",
+      "password_update_failed": "პაროლის განახლება ვერ მოხერხდა.",
+      "event_details": "ივენთის დეტალები",
+      "logout": "გამოსვლა",
+      "error":{
+        "bad_request": "არასწორი მოთხოვნა",
+        "invalid_credentials": "არასწორი სერთიფიკატები",
+        "no_permission": "არ გაქვთ უფლებები",
+        "resource_not_found":"რესურსი ვერ მოიძებნა",
+        "server_error":"სერვერის შეცდომა",
+        "network_error":"ქსელის შეცდომა",
+        "generic":"ზოგადი შეცდომა",
+        "fetching_countries":"ქვეყნების ჩამონათვალის მიღებისას მოხდა შეცდომა",
+      },
+      "validation":{
+        "email_required":"ელფოსტის მისამართი აუცილებელია",
+        "password_required":"პაროლი აუცილებელია",
+        "first_name_required":"სახელი აუცილებელია",
+        "last_name_required":"გვარი აუცილებელია",
+        "phone_required":"ტელეფონის ნომერი აუცილებელია",
+        "country_required":"ქვეყანა აუცილებელია",
+        "personal_number_required":"საჭიროა პირადი ნომერი",
+        "birthdate_required":"საჭიროა დაბადების თარიღი",
+        "social_media_required":"საჭიროა სოციალური მედიის ბმული",
+        "password_mismatch":"პაროლები არ ემთხვევა",
+        "password_complexity" :"პაროლი უნდა შეიცავდეს მინიმუმ 8 სიმბოლოს, მათ შორის ერთი დიდი ასო, ერთი პატარა ასო და ერთი ციფრი",
+        "social_media_format":"სოციალური მედიის ბმული უნდა იყოს ვალიდური URL",
+        "age_requirement" :"თქვენ უნდა იყოთ მინიმუმ 18 წლის ან მეტის",
+        "personal_number_format":"პირადი ნომერი უნდა შეიცავდეს 11 ციფრს",
+        "invalid_email":"არასწორი ელფოსტის ფორმატი",
+      },
+      "success":{
+        "registration":"რეგისტრაცია წარმატებით დასრულდა",
+      },
+    }
     },
+    
   }
 };
 

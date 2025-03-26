@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import localImg from "../../assets/cover-art-5.jpg";
 import ImageGrid from "../reusable/Image Grid/ImageGrid";
+import { useTranslation } from "react-i18next";
 
 const DJs = () => {
   const { id } = useParams();
   const [images, setImages] = useState([]);
+  const { t, i18n } = useTranslation();
 
   // Controlled form fields for DJ contact form
   const [fullName, setFullName] = useState("");
@@ -129,12 +131,9 @@ const DJs = () => {
       </div>
 
       <div className="djs-top-bar">
-        <h1 className="djs-title">Perform at Makerspace</h1>
+        <h1 className="djs-title">{t("dj_perform")}</h1>
         <p className="djs-description">
-          Become a part of Tbilisi's vibrant music scene. Makerspace is the hub
-          for emerging and established DJs looking to showcase their talent.
-          Whether you spin underground beats or mainstream hits, our venue
-          offers the perfect stage.
+         {t("dj_perform_info")}
         </p>
       </div>
 
@@ -155,53 +154,51 @@ const DJs = () => {
 
       <section className="djs-contact">
         <section className="djs-contact-heading">
-          <h2 className="djs-contact-title">Interested in Performing?</h2>
+          <h2 className="djs-contact-title">{t("dj_perform_title")}</h2>
           <p className="djs-contact-description">
-            Ready to take the stage? Submit your details below, and our team
-            will get in touch to discuss your set. Let's make your performance
-            unforgettable!
+            {t("dj_perform_text")}
           </p>
-          <h2>See you on the dance floor!</h2>
+          <h2>{t("dj_perform_see_you_on_dancefloor")}</h2>
         </section>
 
         <section className="djs-contact-form">
           <form onSubmit={handleSubmit}>
             <input
               type="text"
-              placeholder="Full Name"
+              placeholder={t("dj_form_full_name")}
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               required
             />
             <input
               type="text"
-              placeholder="Stage Name"
+              placeholder={t("dj_form_stage_name")}
               value={stageName}
               onChange={(e) => setStageName(e.target.value)}
               required
             />
             <input
               type="url"
-              placeholder="Social Network Link"
+              placeholder={t("dj_form_social")}
               value={socialLink}
               onChange={(e) => setSocialLink(e.target.value)}
               required
             />
             <input
               type="url"
-              placeholder="Music Platform Link"
+              placeholder={t("dj_form_music")}
               value={musicLink}
               onChange={(e) => setMusicLink(e.target.value)}
               required
             />
             <textarea
-              placeholder="Share your motivation to play at Makerspace..."
+              placeholder={t("dj_form_motivation")}
               value={motivation}
               onChange={(e) => setMotivation(e.target.value)}
               required
             ></textarea>
             <button type="submit" disabled={loading}>
-              {loading ? "Submitting..." : "Submit"}
+              {loading ? t("dj_form_submitting") : t("dj_form_submit")}
             </button>
           </form>
 
@@ -223,9 +220,8 @@ const DJs = () => {
           )}
 
           <p className="djs-contact-info">
-            For direct inquiries, reach us at +995 577 900 061.
-            <br />
-            Or email us at{" "}
+            {t("contact_info_sub")} +995 577 900 061
+            {t("contact_email_sub")}
             <a href="mailto:contact@makerspaceclub.com">contact@makerspaceclub.com</a>
           </p>
         </section>

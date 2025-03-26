@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import localImg from "./gallery.jpg";
 import "./Gallery.css";
-
+import { useTranslation } from "react-i18next";
 const Gallery = () => {
   const [images, setImages] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState(null);
-  // State to track whether each image in the grid has loaded
   const [loadedImages, setLoadedImages] = useState({});
-
+  const { t, i18n } = useTranslation();
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -27,27 +26,21 @@ const Gallery = () => {
     fetchImages();
   }, []);
 
-  // Open modal on image click
   const openModal = (index) => {
     setActiveImageIndex(index);
     setModalOpen(true);
   };
 
-  // Close modal
   const closeModal = () => {
     setModalOpen(false);
     setActiveImageIndex(null);
   };
-
-  // Navigate to previous image
   const prevImage = (e) => {
     e.stopPropagation();
     setActiveImageIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
   };
-
-  // Navigate to next image
   const nextImage = (e) => {
     e.stopPropagation();
     setActiveImageIndex((prevIndex) =>
@@ -55,7 +48,6 @@ const Gallery = () => {
     );
   };
 
-  // Handle image load to remove blur placeholder
   const handleImageLoad = (index) => {
     setLoadedImages((prev) => ({ ...prev, [index]: true }));
   };
@@ -76,10 +68,9 @@ const Gallery = () => {
         </picture>
       </div>
       <div className="gallery-top-bar">
-        <h1 className="gallery-title">Gallery of Makerspace</h1>
+        <h1 className="gallery-title">{t("gallery_title")}</h1>
         <p className="gallery-description">
-          Welcome to the makerspace gallery! Check out our collection of creative
-          projects and inspiring ideas from our members.
+          {t("gallery_text")}
         </p>
       </div>
       <section className="gallery-main-container">
@@ -98,8 +89,6 @@ const Gallery = () => {
           ))}
         </div>
       </section>
-
-      {/* Modal for zooming and scrolling images */}
       {modalOpen && activeImageIndex !== null && (
         <div className="modal" onClick={closeModal}>
           <span className="close" onClick={closeModal}>

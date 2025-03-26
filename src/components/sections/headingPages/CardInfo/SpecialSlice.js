@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 export default function SpecialSlice(props) {
+  const { t } = useTranslation();
+
   return (
     <Link to={props.link} className="menu-card-link">
       <article className="menu-card">
@@ -12,13 +14,13 @@ export default function SpecialSlice(props) {
               props.stages.map(([floor, names]) => {
                 const stageLabel =
                   parseInt(floor, 10) === 1
-                    ? "Main"
+                    ? t("main_stage")
                     : parseInt(floor, 10) === 2
-                    ? "Space"
+                    ? t("space_stage")
                     : `Stage ${floor}`;
                 return (<>
                    <p key={floor}>
-                    {stageLabel} Stage:
+                    {stageLabel} {t("stage")}
                   </p>
                   <h3>
                      {names.join(", ")}

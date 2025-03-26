@@ -1,107 +1,134 @@
 // src/components/Profile.js
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../../sections/authPage/utils/AxiosInstance"; // Import the Axios instance
-import "./Profile.css"; // Import the CSS
-
-    function formatDate(dateString) {
-      const date = new Date(dateString);
-      const day = date.getDate();
-      const month = date.toLocaleString("default", { month: "long" });
-      const year = date.getFullYear();
-    
-      // Determine the ordinal suffix
-      let suffix = "th";
-      if (day % 10 === 1 && day !== 11) {
-        suffix = "st";
-      } else if (day % 10 === 2 && day !== 12) {
-        suffix = "nd";
-      } else if (day % 10 === 3 && day !== 13) {
-        suffix = "rd";
-      }
-    
-      return `${month} ${day}${suffix}, ${year}`;
-    }
+import api from "../../sections/authPage/utils/AxiosInstance"; // Axios instance
+import { useTranslation } from "react-i18next";
+import "./Profile.css";
 
 function Profile() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  // Define a function to format dates using i18n translations
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const monthIndex = date.getMonth();
+    const year = date.getFullYear();
+
+    // Mapping array for months – keys must match your translation file entries
+    const monthKeys = [
+      "january",
+      "february",
+      "march",
+      "april",
+      "may",
+      "june",
+      "july",
+      "august",
+      "september",
+      "october",
+      "november",
+      "december",
+    ];
+    const monthTranslated = t(`months.${monthKeys[monthIndex]}`);
+
+    // Determine ordinal suffix (this logic works well for English)
+    let suffix = "th";
+    if (day % 10 === 1 && day !== 11) {
+      suffix = "st";
+    } else if (day % 10 === 2 && day !== 12) {
+      suffix = "nd";
+    } else if (day % 10 === 3 && day !== 13) {
+      suffix = "rd";
+    }
+    const translatedSuffix = t(`ordinals.${suffix}`);
+
+    return `${monthTranslated} ${day}, ${year}`;
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (!token) {
-      console.log("no token");
-      // If no token, redirect to login
+      console.log("No token found");
       navigate("/login");
       return;
-    } 
-    console.log("token exsists", token);
+    }
+    console.log("Token exists:", token);
 
-    // Fetch user profile from protected endpoint
-    api.get("/auth/me")
-    .then((response) => {
-      setProfile(response.data);
-    })
-    .catch((error) => {
-      console.error("Profile fetch error:", error.response?.data || error.message);
-      localStorage.removeItem("accessToken");
-      navigate("/login");
-    })
-    .finally(() => {
-      setLoading(false);
-    });
-  }, []); 
+    // Fetch user profile from a protected endpoint
+    api
+      .get("/auth/me")
+      .then((response) => {
+        setProfile(response.data);
+      })
+      .catch((error) => {
+        console.error(
+          "Profile fetch error:",
+          error.response?.data || error.message
+        );
+        localStorage.removeItem("accessToken");
+        navigate("/login");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [navigate]);
 
   if (loading) {
-    return <div className="profile-container">Loading profile...</div>;
+    return <div className="profile-container">{t("loading_profile")}</div>;
   }
 
   if (!profile) {
-    return <div className="profile-container">Could not load profile data.</div>;
+    return (
+      <div className="profile-container">{t("profile_not_loaded")}</div>
+    );
   }
 
-  // Format the dates if needed
-  const createdAtFormatted = new Date(profile.createdAt).toLocaleString();
-  const birthdateFormatted = new Date(profile.birthdate).toLocaleDateString();
+  // Format dates using the new formatDate function
+  const createdAtFormatted = formatDate(profile.createdAt);
+  const birthdateFormatted = formatDate(profile.birthdate);
 
   return (
     <div className="profile-container">
-      <h1 className="profile-header">Welcome, {profile.firstName}!</h1>
+      <h1 className="profile-header">
+        {t("welcome", { name: profile.firstName })}
+      </h1>
 
       {/* Verification Status Block */}
       {profile.status === "Verified" && (
-  <div className="verification-status verified">Verified</div>
-)}
-{profile.status === "Rejected" && (
-  <div className="verification-status rejected">Rejected</div>
-)}
-{profile.status === "Pending" && (
-  <div className="verification-status pending">Pending</div>
-)}
-
+        <div className="verification-status verified">{t("verified")}</div>
+      )}
+      {profile.status === "Rejected" && (
+        <div className="verification-status rejected">{t("rejected")}</div>
+      )}
+      {profile.status === "Pending" && (
+        <div className="verification-status pending">{t("pending")}</div>
+      )}
 
       <div className="profile-info">
         <p>
-          <strong>Name:</strong> {profile.firstName} {profile.lastName}
+          <strong>{t("name")}:</strong> {profile.firstName} {profile.lastName}
         </p>
         <p>
-          <strong>Email:</strong> {profile.email}
+          <strong>{t("email")}:</strong> {profile.email}
         </p>
         <p>
-          <strong>Phone:</strong> {profile.phoneNumber}
+          <strong>{t("phone")}:</strong> {profile.phoneNumber}
         </p>
         <p>
-          <strong>Country:</strong> {profile.country}
+          <strong>{t("country")}:</strong> {profile.country}
         </p>
         <p>
-          <strong>Personal Number:</strong> {profile.personalNumber}
+          <strong>{t("personal_number")}:</strong> {profile.personalNumber}
         </p>
         <p>
-          <strong>Birthdate:</strong> {formatDate(profile.birthdate)}
+          <strong>{t("birthdate")}:</strong> {birthdateFormatted}
         </p>
         <p>
-          <strong>Social Media Link:</strong>{" "}
+          <strong>{t("social_media_link")}:</strong>{" "}
           {profile.socialMediaProfileLink ? (
             <a
               href={profile.socialMediaProfileLink}
@@ -111,7 +138,7 @@ function Profile() {
               {profile.socialMediaProfileLink}
             </a>
           ) : (
-            "N/A"
+            t("n_a")
           )}
         </p>
       </div>
@@ -119,12 +146,11 @@ function Profile() {
       <button
         className="profile-logout-button"
         onClick={() => {
-          // Logout logic
           localStorage.removeItem("accessToken");
           window.location.reload();
         }}
       >
-        Logout
+        {t("logout")}
       </button>
     </div>
   );

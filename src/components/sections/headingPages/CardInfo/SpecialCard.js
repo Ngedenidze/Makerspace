@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 
+
 export default function SpecialCard(props) {
+
+
+
   return (
     <Link to={props.link} className="menu-card-link">
     <article className="menu-card">

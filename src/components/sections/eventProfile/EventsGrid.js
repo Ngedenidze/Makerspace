@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Carousel from "../headingPages/SpecialsCarousel";
 import SpecialCard from "../headingPages/CardInfo/SpecialCard";
-import Testimonials from "../headingPages/SoonEvents";
 import { useTranslation } from "react-i18next";
 
 export default function EventsGrid({ events }) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   if (!events || events.length === 0) {
     return (
@@ -19,50 +16,89 @@ export default function EventsGrid({ events }) {
 
   const displayedEvents = events.slice(0, 4);
 
+  // Define arrays mapping index values to keys in your translation file
+  const weekdayKeys = [
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+  ];
+  const monthKeys = [
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december",
+  ];
+
   return (
-    <>
     <section className="events-soon">
       <article className="events-topbar">
         <section className="events-topbar-title">
           <Link to="/AllEvents">
-          <h1>{t("next_up")}</h1>
-        </Link></section>
-        <section className="events-topbar-button"><Link to="/AllEvents" className="view-more">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708"/>
-  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708"/>
-</svg>
-        </Link></section>
-    
+            <h1>{t("next_up")}</h1>
+          </Link>
+        </section>
+        <section className="events-topbar-button">
+          <Link to="/AllEvents" className="view-more">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-chevron-double-right"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fillRule="evenodd"
+                d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708"
+              />
+              <path
+                fillRule="evenodd"
+                d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708"
+              />
+            </svg>
+          </Link>
+        </section>
       </article>
 
       <section className="events-cards">
         {displayedEvents.map((event) => {
           const startDate = new Date(event.startDate);
-          const weekday = startDate.toLocaleDateString("en-US", { weekday: "long" });
-          const date = startDate.toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-          });
+          // Get the index-based weekday and month keys
+          const weekdayKey = weekdayKeys[startDate.getDay()];
+          const monthKey = monthKeys[startDate.getMonth()];
+          const day = startDate.getDate();
+          const year = startDate.getFullYear();
 
-          // If lineUps exist, use the first artist name. Otherwise, fallback to event.name
-          const djName = event.lineUps?.length ? event.lineUps[0].artistName : event.name;
+          // Translate the weekday and month using your i18n keys
+          const translatedWeekday = t(`weekdays.${weekdayKey}`);
+          const translatedMonth = t(`months.${monthKey}`);
+
+          // Build a formatted date string (e.g. "March 15, 2025")
+          const translatedDate = `${translatedMonth} ${day}, ${year}`;
 
           return (
             <SpecialCard
               key={event.id}
-              weekday={weekday}
-              date={date}
+              weekday={translatedWeekday}
+              date={translatedDate}
               eventName={event.name}
               link={`/Events/${event.id}`}
             />
           );
         })}
       </section>
-   
     </section>
-  
-    </>
   );
 }

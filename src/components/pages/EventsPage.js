@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import localImg from "../../assets/cover-art-4.jpg";
+import { useTranslation } from "react-i18next";
 
 export default function EventsPage() {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const apiUrl =
@@ -38,7 +40,7 @@ export default function EventsPage() {
   // Function to group lineups by floor
   const groupLineUpsByFloor = (lineUps) => {
     return lineUps.reduce((acc, lineUp) => {
-      const floorName = lineUp.floor === 1 ? "Main Floor" : "Space Floor";
+      const floorName = lineUp.floor === 1 ? t("main_stage") : t("space_stage");
       if (!acc[floorName]) acc[floorName] = [];
       acc[floorName].push(lineUp);
       return acc;
@@ -48,12 +50,53 @@ export default function EventsPage() {
   // If event data is available, group the lineups by floor
   const groupedLineUps = event ? groupLineUpsByFloor(event.lineUps) : {};
 
+  // Build a translated date string
+  const startDate = new Date(event.startDate);
+  // Define mapping arrays (keys must match your translation file)
+  const weekdayKeys = [
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+  ];
+  const monthKeys = [
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december",
+  ];
+  const weekdayKey = weekdayKeys[startDate.getDay()];
+  const monthKey = monthKeys[startDate.getMonth()];
+  const day = startDate.getDate();
+  const year = startDate.getFullYear();
+  const translatedWeekday = t(`weekdays.${weekdayKey}`);
+  const translatedMonth = t(`months.${monthKey}`);
+  const time = startDate.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+  // "starts_at" should be defined in your translation files (e.g., "starts at")
+  const formattedDate = `${translatedWeekday} ${translatedMonth} ${day}, ${year} ${t(
+    "starts_at"
+  )} ${time}`;
+
   return (
     <div className="event-page">
       <div className="event-image-wrapper">
         <img
           className="event-image"
-          // src={event ? event.eventPhotoUrl : localImg}
           src={event ? event.eventPhotoUrl : localImg}
           alt={event ? event.name : "Default"}
         />
@@ -66,27 +109,11 @@ export default function EventsPage() {
         ) : (
           <>
             <section className="event-dates">
-              <p className="start-date">
-                {new Date(event.startDate)
-                  .toLocaleDateString("en-GB", {
-                    weekday: "long",
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                  })
-                  .replace(/[,\.]/g, "")}
-                {" starts at "}
-                {new Date(event.startDate).toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  hour12: false,
-                })}
-              </p>
+              <p className="start-date">{formattedDate}</p>
             </section>
             <header className="event-header">
               <h1 className="event-title">{event.name}</h1>
             </header>
-
             <section className="event-lineups">
               {Object.entries(groupedLineUps).map(([floorName, lineUps]) => (
                 <div key={floorName} className="lineup-floor">
@@ -101,20 +128,12 @@ export default function EventsPage() {
                             lineUp.artistName
                           )}
                         </span>
-                        {/* {" - "}
-                        <span className="lineup-time">
-                          {new Date(lineUp.startTime).toLocaleTimeString([], {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })}
-                        </span> */}
                       </li>
                     ))}
                   </ul>
                 </div>
               ))}
             </section>
-
             <section className="event-description">
               <p className="description-text">{event.description}</p>
             </section>

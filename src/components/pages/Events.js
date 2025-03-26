@@ -3,11 +3,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import localImg from "../../assets/cover-art-default.jpg";
 import SpecialSlice from "../sections/headingPages/CardInfo/SpecialSlice";
+import { useTranslation } from "react-i18next";
 
 export default function Events() {
-  const { tab } = useParams();        // <-- e.g. "upcoming" or "past"
+  const { tab } = useParams();        // e.g. "upcoming" or "past"
   const navigate = useNavigate();
-
+  const { t } = useTranslation();
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -19,7 +20,6 @@ export default function Events() {
   const [activeTab, setActiveTab] = useState(initialTab);
 
   useEffect(() => {
-
     if (tab && !validTabs.includes(tab)) {
       navigate(`/AllEvents/${defaultTab}`, { replace: true });
     } else if (tab && validTabs.includes(tab)) {
@@ -75,26 +75,56 @@ export default function Events() {
   if (loading) return <p>Loading event...</p>;
   if (error) return <p>Error: {error}</p>;
 
-
   const now = new Date();
   const upcomingEvents = events.filter((e) => new Date(e.startDate) >= now);
   const pastEvents = pastEventsData || [];
 
+  // Define arrays to map numeric day/month values to translation keys
+  const weekdayKeys = [
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+  ];
+  const monthKeys = [
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december",
+  ];
+
+  // Format event data using translation keys for weekday and month
   const formatEventData = (event) => {
     const startDate = new Date(event.startDate);
-    const weekday = startDate.toLocaleDateString("en-US", { weekday: "long" });
-    const date = startDate.toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
+    const weekdayKey = weekdayKeys[startDate.getDay()];
+    const monthKey = monthKeys[startDate.getMonth()];
+    const day = startDate.getDate();
+    const year = startDate.getFullYear();
     const time = startDate.toLocaleTimeString("en-GB", {
       hour: "2-digit",
       minute: "2-digit",
       hour12: false,
     });
-    const formattedDate = `${weekday} ${date} starts at ${time}`;
 
+    // Translate weekday and month via i18n
+    const translatedWeekday = t(`weekdays.${weekdayKey}`);
+    const translatedMonth = t(`months.${monthKey}`);
+    
+    // Build the formatted date string (ensure you have a "starts_at" key in your translation files)
+    const formattedDate = `${translatedWeekday} ${translatedMonth} ${day}, ${year} ${t("starts_at")} ${time}`;
+
+    // Process stages data
     const stages = Object.entries(
       event.lineUps?.reduce((acc, lineUp) => {
         const stageKey = lineUp.floor;
@@ -140,13 +170,13 @@ export default function Events() {
           className={activeTab === "upcoming" ? "active" : ""}
           onClick={() => navigate("/AllEvents/upcoming")}
         >
-          Coming Soon
+          {t("coming_soon")}
         </button>
         <button
           className={activeTab === "past" ? "active" : ""}
           onClick={() => navigate("/AllEvents/past")}
         >
-          Past Events
+          {t("past_events")}
         </button>
       </div>
 
@@ -157,7 +187,9 @@ export default function Events() {
           </section>
         )}
         {activeTab === "past" && (
-          <section className="events-slices">{renderEvents(pastEvents)}</section>
+          <section className="events-slices">
+            {renderEvents(pastEvents)}
+          </section>
         )}
       </section>
     </div>

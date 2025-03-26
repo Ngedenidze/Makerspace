@@ -1,12 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import localImg from "../../assets/cover-art-4.jpg";
+import { useTranslation } from "react-i18next";
 
 export default function EventPage() {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { t } = useTranslation();
+
+  // Mapping arrays for weekdays and months (keys must match your translation files)
+  const weekdayKeys = [
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+  ];
+  const monthKeys = [
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december",
+  ];
 
   useEffect(() => {
     const apiUrl =
@@ -34,18 +61,39 @@ export default function EventPage() {
 
   if (loading) return <p>Loading event...</p>;
 
-  // Function to group lineups by floor
+  // Function to group lineups by floor using translated keys for floor names
   const groupLineUpsByFloor = (lineUps) => {
     return lineUps.reduce((acc, lineUp) => {
-      const floorName = lineUp.floor === 1 ? "Main Floor" : "Space Floor";
+      // Use translation keys for floor names
+      const floorName =
+        lineUp.floor === 1 ? t("main_stage") : t("space_stage");
       if (!acc[floorName]) acc[floorName] = [];
       acc[floorName].push(lineUp);
       return acc;
     }, {});
   };
 
-  // If event data is available, group the lineups by floor
+  // Group lineups if event data is available
   const groupedLineUps = event ? groupLineUpsByFloor(event.lineUps) : {};
+
+  // Build a translated date string using mapping arrays
+  let formattedDate = "";
+  if (event) {
+    const startDate = new Date(event.startDate);
+    const weekdayKey = weekdayKeys[startDate.getDay()];
+    const monthKey = monthKeys[startDate.getMonth()];
+    const day = startDate.getDate();
+    const year = startDate.getFullYear();
+    const time = startDate.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+    const translatedWeekday = t(`weekdays.${weekdayKey}`);
+    const translatedMonth = t(`months.${monthKey}`);
+    // "starts_at" should be defined in your translation files (e.g., "starts at")
+    formattedDate = `${translatedWeekday} ${translatedMonth} ${day}, ${year} ${t("starts_at")} ${time}`;
+  }
 
   return (
     <div className="event-page">
@@ -65,22 +113,7 @@ export default function EventPage() {
         ) : (
           <>
             <section className="event-dates">
-              <p className="start-date">
-                {new Date(event.startDate)
-                  .toLocaleDateString("en-GB", {
-                    weekday: "long",
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                  })
-                  .replace(/[,\.]/g, "")}
-                {" starts at "}
-                {new Date(event.startDate).toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  hour12: false,
-                })}
-              </p>
+              <p className="start-date">{formattedDate}</p>
             </section>
             <header className="event-header">
               <h1 className="event-title">{event.name}</h1>

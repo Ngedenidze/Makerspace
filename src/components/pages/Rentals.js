@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import localImg from "../../assets/cover-art-5.jpg";
 import ImageGrid from "../reusable/Image Grid/ImageGrid";
+import { useTranslation } from "react-i18next";
 
 const Rentals = () => {
     const { id } = useParams();
     const [images, setImages] = useState([]);
-
+    const { t, i18n } = useTranslation();
     // State for form fields
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -124,9 +125,9 @@ const Rentals = () => {
                 />
             </div>
             <div className="rentals-top-bar">
-                <h1 className="rentals-title">Host Your Event at Makerspace</h1>
+                <h1 className="rentals-title">{t('rental_title')}</h1>
                 <p className="rentals-description">
-                    Unlock the potential of our dynamic two-floor venue in the heart of Tbilisi. Perfect for corporate functions or private celebrations, our space—with its dance stage, chill-out zones, and versatile bars—is designed to leave a lasting impression. Ready to make your event unforgettable?
+                   {t('rental_info')}
                 </p>
             </div>
             <section className="rentals-main-container">
@@ -135,37 +136,37 @@ const Rentals = () => {
             <section className="rentals-contact">
                 <section className="rentals-contact-heading">
                     <h2 className="rentals-contact-title">
-                        Interested in renting our space?
+                      {t('rental_form_title')}
                     </h2>
                     <p className="rentals-contact-description">
-                        Fill out the form to get in touch with our team and discuss your event requirements. We look forward to helping you create a memorable experience at Makerspace!
+                       {t('rental_form_description')}
                     </p>
-                    <h2>Thank you for your interest!</h2>
+                    <h2>{t('rental_form_thank_you')}</h2>
                 </section>
                 <section className="rentals-contact-form">
                     <form onSubmit={handleSubmit}>
                         <input
                             type="text"
-                            placeholder="Your Name"
+                            placeholder={t('rental_form_name')}
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             required
                         />
                         <input
                             type="email"
-                            placeholder="Your Email"
+                            placeholder={t('rental_form_email')}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
                         <textarea
-                            placeholder="Tell us about your event"
+                            placeholder={t('rental_form_event_description')}
                             value={eventDescription}
                             onChange={(e) => setEventDescription(e.target.value)}
                             required
                         ></textarea>
-                        <button type="submit" disabled={loading}>
-                            {loading ? "Submitting..." : "Submit"}
+                        <button type="submit" disabled={loading} >
+                            {loading ? t('rental_form_submitting') : t('rental_form_submit')}
                         </button>
                     </form>
                     {/* Display error or success messages */}
@@ -180,11 +181,8 @@ const Rentals = () => {
                         </p>
                     )}
                     <p className="rentals-contact-info">
-                        For immediate assistance, call us at +995 577 900 061.
-                        For direct inquiries, reach us at +995 577 900 061.
-           
-                        <br />
-                        Or email us at&nbsp;
+                        {t('contact_info_sub')} +995 577 900 061 
+                        {t('contact_email_sub')}
                         <a href="mailto:contact@makerspaceclub.com">
                         contact@makerspaceclub.com
                         </a>
