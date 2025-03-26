@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Navigation from "../../Navigation";
@@ -12,6 +12,7 @@ const apiUrl =
 
 export default function Heading() {
   const [infoBoxOpen, setInfoBoxOpen] = useState(false);
+  const infoBoxRef = useRef(null);
   const [user, setUser] = useState(null);
   const { t, i18n } = useTranslation();
 
@@ -22,7 +23,20 @@ export default function Heading() {
   function handleInfoToggle() {
     setInfoBoxOpen(!infoBoxOpen);
   }
-
+  useEffect(() => {
+     const handleClickOutside = (event) => {
+    if (infoBoxRef.current && !infoBoxRef.current.contains(event.target)) {
+         setInfoBoxOpen(false);
+        }
+      };
+      const handleScroll = () => {
+        setInfoBoxOpen(false);
+      };
+       document.addEventListener("mousedown", handleClickOutside);
+       document.addEventListener("scroll", handleScroll);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+   }   }, []);
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (!token) {
@@ -178,7 +192,7 @@ export default function Heading() {
           {/* Hamburger / Info Box Toggle */}
           <Hamburger onClick={handleInfoToggle} open={infoBoxOpen} />
           {infoBoxOpen && (
-            <section className="info-box">
+            <section className="info-box" ref={infoBoxRef}>
               <pre>
                 <>
                   <section className="mobile-menu">
