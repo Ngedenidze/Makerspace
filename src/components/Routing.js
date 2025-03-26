@@ -12,9 +12,10 @@ import DJs from "./pages/DJs";
 import AuthPage from "./sections/authPage/AuthPage";
 import Profile from "./pages/user profile/Profile";
 import Gallery from "./pages/Gallery/Gallery";
+import { useAuth } from "./sections/authPage/utils/AuthProvider";
 
 function PrivateRoute({ children }) {
-  const token = localStorage.getItem("accessToken");
+  const { token } = useAuth();
   return token ? children : <Navigate to="/login" />;
 }
 export default function Routing() {

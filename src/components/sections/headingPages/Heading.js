@@ -38,13 +38,13 @@ export default function Heading() {
       document.removeEventListener("mousedown", handleClickOutside);
    }   }, []);
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem("accessToken");
     if (!token) {
       setUser(null);
       return;
     }
     axios
-      .get(`${apiUrl}/api/users/me`, {
+      .get(`${apiUrl}/api/auth/me`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -52,7 +52,7 @@ export default function Heading() {
         if (data && data.id > 0) {
           setUser(data);
         } else {
-          localStorage.removeItem("authToken");
+          localStorage.removeItem("accessToken");
           setUser(null);
         }
       })
@@ -61,7 +61,7 @@ export default function Heading() {
           "Error fetching user in Heading:",
           error.response?.data || error.message
         );
-        localStorage.removeItem("authToken");
+        localStorage.removeItem("accessToken");
         setUser(null);
       });
   }, []);
