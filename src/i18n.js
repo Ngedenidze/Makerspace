@@ -99,7 +99,8 @@ const resources = {
     "october": "October",
     "november": "November",
     "december": "December"
-  },  starts_at: "starts at",
+  }, 
+  starts_at: "starts at",
   "loading_profile": "Loading profile...",
   "profile_not_loaded": "Could not load profile data.",
   "welcome": "Welcome, {{name}}!",
@@ -132,6 +133,7 @@ const resources = {
       "last_name_required":"Last Name is required",
       "phone_required":"Phone is required",
       "country_required":"Country is required",
+      "confirm_password_required":"Confirm Password is required",
       "personal_number_required":"Personal Number is required",
       "birthdate_required":"Birthdate is required",
       "social_media_required":"Social Media Link is required",
@@ -145,55 +147,7 @@ const resources = {
     "success":{
       "registration":"Registration successful! Redirecting to login...",
     },
-    // auth.login_title
-
-    // auth.email_label
-    
-    // auth.email_placeholder
-    
-    // auth.password_label
-    
-    // auth.sign_in
-    
-    // auth.no_account
-    
-    // auth.register_here
-    
-    // auth.forgot_password
-    
-    // auth.reset_here
-    
-    // auth.first_name
-    
-    // auth.last_name
-    
-    // auth.confirm_password
-    
-    // auth.personal_number
-    
-    // auth.birthdate
-    
-    // auth.social_media_link
-    
-    // auth.country
-    
-    // auth.select_country
-    
-    // auth.phone_number
-    
-    // auth.select_code
-    
-    // auth.phone_placeholder
-    
-    // auth.register
-    
-    // auth.already_have_account
-    
-    // auth.login_here
-    
-    // auth.reset_password
-    
-    // auth.remembered
+  
     "auth":{
       "login_title":"Login",
       "email_lable":"Email",
@@ -229,6 +183,8 @@ const resources = {
       "lowercase":"Password must contain at least one lowercase letter",
       "special":"Password must contain at least one special character",
   },
+}
+ },
   ka: {
     translation: {
       about_us: "ჩვენს შესახებ",
@@ -370,6 +326,7 @@ const resources = {
         "password_required":"პაროლი აუცილებელია",
         "first_name_required":"სახელი აუცილებელია",
         "last_name_required":"გვარი აუცილებელია",
+        "confirm_password_required":"პაროლის დადასტურება აუცილებელია",
         "phone_required":"ტელეფონის ნომერი აუცილებელია",
         "country_required":"ქვეყანა აუცილებელია",
         "personal_number_required":"საჭიროა პირადი ნომერი",
@@ -385,9 +342,43 @@ const resources = {
       "success":{
         "registration":"რეგისტრაცია წარმატებით დასრულდა",
       },
-    }
-    },
+      "auth":{
+        "login_title":"შესვლა",
+        "email_label":"ელფოსტა",
+        "email_placeholder":"user@example.com",
+        "password_label":"პაროლი",
+        "sign_in":"შესვლა",
+        "no_account":"არ გაქვთ ანგარიში?",
+        "register_here":"დარეგისტრირდი",
+        "forgot_password":"დაგავიწყდათ პაროლი?",
+        "reset_here":"პაროლის განახლება",
+        "first_name":"სახელი",
+        "last_name":"გვარი",
+        "confirm_password":"დაადასტურეთ პაროლი",
+        "personal_number":"პირადი ნომერი",
+        "birthdate":"დაბადების თარიღი",
+        "social_media_link":"სოციალური მედიის ბმული",
+        "country":"ქვეყანა",
+        "select_country":"აირჩიეთ ქვეყანა",
+        "phone_number":"ტელეფონის ნომერი",
+        "select_code":"აირჩიეთ კოდი",
+        "phone_placeholder":"+995 599 123 456",
+        "register":"რეგისტრაცია",
+        "already_have_account":"გაქვთ ანგარიში?",
+        "login_here":"შესვლა",
+        "reset_password":"პაროლის აღდგენა",
+        "remembered":"გაგახსენდათ პაროლი?",
+        "passwords_match" :"პაროლები ემთხვევა",
+        "passwords_do_not_match":"პაროლები არ ემთხვევა",
+      },
+      "password_rules":{
+        "length":"პაროლი უნდა შეიცავდეს მინიმუმ 8 სიმბოლოს",
+        "uppercase":"პაროლი უნდა შეიცავდეს მინიმუმ ერთ დიდ ასოს",
+        "lowercase":"პაროლი უნდა შეიცავდეს მინიმუმ ერთ პატარა ასოს",
+        "special":"პაროლი უნდა შეიცავდეს მინიმუმ ერთ სპეციალურ სიმბოლოს",
+      },
     
+    }
   }
 };
 

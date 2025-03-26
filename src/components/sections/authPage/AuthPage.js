@@ -112,8 +112,7 @@ const AuthPage = ({ page }) => {
       }
       if (!form.password.trim()) {
         newErrors.password = t(
-          "validation.password_required",
-          "Password is required."
+          "validation.password_required"
         );
       }
       if (!form.confirmPassword.trim()) {
@@ -421,7 +420,7 @@ const AuthPage = ({ page }) => {
                     marginTop: "0.5rem",
                   }}
                 >
-                  {form.password === form.confirmPassword
+                  {form.password === form.confirmPassword && form.password.length !==0
                     ? t("auth.passwords_match", "Passwords match")
                     : t(
                         "auth.passwords_do_not_match",
