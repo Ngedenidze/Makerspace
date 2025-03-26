@@ -1,5 +1,6 @@
 {
- "name": "App",
+ "name": "Makerspace",
+    "short_name": "Makerspace",
  "icons": [
   {
    "src": "\/android-icon-36x36.png",
@@ -37,5 +38,9 @@
    "type": "image\/png",
    "density": "4.0"
   }
- ]
+ ],
+ "start_url": "/",
+ "display": "standalone",
+ "background_color": "#141414",
+ "theme_color": "#141414"
 }

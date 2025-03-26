@@ -33,7 +33,7 @@
   padding: 3rem;
   color: #e2f3ea;
   margin: 2px 0;
-  background-color: #73667a;
+  background-color: var(--seconday-color);
 }
 
 .gallery-top-bar h1 {
@@ -58,16 +58,16 @@
   box-sizing: border-box;
   color: #333;
   overflow: hidden;
-  background-color: #73667a;
+  background-color: var(--seconday-color);
 }
 
 /* Instagram-style image grid */
 .image-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  grid-gap: 5px;
-  padding: 10px;
-  background-color: #73667a;
+  grid-gap: 2px;
+  padding: 2px;
+  background-color: var(--seconday-color);
 }
 
 .image-grid-item img {
@@ -76,10 +76,6 @@
   object-fit: cover;
   cursor: pointer;
   transition: transform 0.2s;
-}
-
-.image-grid-item img:hover {
-  transform: scale(1.05);
 }
 
 /* Progressive Loading (Blur Effect) */
@@ -168,7 +164,7 @@
     .gallery-main-container {
       width: 100%;
       padding: 2px;
-      background-color: #73667a;
+      background-color: var(--seconday-color);
     }
     .image-grid {
       display: grid;

@@ -64,23 +64,25 @@ export default function EventsPage() {
             <h1 className="event-title">There is no upcoming event</h1>
           </header>
         ) : (
-          <>  
-                     <section className="event-dates">
-  <p className="start-date">
-  {new Date(event.startDate).toLocaleDateString('en-GB', {
-  weekday: 'long',
-  day: '2-digit',
-  month: '2-digit',
-  year: 'numeric'
-}).replace(/[,\.]/g, '')}{" starts at "}
-{new Date(event.startDate).toLocaleTimeString([], {
-  hour: '2-digit',
-  minute: '2-digit',
-  hour12: false
-})}
-
-  </p>
-</section>
+          <>
+            <section className="event-dates">
+              <p className="start-date">
+                {new Date(event.startDate)
+                  .toLocaleDateString("en-GB", {
+                    weekday: "long",
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                  })
+                  .replace(/[,\.]/g, "")}
+                {" starts at "}
+                {new Date(event.startDate).toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  hour12: false,
+                })}
+              </p>
+            </section>
             <header className="event-header">
               <h1 className="event-title">{event.name}</h1>
             </header>
@@ -113,11 +115,9 @@ export default function EventsPage() {
               ))}
             </section>
 
-
             <section className="event-description">
               <p className="description-text">{event.description}</p>
             </section>
-
           </>
         )}
       </section>

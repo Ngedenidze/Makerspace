@@ -24,14 +24,15 @@
 
 
 :root {
-  --main-color: #344653;
-  --main-text-color: #1b2a49;
+  --main-color: #1b263b;
+  --main-text-color: #778da9;
   --seconday-text-color: #a7a7a7;
-  --light-text-color: #E2F3EA;
-  --seconday-color: #B9C0DA;
+  --light-text-color: #c6ead6;
+  --seconday-color: #415a77;
+  --seconday-light-color: #e0e1dd;
   --highlighted-text-color: #2a2664;
   --highlighted-text-color-light: #C5E7D6;
-  --forms-color: #5F4B66;
+  --forms-color: #1b263b;
   --blue-faded: rgb(13, 22, 73, 0.75);
   --blue-more-faded: rgb(13, 22, 73, 0.3);
   --blue-full: rgb(13, 22, 73);
@@ -94,6 +95,18 @@ button {
 .burger-icon {
   margin-top: 1.5rem;
 }
+/* For Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 
 Link:visited,
 a:link,
@@ -663,7 +676,7 @@ Link:link {
   align-items: flex-start;
   height: 48vh;
   width: min(65vw, 1200px);
-  background-color: var(--seconday-color);
+  background-color: var(--seconday-light-color);
   
 }
 .in-session-stages{
@@ -760,7 +773,7 @@ Link:link {
 .in-session .in-session-text h1 {
   font-size: 1.625rem;
   margin: 0;
-  color: rgb(168, 36, 36);
+  color: #a80d25;
 }
 
 .in-session .in-session-text h2 {
@@ -890,7 +903,21 @@ Link:link {
   box-sizing: border-box;
   margin: 4px;
   width: 100%;
-  display: block;
+  display: flex;
+  flex-direction: row;
+}
+.events-topbar .events-topbar-title, .events-topbar .events-topbar-button{
+  flex: 1 1 50%;
+
+  height: max-content;
+}
+.events-topbar .events-topbar-button{
+  margin-right: 1rem;
+}
+.events-topbar .events-topbar-title h1, .events-topbar .events-topbar-button a{
+  color: var(--white-full);
+  margin: 0;
+  font-size: 1rem;
 }
 
 .events-topbar > div, .events-topbar > a {
@@ -941,7 +968,6 @@ Link:link {
   display: none;
 }
 .view-more{
-  color: var( --light-text-color);
   text-decoration: none;
   display: block;
   text-align: right;
@@ -1082,7 +1108,7 @@ Link:link {
 }
 .commercial-renting .commercial-renting-text-container h1, .dj-booking .dj-booking-text-container h1{
   font-size: 1.8rem;
-  color: #C4E7D4;
+  color: var( --light-text-color);
 }
 .commercial-renting .commercial-renting-text-container p, .dj-booking .dj-booking-text-container p{
   font-size: 1.2rem;
@@ -1197,7 +1223,7 @@ Link:link {
 .event-dates {
   margin-bottom: 0rem;
   font-size: 1.2rem;
-  color: rgb(25, 25, 25);
+  color: #e0e1dd;
 }
 
 .start-date,
@@ -1228,7 +1254,7 @@ Link:link {
    margin: 0.6rem 0;
 }
 .floor-name{
-  color: rgb(25, 25, 25);
+  color: #dedbd2;
 }
 
 .lineups-list {
@@ -1285,7 +1311,7 @@ Link:link {
 .tabs{
   display: flex;
   width: 100%;
-  background: var(--seconday-color);
+  background: var(--main-color);
   height: 2rem;
   margin-top: 2px;
   
@@ -1335,7 +1361,7 @@ Link:link {
   color: #191919;
 }
 .events-slices .menu-card-link .menu-card-content h3{
-  color: #fff;
+  color: var(--light-text-color);
   margin: 5px;
   margin-left: 2rem;
   font-size: 1.625rem;
@@ -1345,7 +1371,7 @@ Link:link {
   margin-bottom: 5px;
 }
 .events-slices .menu-card-link .menu-card-content p{
-  color: #2a2929;
+  color: #dedbd2;
   font-size: 1rem;
   margin: 0;
 }
@@ -1467,7 +1493,7 @@ Link:link {
 .about-us .hero-text-2 h1 {
   font-size: 1.5rem;
   margin-bottom: 0;
-  color: var(--highlighted-text-color);
+  color: var(--light-text-color);
 }
 .about-us .hero-text .mobile-location{
   display: none;
@@ -2311,6 +2337,12 @@ Link:link {
   .in-session .in-session-text .in-session-timestamps{
     margin: 5px 0;
   }
+  .stage{
+    width: 50%;
+  }
+  .in-session .in-session-text h3 .djName {
+    font-size: 0.875rem;
+  }
   .events-topbar {
     margin: 2px;
   }
@@ -2606,8 +2638,8 @@ Link:link {
 .image-grid{
   justify-content: center;
   align-items: center;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
 }
 .image-item{
   overflow: hidden;
@@ -2731,7 +2763,7 @@ Link:link {
   justify-content: center;
   align-items: center;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 10px;
+  gap: 2px;
 }
 .image-item{
   overflow: hidden;
