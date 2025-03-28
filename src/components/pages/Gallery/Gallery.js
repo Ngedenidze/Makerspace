@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import localImg from "./gallery.jpg";
 import "./Gallery.css";
 import { useTranslation } from "react-i18next";
+
 const Gallery = () => {
   const [images, setImages] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState(null);
   const [loadedImages, setLoadedImages] = useState({});
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -16,8 +18,14 @@ const Gallery = () => {
         );
         const data = await response.json();
         console.log(data);
-        // Directly set images from the API response
-        setImages(data.images || []);
+        const imagesData = data.images || [];
+        setImages(imagesData);
+
+        // Preload full images
+        imagesData.forEach((img) => {
+          const preloadedImg = new Image();
+          preloadedImg.src = img.url;
+        });
       } catch (error) {
         console.error("Error fetching images:", error);
       }
@@ -35,12 +43,14 @@ const Gallery = () => {
     setModalOpen(false);
     setActiveImageIndex(null);
   };
+
   const prevImage = (e) => {
     e.stopPropagation();
     setActiveImageIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
   };
+
   const nextImage = (e) => {
     e.stopPropagation();
     setActiveImageIndex((prevIndex) =>
@@ -55,9 +65,7 @@ const Gallery = () => {
   return (
     <div className="gallery-page">
       <div className="gallery-image-wrapper">
-        {/* Using picture element for responsive cover image */}
         <picture>
-          {/* Replace with an optimized WebP if available */}
           <source srcSet={localImg} type="image/webp" />
           <img
             className="gallery-cover-image"
@@ -69,16 +77,14 @@ const Gallery = () => {
       </div>
       <div className="gallery-top-bar">
         <h1 className="gallery-title">{t("gallery_title")}</h1>
-        <p className="gallery-description">
-          {t("gallery_text")}
-        </p>
+        <p className="gallery-description">{t("gallery_text")}</p>
       </div>
       <section className="gallery-main-container">
         <div className="image-grid">
           {images.map((img, index) => (
             <div key={index} className="image-grid-item">
               <img
-                src={img.url}
+                src={img.thumbnailUrl}
                 alt={img.name}
                 onClick={() => openModal(index)}
                 loading="lazy"
