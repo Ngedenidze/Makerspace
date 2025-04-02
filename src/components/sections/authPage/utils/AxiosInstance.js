@@ -25,6 +25,14 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
+    // If the login endpoint fails, simply reject so that your component can display the error
+    if (
+      error.response?.status === 401 &&
+      originalRequest.url.includes("/auth/login")
+    ) {
+      return Promise.reject(error);
+    }
+
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
@@ -40,5 +48,6 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
 
 export default api;
