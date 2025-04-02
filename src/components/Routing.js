@@ -43,6 +43,7 @@ export default function Routing() {
       <Route path="/register" element={<AuthPage page="register" />} />
   
       <Route path="/forgot-password" element={<AuthPage page="forgot-password" />} />
+      <Route path="/change_password" element={<AuthPage page="change_password" />} />
       {/* Private routes */}
       <Route
           path="/profile"

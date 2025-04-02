@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./AuthForm.css";
 import api from "./utils/AxiosInstance";
 import { useTranslation } from "react-i18next";
@@ -42,13 +42,18 @@ const getFriendlyErrorMessage = (status, defaultMessage, t) => {
 
 const AuthPage = ({ page }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { t } = useTranslation();
   const [countries, setCountries] = useState([]);
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [passwordTouched, setPasswordTouched] = useState(false);
   const [confirmPasswordTouched, setConfirmPasswordTouched] = useState(false);
-  const { t } = useTranslation();
+
+  // The form state now also includes fields for password reset.
   const [form, setForm] = useState({
+    // For login/register
     firstName: "",
     lastName: "",
     email: "",
@@ -58,7 +63,12 @@ const AuthPage = ({ page }) => {
     personalNumber: "",
     birthdate: "",
     socialMediaProfileLink: "",
+    socialMediaPlatform: "",
+    socialMediaUsername: "",
     country: "",
+    // For change_password page
+    newPassword: "",
+    confirmNewPassword: "",
   });
 
   useEffect(() => {
@@ -111,9 +121,7 @@ const AuthPage = ({ page }) => {
         newErrors.email = t("validation.email_required", "Email is required.");
       }
       if (!form.password.trim()) {
-        newErrors.password = t(
-          "validation.password_required"
-        );
+        newErrors.password = t("validation.password_required");
       }
       if (!form.confirmPassword.trim()) {
         newErrors.confirmPassword = t(
@@ -163,7 +171,7 @@ const AuthPage = ({ page }) => {
       ) {
         newErrors.password = t(
           "validation.password_complexity",
-          "Password must be at least 8 characters long, with uppercase, lowercase, and a special character."
+          "Password does not meet the complexity requirements."
         );
       }
       if (
@@ -199,6 +207,35 @@ const AuthPage = ({ page }) => {
       if (!form.email.trim()) {
         newErrors.email = t("validation.email_required", "Email is required.");
       }
+    } else if (page === "change_password") {
+      if (!form.newPassword.trim()) {
+        newErrors.newPassword = t(
+          "validation.new_password_required",
+          "New password is required."
+        );
+      }
+      if (!form.confirmNewPassword.trim()) {
+        newErrors.confirmNewPassword = t(
+          "validation.confirm_new_password_required",
+          "Please confirm your new password."
+        );
+      } else if (form.newPassword !== form.confirmNewPassword) {
+        newErrors.confirmNewPassword = t(
+          "validation.passwords_mismatch",
+          "Passwords do not match."
+        );
+      }
+      if (
+        form.newPassword &&
+        !form.newPassword.match(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,})/
+        )
+      ) {
+        newErrors.newPassword = t(
+          "validation.password_complexity",
+          "Password does not meet the complexity requirements."
+        );
+      }
     }
     return newErrors;
   };
@@ -212,6 +249,8 @@ const AuthPage = ({ page }) => {
       setErrors(formErrors);
       return;
     }
+
+    setIsSubmitting(true);
 
     try {
       let response;
@@ -242,22 +281,61 @@ const AuthPage = ({ page }) => {
           email: form.email,
         });
         console.log("Reset Email Sent:", response.data);
+        setSuccess(
+          t(
+            "success.reset_email_sent",
+            "Please check your email for reset instructions. Redirecting to login..."
+          )
+        );
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000);
+      } else if (page === "change_password") {
+        // Get the token from the URL query string
+        const queryParams = new URLSearchParams(location.search);
+        const token = queryParams.get("token");
+        if (!token) {
+          setErrors({ general: t("error.invalid_token", "Invalid or missing token.") });
+          setIsSubmitting(false);
+          return;
+        }
+        response = await api.post("/Auth/reset-password", {
+          token: token,
+          newPassword: form.newPassword,
+        });
+        console.log("Password Reset Successful:", response.data);
+        setSuccess(
+          t(
+            "success.password_reset",
+            "Password reset successful! Redirecting to login..."
+          )
+        );
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000);
       }
     } catch (error) {
       const status = error.response?.status || 0;
       const friendlyMessage = getFriendlyErrorMessage(
         status,
-        error.response?.data?.message
+        error.response?.data?.message,
+        t
       );
       if (error.response?.data?.errors) {
         setErrors(error.response.data.errors);
       } else {
         setErrors({ general: friendlyMessage });
       }
+      setIsSubmitting(false);
+    } finally {
+      if (page !== "register") {
+        setIsSubmitting(false);
+      }
     }
   };
 
-  const passwordRules = [
+  // Password rules for registration (using form.password)...
+  const registrationPasswordRules = [
     {
       label: t("password_rules.length", "At least 8 characters"),
       isValid: form.password.length >= 8,
@@ -273,6 +351,26 @@ const AuthPage = ({ page }) => {
     {
       label: t("password_rules.special", "At least one special character"),
       isValid: /[^A-Za-z0-9]/.test(form.password),
+    },
+  ];
+
+  // Password rules for resetting password (using form.newPassword)
+  const resetPasswordRules = [
+    {
+      label: t("password_rules.length", "At least 8 characters"),
+      isValid: form.newPassword.length >= 8,
+    },
+    {
+      label: t("password_rules.uppercase", "At least one uppercase letter"),
+      isValid: /[A-Z]/.test(form.newPassword),
+    },
+    {
+      label: t("password_rules.lowercase", "At least one lowercase letter"),
+      isValid: /[a-z]/.test(form.newPassword),
+    },
+    {
+      label: t("password_rules.special", "At least one special character"),
+      isValid: /[^A-Za-z0-9]/.test(form.newPassword),
     },
   ];
 
@@ -292,6 +390,7 @@ const AuthPage = ({ page }) => {
             className="form-input"
             placeholder={t("auth.email_placeholder", "user@example.com")}
             onChange={handleChange}
+            disabled={isSubmitting}
           />
           {errors.email && <div className="error-text">{errors.email}</div>}
         </div>
@@ -306,12 +405,13 @@ const AuthPage = ({ page }) => {
             className="form-input"
             placeholder="••••••••"
             onChange={handleChange}
+            disabled={isSubmitting}
           />
           {errors.password && (
             <div className="error-text">{errors.password}</div>
           )}
         </div>
-        <button type="submit" className="auth-button">
+        <button type="submit" className="auth-button" disabled={isSubmitting}>
           {t("auth.sign_in", "Sign in")}
         </button>
         <p className="auth-link">
@@ -352,24 +452,12 @@ const AuthPage = ({ page }) => {
         label: t("auth.birthdate", "Birthdate"),
         type: "date",
       },
-      {
-        name: "socialMediaProfileLink",
-        label: t("auth.social_media_link", "Social Media Profile Link"),
-      },
     ];
 
     return (
       <>
         <h1 className="auth-title">{t("auth.register_title", "Register")}</h1>
         <form className="auth-form" onSubmit={handleSubmit}>
-          {success && (
-            <div
-              className="success-text"
-              style={{ color: "green", marginBottom: "1rem" }}
-            >
-              {success}
-            </div>
-          )}
           {errors.general && <div className="error-text">{errors.general}</div>}
           {fields.map(({ name, label, type = "text" }) => (
             <div className="form-group" key={name}>
@@ -392,11 +480,12 @@ const AuthPage = ({ page }) => {
                   }
                 }}
                 value={form[name]}
+                disabled={isSubmitting}
               />
               {errors[name] && <div className="error-text">{errors[name]}</div>}
               {name === "password" && passwordTouched && (
                 <div className="password-rules">
-                  {passwordRules.map((rule, index) => (
+                  {registrationPasswordRules.map((rule, index) => (
                     <p
                       key={index}
                       style={{
@@ -420,7 +509,8 @@ const AuthPage = ({ page }) => {
                     marginTop: "0.5rem",
                   }}
                 >
-                  {form.password === form.confirmPassword && form.password.length !==0
+                  {form.password === form.confirmPassword &&
+                  form.password.length !== 0
                     ? t("auth.passwords_match", "Passwords match")
                     : t(
                         "auth.passwords_do_not_match",
@@ -431,6 +521,65 @@ const AuthPage = ({ page }) => {
             </div>
           ))}
           <div className="form-group">
+            <label htmlFor="socialMediaPlatform" className="form-label">
+              {t("auth.social_media_profile", "Social Media Profile")}
+            </label>
+            <select
+              name="socialMediaPlatform"
+              id="socialMediaPlatform"
+              className="form-input"
+              style={{ width: "30%" }}
+              onChange={(e) =>
+                setForm((prev) => {
+                  const newPlatform = e.target.value;
+                  return {
+                    ...prev,
+                    socialMediaPlatform: newPlatform,
+                    socialMediaProfileLink: `${newPlatform}${
+                      prev.socialMediaUsername
+                        ? prev.socialMediaUsername + "/"
+                        : ""
+                    }`,
+                  };
+                })
+              }
+              value={form.socialMediaPlatform || ""}
+              disabled={isSubmitting}
+            >
+              <option value="">
+                {t("auth.select_social_media", "Select a social media")}
+              </option>
+              <option value="https://www.facebook.com/">
+                {t("auth.facebook", "Facebook")}
+              </option>
+              <option value="https://www.instagram.com/">
+                {t("auth.instagram", "Instagram")}
+              </option>
+            </select>
+            <input
+              type="text"
+              name="socialMediaUsername"
+              id="socialMediaUsername"
+              className="form-input"
+              style={{ width: "70%" }}
+              placeholder={t("auth.social_media_profile_link", "Username")}
+              onChange={(e) =>
+                setForm((prev) => {
+                  const newUsername = e.target.value;
+                  return {
+                    ...prev,
+                    socialMediaUsername: newUsername,
+                    socialMediaProfileLink: `${
+                      prev.socialMediaPlatform || ""
+                    }${newUsername}/`,
+                  };
+                })
+              }
+              value={form.socialMediaUsername || ""}
+              disabled={isSubmitting}
+            />
+          </div>
+          <div className="form-group">
             <label htmlFor="country" className="form-label">
               {t("auth.country", "Country")}
             </label>
@@ -440,6 +589,7 @@ const AuthPage = ({ page }) => {
               className="form-input"
               onChange={handleChange}
               value={form.country}
+              disabled={isSubmitting}
             >
               <option value="">
                 {t("auth.select_country", "Select a country")}
@@ -472,6 +622,7 @@ const AuthPage = ({ page }) => {
                     )}`,
                   }))
                 }
+                disabled={isSubmitting}
               >
                 <option value="">{t("auth.select_code", "Select code")}</option>
                 {countries.map((c, index) => (
@@ -489,13 +640,22 @@ const AuthPage = ({ page }) => {
                 placeholder={t("auth.phone_placeholder", "5XXXXXXXX")}
                 onChange={handleChange}
                 value={form.phoneNumber}
+                disabled={isSubmitting}
               />
             </div>
             {errors.phoneNumber && (
               <div className="error-text">{errors.phoneNumber}</div>
             )}
           </div>
-          <button type="submit" className="auth-button">
+          {success && (
+            <div
+              className="success-text"
+              style={{ color: "green", marginBottom: "1rem" }}
+            >
+              {success}
+            </div>
+          )}
+          <button type="submit" className="auth-button" disabled={isSubmitting}>
             {t("auth.register", "Register")}
           </button>
           <p className="auth-link">
@@ -509,7 +669,9 @@ const AuthPage = ({ page }) => {
 
   const renderForgotPassword = () => (
     <>
-      <h1 className="auth-title">{t("auth.forgot_password", "Forgot Password")}</h1>
+      <h1 className="auth-title">
+        {t("auth.forgot_password", "Forgot Password")}
+      </h1>
       <form className="auth-form" onSubmit={handleSubmit}>
         {errors.general && <div className="error-text">{errors.general}</div>}
         <div className="form-group">
@@ -523,18 +685,120 @@ const AuthPage = ({ page }) => {
             className="form-input"
             placeholder={t("auth.email_placeholder", "user@example.com")}
             onChange={handleChange}
+            disabled={isSubmitting}
           />
           {errors.email && <div className="error-text">{errors.email}</div>}
         </div>
-        <button type="submit" className="auth-button">
+        <button type="submit" className="auth-button" disabled={isSubmitting}>
           {t("auth.reset_password", "Reset Password")}
         </button>
         <p className="auth-link">
-          {t("auth.remembered", "Remembered?")} <Link to="/login">{t("auth.login_here", "Login here")}</Link>
+          {t("auth.remembered", "Remembered?")}{" "}
+          <Link to="/login">{t("auth.login_here", "Login here")}</Link>
         </p>
       </form>
     </>
   );
+
+  const renderChangePassword = () => {
+    return (
+      <>
+        <h1 className="auth-title">{t("auth.reset_password", "Reset Password")}</h1>
+        <form className="auth-form" onSubmit={handleSubmit}>
+          {errors.general && <div className="error-text">{errors.general}</div>}
+          {success && (
+            <div
+              className="success-text"
+              style={{ color: "green", marginBottom: "1rem" }}
+            >
+              {success}
+            </div>
+          )}
+          <div className="form-group">
+            <label htmlFor="newPassword" className="form-label">
+              {t("auth.new_password", "New Password")}
+            </label>
+            <input
+              type="password"
+              name="newPassword"
+              id="newPassword"
+              className="form-input"
+              placeholder={t("auth.new_password", "New Password")}
+              onChange={(e) => {
+                handleChange(e);
+                if (e.target.name === "newPassword" && !passwordTouched) {
+                  setPasswordTouched(true);
+                }
+              }}
+              value={form.newPassword || ""}
+              disabled={isSubmitting}
+            />
+            {errors.newPassword && (
+              <div className="error-text">{errors.newPassword}</div>
+            )}
+            {passwordTouched && (
+              <div className="password-rules">
+                {resetPasswordRules.map((rule, index) => (
+                  <p
+                    key={index}
+                    style={{
+                      color: rule.isValid ? "green" : "red",
+                      margin: "0.2rem 0",
+                      fontSize: "0.9rem",
+                    }}
+                  >
+                    {rule.label}
+                  </p>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="confirmNewPassword" className="form-label">
+              {t("auth.confirm_new_password", "Confirm New Password")}
+            </label>
+            <input
+              type="password"
+              name="confirmNewPassword"
+              id="confirmNewPassword"
+              className="form-input"
+              placeholder={t("auth.confirm_new_password", "Confirm New Password")}
+              onChange={(e) => {
+                handleChange(e);
+                if (e.target.name === "confirmNewPassword" && !confirmPasswordTouched) {
+                  setConfirmPasswordTouched(true);
+                }
+              }}
+              value={form.confirmNewPassword || ""}
+              disabled={isSubmitting}
+            />
+            {errors.confirmNewPassword && (
+              <div className="error-text">{errors.confirmNewPassword}</div>
+            )}
+            {confirmPasswordTouched && (
+              <div
+                className="password-match"
+                style={{
+                  color:
+                    form.newPassword === form.confirmNewPassword ? "green" : "red",
+                  fontSize: "0.9rem",
+                  marginTop: "0.5rem",
+                }}
+              >
+                {form.newPassword === form.confirmNewPassword &&
+                form.newPassword.length !== 0
+                  ? t("auth.passwords_match", "Passwords match")
+                  : t("auth.passwords_do_not_match", "Passwords do not match")}
+              </div>
+            )}
+          </div>
+          <button type="submit" className="auth-button" disabled={isSubmitting}>
+            {t("auth.reset_password", "Reset Password")}
+          </button>
+        </form>
+      </>
+    );
+  };
 
   return (
     <section className="auth-container">
@@ -542,6 +806,7 @@ const AuthPage = ({ page }) => {
         {page === "login" && renderLogin()}
         {page === "register" && renderRegister()}
         {page === "forgot-password" && renderForgotPassword()}
+        {page === "change_password" && renderChangePassword()}
       </div>
     </section>
   );

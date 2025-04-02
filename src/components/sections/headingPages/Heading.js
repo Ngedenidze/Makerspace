@@ -13,9 +13,14 @@ const apiUrl =
 export default function Heading() {
   const [infoBoxOpen, setInfoBoxOpen] = useState(false);
   const infoBoxRef = useRef(null);
+  const toggleRef = useRef(null);
   const [user, setUser] = useState(null);
   const { t, i18n } = useTranslation();
 
+  /**
+   * Changes the language of the application.
+   * @param {string} lang - language code, e.g. 'en' or 'ka'
+   */
   const switchLanguage = (lang) => {
     i18n.changeLanguage(lang);
   };
@@ -25,10 +30,15 @@ export default function Heading() {
   }
   useEffect(() => {
      const handleClickOutside = (event) => {
-    if (infoBoxRef.current && !infoBoxRef.current.contains(event.target)) {
-         setInfoBoxOpen(false);
-        }
-      };
+      if (
+        infoBoxRef.current &&
+        !infoBoxRef.current.contains(event.target) &&
+        toggleRef.current &&
+        !toggleRef.current.contains(event.target)
+      ) {
+        setInfoBoxOpen(false);
+      }
+    };
       const handleScroll = () => {
         setInfoBoxOpen(false);
       };

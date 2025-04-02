@@ -49,6 +49,21 @@ const Rentals = () => {
                     alt: "Rental Space 2"
                 }
             ]
+        },
+        {
+            id: 3,
+            title: "Rental Space",
+            description: "Perfect for outdoor parties and gatherings.",
+            images: [
+                {
+                    url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/f058fba1-ac14-4458-8977-0b8e1f654938.jpeg",
+                    alt: "Rental Space 1"
+                },
+                {
+                    url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/ed65ac52-9430-4bcb-8c9f-500011188ac0.jpeg",
+                    alt: "Rental Space 2"
+                }
+            ]
         }
     ];
 
