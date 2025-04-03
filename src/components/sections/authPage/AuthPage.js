@@ -70,7 +70,11 @@ const AuthPage = ({ page }) => {
     newPassword: "",
     confirmNewPassword: "",
   });
-
+  useEffect(() => {
+    setIsSubmitting(false);
+    setErrors({});
+    setSuccess("");
+  }, [page]);
   useEffect(() => {
     fetch("https://countriesnow.space/api/v0.1/countries/codes")
       .then((res) => res.json())
@@ -81,11 +85,6 @@ const AuthPage = ({ page }) => {
       })
       .catch((error) => console.error(t("error.fetching_countries"), error));
   }, [t]);
-
-  useEffect(() => {
-    setErrors({});
-  }, [page]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -155,7 +154,7 @@ const AuthPage = ({ page }) => {
       if (!form.socialMediaProfileLink.trim()) {
         newErrors.socialMediaProfileLink = t(
           "validation.social_media_required",
-          "Social Media Profile Link is required."
+          "Correct social media profile link is required."
         );
       }
       if (!form.country.trim()) {
@@ -263,9 +262,26 @@ const AuthPage = ({ page }) => {
             "Registration successful! Redirecting to login..."
           )
         );
+        setForm({
+          firstName: "",
+          lastName: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+          phoneNumber: "",
+          personalNumber: "",
+          birthdate: "",
+          socialMediaProfileLink: "",
+          socialMediaPlatform: "",
+          socialMediaUsername: "",
+          country: "",
+          newPassword: "",
+          confirmNewPassword: "",
+        });
         setTimeout(() => {
+          setIsSubmitting(false);
           navigate("/login");
-        }, 3000);
+        }, 1000);
       } else if (page === "login") {
         response = await api.post("/auth/login", {
           email: form.email,
@@ -483,7 +499,7 @@ const AuthPage = ({ page }) => {
                 disabled={isSubmitting}
               />
               {errors[name] && <div className="error-text">{errors[name]}</div>}
-              {name === "password" && passwordTouched && (
+              {name === "password" && passwordTouched && form.password.length > 0 && (
                 <div className="password-rules">
                   {registrationPasswordRules.map((rule, index) => (
                     <p
@@ -520,7 +536,7 @@ const AuthPage = ({ page }) => {
               )}
             </div>
           ))}
-          <div className="form-group">
+          {/* <div className="form-group">
             <label htmlFor="socialMediaPlatform" className="form-label">
               {t("auth.social_media_profile", "Social Media Profile")}
             </label>
@@ -578,6 +594,27 @@ const AuthPage = ({ page }) => {
               value={form.socialMediaUsername || ""}
               disabled={isSubmitting}
             />
+          </div> */}
+          <div className="form-group">
+            <label htmlFor="socialMediaPlatform" className="form-label">
+              {t("auth.social_media_profile", "Social Media Profile")}
+            </label>
+            <input
+              type="text"
+              name="socialMediaProfileLink"
+              id="socialMediaProfileLink"
+              className="form-input"
+              placeholder={t(
+                "auth.social_media_profile_link",
+                "https://facebook.com/username or etc."
+              )}
+              onChange={handleChange}
+              value={form.socialMediaProfileLink}
+              disabled={isSubmitting}
+            />
+            {errors.socialMediaProfileLink && (
+              <div className="error-text">{errors.socialMediaProfileLink}</div>
+            )}
           </div>
           <div className="form-group">
             <label htmlFor="country" className="form-label">
@@ -706,14 +743,10 @@ const AuthPage = ({ page }) => {
         <h1 className="auth-title">{t("auth.reset_password", "Reset Password")}</h1>
         <form className="auth-form" onSubmit={handleSubmit}>
           {errors.general && <div className="error-text">{errors.general}</div>}
-          {success && (
-            <div
-              className="success-text"
-              style={{ color: "green", marginBottom: "1rem" }}
-            >
-              {success}
-            </div>
-          )}
+          {/* Always render the success message placeholder, even if empty */}
+          <div className="success-text" style={{ color: "green", marginBottom: "1rem" }}>
+            {success}
+          </div>
           <div className="form-group">
             <label htmlFor="newPassword" className="form-label">
               {t("auth.new_password", "New Password")}
@@ -763,12 +796,6 @@ const AuthPage = ({ page }) => {
               id="confirmNewPassword"
               className="form-input"
               placeholder={t("auth.confirm_new_password", "Confirm New Password")}
-              onChange={(e) => {
-                handleChange(e);
-                if (e.target.name === "confirmNewPassword" && !confirmPasswordTouched) {
-                  setConfirmPasswordTouched(true);
-                }
-              }}
               value={form.confirmNewPassword || ""}
               disabled={isSubmitting}
             />

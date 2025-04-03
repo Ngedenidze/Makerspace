@@ -15,7 +15,7 @@ export default function About() {
           <p className="about-subtext">
             {t("about_me_text")}
           </p>
-          <a className="gallery-button" href="#/Gallery">{t("about_me_action")} &#x2192;</a>
+          <Link className="gallery-button" to="/Gallery">{t("about_me_action")} &#x2192;</Link>
         </section>
 
         <section className="double-image">
