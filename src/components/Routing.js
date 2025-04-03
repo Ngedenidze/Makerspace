@@ -12,6 +12,7 @@ import DJs from "./pages/DJs";
 import AuthPage from "./sections/authPage/AuthPage";
 import Profile from "./pages/user profile/Profile";
 import Gallery from "./pages/Gallery/Gallery";
+import QRScan from "./pages/Qr scan/QRScan";
 import { useAuth } from "./sections/authPage/utils/AuthProvider";
 
 function PrivateRoute({ children }) {
@@ -40,11 +41,11 @@ export default function Routing() {
       <Route path="/DJs" element={<DJs />} />
       <Route path="/gallery" element={<Gallery />} />
       <Route path="/login" element={<AuthPage page="login" />} />
-      <Route path="/register" element={<AuthPage page="register" />} />
-  
+      <Route path="/register" element={<AuthPage page="register" />} />\  
       <Route path="/forgot-password" element={<AuthPage page="forgot-password" />} />
       <Route path="/change_password" element={<AuthPage page="change_password" />} />
       {/* Private routes */}
+      <Route path="/QRScan" element={<PrivateRoute><QRScan /></PrivateRoute>} />
       <Route
           path="/profile"
           element={
