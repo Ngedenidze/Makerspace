@@ -78,7 +78,12 @@
   cursor: pointer;
   transition: transform 0.2s;
 }
-
+.load-more-button{
+  background-color: transparent;
+  display: inline;
+  border: none;
+  text-align: center;
+}
 /* Progressive Loading (Blur Effect) */
 .grid-image.loading {
   filter: blur(10px);

@@ -17,6 +17,13 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face{
+  font-family: "Georgian Modern";
+  src: url("./assets/fonts/gl-kupiura-regular.ttf") format('opentype');
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+}
 * {
   font-family: "Cocktail Font", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
@@ -42,7 +49,10 @@
   --brown-faded: rgb(207, 129, 15, 0.75);
   --brown-full: rgb(207, 129, 15);
 }
-
+:lang(ka){
+  font-family: "Georgian Modern", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  
+}
 label,
 input,
 select,

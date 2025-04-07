@@ -1,27 +1,42 @@
 import React, { useState } from "react";
 import { QrReader } from "@blackbox-vision/react-qr-reader";
-import axios from "axios";
+import api from "../../sections/authPage/utils/AxiosInstance";
 
 const QRScan = () => {
   const [scanResult, setScanResult] = useState(null);
   const [validationResult, setValidationResult] = useState(null);
-  const API_URL = "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/QRCode/scan"; // Replace with your API URL
+  // Store parsed QR data for later use in submitting the ticket status.
+  const [qrData, setQrData] = useState(null);
 
-  const handleScan = async (data) => {
+  // Handle a QR code scan.
+  const handleScan = (data) => {
     if (data) {
       setScanResult(data);
-
       try {
-        const qrData = JSON.parse(data);
-        const response = await axios.post(API_URL, {
-          ticketId: qrData.ticketId,
-          secret: qrData.secret,
-        });
-
-        setValidationResult(`✅ Valid Ticket: ${response.data.message}`);
+        // Parse the scanned QR code data.
+        const parsedData = JSON.parse(data);
+        setQrData(parsedData);
       } catch (error) {
-        setValidationResult("❌ Invalid Ticket!");
+        console.error("Invalid QR data", error);
+        setValidationResult("❌ Invalid QR Code Format!");
       }
+    }
+  };
+
+  // Submit the scanned QR data with the selected action.
+  const handleSubmit = async (isReject) => {
+    if (!qrData) return;
+    try {
+      // Post the scanned data along with the isReject flag.
+      const response = await api.post("/QRCode/scan", {
+        ticketId: qrData.ticketId,
+        secret: qrData.secret,
+        isReject: isReject,
+      });
+      setValidationResult(`✅ Valid Ticket: ${response.data.message}`);
+    } catch (error) {
+      console.error("Error processing QR code", error);
+      setValidationResult("❌ Invalid Ticket!");
     }
   };
 
@@ -31,7 +46,7 @@ const QRScan = () => {
 
   return (
     <div style={{ textAlign: "center", padding: "20px" }}>
-        <h2>🎟 Scan Ticket QR Code</h2>
+      <h2>🎟 Scan Ticket QR Code</h2>
       <QrReader
         onResult={(result, error) => {
           if (result) handleScan(result.text);
@@ -40,7 +55,14 @@ const QRScan = () => {
         constraints={{ facingMode: "environment" }}
         style={{ width: "300px" }}
       />
-    {scanResult && <p>Scanned Data: {scanResult}</p>}
+      {scanResult && <p>Scanned Data: {scanResult}</p>}
+      {/* If QR data is available, show buttons to either accept or reject */}
+      {qrData && (
+        <div>
+          <button onClick={() => handleSubmit(false)}>Accept Ticket</button>
+          <button onClick={() => handleSubmit(true)}>Reject Ticket</button>
+        </div>
+      )}
       {validationResult && (
         <p style={{ fontWeight: "bold" }}>{validationResult}</p>
       )}

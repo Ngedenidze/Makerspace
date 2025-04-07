@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 
 const Gallery = () => {
   const [images, setImages] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState(null);
   const [loadedImages, setLoadedImages] = useState({});
@@ -14,26 +16,25 @@ const Gallery = () => {
     const fetchImages = async () => {
       try {
         const response = await fetch(
-          "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/google-drive/images"
+          `https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/google-drive/images?page=${currentPage}&limit=20`
         );
         const data = await response.json();
-        console.log(data);
-        const imagesData = data.images || [];
-        setImages(imagesData);
-
-        // Preload full images
-        imagesData.forEach((img) => {
-          const preloadedImg = new Image();
-          preloadedImg.src = img.url;
-        });
+        const newImages = data.images || [];
+        // Append new images rather than replace
+        setImages((prev) => [...prev, ...newImages]);
+        // If the number of images fetched is less than the limit, no more images are available
+        if (newImages.length < 20) setHasMore(false);
       } catch (error) {
         console.error("Error fetching images:", error);
       }
     };
 
     fetchImages();
-  }, []);
+  }, [currentPage]);
 
+  const loadMoreImages = () => {
+    if (hasMore) setCurrentPage((prevPage) => prevPage + 1);
+  };
   const openModal = (index) => {
     setActiveImageIndex(index);
     setModalOpen(true);
@@ -84,7 +85,7 @@ const Gallery = () => {
           {images.map((img, index) => (
             <div key={index} className="image-grid-item">
               <img
-                src={img.thumbnailUrl}
+                src={img.url}
                 alt={img.name}
                 onClick={() => openModal(index)}
                 loading="lazy"

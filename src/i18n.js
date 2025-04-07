@@ -126,7 +126,7 @@ const resources = {
       "generic":"Something went wrong",
       "fetching_countries":"Fetching countries",
     },
-    "validation":{
+    validation:{
       "email_required":"Email is required",
       "password_required":"Password is required",
       "first_name_required":"First Name is required",
@@ -134,14 +134,15 @@ const resources = {
       "phone_required":"Phone is required",
       "country_required":"Country is required",
       "confirm_password_required":"Confirm Password is required",
-      "personal_number_required":"Personal Number is required",
+      "personal_number_required":"Personal number is required",
       "birthdate_required":"Birthdate is required",
       "social_media_required":"Social Media Link is required",
       "password_mismatch":"Passwords do not match",
-      "password_complexity" :"Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+      "password_complexity" :"Password must meet the complexity requirements",
       "social_media_format":"Social Media Link must be a valid URL",
       "age_requirement" :"You must be at least 18 years old to use this service",
       "personal_number_format":"Personal Number must be a valid Georgian personal number",
+      "personal_number_format_non_georgian": "Personal Number must be a valid personal number",
       "invalid_email":"Invalid email",
     },
     "success":{
@@ -176,6 +177,8 @@ const resources = {
       "remembered":"Remembered?",
       "passwords_match" :"Passwords match",
       "passwords_do_not_match":"Passwords do not match",
+      "personal_number_placeholder_georgia": "Enter your personal number",
+      "auth.personal_number_placeholder_non_georgia": "Enter your passport/personal number"
     },
     "password_rules":{
       "length":"Password must be at least 8 characters long",
@@ -321,7 +324,7 @@ const resources = {
         "generic":"ზოგადი შეცდომა",
         "fetching_countries":"ქვეყნების ჩამონათვალის მიღებისას მოხდა შეცდომა",
       },
-      "validation":{
+      validation:{
         "email_required":"ელფოსტის მისამართი აუცილებელია",
         "password_required":"პაროლი აუცილებელია",
         "first_name_required":"სახელი აუცილებელია",
@@ -333,10 +336,12 @@ const resources = {
         "birthdate_required":"საჭიროა დაბადების თარიღი",
         "social_media_required":"საჭიროა სოციალური მედიის ბმული",
         "password_mismatch":"პაროლები არ ემთხვევა",
-        "password_complexity" :"პაროლი უნდა შეიცავდეს მინიმუმ 8 სიმბოლოს, მათ შორის ერთი დიდი ასო, ერთი პატარა ასო და ერთი ციფრი",
+        "password_complexity" :"პაროლის არ აკმაყოფილებს სირთულის მოთხოვნებს",
         "social_media_format":"სოციალური მედიის ბმული უნდა იყოს ვალიდური URL",
         "age_requirement" :"თქვენ უნდა იყოთ მინიმუმ 18 წლის ან მეტის",
         "personal_number_format":"პირადი ნომერი უნდა შეიცავდეს 11 ციფრს",
+        "personal_number_format_non_georgia":"პირადი ნომერი უნდა შეიცავდეს 7-ზე მეტ სიმბოლოს",
+        
         "invalid_email":"არასწორი ელფოსტის ფორმატი",
       },
       "success":{
@@ -370,6 +375,8 @@ const resources = {
         "remembered":"გაგახსენდათ პაროლი?",
         "passwords_match" :"პაროლები ემთხვევა",
         "passwords_do_not_match":"პაროლები არ ემთხვევა",
+        "personal_number_placeholder_georgia": "შეიყვანეთ პირადი ნომერი",
+        "personal_number_placeholder_non_georgia": "შეიყვანეთ პასპორტის/პირადი ნომერი",
       },
       "password_rules":{
         "length":"პაროლი უნდა შეიცავდეს მინიმუმ 8 სიმბოლოს",
