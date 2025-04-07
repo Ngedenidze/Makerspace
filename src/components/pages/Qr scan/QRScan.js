@@ -5,16 +5,17 @@ import api from "../../sections/authPage/utils/AxiosInstance";
 const QRScan = () => {
   const [scanResult, setScanResult] = useState(null);
   const [validationResult, setValidationResult] = useState(null);
-  // Store parsed QR data for later use in submitting the ticket status.
   const [qrData, setQrData] = useState(null);
 
   // Handle a QR code scan.
   const handleScan = (data) => {
     if (data) {
+      console.log("Scanned data received:", data);
       setScanResult(data);
       try {
         // Parse the scanned QR code data.
         const parsedData = JSON.parse(data);
+        console.log("Parsed QR data:", parsedData);
         setQrData(parsedData);
       } catch (error) {
         console.error("Invalid QR data", error);
@@ -26,6 +27,7 @@ const QRScan = () => {
   // Submit the scanned QR data with the selected action.
   const handleSubmit = async (isReject) => {
     if (!qrData) return;
+    console.log("Submitting QR data:", qrData, "with isReject:", isReject);
     try {
       // Post the scanned data along with the isReject flag.
       const response = await api.post("/QRCode/scan", {
@@ -33,6 +35,7 @@ const QRScan = () => {
         secret: qrData.secret,
         isReject: isReject,
       });
+      console.log("Server response:", response.data);
       setValidationResult(`✅ Valid Ticket: ${response.data.message}`);
     } catch (error) {
       console.error("Error processing QR code", error);
@@ -41,7 +44,7 @@ const QRScan = () => {
   };
 
   const handleError = (err) => {
-    console.error(err);
+    console.error("QR Reader error:", err);
   };
 
   return (
@@ -56,7 +59,6 @@ const QRScan = () => {
         style={{ width: "300px" }}
       />
       {scanResult && <p>Scanned Data: {scanResult}</p>}
-      {/* If QR data is available, show buttons to either accept or reject */}
       {qrData && (
         <div>
           <button onClick={() => handleSubmit(false)}>Accept Ticket</button>
@@ -67,7 +69,7 @@ const QRScan = () => {
         <p style={{ fontWeight: "bold" }}>{validationResult}</p>
       )}
     </div>
-  );
+   );
 };
 
 export default QRScan;
