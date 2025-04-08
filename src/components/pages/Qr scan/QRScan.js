@@ -10,37 +10,22 @@ const QRScan = () => {
   // Handle a QR code scan.
   const handleScan = (data) => {
     if (data) {
-      console.log("Scanned data received:", data);
+      console.log("Scanned raw data:", data);
       setScanResult(data);
-      try {
-        // Parse the scanned QR code data.
-        const parsedData = JSON.parse(data);
-        console.log("Parsed QR data:", parsedData);
-        setQrData(parsedData);
-      } catch (error) {
-        console.error("Invalid QR data", error);
-        setValidationResult("❌ Invalid QR Code Format!");
-      }
+      // Store the raw data for now.
+      setQrData(data);
     }
   };
 
   // Submit the scanned QR data with the selected action.
+  // For now, just log the raw data.
   const handleSubmit = async (isReject) => {
     if (!qrData) return;
-    console.log("Submitting QR data:", qrData, "with isReject:", isReject);
-    try {
-      // Post the scanned data along with the isReject flag.
-      const response = await api.post("/QRCode/scan", {
-        ticketId: qrData.ticketId,
-        secret: qrData.secret,
-        isReject: isReject,
-      });
-      console.log("Server response:", response.data);
-      setValidationResult(`✅ Valid Ticket: ${response.data.message}`);
-    } catch (error) {
-      console.error("Error processing QR code", error);
-      setValidationResult("❌ Invalid Ticket!");
-    }
+    console.log("Submitting raw QR data:", qrData, "with isReject:", isReject);
+    // Example: post the raw data if needed.
+    // const response = await api.post("/QRCode/scan", { data: qrData, isReject });
+    // console.log("Server response:", response.data);
+    // setValidationResult(`Response: ${response.data.message}`);
   };
 
   const handleError = (err) => {
@@ -55,21 +40,23 @@ const QRScan = () => {
           if (result) handleScan(result.text);
           if (error) handleError(error);
         }}
-        constraints={{ facingMode: "environment" }}
-        style={{ width: "300px" }}
+        constraints={{ facingMode: "user" }}
+        style={{ width: "500px" }}
       />
       {scanResult && <p>Scanned Data: {scanResult}</p>}
       {qrData && (
         <div>
-          <button onClick={() => handleSubmit(false)}>Accept Ticket</button>
-          <button onClick={() => handleSubmit(true)}>Reject Ticket</button>
+          <button onClick={() => handleSubmit(false)}>Submit Data</button>
+          <button onClick={() => handleSubmit(true)}>
+            Submit Data (Reject)
+          </button>
         </div>
       )}
       {validationResult && (
         <p style={{ fontWeight: "bold" }}>{validationResult}</p>
       )}
     </div>
-   );
+  );
 };
 
 export default QRScan;
