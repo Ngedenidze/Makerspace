@@ -273,7 +273,6 @@ const AuthPage = ({ page }) => {
           password: form.password,
         });
         const { accessToken: token } = response.data;
-        console.log("Login Successful:", token);
         localStorage.setItem("accessToken", token);
         navigate("/profile");
         window.location.reload();
@@ -306,14 +305,18 @@ const AuthPage = ({ page }) => {
       }
     } catch (error) {
       const status = error.response?.status || 0;
-      const friendlyMessage = getFriendlyErrorMessage(
-        status,
-        error.response?.data?.message,
-        t
-      );
-      if (error.response?.data?.errors) {
+      if (status === 401) {
+        // Use the network's error message if available.
+        const errorMessage = error.response?.data?.message || "Wrong credentials";
+        setErrors({ general: errorMessage });
+      } else if (error.response?.data?.errors) {
         setErrors(error.response.data.errors);
       } else {
+        const friendlyMessage = getFriendlyErrorMessage(
+          status,
+          error.response?.data?.message,
+          t
+        );
         setErrors({ general: friendlyMessage });
       }
       setIsSubmitting(false);
@@ -656,9 +659,9 @@ const AuthPage = ({ page }) => {
     <>
       <h1 className="auth-title">{t("auth.reset_password", "Reset Password")}</h1>
       <form className="auth-form" onSubmit={handleSubmit}>
-        {errors.general && (
-          <div className="error-text">{t(errors.general, "An error occurred")}</div>
-        )}
+      {errors.general && (
+  <div className="error-text">{t(errors.general, "An error occurred")}</div>
+)}
         <div className="success-text" style={{ color: "green", marginBottom: "1rem" }}>
           {t(success, "")}
         </div>

@@ -6,14 +6,15 @@
     align-items: center;
   
 }
-.profile-details{
+.QRprofile-details{
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
-.profile-container {
+.QRprofile-container {
     width: 40vw;
+    height: 100vh;
     margin: 2rem auto;
     padding: 5rem;
     color: #ccc;
@@ -23,7 +24,7 @@
   }
   
   /* Header styling */
-  .profile-header {
+  .QRprofile-header {
     font-size: 1.8rem;
     margin-bottom: 1rem;
     text-align: center;
@@ -31,7 +32,7 @@
   }
   
   /* Container for user information */
-  .profile-info {
+  .QRprofile-info {
     background-color: var(--main-color, #555);
     padding: 2rem;
     width: 100%;
@@ -39,22 +40,21 @@
     margin-bottom: 20px;
   }
   
-  .profile-info p {
+  .QRprofile-info p {
     margin: 0.5rem 0;
     font-size: 1rem;
   }
   
-  .profile-info strong {
+  .QRprofile-info strong {
     color: #fff;
     margin-right: 0.5rem;
   }
-  /* const response = await api.get(`/users/me`); */
+  
   
   /* Decision box styling (for accepted/rejected) */
-  .verification-status {
+  .verification-statusQR {
     margin: 1rem 0;
     padding: 1rem;
-    width: 100%;
     text-align: center;
     border-radius: 8px;
     font-size: 1.5rem;
@@ -62,11 +62,11 @@
     color: #fff;
   }
   
-  .verification-status.verified {
+  .verification-statusQR.verified {
     background-color: green;
   }
   
-  .verification-status.rejected {
+  .verification-statusQR.rejected {
     background-color: red;
   }
   
@@ -105,17 +105,13 @@
   
   /* Responsive adjustments */
   @media screen and (max-width: 900px) {
-    .profile-container {
+    .QRprofile-container {
       width: 70%;
     }
   }
   
   @media screen and (max-width: 600px) {
-    .profile-container {
-      width: 99vw;
-      height: max-content;
-      padding: 0;
-      margin: 0 1px;
-    }
+
   }
+  
   

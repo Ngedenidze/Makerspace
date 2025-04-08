@@ -140,9 +140,9 @@ const AdminQRScanner = () => {
   };
 
   return (
-    <div className="profile-container">
-      <h2 className="profile-header">User Info QR Scanner</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <div className="QRprofile-container">
+      <h2 className="QRprofile-header">User Info QR Scanner</h2>
+    
       {scanResult === null ? (
         <div className="scanner-container">
           <video ref={videoRef} style={{ width: "300px", border: "1px solid #ccc" }} />
@@ -151,10 +151,10 @@ const AdminQRScanner = () => {
           <p>Scanning for QR code...</p>
         </div>
       ) : (
-        <div className="profile-details">
+        <div className="QRprofile-details">
          
           {userInfo ? (
-            <div className="profile-info">
+            <div className="QRprofile-info">
               <p><strong>First Name:</strong> {userInfo.firstName}</p>
               <p><strong>Last Name:</strong> {userInfo.lastName}</p>
               <p><strong>Date of Birth:</strong> {new Date(userInfo.birthdate).toLocaleDateString()}</p>
@@ -163,7 +163,7 @@ const AdminQRScanner = () => {
             <p>Fetching user information...</p>
           )}
           {decision ? (
-            <div className={`verification-status ${decision === "accepted" ? "verified" : "rejected"}`}>
+            <div className={`verification-statusQR ${decision === "accepted" ? "verified" : "rejected"}`}>
               {decision === "accepted" ? "Accepted" : "Rejected"}
             </div>
           ) : (
