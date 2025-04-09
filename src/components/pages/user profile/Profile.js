@@ -11,14 +11,19 @@ function Profile() {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Define a function to format dates using i18n translations
+  // New states to handle tickets
+  const [tickets, setTickets] = useState([]);
+  const [ticketsVisible, setTicketsVisible] = useState(false);
+  const [ticketsLoading, setTicketsLoading] = useState(false);
+  const [ticketsError, setTicketsError] = useState(null);
+
+  // Format date function (kept the same)
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate();
     const monthIndex = date.getMonth();
     const year = date.getFullYear();
 
-    // Mapping array for months – keys must match your translation file entries
     const monthKeys = [
       "january",
       "february",
@@ -34,8 +39,6 @@ function Profile() {
       "december",
     ];
     const monthTranslated = t(`months.${monthKeys[monthIndex]}`);
-
-    // Determine ordinal suffix (this logic works well for English)
     let suffix = "th";
     if (day % 10 === 1 && day !== 11) {
       suffix = "st";
@@ -49,6 +52,7 @@ function Profile() {
     return `${monthTranslated} ${day}, ${year}`;
   };
 
+  // Fetch profile
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (!token) {
@@ -58,17 +62,13 @@ function Profile() {
     }
     console.log("Token exists:", token);
 
-    // Fetch user profile from a protected endpoint
     api
       .get("/auth/me")
       .then((response) => {
         setProfile(response.data);
       })
       .catch((error) => {
-        console.error(
-          "Profile fetch error:",
-          error.response?.data || error.message
-        );
+        console.error("Profile fetch error:", error.response?.data || error.message);
         localStorage.removeItem("accessToken");
         navigate("/login");
       })
@@ -77,17 +77,33 @@ function Profile() {
       });
   }, [navigate]);
 
+  // Fetch tickets when the "My Tickets" section is expanded and tickets haven't been loaded yet.
+  useEffect(() => {
+    if (ticketsVisible && tickets.length === 0) {
+      setTicketsLoading(true);
+      api
+        .get("/Tickets/my-tickets")
+        .then((response) => {
+          setTickets(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching tickets:", error.response?.data || error.message);
+          setTicketsError(error.response?.data?.message || error.message || "Unknown error");
+        })
+        .finally(() => {
+          setTicketsLoading(false);
+        });
+    }
+  }, [ticketsVisible, tickets.length]);
+
   if (loading) {
     return <div className="profile-container">{t("loading_profile")}</div>;
   }
 
   if (!profile) {
-    return (
-      <div className="profile-container">{t("profile_not_loaded")}</div>
-    );
+    return <div className="profile-container">{t("profile_not_loaded")}</div>;
   }
 
-  // Format dates using the new formatDate function
   const createdAtFormatted = formatDate(profile.createdAt);
   const birthdateFormatted = formatDate(profile.birthdate);
 
@@ -142,6 +158,53 @@ function Profile() {
           )}
         </p>
       </div>
+
+      {/* Expandable/Collapsible "My Tickets" Section */}
+      <div className="my-tickets-section">
+       
+        {ticketsVisible && (
+          <div className="my-tickets">
+            {ticketsLoading ? (
+              <p>{t("loading_tickets")}</p>
+            ) : ticketsError ? (
+              <p className="error">
+                {t("tickets_error")}: {ticketsError}
+              </p>
+            ) : tickets && tickets.length > 0 ? (
+              tickets.map((ticket) => (
+                <div key={ticket.id} className="ticket-item">
+                  <p>
+                    <strong>{ "Ticket ID" || t("ticket_id")}:</strong> {ticket.id}
+                  </p>
+                  <p>
+                    <strong>{"Used" || t("ticket_used") }:</strong>{" "}
+                    {ticket.isUsedTicket ? (t("yes") || "Yes") : (t("no") || "No")}
+                  </p>
+                </div>
+              ))
+            ) : (
+              <p>{t("no_tickets")}</p>
+            )}
+          </div>
+        )}
+      </div>
+      <button
+          onClick={() => setTicketsVisible((prevVisible) => !prevVisible)}
+          className="toggle-tickets-button"
+        >
+          {/* {ticketsVisible ? t("collapse_my_tickets") : t("expand_my_tickets")} */}
+          My Tickets
+        </button>
+      {/* Conditionally render the Scan QR Code button for admin users */}
+      {profile.role === "Admin" && (
+        <button
+          className="scan-qr-button"
+          onClick={() => navigate("/QRScan")}
+        >
+          {/* {t("scan_qr_code") || "Scan QR Code"} */}
+          Scan QR Code
+        </button>
+      )}
 
       <button
         className="profile-logout-button"

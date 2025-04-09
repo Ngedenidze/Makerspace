@@ -7,7 +7,7 @@ const apiUrl =
 
 export const refreshAccessToken = async () => {
   try {
-    const res = await axios.post(`${apiUrl}/api/auth/refresh`, null, {
+    const res = await axios.post(`${apiUrl}/api/Auth/refresh`, null, {
       withCredentials: true, // Required to send the cookie
     });
 

@@ -18,7 +18,7 @@ const AdminQRScanner = () => {
   // Helper to initialize video stream.
   const initVideo = async () => {
     try {
-      // If a stream already exists, stop its tracks
+      // If a stream already exists, stop its tracks.
       if (videoRef.current && videoRef.current.srcObject) {
         const oldStream = videoRef.current.srcObject;
         oldStream.getTracks().forEach(track => track.stop());
@@ -39,8 +39,7 @@ const AdminQRScanner = () => {
   // Start video on mount.
   useEffect(() => {
     initVideo();
-
-    // Cleanup function: stop video stream and cancel scanning.
+    // Cleanup: stop video stream and cancel scanning.
     return () => {
       if (videoRef.current && videoRef.current.srcObject) {
         const stream = videoRef.current.srcObject;
@@ -71,6 +70,7 @@ const AdminQRScanner = () => {
               const parsedData = JSON.parse(code.data);
               setScannedData(parsedData);
             } catch (e) {
+              // If the QR data is not valid JSON, store it as raw.
               setScannedData({ raw: code.data });
             }
             setScanning(false);
@@ -109,8 +109,7 @@ const AdminQRScanner = () => {
   // Fetch user info from GET /users/{id}.
   const fetchUserInfo = async (userId) => {
     try {
-      // const response = await api.get(`/users/${userId}`);
-       const response = await api.get(`/users/me`); 
+      const response = await api.get(`/users/GetUserbyId/${userId}`);
       console.log("User info:", response.data);
       setUserInfo(response.data);
     } catch (err) {
@@ -119,13 +118,29 @@ const AdminQRScanner = () => {
     }
   };
 
+  // Function to handle decision and send it via API.
+  const sendDecision = async (isReject) => {
+    // Determine ticketId.
+    // If your QR code data includes a ticketId property, use that;
+    // otherwise, default to 0 or adjust this logic as needed.
+    const ticketId = scannedData && scannedData.ticketId ? scannedData.ticketId : 0;
+    try {
+      const response = await api.post("/QRCode/scan", { isReject, ticketId });
+      console.log("Decision response:", response.data);
+      setDecision(isReject ? "rejected" : "accepted");
+    } catch (error) {
+      console.error("Error sending decision:", error);
+      setError("Error sending decision");
+    }
+  };
+
   // Handlers for admin decision.
   const handleAccept = () => {
-    setDecision("accepted");
+    sendDecision(false);
   };
 
   const handleReject = () => {
-    setDecision("rejected");
+    sendDecision(true);
   };
 
   // Reset state, reinitialize video, and restart scanning.
@@ -152,12 +167,14 @@ const AdminQRScanner = () => {
         </div>
       ) : (
         <div className="QRprofile-details">
-         
           {userInfo ? (
             <div className="QRprofile-info">
               <p><strong>First Name:</strong> {userInfo.firstName}</p>
               <p><strong>Last Name:</strong> {userInfo.lastName}</p>
-              <p><strong>Date of Birth:</strong> {new Date(userInfo.birthdate).toLocaleDateString()}</p>
+              <p>
+                <strong>Date of Birth:</strong>{" "}
+                {new Date(userInfo.birthdate).toLocaleDateString()}
+              </p>
             </div>
           ) : (
             <p>Fetching user information...</p>

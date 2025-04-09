@@ -11,7 +11,7 @@ import DJs from "./pages/DJs";
 import AuthPage from "./sections/authPage/AuthPage";
 import Profile from "./pages/user profile/Profile";
 import Gallery from "./pages/Gallery/Gallery";
-import QRScan from "./pages/Qr scan/QRScan";
+import AdminQRScanner from "./pages/Qr scan/AdminQRScanner";
 import { useAuth } from "./sections/authPage/utils/AuthProvider";
 import AdminPrivateRoute from "./reusable/Admin Route/AdminPrivateRoute";
 
@@ -79,7 +79,7 @@ export default function Routing() {
         path="/QRScan"
         element={
           <AdminPrivateRoute>
-            <QRScan />
+            <AdminQRScanner />
           </AdminPrivateRoute>
         }
       />

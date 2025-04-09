@@ -33,9 +33,9 @@
 }
 
 /* Logout button styling */
-.profile-logout-button {
+.profile-logout-button, .scan-qr-button {
   display: inline-block;
-  margin: 1rem 0 0 1rem;
+  margin: 1rem 0 0 0.5rem;
   padding: 0.6rem 1.2rem;
   background-color: #f44336;
   color: #fff;
@@ -45,8 +45,10 @@
   text-transform: uppercase;
   font-weight: 600;
 }
-
-.profile-logout-button:hover {
+.scan-qr-button {
+  margin: 0.5rem 0 0 0.5rem;
+}
+.profile-logout-button:hover, .scan-qr-button:hover {
   background-color: #d32f2f;
 }
 
@@ -72,6 +74,56 @@
 .verification-status.pending {
   background-color: gray;
   color: white;
+}
+/* ============================= */
+/* My Tickets Section Styling    */
+/* ============================= */
+
+.my-tickets-section {
+  margin-top: 2rem;
+  width: 100%;
+  text-align: left;
+}
+
+.toggle-tickets-button {
+  background-color: #2196F3;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-tickets-button:hover {
+  background-color: #1976d2;
+}
+
+.my-tickets {
+  background-color: var(--main-color, #555);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  text-align: left;
+  margin-top: 1rem;
+}
+
+.ticket-item {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #777;
+}
+
+.ticket-item:last-child {
+  border-bottom: none;
+}
+
+.ticket-item p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #fff;
 }
 @media screen and (max-width: 900px) {
   .profile-container {
