@@ -1,13 +1,10 @@
 import axios from "axios";
 
-const apiUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net"
-    : "";
+const apiBaseUrl = process.env.REACT_APP_API_URL; 
 
 export const refreshAccessToken = async () => {
   try {
-    const res = await axios.post(`${apiUrl}/api/Auth/refresh`, null, {
+    const res = await axios.post(`${apiBaseUrl}/api/Auth/refresh`, null, {
       withCredentials: true, // Required to send the cookie
     });
 

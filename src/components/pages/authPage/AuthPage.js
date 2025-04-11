@@ -4,11 +4,6 @@ import "./AuthForm.css";
 import api from "./utils/AxiosInstance";
 import { useTranslation } from "react-i18next";
 
-const apiUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net"
-    : "";
-
 const getFriendlyErrorMessage = (status, defaultMessage, t) => {
   switch (status) {
     case 400:

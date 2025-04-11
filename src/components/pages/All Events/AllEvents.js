@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import localImg from "../../../assets/cover-art-default.jpg";
-import SpecialSlice from "../../reusable/CardInfo/SpecialSlice"
+import SpecialSlice from "../../reusable/CardInfo/SpecialSlice";
 import { useTranslation } from "react-i18next";
 
 export default function Events() {
-  const { tab } = useParams();        // e.g. "upcoming" or "past"
+  const { tab } = useParams(); // e.g. "upcoming" or "past"
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Use the environment variable; if using CRA, use process.env.REACT_APP_API_URL instead.
+  const apiBaseUrl = process.env.REACT_APP_API_URL; 
 
   const validTabs = ["upcoming", "past"];
   const defaultTab = "upcoming";
@@ -30,12 +33,14 @@ export default function Events() {
   }, [tab, navigate, validTabs]);
 
   useEffect(() => {
-    const apiUrl =
+    // Build events URL using the env variable. In production we use the API URL from env,
+    // otherwise use the local endpoint.
+    const eventsUrl =
       process.env.NODE_ENV === "production"
-        ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/Events"
+        ? `${apiBaseUrl}/api/Events`
         : "/api/Events/AllEvents";
 
-    fetch(apiUrl)
+    fetch(eventsUrl)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`Network response was not ok. Status: ${res.status}`);
@@ -52,19 +57,20 @@ export default function Events() {
         setEvents([]);
         setLoading(false);
       });
-  }, []);
+  }, [apiBaseUrl]);
 
+  // Using react-query for past events
   const {
     data: pastEventsData,
     isLoading: pastLoading,
     error: pastError,
   } = useQuery("pastEvents", async () => {
-    const apiUrl =
+    const pastEventsUrl =
       process.env.NODE_ENV === "production"
-        ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/PastEvents"
+        ? `${apiBaseUrl}/api/PastEvents`
         : "/api/Events/PastEvents";
   
-    const res = await fetch(apiUrl);
+    const res = await fetch(pastEventsUrl);
     if (!res.ok) {
       throw new Error(`Network error: ${res.status}`);
     }
@@ -79,7 +85,7 @@ export default function Events() {
   const upcomingEvents = events.filter((e) => new Date(e.startDate) >= now);
   const pastEvents = pastEventsData || [];
 
-  // Define arrays to map numeric day/month values to translation keys
+  // Mapping arrays for translating numeric day/month values
   const weekdayKeys = [
     "sunday",
     "monday",
@@ -117,14 +123,12 @@ export default function Events() {
       hour12: false,
     });
 
-    // Translate weekday and month via i18n
     const translatedWeekday = t(`weekdays.${weekdayKey}`);
     const translatedMonth = t(`months.${monthKey}`);
-    
-    // Build the formatted date string (ensure you have a "starts_at" key in your translation files)
-    const formattedDate = `${translatedWeekday} ${translatedMonth} ${day}, ${year} ${t("starts_at")} ${time}`;
+    const formattedDate = `${translatedWeekday} ${translatedMonth} ${day}, ${year} ${t(
+      "starts_at"
+    )} ${time}`;
 
-    // Process stages data
     const stages = Object.entries(
       event.lineUps?.reduce((acc, lineUp) => {
         const stageKey = lineUp.floor;

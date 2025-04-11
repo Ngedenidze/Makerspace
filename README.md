@@ -241,19 +241,6 @@ To deploy on **GitHub Pages**:
 
 ---
 
-## 🔗 API Endpoints
-
-- Events API:
-    ```
-    https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/Events
-    ```
-- Rentals API:
-    ```
-    https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/Rentals
-    ```
-
----
-
 ## 🤝 Contribution
 
 1. **Fork the repository** and **clone it** locally.

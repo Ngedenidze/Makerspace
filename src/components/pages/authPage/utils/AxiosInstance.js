@@ -1,13 +1,13 @@
 import axios from "axios";
 import { refreshAccessToken } from "./AuthService";
 
-const apiUrl =
+const apiBaseUrl =
   process.env.NODE_ENV === "production"
-    ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net"
+    ? process.env.REACT_APP_API_URL
     : "";
 
 const api = axios.create({
-  baseURL: `${apiUrl}/api`,
+  baseURL: `${apiBaseUrl}/api`,
   withCredentials: true, // Ensure cookies (refreshToken) are always sent
 });
 
