@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import localImage from "../../../../assets/art-cover.jpg";
+import localImage from "../../../assets/art-cover.jpg";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 

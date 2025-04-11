@@ -14,7 +14,7 @@ export default function Navigation({ device, onSpecialsClick, onAboutClick }) {
       ) : (
         <div className="nav-bar-logo">
           <img
-            src={require("../assets/ms-name-red.png")}
+            src={require("../../assets/ms-name-red.png")}
             alt={t('makerspace_logo')}
             className="nav-title-logo"
           />

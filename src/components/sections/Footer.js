@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Navigation from "../../Navigation";
-import Hamburger from "../../reusable/Hamburger/Hamburger";
+import Navigation from "./Navigation";
+import Hamburger from "../reusable/Hamburger/Hamburger";
 import { useTranslation } from "react-i18next";
 
 const apiUrl =
@@ -10,7 +10,7 @@ const apiUrl =
     ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net"
     : "";
 
-export default function Heading() {
+export default function Footer() {
   const [infoBoxOpen, setInfoBoxOpen] = useState(false);
   const infoBoxRef = useRef(null);
   const toggleRef = useRef(null);

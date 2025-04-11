@@ -1,8 +1,7 @@
 import "./App.css";
 import BackgroundPoly from "./components/reusable/Background/backgroundPoly";
-import Routing from "./components/Routing";
-import Heading from "./components/sections/headingPages/Heading";
-import ScrollToTop from "./components/ScrollToTop";
+import Routing from "./Routing";
+import Heading from "./components/sections/Footer";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
@@ -21,7 +20,6 @@ function App() {
 
   return (
     <>
-      <ScrollToTop />
       <BackgroundPoly />
       <div className="layout-container">
         <aside className="header-menu">

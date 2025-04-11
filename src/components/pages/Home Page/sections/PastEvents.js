@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Carousel from "../headingPages/SpecialsCarousel";
-import SpecialCard from "../headingPages/CardInfo/SpecialCard";
-import Testimonials from "./SoonEvents";
+import SpecialCard from "../../../reusable/CardInfo/SpecialCard";
 import { useTranslation } from "react-i18next";
 export default function PastEvents({ events }) {
   const { t, i18n } = useTranslation();
