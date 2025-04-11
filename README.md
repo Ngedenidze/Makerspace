@@ -1,6 +1,6 @@
 # 🎶 Makerspace Event & Booking Platform
 
-Website link: makerspaceclub.com
+Website link: https://makerspaceclub.com
 
 ## 🚀 Overview
 
