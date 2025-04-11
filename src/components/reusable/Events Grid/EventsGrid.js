@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SpecialCard from "../headingPages/CardInfo/SpecialCard";
+import SpecialCard from "../../sections/headingPages/CardInfo/SpecialCard";
 import { useTranslation } from "react-i18next";
 
 export default function EventsGrid({ events }) {

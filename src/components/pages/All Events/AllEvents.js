@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
-import localImg from "../../assets/cover-art-default.jpg";
-import SpecialSlice from "../sections/headingPages/CardInfo/SpecialSlice";
+import localImg from "../../../assets/cover-art-default.jpg";
+import SpecialSlice from "../../reusable/CardInfo/SpecialSlice"
 import { useTranslation } from "react-i18next";
 
 export default function Events() {

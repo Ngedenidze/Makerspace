@@ -17,7 +17,7 @@ const CommercialRenting = () => {
 
       <div className="commercial-renting-image">
         <img
-          src={require("../../assets/space.jpg")}
+          src={require("../../../../assets/space.jpg")}
           alt="Commercial Space"
         ></img>
       </div>

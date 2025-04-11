@@ -1,12 +1,9 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Homepage from "./pages/HomePage";
-import About from "./pages/About";
-import Reservation from "./pages/BookingPage";
-import Order from "./pages/Order";
-import Confirmation from "./pages/Confirmation";
+import Homepage from "./pages/Home Page/HomePage";
+import About from "./pages/About/About";
 import EventPage from "./pages/Event Page/EventPage";
-import Rentals from "./pages/Rentals";
-import Events from "./pages/Events";
+import Rentals from "./pages/Home Page/sections/Rentals";
+import Events from "./pages/All Events/AllEvents";
 import DJs from "./pages/DJ Booking/DJs";
 import AuthPage from "./pages/authPage/AuthPage";
 import Profile from "./pages/User Profile/Profile";
@@ -30,9 +27,6 @@ export default function Routing() {
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/about" element={<About />} />
-      <Route path="/reservations" element={<Reservation />} />
-      <Route path="/order" element={<Order />} />
-      <Route path="/confirmation" element={<Confirmation />} />
       <Route path="/Rentals" element={<Rentals />} />
       <Route path="/Cart" element={<CartPage />} />
       <Route path="/AllEvents" element={<Events />} />

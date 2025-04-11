@@ -1,12 +1,12 @@
 import React, { useRef } from "react";
 import { useQuery } from "react-query";
-import Specials from "../sections/eventProfile/EventsGrid";
-import InsessionTabs from "../sections/headingPages/CardInfo/InSessionTabs";
-import CommercialRenting from "./CommercialRenting";
-import DJBooking from "./DJ Booking/DJBooking";
-import About from "../sections/headingPages/About";
-import PastEvents from "../sections/headingPages/PastEvents";
-import SoonEvents from "../sections/headingPages/SoonEvents";
+import EventsGrid from "../../reusable/Events Grid/EventsGrid";
+import InsessionTabs from "../reusable/InsessionTabs/InsessionTabs";
+import CommercialRenting from "./sections/CommercialRenting";
+import DJBooking from "../DJ Booking/DJBooking";
+import About from "../../sections/headingPages/About";
+import PastEvents from "../../sections/headingPages/PastEvents";
+import SoonEvents from "../../sections/headingPages/SoonEvents";
 
 export default function Homepage() {
   const specialsRef = useRef(null);
@@ -77,7 +77,7 @@ export default function Homepage() {
           <InsessionTabs eventsData={eventsData} />
 
           <section ref={specialsRef} className="events">
-            <Specials events={eventsData} />
+            <EventsGrid events={eventsData} />
           </section>
           <section className="events">
             <SoonEvents events={soonEventsData} />
