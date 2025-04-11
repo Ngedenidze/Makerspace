@@ -5,9 +5,10 @@ import Navigation from "./Navigation";
 import Hamburger from "../reusable/Hamburger/Hamburger";
 import { useTranslation } from "react-i18next";
 
+const apiBaseUrl = process.env.REACT_APP_API_URL;
 const apiUrl =
   process.env.NODE_ENV === "production"
-    ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net"
+    ? apiBaseUrl
     : "";
 
 export default function Footer() {

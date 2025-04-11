@@ -11,6 +11,7 @@ const Rentals = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [eventDescription, setEventDescription] = useState("");
+    const apiBaseUrl = process.env.REACT_APP_API_URL;
 
     // State for handling loading, error, and success messages
     const [loading, setLoading] = useState(false);
@@ -85,7 +86,7 @@ const Rentals = () => {
 
         // Determine the API URL based on the environment
         const apiUrl = process.env.NODE_ENV === "production"
-            ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/email/ClientContactToEmail"
+            ? `${apiBaseUrl}/api/email/ClientContactToEmail`
             : "/api/email/ClientContactToEmail";
 
         try {

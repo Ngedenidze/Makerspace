@@ -5,7 +5,10 @@ import axios from "axios";
 const QRScanner = () => {
   const [scanResult, setScanResult] = useState(null);
   const [validationResult, setValidationResult] = useState(null);
-  const API_URL = "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/QRCode/scan"; // Replace with your API URL
+  
+  const apiBaseUrl = process.env.REACT_APP_API_URL;
+
+  const API_URL = `${apiBaseUrl}/api/QRCode/scan`;
 
   const handleScan = async (data) => {
     if (data) {

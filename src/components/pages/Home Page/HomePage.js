@@ -12,6 +12,7 @@ export default function Homepage() {
   const specialsRef = useRef(null);
   const aboutRef = useRef(null);
 
+  const apiBaseUrl = process.env.REACT_APP_API_URL;
   // Fetch events data
   const {
     data: eventsData,
@@ -20,7 +21,7 @@ export default function Homepage() {
   } = useQuery("events", async () => {
     const apiUrl =
       process.env.NODE_ENV === "production"
-        ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/Events"
+        ? `${apiBaseUrl}/api/Events`
         : "/api/Events";
     const res = await fetch(apiUrl);
     if (!res.ok) {
@@ -37,7 +38,7 @@ export default function Homepage() {
   } = useQuery("soonEvents", async () => {
     const apiUrl =
       process.env.NODE_ENV === "production"
-        ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/SoonEvents"
+        ? `${apiBaseUrl}/api/SoonEvents`
         : "/api/SoonEvents";
     const res = await fetch(apiUrl);
     if (!res.ok) {
@@ -54,7 +55,7 @@ export default function Homepage() {
   } = useQuery("pastEvents", async () => {
     const apiUrl =
       process.env.NODE_ENV === "production"
-        ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/Events/PastEvents"
+        ? `${apiBaseUrl}/api/Events/PastEvents`
         : "/api/Events/PastEvents";
     const res = await fetch(apiUrl);
     if (!res.ok) {

@@ -13,6 +13,7 @@ const Gallery = () => {
   const { t } = useTranslation();
 
   const apiBaseUrl = process.env.REACT_APP_API_URL;
+  
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -21,9 +22,7 @@ const Gallery = () => {
         );
         const data = await response.json();
         const newImages = data.images || [];
-        // Append new images rather than replace
         setImages((prev) => [...prev, ...newImages]);
-        // If the number of images fetched is less than the limit, no more images are available
         if (newImages.length < 20) setHasMore(false);
       } catch (error) {
         console.error("Error fetching images:", error);
