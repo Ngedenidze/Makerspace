@@ -12,11 +12,12 @@ const Gallery = () => {
   const [loadedImages, setLoadedImages] = useState({});
   const { t } = useTranslation();
 
+  const apiBaseUrl = process.env.REACT_APP_API_URL;
   useEffect(() => {
     const fetchImages = async () => {
       try {
         const response = await fetch(
-          `https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/google-drive/images?page=${currentPage}&limit=20`
+          `${apiBaseUrl}/api/google-drive/images?page=${currentPage}&limit=20`
         );
         const data = await response.json();
         const newImages = data.images || [];
