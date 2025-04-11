@@ -40,17 +40,17 @@ export default function EventPage() {
 
   useEffect(() => {
     api
-    .get(`/Events/${id}`)
-    .then((res) => {
-      setEvent(res.data);
-      setLoading(false);
-    })
-    .catch((err) => {
-      console.error("Error fetching event:", err);
-      setError(err.response?.data?.message || err.message);
-      setLoading(false);
-    });
-}, [id]);
+      .get(`/Events/${id}`)
+      .then((res) => {
+        setEvent(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching event:", err);
+        setError(err.response?.data?.message || err.message);
+        setLoading(false);
+      });
+  }, [id]);
 
   if (loading) return <p>Loading event...</p>;
 
@@ -86,13 +86,20 @@ export default function EventPage() {
     api
       .post(`/tickets/purchase/${id}`, {})
       .then((res) => {
+        // Here we add extra properties: image, description, and quantity set to 1 by default.
         addItem({
           eventId: id,
           ticketId: res.data.ticketId,
           eventName: event.name,
-          price: event.price || "N/A"
+          price: event.price || "N/A",
+          image: event.eventPhotoUrl,
+          description: event.description,
+          quantity: 1,
         });
-        alert("Ticket reserved! Check your cart to proceed to payment." + res.data.ticketId);
+        alert(
+          "Ticket reserved! Check your cart to proceed to payment. Ticket ID: " +
+            res.data.ticketId
+        );
       })
       .catch((error) => {
         console.error("Ticket reservation error:", error);
@@ -155,7 +162,9 @@ export default function EventPage() {
             </section>
             {/* Buy Ticket button */}
             <section className="buy-ticket-section">
-            <button className="buy-ticket-button" onClick={handleBuyTicket}>Buy Ticket</button>
+              <button className="buy-ticket-button" onClick={handleBuyTicket}>
+                Add to Cart
+              </button>
             </section>
           </>
         )}
