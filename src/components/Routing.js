@@ -4,7 +4,7 @@ import About from "./pages/About";
 import Reservation from "./pages/BookingPage";
 import Order from "./pages/Order";
 import Confirmation from "./pages/Confirmation";
-import EventPage from "./pages/EventPage";
+import EventPage from "./pages/Event Page/EventPage";
 import Rentals from "./pages/Rentals";
 import Events from "./pages/Events";
 import DJs from "./pages/DJs";
@@ -14,7 +14,7 @@ import Gallery from "./pages/Gallery/Gallery";
 import AdminQRScanner from "./pages/Qr scan/AdminQRScanner";
 import { useAuth } from "./sections/authPage/utils/AuthProvider";
 import AdminPrivateRoute from "./reusable/Admin Route/AdminPrivateRoute";
-
+import CartPage from "./reusable/Cart/CartPage";
 function PrivateRoute({ children }) {
   const { token } = useAuth();
   return token ? children : <Navigate to="/login" />;
@@ -34,6 +34,7 @@ export default function Routing() {
       <Route path="/order" element={<Order />} />
       <Route path="/confirmation" element={<Confirmation />} />
       <Route path="/Rentals" element={<Rentals />} />
+      <Route path="/Cart" element={<CartPage />} />
       <Route path="/AllEvents" element={<Events />} />
       <Route path="/AllEvents/:tab" element={<Events />} />
       <Route path="/Events/:id" element={<EventPage />} />

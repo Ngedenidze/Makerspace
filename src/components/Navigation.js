@@ -41,6 +41,9 @@ export default function Navigation({ device, onSpecialsClick, onAboutClick }) {
           <Link className="hover-effect" to="/gallery">
             <h1>{t('gallery')}</h1>
           </Link>
+          <Link className="hover-effect" to="/Cart">
+          <h1>Cart</h1>
+        </Link>
         </section>
       </menu>
     </section>

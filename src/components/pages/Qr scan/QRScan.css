@@ -22,6 +22,39 @@
     font-family: "Arial", sans-serif;
     background-color: #333;
   }
+  /* Container for the decision buttons */
+.decision-selection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* Basic button styling */
+.decision-selection button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  background-color: #6c766d77;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover state */
+.decision-selection button:hover {
+  background-color: #55575551;
+}
+
+/* Styling for the selected (active) button */
+.decision-selection button.active-decision {
+  background-color: #f0f0f0; /* green background */
+  border-color: #4caf50;
+  color: #0c0c0c;
+}
+
   
   /* Header styling */
   .QRprofile-header {

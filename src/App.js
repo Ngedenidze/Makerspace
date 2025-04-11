@@ -6,6 +6,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
+import { CartProvider } from "./components/reusable/Cart/CartContext";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ function App() {
           </main>
         </QueryClientProvider>
       </div>
+
     </>
   );
 }

@@ -1,0 +1,132 @@
+
+.event-page {
+    position: relative;
+    background-color: transparent;
+    padding: 0rem;
+    margin: 2rem auto;
+    width: min(65vw, 1200px);
+    box-sizing: border-box;
+    color: #333;
+    overflow: hidden;
+  }
+  
+  /* Diagonal background similar to About Us */
+  
+  .event-info {
+    padding: 4rem 2rem;
+    position: relative;
+    z-index: 1;
+    background-color: tr;
+    min-height: 400px;
+  }
+  .event-info::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: var(--main-color);
+    clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
+  }
+  
+  .event-image-wrapper {
+    margin: 0 auto;
+    max-width: 1200px;
+    overflow: hidden;
+  }
+  
+  .event-image {
+    display: block;
+    max-height: 500px;
+    width: 100%;
+    object-fit: cover;
+    clip-path: polygon(0 0, 100% 0, 100% 94%, 0 100%);
+  }
+  
+  .event-description {
+    margin-bottom: 2rem;
+  }
+  
+  .description-text {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    color: var( --light-text-color);
+  }
+  
+  .event-dates {
+    margin-bottom: 0rem;
+    font-size: 1.2rem;
+    color: #e0e1dd;
+  }
+  
+  .start-date,
+  .end-date {
+    margin: 0;
+  }
+  
+  .date-label {
+    font-weight: bold;
+  }
+  
+  .event-lineups {
+    margin-bottom: 2rem;
+  }
+  
+  .lineups-heading {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--highlighted-text-color-light);
+  }
+  .event-title{
+    color: var(--main-text-color);
+    font-size: 2rem;
+    margin: 0.4rem 0;
+  }
+  .lineup-floor h3{
+     font-size: 1.3rem;
+     margin: 0.6rem 0;
+  }
+  .floor-name{
+    color: #dedbd2;
+  }
+  
+  .lineups-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .lineup-item {
+    padding: 0.5rem 2rem;
+    font-size: 1.5rem;
+    color: var(--light-text-color);
+  }
+  
+  .lineup-artist {
+    font-weight: 600;
+    color: var( --light-text-color);
+  
+  }
+  
+  .lineup-time {
+    font-style: italic;
+    color: var( --light-text-color);
+  }
+  .buy-ticket-section {
+    display: flex;
+    justify-content: flex-end;
+    text-align: flex-end;
+    margin-top: 2rem;
+  }
+  .buy-ticket-button{
+    background-color: var( --light-text-color);
+    color: var(--main-color);
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }

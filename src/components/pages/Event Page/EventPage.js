@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import localImg from "../../assets/cover-art-4.jpg";
+import localImg from "../../../assets/cover-art-4.jpg";
 import { useTranslation } from "react-i18next";
+import CartContext from "../../reusable/Cart/CartContext";
+import api from "../../sections/authPage/utils/AxiosInstance";
+import "./EventPage.css";
 
 export default function EventPage() {
   const { id } = useParams();
+  const { addItem } = useContext(CartContext);
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { t } = useTranslation();
 
-  // Mapping arrays for weekdays and months (keys must match your translation files)
   const weekdayKeys = [
     "sunday",
     "monday",
@@ -36,47 +39,33 @@ export default function EventPage() {
   ];
 
   useEffect(() => {
-    const apiUrl =
-      process.env.NODE_ENV === "production"
-        ? "https://makerspace-cffwdbazgbh3ftdq.westeurope-01.azurewebsites.net/api/Events"
-        : "/api/Events";
-    fetch(`${apiUrl}/${id}`)
-      .then((res) => {
-        if (!res.ok) {
-          console.error("Error fetching event:", res.statusText);
-          throw new Error(`Network response was not ok. Status: ${res.status}`);
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setEvent(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching event:", err);
-        setError(err.message);
-        setLoading(false);
-      });
-  }, [id]);
+    api
+    .get(`/Events/${id}`)
+    .then((res) => {
+      setEvent(res.data);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.error("Error fetching event:", err);
+      setError(err.response?.data?.message || err.message);
+      setLoading(false);
+    });
+}, [id]);
 
   if (loading) return <p>Loading event...</p>;
 
-  // Function to group lineups by floor using translated keys for floor names
+  // Group lineups by floor
   const groupLineUpsByFloor = (lineUps) => {
     return lineUps.reduce((acc, lineUp) => {
-      // Use translation keys for floor names
-      const floorName =
-        lineUp.floor === 1 ? t("main_stage") : t("space_stage");
+      const floorName = lineUp.floor === 1 ? t("main_stage") : t("space_stage");
       if (!acc[floorName]) acc[floorName] = [];
       acc[floorName].push(lineUp);
       return acc;
     }, {});
   };
 
-  // Group lineups if event data is available
   const groupedLineUps = event ? groupLineUpsByFloor(event.lineUps) : {};
 
-  // Build a translated date string using mapping arrays
   let formattedDate = "";
   if (event) {
     const startDate = new Date(event.startDate);
@@ -89,11 +78,27 @@ export default function EventPage() {
       minute: "2-digit",
       hour12: false,
     });
-    const translatedWeekday = t(`weekdays.${weekdayKey}`);
-    const translatedMonth = t(`months.${monthKey}`);
-    // "starts_at" should be defined in your translation files (e.g., "starts at")
-    formattedDate = `${translatedWeekday} ${translatedMonth} ${day}, ${year} ${t("starts_at")} ${time}`;
+    formattedDate = `${t(`weekdays.${weekdayKey}`)} ${t(`months.${monthKey}`)} ${day}, ${year} ${t("starts_at")} ${time}`;
   }
+
+  // Handler for buying a ticket (adding to cart)
+  const handleBuyTicket = () => {
+    api
+      .post(`/tickets/purchase/${id}`, {})
+      .then((res) => {
+        addItem({
+          eventId: id,
+          ticketId: res.data.ticketId,
+          eventName: event.name,
+          price: event.price || "N/A"
+        });
+        alert("Ticket reserved! Check your cart to proceed to payment." + res.data.ticketId);
+      })
+      .catch((error) => {
+        console.error("Ticket reservation error:", error);
+        alert("Error reserving ticket.");
+      });
+  };
 
   return (
     <div className="event-page">
@@ -102,7 +107,7 @@ export default function EventPage() {
           className="event-image"
           src={event ? event.eventPhotoUrl : localImg}
           alt={event ? event.name : "Default"}
-          loading="lazy"  // Native lazy loading attribute
+          loading="lazy"
         />
       </div>
       <section className="event-info">
@@ -131,8 +136,8 @@ export default function EventPage() {
                           ) : (
                             lineUp.artistName
                           )}
-                        </span>
-                        {" - "}
+                        </span>{" "}
+                        -{" "}
                         <span className="lineup-time">
                           {new Date(lineUp.startTime).toLocaleTimeString([], {
                             hour: "2-digit",
@@ -147,6 +152,10 @@ export default function EventPage() {
             </section>
             <section className="event-description">
               <p className="description-text">{event.description}</p>
+            </section>
+            {/* Buy Ticket button */}
+            <section className="buy-ticket-section">
+            <button className="buy-ticket-button" onClick={handleBuyTicket}>Buy Ticket</button>
             </section>
           </>
         )}
