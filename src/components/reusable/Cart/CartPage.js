@@ -1,4 +1,3 @@
-// CartPage.js
 import React, { useContext, useEffect, useState } from "react";
 import CartContext from "./CartContext";
 import "./CartPage.css";
@@ -6,13 +5,10 @@ import "./CartPage.css";
 export default function CartPage() {
   const { cart, removeItem, updateQuantity } = useContext(CartContext);
 
-  // We'll calculate subtotal, shipping, and total for demonstration
   const [subTotal, setSubTotal] = useState(0);
-  const [shippingCost, setShippingCost] = useState(0);
   const [estimatedTotal, setEstimatedTotal] = useState(0);
-  const FREE_SHIPPING_THRESHOLD = 100; // Example threshold
 
-  // Recalculate costs whenever cart.items changes
+  // Recalculate costs whenever cart.items changes (no shipping now)
   useEffect(() => {
     let newSubTotal = 0;
     cart.items.forEach((item) => {
@@ -20,11 +16,7 @@ export default function CartPage() {
       newSubTotal += itemPrice * (item.quantity || 1);
     });
     setSubTotal(newSubTotal);
-
-    const newShippingCost = newSubTotal >= FREE_SHIPPING_THRESHOLD ? 0 : 10;
-    setShippingCost(newShippingCost);
-
-    setEstimatedTotal(newSubTotal + newShippingCost);
+    setEstimatedTotal(newSubTotal);
   }, [cart.items]);
 
   const handleIncrease = (item) => {
@@ -39,16 +31,9 @@ export default function CartPage() {
     }
   };
 
-  // Example message for free shipping
-  const freeShippingMessage =
-    subTotal >= FREE_SHIPPING_THRESHOLD
-      ? "You qualify for free shipping!"
-      : `You're $${(FREE_SHIPPING_THRESHOLD - subTotal).toFixed(
-          2
-        )} away from free shipping!`;
-
   return (
     <div className="cart-container">
+      {/* Items Column */}
       <div className="cart-items">
         <h1 className="cart-title">Shopping Cart</h1>
         {cart.items.length === 0 ? (
@@ -65,7 +50,7 @@ export default function CartPage() {
                 <div className="cart-item-info">
                   <h2 className="cart-item-name">{item.eventName}</h2>
                   <p className="cart-item-desc">{item.description}</p>
-                  <p className="cart-item-stock">Ticket ID: {item.ticketId}</p>
+                  <p className="cart-item-stock">{item.date}</p>
                 </div>
               </div>
               <div className="cart-item-right">
@@ -78,7 +63,7 @@ export default function CartPage() {
                     onClick={() => handleDecrease(item)}
                     disabled={item.quantity <= 1}
                   >
-                    -
+                    –
                   </button>
                   <span className="quantity-value">{item.quantity}</span>
                   <button
@@ -106,11 +91,6 @@ export default function CartPage() {
           <span>${subTotal.toFixed(2)}</span>
         </div>
         <div className="summary-row">
-          <span>Shipping Cost:</span>
-          <span>${shippingCost.toFixed(2)}</span>
-        </div>
-        {/* You can skip Discount entirely or show it as $0 */}
-        <div className="summary-row">
           <span>Discount:</span>
           <span>$0.00</span>
         </div>
@@ -119,7 +99,6 @@ export default function CartPage() {
           <span>Estimated Total:</span>
           <span>${estimatedTotal.toFixed(2)}</span>
         </div>
-        <p className="free-shipping-msg">{freeShippingMessage}</p>
         <button
           className="checkout-btn"
           onClick={() => alert("Proceeding to checkout page...")}

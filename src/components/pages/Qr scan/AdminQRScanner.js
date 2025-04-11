@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import jsQR from "jsqr";
-import api from "../../sections/authPage/utils/AxiosInstance"; // Adjust path as needed
+import api from "../authPage/utils/AxiosInstance";
 import "./QRScan.css"; // Contains your CSS
 
 const AdminQRScanner = () => {

@@ -7,12 +7,12 @@ import Confirmation from "./pages/Confirmation";
 import EventPage from "./pages/Event Page/EventPage";
 import Rentals from "./pages/Rentals";
 import Events from "./pages/Events";
-import DJs from "./pages/DJs";
-import AuthPage from "./sections/authPage/AuthPage";
-import Profile from "./pages/user profile/Profile";
+import DJs from "./pages/DJ Booking/DJs";
+import AuthPage from "./pages/authPage/AuthPage";
+import Profile from "./pages/User Profile/Profile";
 import Gallery from "./pages/Gallery/Gallery";
 import AdminQRScanner from "./pages/Qr scan/AdminQRScanner";
-import { useAuth } from "./sections/authPage/utils/AuthProvider";
+import { useAuth } from "./pages/authPage/utils/AuthProvider"; 
 import AdminPrivateRoute from "./reusable/Admin Route/AdminPrivateRoute";
 import CartPage from "./reusable/Cart/CartPage";
 function PrivateRoute({ children }) {

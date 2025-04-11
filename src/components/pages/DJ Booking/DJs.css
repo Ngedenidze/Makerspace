@@ -1,0 +1,192 @@
+.djs-page {
+    position: relative;
+    background-color: transparent;
+    padding: 0rem;
+    margin: 2rem auto;
+    width: min(65vw, 1200px);
+    box-sizing: border-box;
+    color: #333;
+    overflow: hidden;
+  }
+  
+  
+  
+  .djs-cover-image {
+    display: block;
+    max-height: 500px;
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.2s, clip-path 0.2s;
+    clip-path: polygon(0 0, 70% 0, 100% 10%, 100% 100%, 50% 100%, 0 100%);
+    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
+  }
+  .djs-stage-image-wrapper {
+    margin: 0 auto;
+    max-width: 1190px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+  }
+  .djs-stage-image{
+    max-width: 50%;
+    margin: 2px;
+    height: 40vh;
+  
+  }
+  .djs-stage-image-wrapper img{
+    width: 100%;
+    object-fit: cover;
+    object-position: 0px 80%;
+  }
+  .djs-stage-image .stage-1{
+  
+  }
+  
+  
+  .djs-main-container {
+    position: relative;
+    padding: 5px;
+    margin: 0 auto;
+    width: min(65vw, 1200px);
+    box-sizing: border-box;
+    color: #333;
+    overflow: hidden;
+    background-color: var(--main-color);
+  }
+  
+  .djs-top-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 3rem;
+    color: var( --light-text-color);
+    margin: 2px 0;
+    background-color: var(--main-color);
+  }
+  
+  .djs-top-bar h1 {
+    font-size: 1.625rem;
+    margin: 0;
+    text-align: left;
+    width: 100%;
+  }
+  
+  .djs-top-bar p {
+    font-size: 1rem;
+    margin: 5px;
+    margin-top: 1rem;
+    width: 100%;
+  }
+  /* -------------------------------------------------------------------------- */
+  /*  DJs Contact Section                                                       */
+  /* -------------------------------------------------------------------------- */
+  .djs-contact {
+    padding: 1rem;
+    margin: 2px auto;
+    width: min(65vw, 1200px);
+    box-sizing: border-box;
+    color: var( --light-text-color);
+    background-color: var(--main-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+  }
+  
+  .djs-contact-heading {
+    text-align: center;
+    margin: 0;
+    max-width: 50%;
+    padding: 2rem;
+    align-content: center;
+  }
+  
+  .djs-contact-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #F9F9F9;
+    text-align: center;
+  }
+  
+  .djs-contact-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    color: var( --light-text-color);
+    text-align: center;
+  }
+  
+  .djs-contact-form {
+    background-color: var(--forms-color);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .djs-contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .djs-contact-form input[type="text"],
+  .djs-contact-form input[type="email"],
+  .djs-contact-form input[type="url"],
+  .djs-contact-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+    background-color: #F9F9F9;
+    color: #333;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+  }
+  
+  .djs-contact-form input[type="text"]:focus,
+  .djs-contact-form input[type="email"]:focus,
+  .djs-contact-form textarea:focus {
+    border-color: var( --light-text-color);
+    outline: none;
+    box-shadow: 0 0 10px rgba(226, 243, 234, 0.5);
+  }
+  
+  .djs-contact-form textarea {
+    resize: vertical;
+    min-height: 150px;
+  }
+  
+  .djs-contact-form button {
+    background-color: var( --light-text-color);
+    color: #333;
+    padding: 0.8rem 2rem;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .djs-contact-form button:hover {
+    background-color: #d1e8d7;
+  }
+  
+  .djs-contact-info {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #F9F9F9;
+    text-align: center;
+  }
+  
+  .djs-contact-info a {
+    color: var( --light-text-color);
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+  
+  .djs-contact-info a:hover {
+    color: #d1e8d7;
+  }
+  

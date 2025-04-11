@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import Specials from "../sections/eventProfile/EventsGrid";
 import InsessionTabs from "../sections/headingPages/CardInfo/InSessionTabs";
 import CommercialRenting from "./CommercialRenting";
-import DJBooking from "./DJBooking";
+import DJBooking from "./DJ Booking/DJBooking";
 import About from "../sections/headingPages/About";
 import PastEvents from "../sections/headingPages/PastEvents";
 import SoonEvents from "../sections/headingPages/SoonEvents";

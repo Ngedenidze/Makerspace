@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import localImg from "../../assets/cover-art-5.jpg";
-import ImageGrid from "../reusable/Image Grid/ImageGrid";
 import { useTranslation } from "react-i18next";
+import "./DJs.css";
 
 const DJs = () => {
   const { id } = useParams();

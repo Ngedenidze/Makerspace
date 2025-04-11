@@ -5,27 +5,31 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    width: 90%;
-    background-color: #ccc;
-    max-width: 1200px;
-    margin: 40px auto;
+    width: min(65vw, 1200px);
+    max-width: 1600px;
+    min-height: 101vh;
+    margin: 2rem auto;
     gap: 20px;
+    border-radius: 2%;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: var(--light-text-color, #333);
+    background-color: var(--main-color, #fff);
+    padding: 4rem auto;  
   }
   
   .cart-items {
     flex: 2;
-    margin-right: 20px;
+    margin: 1.5rem;
   }
   
   .cart-title {
     font-size: 2rem;
-    margin-bottom: 20px;
+    margin: 20px;
   }
   
   .empty-cart {
-    text-align: center;
+    text-align: left;
+    margin-left: 1.5rem;
     font-size: 1.2rem;
     color: #777;
   }
@@ -34,7 +38,7 @@
   .cart-row {
     display: flex;
     justify-content: space-between;
-    background-color: var(--main-color, #f7f7f7);
+    background-color: var(--seconday-color, #f7f7f7);
     border-radius: 8px;
     margin-bottom: 15px;
     padding: 15px;
@@ -42,7 +46,7 @@
   }
   
   .cart-row:hover {
-    background-color: #f0f0f0;
+    background-color: var(--blue-sky, #e0e0e0);
   }
   
   /* Left side: image + info */
@@ -72,12 +76,12 @@
   .cart-item-desc {
     margin: 0 0 5px 0;
     font-size: 0.95rem;
-    color: #555;
+    color: var(--light-text-color);
   }
   
   .cart-item-stock {
     font-size: 0.9rem;
-    color: #444;
+    color: #f0f0f0;
   }
   
   /* Right side: price, quantity, remove */
@@ -139,7 +143,8 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 20px;
-    background-color: #fafafa;
+    margin: 1.5rem;
+    background-color: var(--seconday-color, #f7f7f7);
     max-height: fit-content;
   }
   
@@ -165,7 +170,7 @@
     text-align: center;
     margin: 10px 0;
     font-size: 0.95rem;
-    color: #555;
+    color: #fff;
   }
   
   .checkout-btn {

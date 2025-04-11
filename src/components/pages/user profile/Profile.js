@@ -1,7 +1,7 @@
 // src/components/Profile.js
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../../sections/authPage/utils/AxiosInstance"; // Axios instance
+import api from "../authPage/utils/AxiosInstance";
 import { useTranslation } from "react-i18next";
 import "./Profile.css";
 

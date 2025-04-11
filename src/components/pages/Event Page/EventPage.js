@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import localImg from "../../../assets/cover-art-4.jpg";
 import { useTranslation } from "react-i18next";
 import CartContext from "../../reusable/Cart/CartContext";
-import api from "../../sections/authPage/utils/AxiosInstance";
+import api from "../authPage/utils/AxiosInstance";
 import "./EventPage.css";
 
 export default function EventPage() {
@@ -83,9 +83,23 @@ export default function EventPage() {
 
   // Handler for buying a ticket (adding to cart)
   const handleBuyTicket = () => {
+    if (event) {
+      const startDate = new Date(event.startDate);
+      const monthKey = monthKeys[startDate.getMonth()];
+      const day = startDate.getDate();
+      const year = startDate.getFullYear();
+      const time = startDate.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      });
+      formattedDate = `${t(`months.${monthKey}`)} ${day}, ${year} ${t("starts_at")} ${time}`;
+    }
+
     api
       .post(`/tickets/purchase/${id}`, {})
       .then((res) => {
+
         // Here we add extra properties: image, description, and quantity set to 1 by default.
         addItem({
           eventId: id,
@@ -95,6 +109,7 @@ export default function EventPage() {
           image: event.eventPhotoUrl,
           description: event.description,
           quantity: 1,
+          date: formattedDate,
         });
         alert(
           "Ticket reserved! Check your cart to proceed to payment. Ticket ID: " +

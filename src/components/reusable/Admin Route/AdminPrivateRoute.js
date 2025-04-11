@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../../sections/authPage/utils/AuthProvider";
-import api from "../../sections/authPage/utils/AxiosInstance";
+import { useAuth } from "../../pages/authPage/utils/AuthProvider";
+import api from "../../pages/authPage/utils/AxiosInstance";
 
 function AdminPrivateRoute({ children }) {
   const { token } = useAuth();
