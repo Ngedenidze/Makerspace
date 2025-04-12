@@ -13,7 +13,7 @@ const DJs = () => {
   const [stageName, setStageName] = useState("");
   const [socialLink, setSocialLink] = useState("");
   const [musicLink, setMusicLink] = useState("");
-  const [motivation, setMotivation] = useState("");
+  const [motivation, setMotivation] = useState(""); 
 
   // State for handling loading, error, and success messages
   const [loading, setLoading] = useState(false);
