@@ -1,0 +1,21 @@
+.success-payment-page {
+    max-width: 600px;
+    min-height: 100vh;
+    margin: 100px auto;
+    padding: 40px;
+    text-align: center;
+  }
+  .success-payment-content{
+    background-color: var(--main-color);
+    padding: 5rem;
+  }
+  .success-payment-content h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .success-payment-content p {
+    font-size: 1.2rem;
+    color: var(--light-text-color);
+    margin: 0;
+  }

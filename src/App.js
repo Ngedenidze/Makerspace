@@ -5,7 +5,7 @@ import Heading from "./components/sections/Footer";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
-import { CartProvider } from "./components/reusable/Cart/CartContext";
+import { CartProvider } from "./components/pages/Cart/CartContext";
 
 const queryClient = new QueryClient();
 

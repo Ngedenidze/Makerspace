@@ -17,11 +17,9 @@ test("renders Homepage route", () => {
 
 test("renders EventPage route", () => {
   render(
-    <QueryClientProvider client={queryClient}>
     <MemoryRouter initialEntries={["/Events/1"]}>
       <Routing />
     </MemoryRouter>
-    </QueryClientProvider>
   );
 
   expect(screen.getByText(/Loading event/i)).toBeInTheDocument();

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import localImg from "../../../assets/cover-art-4.jpg";
 import { useTranslation } from "react-i18next";
-import CartContext from "../../reusable/Cart/CartContext";
+import CartContext from "../Cart/CartContext";
 import api from "../authPage/utils/AxiosInstance";
 import "./EventPage.css";
 
@@ -14,6 +14,7 @@ export default function EventPage() {
   const [error, setError] = useState(null);
   const { t } = useTranslation();
 
+  // Define keys for localization of weekdays and months.
   const weekdayKeys = [
     "sunday",
     "monday",
@@ -54,7 +55,7 @@ export default function EventPage() {
 
   if (loading) return <p>Loading event...</p>;
 
-  // Group lineups by floor
+  // Group lineups by floor.
   const groupLineUpsByFloor = (lineUps) => {
     return lineUps.reduce((acc, lineUp) => {
       const floorName = lineUp.floor === 1 ? t("main_stage") : t("space_stage");
@@ -66,6 +67,7 @@ export default function EventPage() {
 
   const groupedLineUps = event ? groupLineUpsByFloor(event.lineUps) : {};
 
+  // Format event start date.
   let formattedDate = "";
   if (event) {
     const startDate = new Date(event.startDate);
@@ -78,32 +80,25 @@ export default function EventPage() {
       minute: "2-digit",
       hour12: false,
     });
-    formattedDate = `${t(`weekdays.${weekdayKey}`)} ${t(`months.${monthKey}`)} ${day}, ${year} ${t("starts_at")} ${time}`;
+    formattedDate = `${t(`weekdays.${weekdayKey}`)} ${t(
+      `months.${monthKey}`
+    )} ${day}, ${year} ${t("starts_at")} ${time}`;
   }
 
-  // Handler for buying a ticket (adding to cart)
+  // Updated handler for buying a ticket using BoG's payment system workflow.
   const handleBuyTicket = () => {
-    if (event) {
-      const startDate = new Date(event.startDate);
-      const monthKey = monthKeys[startDate.getMonth()];
-      const day = startDate.getDate();
-      const year = startDate.getFullYear();
-      const time = startDate.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      });
-      formattedDate = `${t(`months.${monthKey}`)} ${day}, ${year} ${t("starts_at")} ${time}`;
-    }
-
+    // Step 1: Create or retrieve the cart.
     api
-      .post(`/tickets/purchase/${id}`, {})
-      .then((res) => {
-
-        // Here we add extra properties: image, description, and quantity set to 1 by default.
+      .get("/Cart/my-cart")
+      .then((cartRes) => {
+        // Step 2: Add the ticket to the cart.
+        return api.post("/Cart/add-ticket", { ticketId: id });
+      })
+      .then((addTicketRes) => {
+        // Update your local cart context for immediate UI feedback.
         addItem({
           eventId: id,
-          ticketId: res.data.ticketId,
+          ticketId: addTicketRes.data.ticketId,
           eventName: event.name,
           price: event.price || "N/A",
           image: event.eventPhotoUrl,
@@ -113,7 +108,7 @@ export default function EventPage() {
         });
         alert(
           "Ticket reserved! Check your cart to proceed to payment. Ticket ID: " +
-            res.data.ticketId
+            addTicketRes.data.ticketId
         );
       })
       .catch((error) => {
@@ -121,6 +116,7 @@ export default function EventPage() {
         alert("Error reserving ticket.");
       });
   };
+  
 
   return (
     <div className="event-page">

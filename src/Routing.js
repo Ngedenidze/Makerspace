@@ -11,7 +11,9 @@ import Gallery from "./components/pages/Gallery/Gallery";
 import AdminQRScanner from "./components/pages/Qr scan/AdminQRScanner";
 import { useAuth } from "./components/pages/authPage/utils/AuthProvider"; 
 import AdminPrivateRoute from "./components/reusable/Admin Route/AdminPrivateRoute";
-import CartPage from "./components/reusable/Cart/CartPage";
+import CartPage from "./components/pages/Cart/CartPage";
+import SuccessPayment from "./components/pages/Payment Handling/SuccessPayement";
+import FailPayment from "./components/pages/Payment Handling/FailPayment";
 function PrivateRoute({ children }) {
   const { token } = useAuth();
   return token ? children : <Navigate to="/login" />;
@@ -33,6 +35,8 @@ export default function Routing() {
       <Route path="/AllEvents/:tab" element={<Events />} />
       <Route path="/Events/:id" element={<EventPage />} />
       <Route path="/DJs" element={<DJs />} />
+      <Route path="/successpayment" element={<SuccessPayment />} />
+      <Route path="/failpayment" element={<FailPayment />} />
       <Route path="/gallery" element={<Gallery />} />
       
       {/* Auth routes wrapped in PublicRoute */}

@@ -1,0 +1,23 @@
+.fail-payment-page {
+    min-height: 100vh;
+    max-width: 600px;
+    margin: 100px auto;
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .fail-payment-content{
+    background-color: var(--main-color);
+    padding: 5rem;
+}
+  .fail-payment-content h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #d32f2f; /* Red color for the headline */
+  }
+  
+  .fail-payment-content p {
+    color: var(--light-text-color);
+    font-size: 1.2rem;
+    margin: 0;
+  }
