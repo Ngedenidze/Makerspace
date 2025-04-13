@@ -110,14 +110,10 @@ export default function EventPage() {
           quantity: ticketQuantity,
           date: formattedDate,
         });
-        alert(
-          "Ticket reserved! Check your cart to proceed to payment. Ticket ID: " +
-            addTicketRes.data.ticketId
-        );
+      
       })
       .catch((error) => {
         console.error("Ticket reservation error:", error);
-        alert("Error reserving ticket.");
       });
   };
   
@@ -175,23 +171,16 @@ export default function EventPage() {
             <section className="event-description">
               <p className="description-text">{event.description}</p>
             </section>
-            {/* Quantity selection */}
-            <section className="ticket-quantity-section">
-              <label htmlFor="ticketQuantity">Quantity:</label>
+            <section className="buy-ticket-section">
+            <label htmlFor="ticketQuantity">Quantity:</label>
               <input
                 id="ticketQuantity"
                 type="number"
-                min="1"
-                // Adjust max here as needed; e.g. remove or increase if more than 2 tickets can be bought.
-                max="2"
                 value={ticketQuantity}
                 onChange={(e) =>
                   setTicketQuantity(parseInt(e.target.value, 10) || 1)
                 }
               />
-            </section>
-            {/* Buy Ticket button */}
-            <section className="buy-ticket-section">
               <button className="buy-ticket-button" onClick={handleBuyTicket}>
                 Add to Cart
               </button>

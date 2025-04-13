@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../authPage/utils/AxiosInstance";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../authPage/utils/AuthProvider";
 import "./Profile.css";
 
 function Profile() {
@@ -16,7 +17,7 @@ function Profile() {
   const [ticketsVisible, setTicketsVisible] = useState(false);
   const [ticketsLoading, setTicketsLoading] = useState(false);
   const [ticketsError, setTicketsError] = useState(null);
-
+  const { token, clearToken } = useAuth();
   // Format date function (kept the same)
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -54,7 +55,6 @@ function Profile() {
 
   // Fetch profile
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
     if (!token) {
       console.log("No token found");
       navigate("/login");
@@ -63,19 +63,33 @@ function Profile() {
     console.log("Token exists:", token);
 
     api
-      .get("/auth/me")
+      .get("/auth/me", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
-        setProfile(response.data);
+        console.log("Profile fetch response:", response.data);
+        const data = response.data;
+        if (data && data.id > 0) {
+          setProfile(data);
+        } else {
+          console.warn("Profile data is empty or missing an ID");
+          clearToken(); // update context state
+          navigate("/login");
+        }
       })
       .catch((error) => {
-        console.error("Profile fetch error:", error.response?.data || error.message);
-        localStorage.removeItem("accessToken");
+        console.error(
+          "Profile fetch error:",
+          error.response?.data || error.message
+        );
+        clearToken(); // update context state
         navigate("/login");
       })
       .finally(() => {
         setLoading(false);
       });
-  }, [navigate]);
+  }, [token, navigate, clearToken]);
+  
 
   // Fetch tickets when the "My Tickets" section is expanded and tickets haven't been loaded yet.
   useEffect(() => {
