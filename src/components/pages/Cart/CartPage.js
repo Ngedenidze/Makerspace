@@ -46,9 +46,6 @@ export default function CartPage() {
     setSubTotal(newSubTotal);
     setEstimatedTotal(newSubTotal);
   }, [cart.items]);
-
-  // Create a debounced function to update the backend.
-  // Using useCallback to ensure that the debounced function is not recreated on every render.
   const updateQuantityBackend = useCallback(
     debounce((item, newQuantity) => {
       api.post(`/Cart/update-ticket?eventId=${item.eventId}&quantity=${newQuantity}`)
@@ -58,7 +55,7 @@ export default function CartPage() {
         .catch((error) => {
           console.error("Error updating quantity on backend:", error);
         });
-    }, 500), // 500ms debounce delay; adjust as needed.
+    }, 100), 
     []
   );
 

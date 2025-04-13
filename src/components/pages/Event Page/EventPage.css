@@ -116,17 +116,38 @@
   }
   .buy-ticket-section {
     display: flex;
+    gap: 5px;
     justify-content: flex-end;
     text-align: flex-end;
+    align-items: center;
     margin-top: 2rem;
+  }
+  .buy-ticket-section label{
+    color: var(--highlighted-text-color-light);
+    font-size: 1rem;
+  }
+  .buy-ticket-section input{
+    background-color: var( --light-text-color);
+    color: var(--main-color);
+    padding: 1rem;
+    font-size: 1rem;
+    width: 20px;
+    cursor: pointer;
+    height: 10px;
+    border-radius: 0;
+  }
+  .buy-ticket-section input:hover{
+    background-color: var( --light-text-color);
+    color: var(--main-color);
+    padding: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
   }
   .buy-ticket-button{
     background-color: var( --light-text-color);
     color: var(--main-color);
-    padding: 0.8rem 2rem;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
+    padding: 0.8rem;
+    font-size: 0.8rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }

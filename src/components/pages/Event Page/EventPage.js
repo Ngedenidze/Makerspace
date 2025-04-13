@@ -172,7 +172,7 @@ export default function EventPage() {
               <p className="description-text">{event.description}</p>
             </section>
             <section className="buy-ticket-section">
-            <label htmlFor="ticketQuantity">Quantity:</label>
+            <label htmlFor="ticketQuantity">Buy Tickets:</label>
               <input
                 id="ticketQuantity"
                 type="number"

@@ -9,6 +9,7 @@ export default function Navigation({ device, onSpecialsClick, onAboutClick }) {
   const { token } = useAuth(); // Assume that 'token' exists if the user is signed in.
   const { cart, dispatch } = useContext(CartContext);
   const cartCount = cart.items.reduce((total, item) => total + item.quantity, 0);
+  
   return (
     <section className="navbar-stack">
       <div className="nav-bar-title">
