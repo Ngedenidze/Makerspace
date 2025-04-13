@@ -805,6 +805,7 @@ Link:link {
 .in-session .in-session-text h2 {
   font-size: 1.6rem;
   margin: 0;
+  text-align: left;
   color: rgb(75, 75, 75);
 }
 
@@ -1199,7 +1200,7 @@ Link:link {
   background-color: transparent;
   padding: 0rem;
   margin: 2rem auto;
-  width: min(65vw, 1200px);
+  width: min(70vw, 1200px);
   box-sizing: border-box;
   color: #333;
   overflow: hidden;
@@ -1302,7 +1303,7 @@ Link:link {
   background-color: transparent;
   padding: 0rem;
   margin: 2rem auto;
-  width: min(65vw, 1200px);
+  width: min(70vw, 1200px);
   box-sizing: border-box;
   color: #333;
   overflow: hidden;
@@ -1322,7 +1323,7 @@ Link:link {
   position: relative;
   padding: 5px;
   margin: 0 auto;
-  width: min(65vw, 1200px);
+  width: min(70vw, 1200px);
   box-sizing: border-box;
   color: #333;
   overflow: hidden;
@@ -1443,7 +1444,7 @@ Link:link {
 .rentals-contact {
   padding: 1rem;
   margin: 2px auto;
-  width: min(65vw, 1200px);
+  width: min(70vw, 1200px);
   box-sizing: border-box;
   color: var( --light-text-color);
   background-color: var(--main-color);
@@ -1866,6 +1867,7 @@ Link:link {
     object-fit: cover;
     overflow: hidden;
   }
+  
 }
 @media (max-width: 768px) { /* Tablet styles */
   .nav-title-logo{
