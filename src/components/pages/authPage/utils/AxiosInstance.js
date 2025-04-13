@@ -34,9 +34,10 @@ api.interceptors.response.use(
 
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-
+      console.log("Old token:", localStorage.getItem("accessToken"));
       const newToken = await refreshAccessToken();
       if (newToken) {
+        console.log("New token received:", newToken);
         originalRequest.headers.Authorization = `Bearer ${newToken}`;
         return api(originalRequest);
       } else {

@@ -14,6 +14,9 @@ export default function EventPage() {
   const [error, setError] = useState(null);
   const { t } = useTranslation();
 
+  // New state for ticket quantity
+  const [ticketQuantity, setTicketQuantity] = useState(1);
+
   // Define keys for localization of weekdays and months.
   const weekdayKeys = [
     "sunday",
@@ -87,15 +90,16 @@ export default function EventPage() {
 
   // Updated handler for buying a ticket using BoG's payment system workflow.
   const handleBuyTicket = () => {
-    // Step 1: Create or retrieve the cart.
+    console.log("Event ID:", id);
+    console.log("Ticket Quantity:", ticketQuantity);
+  
     api
       .get("/Cart/my-cart")
-      .then((cartRes) => {
-        // Step 2: Add the ticket to the cart.
-        return api.post("/Cart/add-ticket", { ticketId: id });
+      .then(() => {
+        // Pass eventId and quantity as query parameters per Swagger definition.
+        return api.post(`/Cart/add-ticket?eventId=${Number(id)}&quantity=${ticketQuantity}`);
       })
       .then((addTicketRes) => {
-        // Update your local cart context for immediate UI feedback.
         addItem({
           eventId: id,
           ticketId: addTicketRes.data.ticketId,
@@ -103,7 +107,7 @@ export default function EventPage() {
           price: event.price || "N/A",
           image: event.eventPhotoUrl,
           description: event.description,
-          quantity: 1,
+          quantity: ticketQuantity,
           date: formattedDate,
         });
         alert(
@@ -170,6 +174,21 @@ export default function EventPage() {
             </section>
             <section className="event-description">
               <p className="description-text">{event.description}</p>
+            </section>
+            {/* Quantity selection */}
+            <section className="ticket-quantity-section">
+              <label htmlFor="ticketQuantity">Quantity:</label>
+              <input
+                id="ticketQuantity"
+                type="number"
+                min="1"
+                // Adjust max here as needed; e.g. remove or increase if more than 2 tickets can be bought.
+                max="2"
+                value={ticketQuantity}
+                onChange={(e) =>
+                  setTicketQuantity(parseInt(e.target.value, 10) || 1)
+                }
+              />
             </section>
             {/* Buy Ticket button */}
             <section className="buy-ticket-section">

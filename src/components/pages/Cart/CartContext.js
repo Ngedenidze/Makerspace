@@ -3,38 +3,36 @@ import React, { createContext, useReducer, useEffect } from "react";
 const CartContext = createContext();
 
 const initialState = {
-  items: [] // Each item: { eventId, ticketId, eventName, price, image, description, quantity, ... }
+  items: JSON.parse(localStorage.getItem("cartItems")) || [],
 };
 
 function cartReducer(state, action) {
   switch (action.type) {
     case "ADD_ITEM":
-      // Instead of blindly adding, this case is no longer needed
-      // if duplicate handling is performed in addItem function.
-      return { ...state, items: [...state.items, action.payload] };
-
+      const updatedItems = [...state.items, action.payload];
+      localStorage.setItem("cartItems", JSON.stringify(updatedItems));
+      return { ...state, items: updatedItems };
     case "REMOVE_ITEM":
-      return {
-        ...state,
-        items: state.items.filter(
-          (item) => item.ticketId !== action.payload.ticketId
-        ),
-      };
-
-    case "CLEAR_CART":
-      return { ...state, items: [] };
-
+      const filteredItems = state.items.filter(
+        (item) => item.ticketId !== action.payload.ticketId
+      );
+      localStorage.setItem("cartItems", JSON.stringify(filteredItems));
+      return { ...state, items: filteredItems };
     case "UPDATE_QUANTITY":
-      return {
-        ...state,
-        items: state.items.map((item) => {
-          if (item.ticketId === action.payload.ticketId) {
-            return { ...item, quantity: action.payload.quantity };
-          }
-          return item;
-        }),
-      };
-
+      const modifiedItems = state.items.map((item) =>
+        item.ticketId === action.payload.ticketId
+          ? { ...item, quantity: action.payload.quantity }
+          : item
+      );
+      localStorage.setItem("cartItems", JSON.stringify(modifiedItems));
+      return { ...state, items: modifiedItems };
+    case "CLEAR_CART":
+      localStorage.removeItem("cartItems");
+      return { ...state, items: [] };
+    // Add SET_CART if you're rehydrating the cart from the backend:
+    case "SET_CART":
+      localStorage.setItem("cartItems", JSON.stringify(action.payload));
+      return { ...state, items: action.payload };
     default:
       return state;
   }
@@ -57,40 +55,37 @@ export const CartProvider = ({ children }) => {
           quantity: existingItem.quantity + newItem.quantity,
         },
       });
-      // Uncomment for debug logging:
-      // console.log("Updated existing item quantity:", newItem.ticketId);
     } else {
       dispatch({ type: "ADD_ITEM", payload: newItem });
-      // Uncomment for debug logging:
-      // console.log("Item added to cart:", newItem);
     }
-    // Uncomment for overall cart state logging:
-    // console.log("Cart state after addItem:", state);
   };
 
   const removeItem = (item) => {
     dispatch({ type: "REMOVE_ITEM", payload: item });
-    // console.log("Item removed from cart:", item);
   };
 
   const clearCart = () => {
     dispatch({ type: "CLEAR_CART" });
-    // console.log("Cart cleared");
   };
 
   const updateQuantity = (ticketId, quantity) => {
     dispatch({ type: "UPDATE_QUANTITY", payload: { ticketId, quantity } });
-    // console.log("Quantity updated for ticket:", ticketId, "Quantity:", quantity);
   };
 
   useEffect(() => {
-    // Uncomment this line if you need to observe cart state changes during development.
     // console.log("Cart state updated:", state);
   }, [state]);
 
   return (
     <CartContext.Provider
-      value={{ cart: state, addItem, removeItem, clearCart, updateQuantity }}
+      value={{
+        cart: state,
+        dispatch, // Exposing dispatch so you can call actions directly (e.g., SET_CART)
+        addItem,
+        removeItem,
+        clearCart,
+        updateQuantity,
+      }}
     >
       {children}
     </CartContext.Provider>
