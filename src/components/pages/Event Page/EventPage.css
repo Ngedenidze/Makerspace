@@ -8,7 +8,7 @@
     box-sizing: border-box;
     color: #333;
     overflow: hidden;
-  }
+}
   
   /* Diagonal background similar to About Us */
   
@@ -28,7 +28,7 @@
     left: 0;
     z-index: -1;
     background: var(--main-color);
-    clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 100%);
   }
   
   .event-image-wrapper {
@@ -53,12 +53,17 @@
     font-size: 1.3rem;
     line-height: 1.6;
     color: var( --light-text-color);
+
+      white-space: pre-line;
+
+    
   }
   
   .event-dates {
     margin-bottom: 0rem;
     font-size: 1.2rem;
     color: #e0e1dd;
+    margin-top: 1rem;
   }
   
   .start-date,
@@ -87,6 +92,7 @@
   .lineup-floor h3{
      font-size: 1.3rem;
      margin: 0.6rem 0;
+     text-decoration: underline 2px; 
   }
   .floor-name{
     color: #dedbd2;
@@ -111,7 +117,6 @@
   }
   
   .lineup-time {
-    font-style: italic;
     color: var( --light-text-color);
   }
   .buy-ticket-section {
@@ -150,4 +155,34 @@
     font-size: 0.8rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+  }
+
+  @media screen and (max-width: 600px) {
+    /* -------------------------------------------------------------------------- */
+/*  Events                                                                 */
+/* -------------------------------------------------------------------------- */
+  .event-page{
+    margin: 0;
+    width: 100%;
+  }
+  .event-info{
+    padding: 1rem;
+  }
+  .event-dates{
+    font-size: 0.9rem;
+  }
+  .event-image{
+    clip-path: none;
+    max-height: 25vh;
+  }
+  .event-info::before {
+    clip-path: none;
+  }
+  .event-page h1{
+    font-size: 1.2rem;
+  }
+  .event-page h3{
+    font-size: 1rem;
+  }
+    
   }

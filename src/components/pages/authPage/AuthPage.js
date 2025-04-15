@@ -603,6 +603,25 @@ const AuthPage = ({ page }) => {
               {t(success, "Operation successful")}
             </div>
           )}
+          <div className="terms-and-conditions">
+                          <label htmlFor="termsCheckbox" className="terms-label">
+                            <input type="checkbox" required id="termsCheckbox" />
+                            <span className="terms-checkbox"></span>
+                            <span className="terms-text">
+                              <span
+                                className="required-asterisk"
+                                style={{ color: "red", marginRight: "4px" }}
+                              >
+                                *
+                              </span>
+                              By creating an account, I confirm that I have read and accept our{" "}
+                              <Link className="terms-link" to="/terms">
+                                Terms and Conditions
+                              </Link>
+                              . I understand that my registration signifies my agreement to abide by these terms.
+                            </span>
+                          </label>
+                        </div>
           <button type="submit" className="auth-button" disabled={isSubmitting}>
             {t("auth.register", "Register")}
           </button>

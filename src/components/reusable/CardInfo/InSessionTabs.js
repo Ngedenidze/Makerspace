@@ -8,8 +8,32 @@ export default function InsessionTabs({ eventsData }) {
   const [stages, setStages] = useState([]);
   const [eventID, setEventID] = useState("");
   const [eventStatus, setEventStatus] = useState("");
+  const [upcomingEventDate, setUpcomingEventDate] = useState(null);
   const [image, setImage] = useState("");
   const [error, setError] = useState(false);
+  const weekdayKeys = [
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+  ];
+  const monthKeys = [
+    "january",
+    "february", 
+    "march",
+    "april",  
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december",
+  ];
 
   useEffect(() => {
     if (!eventsData || eventsData.length === 0) return;
@@ -23,7 +47,14 @@ export default function InsessionTabs({ eventsData }) {
     if (upcomingEvent) {
       const start = new Date(upcomingEvent.startDate);
       const end = new Date(upcomingEvent.endDate);
-
+      
+      const weekdayKey = weekdayKeys[start.getDay()];
+      const monthKey = monthKeys[start.getMonth()];
+      const translatedWeekday = t(`weekdays.${weekdayKey}`);
+      const translatedMonth = t(`months.${monthKey}`);
+      const day = start.getDate();
+      const translatedDate = `${translatedMonth} ${day}`;
+      setUpcomingEventDate(translatedDate);
       if (now < start) {
         setEventStatus(t("starting_soon"));
       } else if (now >= start && now <= end) {
@@ -100,6 +131,7 @@ export default function InsessionTabs({ eventsData }) {
           <>
             <article className="in-session-text">
               <h1>{eventStatus}</h1>
+              <h3>{upcomingEventDate} </h3>
               <div className="in-session-stages">
                 {stages.map((stage) => (
                   <div className="stage" key={stage.id}>

@@ -4,6 +4,7 @@ import localImg from "../../../assets/cover-art-4.jpg";
 import { useTranslation } from "react-i18next";
 import CartContext from "../Cart/CartContext";
 import api from "../authPage/utils/AxiosInstance";
+import Linkify from "react-linkify"; // Import react-linkify
 import "./EventPage.css";
 
 export default function EventPage() {
@@ -14,10 +15,10 @@ export default function EventPage() {
   const [error, setError] = useState(null);
   const { t } = useTranslation();
 
-  // New state for ticket quantity
+  // State for ticket quantity
   const [ticketQuantity, setTicketQuantity] = useState(1);
 
-  // Define keys for localization of weekdays and months.
+  // Localization arrays for weekdays and months
   const weekdayKeys = [
     "sunday",
     "monday",
@@ -88,16 +89,17 @@ export default function EventPage() {
     )} ${day}, ${year} ${t("starts_at")} ${time}`;
   }
 
-  // Updated handler for buying a ticket using BoG's payment system workflow.
+  // Handler for buying a ticket
   const handleBuyTicket = () => {
     console.log("Event ID:", id);
     console.log("Ticket Quantity:", ticketQuantity);
-  
+
     api
       .get("/Cart/my-cart")
       .then(() => {
-        // Pass eventId and quantity as query parameters per Swagger definition.
-        return api.post(`/Cart/add-ticket?eventId=${Number(id)}&quantity=${ticketQuantity}`);
+        return api.post(
+          `/Cart/add-ticket?eventId=${Number(id)}&quantity=${ticketQuantity}`
+        );
       })
       .then((addTicketRes) => {
         addItem({
@@ -110,13 +112,12 @@ export default function EventPage() {
           quantity: ticketQuantity,
           date: formattedDate,
         });
-      
+        // No alert—UI (like a badge) could update automatically from your CartContext.
       })
       .catch((error) => {
         console.error("Ticket reservation error:", error);
       });
   };
-  
 
   return (
     <div className="event-page">
@@ -169,10 +170,27 @@ export default function EventPage() {
               ))}
             </section>
             <section className="event-description">
-              <p className="description-text">{event.description}</p>
+              {/* Wrap description in Linkify to auto‑detect URLs */}
+              <p className="description-text">
+                <Linkify
+                  componentDecorator={(decoratedHref, decoratedText, key) => (
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={decoratedHref}
+                      key={key}
+                      style={{ color: "teal" }}
+                    >
+                      {decoratedText}
+                    </a>
+                  )}
+                >
+                  {event.description}
+                </Linkify>
+              </p>
             </section>
             <section className="buy-ticket-section">
-            <label htmlFor="ticketQuantity">Buy Tickets:</label>
+              <label htmlFor="ticketQuantity">Buy Tickets:</label>
               <input
                 id="ticketQuantity"
                 type="number"

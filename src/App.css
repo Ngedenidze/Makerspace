@@ -19,7 +19,7 @@
 }
 @font-face{
   font-family: "Georgian Modern";
-  src: url("./assets/fonts/gl-kupiura-regular.ttf") format('opentype');
+  src: url("./assets/fonts/Sylfaen/sylfaen.ttf") format('opentype');
   font-display: swap;
   font-weight: normal;
   font-style: normal;
@@ -2254,32 +2254,7 @@ Link:link {
     margin: 0;
   }
   
-  /* -------------------------------------------------------------------------- */
-/*  Events                                                                 */
-/* -------------------------------------------------------------------------- */
-  .event-page{
-    margin: 0;
-    width: 100%;
-  }
-  .event-info{
-    padding: 1rem;
-  }
-  .event-dates{
-    font-size: 0.9rem;
-  }
-  .event-image{
-    clip-path: none;
-    max-height: 25vh;
-  }
-  .event-info::before {
-    clip-path: none;
-  }
-  .event-page h1{
-    font-size: 1.2rem;
-  }
-  .event-page h3{
-    font-size: 1rem;
-  }
+  
   .lineup-item{
     font-size: 0.8rem;
     padding: 0.5rem;
