@@ -1,3 +1,4 @@
+// authPage/utils/AxiosInstance.js
 import axios from "axios";
 import { refreshAccessToken } from "./AuthService";
 
@@ -8,7 +9,7 @@ const apiBaseUrl =
 
 const api = axios.create({
   baseURL: `${apiBaseUrl}/api`,
-  withCredentials: true, // Ensure cookies (refreshToken) are always sent
+  withCredentials: true,
 });
 
 api.interceptors.request.use((config) => {
@@ -24,7 +25,6 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // If the login endpoint fails, simply reject so that your component can display the error
     if (
       error.response?.status === 401 &&
       originalRequest.url.includes("/auth/login")
@@ -35,19 +35,24 @@ api.interceptors.response.use(
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       console.log("Old token:", localStorage.getItem("accessToken"));
-      const newToken = await refreshAccessToken();
-      if (newToken) {
-        console.log("New token received:", newToken);
-        originalRequest.headers.Authorization = `Bearer ${newToken}`;
-        return api(originalRequest);
-      } else {
-        window.location.href = "/login";
+      try {
+        const newToken = await refreshAccessToken();
+        if (newToken) {
+          console.log("New token received:", newToken);
+          originalRequest.headers.Authorization = `Bearer ${newToken}`;
+          return api(originalRequest);
+        } else {
+          window.location.href = "/login";
+        }
+      } catch (refreshError) {
+        console.error("Token refresh failed:", refreshError);
+        window.location.href = "/login"; // Redirect to login on refresh failure
+        return Promise.reject(refreshError);
       }
     }
 
     return Promise.reject(error);
   }
 );
-
 
 export default api;
