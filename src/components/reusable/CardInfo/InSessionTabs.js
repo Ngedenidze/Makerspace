@@ -53,7 +53,7 @@ export default function InsessionTabs({ eventsData }) {
       const translatedWeekday = t(`weekdays.${weekdayKey}`);
       const translatedMonth = t(`months.${monthKey}`);
       const day = start.getDate();
-      const translatedDate = `${translatedMonth} ${day}`;
+      const translatedDate = `${translatedMonth} ${day}, ${translatedWeekday}`;
       setUpcomingEventDate(translatedDate);
       if (now < start) {
         setEventStatus(t("starting_soon"));
