@@ -994,10 +994,14 @@ Link:link {
 .specials-carousel {
   display: none;
 }
-.view-more{
+.view-more .chevron{
   text-decoration: none;
   display: block;
   text-align: right;
+  font-weight: bold;
+} 
+.view-more svg{
+  stroke-width: 1.5;
 }
 /* -------------------------------------------------------------------------- */
 /*  TESTIMONIAL CARDS                                                         */
