@@ -5,6 +5,30 @@ import { useTranslation } from "react-i18next";
 
 export default function SoonEvents({ events }) {
   const { t, i18n } = useTranslation();
+  const currentLang = i18n.language; // e.g. "en" or "ka"
+  const weekdayKeys = [
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+  ];
+  const monthKeys = [
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december",
+  ];
   // Normalize the events: if an item has a nested "event" property, use it.
   const normalizedEvents =
     events && events.length > 0
@@ -82,15 +106,16 @@ export default function SoonEvents({ events }) {
             const startDate = event.startDate
               ? new Date(event.startDate)
               : null;
-            const weekday = startDate
-              ? startDate.toLocaleDateString("en-US", { weekday: "long" })
-              : "TBD";
+            const weekdayKey = weekdayKeys[startDate.getDay()];
+
+            const monthKey = monthKeys[startDate.getMonth()];
+            const day = startDate.getDate();
+            const year = startDate.getFullYear();
+            const translatedWeekday = t(`weekdays.${weekdayKey}`);
+            const translatedMonth = t(`months.${monthKey}`);
+            const translatedDate = currentLang === "en" ? `${translatedMonth} ${day}, ${year}` : `${day} ${translatedMonth}, ${year}`;
             const date = startDate
-              ? startDate.toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                })
+              ? translatedDate
               : "TBD";
             // Use the first artistName from lineUps if available, otherwise check event.name, and fallback to "TBD"
             const djName =
@@ -100,8 +125,8 @@ export default function SoonEvents({ events }) {
             return (
               <SpecialCard
                 key={event.id || "placeholder-" + Math.random()}
-                weekday={weekday}
-                date={date}
+                weekday={translatedWeekday}
+                date={event.lineUps && event.lineUps.length > 0 ? date : "TBD"}
                 eventName={event.name}
                 link={`/Events/${event.id}`}
               />

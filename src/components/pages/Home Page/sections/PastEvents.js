@@ -4,12 +4,36 @@ import SpecialCard from "../../../reusable/CardInfo/SpecialCard";
 import { useTranslation } from "react-i18next";
 export default function PastEvents({ events }) {
   const { t, i18n } = useTranslation();
+  const currentLang = i18n.language; // e.g. "en" or "ka"
+
   if (!events || events.length === 0) {
     return;
   }
 
   const displayedEvents = events.slice(0, 4);
-
+  const weekdayKeys = [
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+  ];
+  const monthKeys = [
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december",
+  ];
   return (
     <>
       <section className="events-soon">
@@ -32,15 +56,15 @@ export default function PastEvents({ events }) {
           {displayedEvents.map((event) => {
             if (!event || !event.startDate) return null; // skip if invalid
 
-            const startDate = new Date(event.startDate);
-            const weekday = startDate.toLocaleDateString("en-US", {
-              weekday: "long",
-            });
-            const date = startDate.toLocaleDateString("en-US", {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-            });
+             const startDate = new Date(event.startDate);
+          // Get the index-based weekday and month keys
+          const weekdayKey = weekdayKeys[startDate.getDay()];
+          const monthKey = monthKeys[startDate.getMonth()];
+          const day = startDate.getDate();
+          const year = startDate.getFullYear();
+          const translatedWeekday = t(`weekdays.${weekdayKey}`);
+          const translatedMonth = t(`months.${monthKey}`);
+          const translatedDate = currentLang === "en" ? `${translatedMonth} ${day}, ${year}` : `${day} ${translatedMonth}, ${year}`;
 
             const eventName =
               event.lineUps?.length > 0
@@ -50,8 +74,8 @@ export default function PastEvents({ events }) {
             return (
               <SpecialCard
                 key={event.id}
-                weekday={weekday}
-                date={date}
+                weekday={translatedWeekday}
+                date={translatedDate}
                 eventName={eventName}
                 link={`/Events/${event.id}`}
               />

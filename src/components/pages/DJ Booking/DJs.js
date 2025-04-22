@@ -220,9 +220,11 @@ const DJs = () => {
           )}
 
           <p className="djs-contact-info">
-            {t("contact_info_sub")} +995 577 900 061
-            {t("contact_email_sub")}
-            <a href="mailto:contact@makerspaceclub.com">contact@makerspaceclub.com</a>
+          {t("contact_info_sub")} <br></br>+995 577 900 061
+            <br></br>
+            <a href="mailto:contact@makerspaceclub.com">
+              contact@makerspaceclub.com
+            </a>
           </p>
         </section>
       </section>

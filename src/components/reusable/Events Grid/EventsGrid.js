@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 
 export default function EventsGrid({ events }) {
   const { t } = useTranslation();
+  const currentLang = t("currentLang"); // e.g. "en" or "ka"
 
   if (!events || events.length === 0) {
     return (
@@ -70,7 +71,7 @@ export default function EventsGrid({ events }) {
           const translatedMonth = t(`months.${monthKey}`);
 
           // Build a formatted date string (e.g. "March 15, 2025")
-          const translatedDate = `${translatedMonth} ${day}, ${year}`;
+          const translatedDate = currentLang === "en" ? `${translatedMonth} ${day}, ${year}` : `${day} ${translatedMonth}, ${year}`;
 
           return (
             <SpecialCard
