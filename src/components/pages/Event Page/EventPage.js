@@ -124,7 +124,7 @@ export default function EventPage() {
       <div className="event-image-wrapper">
         <img
           className="event-image"
-          src={event ? event.eventPhotoUrl : localImg}
+          src={event ? "https://fastly.picsum.photos/id/1048/2400/1000.jpg?hmac=7v6bR6U2aN1I0-SDY85w6K3dH0kVNZo4SvHr6yKTu8w" : localImg}
           alt={event ? event.name : "Default"}
           loading="lazy"
         />
@@ -148,22 +148,25 @@ export default function EventPage() {
                   <h3 className="floor-name">{floorName}</h3>
                   <ul className="lineups-list">
                     {lineUps.map((lineUp) => (
-                      <li key={lineUp.id} className="lineup-item">
-                        <span className="lineup-artist">
-                          {lineUp.isHeaderLineUp ? (
-                            <strong>{lineUp.artistName} </strong>
-                          ) : (
-                            lineUp.artistName
-                          )}
-                        </span>{" "}
-                        -{" "}
-                        <span className="lineup-time">
-                          {new Date(lineUp.startTime).toLocaleTimeString([], {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })}
-                        </span>
-                      </li>
+                   <li key={lineUp.id} className="lineup-item">
+                   <div className="lineup-flex">
+                     <span className="lineup-artist">
+                       {lineUp.isHeaderLineUp ? (
+                         <strong>{lineUp.artistName}</strong>
+                       ) : (
+                         lineUp.artistName
+                       )}
+                     </span>
+                     <span className="lineup-time">
+                      {" - "}
+                      {new Date(lineUp.startTime).toLocaleTimeString([], {
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: false,
+})}
+                     </span>
+                   </div>
+                 </li>
                     ))}
                   </ul>
                 </div>

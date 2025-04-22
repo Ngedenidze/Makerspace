@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./DJs.css";
+import { Trans } from "react-i18next";
 
 const DJs = () => {
   const { id } = useParams();
@@ -132,7 +133,7 @@ const DJs = () => {
       <div className="djs-top-bar">
         <h1 className="djs-title">{t("dj_perform")}</h1>
         <p className="djs-description">
-         {t("dj_perform_info")}
+        <Trans i18nKey="dj_perform_info" />
         </p>
       </div>
 

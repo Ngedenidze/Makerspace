@@ -9,7 +9,9 @@
     overflow: hidden;
   }
   
-  
+  p {
+    white-space: pre-wrap; /* makes \n behave like real line breaks */
+  }
   
   .djs-cover-image {
     display: block;

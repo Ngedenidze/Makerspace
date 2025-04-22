@@ -10,7 +10,7 @@ const CommercialRenting = () => {
       <div className="commercial-renting-text-container">
         <h1>{t("rental_title")}</h1>
         <p>
-          {t("rental_info")}
+          {t("rental_info_short")}
         </p>
         <Link className="special-button" to="/Rentals">{t("rental_action")} &#x2192;</Link>
       </div>

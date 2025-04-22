@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 export default function About() {
   const { t, i18n } = useTranslation();
   return (
@@ -9,12 +9,26 @@ export default function About() {
           <h1>Makerspace</h1>
           <br />
           <h2 className="desktop-location">
-            {t("address")}
+            {t("address_about")}
           </h2>
          
-          <p className="about-subtext">
-            {t("about_me_text")}
-          </p>
+          <section className="about-subtext">
+          <p><Trans i18nKey="about_me_1" components={{ strong: <strong /> }} /></p>
+  <p><Trans i18nKey="about_me_2" components={{ strong: <strong /> }} /></p>
+  <p><Trans i18nKey="about_me_3" components={{ strong: <strong /> }} /></p>
+  <p><Trans i18nKey="about_me_4" components={{ strong: <strong /> }} /></p>
+  <ul>
+    <li><Trans i18nKey="about_me_list_1" components={{ strong: <strong /> }} /></li>
+    <li><Trans i18nKey="about_me_list_2" components={{ strong: <strong /> }} /></li>
+    <li><Trans i18nKey="about_me_list_3" components={{ strong: <strong /> }} /></li>
+    <li><Trans i18nKey="about_me_list_4" components={{ strong: <strong /> }} /></li>
+    <li><Trans i18nKey="about_me_list_5" components={{ strong: <strong /> }} /></li>
+    <li><Trans i18nKey="about_me_list_6" components={{ strong: <strong /> }} /></li>
+    <li><Trans i18nKey="about_me_list_7" components={{ strong: <strong /> }} /></li>
+  </ul>
+  <p><Trans i18nKey="about_me_5" components={{ strong: <strong /> }} /></p>
+  <p><Trans i18nKey="about_me_6" components={{ strong: <strong /> }} /></p>
+          </section>
           <Link className="gallery-button" to="/Gallery">{t("about_me_action")} &#x2192;</Link>
         </section>
 
@@ -25,7 +39,7 @@ export default function About() {
           ></img>
         </section>
       </section>
-      <section className="about-botton-part">
+      <section className="about-bottom-part">
         <section className="double-image">
           <img
             src={require("../../../assets/outside.jpg")}
@@ -49,7 +63,7 @@ export default function About() {
             <p className="subsection">
               {t("friday")}: 23:00 - 07:00
               <br></br>
-              {t("saturday")}: 19:00 - 07:00
+              {t("saturday")}: 23:00 - 07:00
             </p>
           </section>
          

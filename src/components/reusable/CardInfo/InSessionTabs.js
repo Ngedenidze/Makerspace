@@ -72,6 +72,7 @@ export default function InsessionTabs({ eventsData }) {
             startTime: new Date(lineUp.startTime).toLocaleTimeString([], {
               hour: "2-digit",
               minute: "2-digit",
+              hour12: false,
             }),
             djName: lineUp.artistName,
           })),
@@ -86,6 +87,7 @@ export default function InsessionTabs({ eventsData }) {
             startTime: new Date(lineUp.startTime).toLocaleTimeString([], {
               hour: "2-digit",
               minute: "2-digit",
+              hour12: false,
             }),
             djName: lineUp.artistName,
           })),
@@ -153,7 +155,7 @@ export default function InsessionTabs({ eventsData }) {
               </div>
             </article>
             <section className="in-session-image">
-              <img src={image} alt={t("in_session_image_alt")} loading="lazy" />
+              <img src={"https://fastly.picsum.photos/id/1048/2400/1000.jpg?hmac=7v6bR6U2aN1I0-SDY85w6K3dH0kVNZo4SvHr6yKTu8w"} alt={t("in_session_image_alt")} loading="lazy" />
             </section>
           </>
         )}

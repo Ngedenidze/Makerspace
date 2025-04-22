@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ImageGrid from "../../../reusable/Image Grid/ImageGrid";
 import { useTranslation } from "react-i18next";
-
+import { Trans } from "react-i18next";
 const Rentals = () => {
     const { id } = useParams();
     const [images, setImages] = useState([]);
@@ -142,7 +142,22 @@ const Rentals = () => {
             <div className="rentals-top-bar">
                 <h1 className="rentals-title">{t('rental_title')}</h1>
                 <p className="rentals-description">
-                   {t('rental_info')}
+                <p><Trans i18nKey="rental_info_intro" /></p>
+  <p><Trans i18nKey="rental_info_venue" components={{ strong: <strong /> }} /></p>
+  <p><Trans i18nKey="rental_info_features" components={{ strong: <strong /> }} /></p>
+
+  <p><Trans i18nKey="rental_info_offer_heading" components={{ strong: <strong /> }} /></p>
+  <ul>
+    <li><Trans i18nKey="rental_info_offer_1" components={{ strong: <strong /> }} /></li>
+    <li><Trans i18nKey="rental_info_offer_2" components={{ strong: <strong /> }} /></li>
+    <li><Trans i18nKey="rental_info_offer_3" components={{ strong: <strong /> }} /></li>
+    <li><Trans i18nKey="rental_info_offer_4" components={{ strong: <strong /> }} /></li>
+    <li><Trans i18nKey="rental_info_offer_5" components={{ strong: <strong /> }} /></li>
+    <li><Trans i18nKey="rental_info_offer_6" components={{ strong: <strong /> }} /></li>
+  </ul>
+
+  <p><Trans i18nKey="rental_info_closer" components={{ strong: <strong /> }} /></p>
+  <p><Trans i18nKey="rental_info_footer" /></p>
                 </p>
             </div>
             <section className="rentals-main-container">
@@ -196,8 +211,8 @@ const Rentals = () => {
                         </p>
                     )}
                     <p className="rentals-contact-info">
-                        {t('contact_info_sub')} +995 577 900 061 
-                        {t('contact_email_sub')}
+                        {t('contact_info_sub')} <br></br>+995 577 900 061 
+                        <br></br>
                         <a href="mailto:contact@makerspaceclub.com">
                         contact@makerspaceclub.com
                         </a>

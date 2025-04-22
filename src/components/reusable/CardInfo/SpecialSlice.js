@@ -17,7 +17,7 @@ export default function SpecialSlice(props) {
                     ? t("main_stage")
                     : parseInt(floor, 10) === 2
                     ? t("space_stage")
-                    : `Stage ${floor}`;
+                    : `${floor}`;
                 return (<>
                    <p key={floor}>
                     {stageLabel} {t("stage")}

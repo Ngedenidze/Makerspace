@@ -768,12 +768,14 @@ Link:link {
 /* Left side text */
 .in-session-text {
   width: 50%;
+  min-height: fit-content;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   padding: 2rem;
+  z-index: 20;
 }
 
 /* Right side image */
@@ -784,16 +786,16 @@ Link:link {
   display: flex;
   justify-content: center;
   align-items: center;
-
+  overflow: hidden; /* prevents overflow artifacts */
+  position: relative;
 }
 .in-session-image img {
   object-fit: cover;
   height: 100%;
   display: block;
  width: 100%;
-  max-width: 800px;
   overflow: visible;
-  object-position: 0%;
+  object-position:center;
 }
 
 
@@ -1177,11 +1179,13 @@ Link:link {
 
 
 .commercial-renting .commercial-renting-image, .dj-booking .dj-booking-image{
-  padding-top: 2rem;
-  z-index: 0;
-  width: 50%;
-  object-fit: cover;
-  overflow: hidden;
+  display: flex;
+  flex: 1 1 40%;
+  width: 100%;
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .dj-booking .dj-booking-image{
   z-index: 1;
@@ -1189,8 +1193,10 @@ Link:link {
   
 }
 .commercial-renting .commercial-renting-image img, .dj-booking .dj-booking-image img{
-  max-height: 600px;
-  width: auto;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
 }
 /* -------------------------------------------------------------------------- */
 /*  EVENT PAGE                                                                */
@@ -1334,6 +1340,17 @@ Link:link {
   overflow: hidden;
   background-color: var(--main-color);
 }
+.rentals-description{
+  white-space: pre-wrap;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.rental-info-text ul {
+  padding-left: 1.2rem;
+  list-style: disc;
+  margin-top: 0.5rem;
+}
 .rentals-top-bar{
   display: flex;
   flex-direction: column;
@@ -1401,11 +1418,8 @@ Link:link {
 }
 .about-us .hero-text,
 .about-us .hero-text-2 {
-  margin-left: 0;
-  text-align: left; 
-  width: 80%;
-  color: var(--light-text-color);
-  margin-bottom: 1rem;
+  flex: 1 1 50%;
+  max-width: 600px;
 }
 
 .about-us .hero-text h1,
@@ -1433,14 +1447,29 @@ Link:link {
   display: none;
 }
 .double-image > img {
-  height: auto;
+  width: 100%;
   max-height: 400px;
-  object-fit: fill;
-  display: block;
-  margin-right: 1remq;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 .about-us .about-top-part .double-image{
   margin-top: 5rem;
+}
+.about-us .double-image {
+  flex: 1 1 40%;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.about-top-part,
+.about-bottom-part {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 4rem;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -1775,7 +1804,7 @@ Link:link {
     align-items: flex-end;
     padding: 0 2rem 0 2rem;
   }
-  .about-us .about-botton-part .double-image{
+  .about-us .about-bottom-part .double-image{
     display: none;
   }
   .about-us .hero-text .desktop-location{
@@ -1935,7 +1964,6 @@ Link:link {
   .main-content, .homepage, .in-session, .events, .merch-display, .about-us {
     width: 95vw;
     margin: 0;
-    margin-bottom: 1.625rem;
     justify-content: center;
   }
   .header-menu{
@@ -2029,7 +2057,7 @@ Link:link {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-height: 50vh;
+    max-height: 60vh;
     height: max-content;
     overflow: hidden;
     width: 100%;
@@ -2039,6 +2067,7 @@ Link:link {
     width: 100%;
     padding: 1rem;
     overflow: hidden;
+    height: fit-content;
   }
   .in-session-image {
     height: 50%;
@@ -2103,13 +2132,14 @@ Link:link {
     display: none;
   }
   .commercial-renting, .dj-booking{
-    width: 99vw;
+    width: 95vw;
     margin: 0;
     margin-bottom: 20px;
     flex-direction: column;
   }
   .dj-booking{
     flex-direction: column-reverse;
+    width: 95vw;
   }
   .commercial-renting .commercial-renting-image, .dj-booking .dj-booking-image{
     width: 100%;
@@ -2117,8 +2147,8 @@ Link:link {
     max-height: 40vh;
   }
   .commercial-renting .commercial-renting-image img, .dj-booking .dj-booking-image img{
-    object-fit: cover;
-    height: 400px;
+    object-fit: scale-down;
+    width: 100%;
   }
   .commercial-renting .commercial-renting-text-container, .dj-booking .dj-booking-text-container{
     display: flex;
@@ -2126,8 +2156,8 @@ Link:link {
     padding: 1rem;
     padding-bottom: 0;
     margin: 0;
-    margin-left: 1rem;
-    max-width: 90%;
+    width: 100%;
+    max-width: 100%;
     height: fit-content;
     min-height: 40vh;
     align-items: flex-start;
@@ -2150,24 +2180,37 @@ Link:link {
     width: 100%;
   }
   .dj-booking .dj-booking-text-container::before{
-    /* height: 60%; */
+    content: "";
+    position: absolute;
+    top: 0;
     left: 0;
+    right: 0;
+    width: 100%;
+    z-index: -1;
+    background: var(--main-color);
     clip-path: none;
   }
   .dj-booking .dj-booking-image{
-    position: relative;
-    clip-path: none;
-    left: -2rem;
-    padding: 0;
-  }
-  .dj-booking .dj-booking-image img{
+    display: flex;
+    flex: 1 1 40%;
     width: 100%;
-  }  
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .dj-booking .dj-booking-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+  }
   .commercial-renting .commercial-renting-text-container .special-button, .dj-booking .dj-booking-text-container .special-button{
     position: relative;
   }
-  .about-us{
-    padding: 0;
+  .about-us {
+    flex-direction: column;
+    padding: 0rem;
   }
   .about-us .about-top-part .hero-text {
     padding: 0;
@@ -2188,23 +2231,26 @@ Link:link {
   /* Example: diagonal clip from top-left to halfway across the top,
      then to the right side (cutting off the top-right corner).
      Adjust the polygon points to get the exact shape you want. */
-  clip-path: polygon(0% 0, 100% 0, 100% 90%, 0 100%);
+  clip-path:none;
 }
-  .about-us .about-top-part{
-    flex-direction: column;
-    align-items: center;
-    padding: 0; 
-    margin-bottom: 1rem;
-  }
+.about-us .about-top-part {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0rem;
+  padding: 0;
+  margin-bottom: 1rem;
+}
   .about-us .about-top-part .about-subtext{
     margin: 0;
     padding: 0;
   }
-  .about-us .about-top-part .hero-text{
-    width: 100%;
-    margin: 2rem 1rem 1rem 1rem;
+  .about-us .about-top-part .hero-text {
+    flex: 1 1 55%;
     padding: 1rem;
-    box-sizing: border-box;
+    min-width: 300px;
+  margin: 0;
   }
   .about-us .about-top-part .hero-text h1{
     font-size: 1.5rem;
@@ -2215,23 +2261,24 @@ Link:link {
     margin-bottom: 1rem;
   }
 
-  .about-us .about-top-part .double-image{
+  .about-us .about-top-part .double-image {
+    flex: 1 1 40%;
     width: 100%;
-    max-width: 100%;  
-    margin: 0;
-    clip-path: polygon(0 100%, 100% 90%, 100% 0, 0 0);
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  .about-us .about-top-part img{
+  .about-top-part .double-image img {
     width: 100%;
     height: auto;
-    margin: 0;
-    padding: 0;
+    border-radius: 10px;
     object-fit: cover;
   }
-  .about-botton-part{
+  .about-bottom-part{
     position: relative;
   }
-  .about-botton-part::before{
+  .about-bottom-part::before{
     content: "";
     position: absolute;
     top: 0;
@@ -2240,8 +2287,9 @@ Link:link {
     height: 95%;
     z-index: -1; /* Place behind the .about-us content */
     background: var(--main-color); /* Or use an image/gradient if desired */
-    clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 10%);
+    clip-path: none;
   }
+  
   .about-us .hero-text-2 {
     padding: 1rem;
     padding-bottom: 2rem;
@@ -2265,7 +2313,8 @@ Link:link {
     padding: 0.5rem;
   }
   .lineup-artist, .lineup-time{
-    font-size: 1.1rem;
+    font-size: 1rem;
+    max-width: 50%;
   }
   .description-text{
     font-size: 0.8rem;
