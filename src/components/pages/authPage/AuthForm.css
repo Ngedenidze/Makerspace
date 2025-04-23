@@ -6,8 +6,8 @@ body {
 .auth-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 110vh;
+  align-items: flex-start;
+  padding-top: 10rem;
   margin-top: 1rem;
 }
 .error-text {
@@ -90,7 +90,7 @@ body {
   margin-top: 1rem;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   .auth-container{
     min-height: 50vh;
     align-items: flex-start;

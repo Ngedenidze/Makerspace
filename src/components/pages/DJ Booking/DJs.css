@@ -193,7 +193,7 @@
     color: #d1e8d7;
   }
   
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
      /* -------------------------------------------------------------------------- */
 /*  DJs Page - Mobile Version                                                  */
 /* -------------------------------------------------------------------------- */
@@ -202,10 +202,11 @@
   width: 100%;
 }
 .djs-cover-image-wrapper{
-  max-height: 20vh;
+  max-height: 40vh;
 }
 .djs-cover-image{
-  max-height: 20vh;
+  width: 100%;
+  max-height: 40vh;
   object-fit: cover;
 }
 .djs-cover-image-wrapper::before {

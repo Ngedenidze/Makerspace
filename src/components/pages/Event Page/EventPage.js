@@ -124,7 +124,7 @@ export default function EventPage() {
       <div className="event-image-wrapper">
         <img
           className="event-image"
-          src={event ? "https://fastly.picsum.photos/id/1048/2400/1000.jpg?hmac=7v6bR6U2aN1I0-SDY85w6K3dH0kVNZo4SvHr6yKTu8w" : localImg}
+          src={event ? event.eventPhotoUrl : localImg}
           alt={event ? event.name : "Default"}
           loading="lazy"
         />
@@ -158,7 +158,7 @@ export default function EventPage() {
                        )}
                      </span>
                      <span className="lineup-time">
-                      {" - "}
+                     {" "} {" - "}
                       {new Date(lineUp.startTime).toLocaleTimeString([], {
   hour: "2-digit",
   minute: "2-digit",

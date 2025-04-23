@@ -112,7 +112,6 @@
   
   .lineup-flex {
     display: flex;
-    justify-content: space-between;
     align-items: flex-start;
     gap: 0.2rem;
     flex-wrap: wrap;
@@ -122,7 +121,6 @@
     font-weight: 600;
     color: var(--light-text-color);
     white-space: normal;
-    flex: 1 1 auto;
     min-width: 0;
   }
   
@@ -169,7 +167,7 @@
     transition: background-color 0.3s ease;
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
     /* -------------------------------------------------------------------------- */
 /*  Events                                                                 */
 /* -------------------------------------------------------------------------- */
@@ -185,7 +183,9 @@
   }
   .event-image{
     clip-path: none;
-    max-height: 25vh;
+    max-height: 40vh;
+    width: 100%;
+    object-fit: cover;
   }
   .event-info::before {
     clip-path: none;
