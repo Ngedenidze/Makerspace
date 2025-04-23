@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { useTranslation, Trans } from "react-i18next";
 export default function About() {
   const { t, i18n } = useTranslation();
@@ -8,28 +8,75 @@ export default function About() {
         <section className="hero-text">
           <h1>Makerspace</h1>
           <br />
-          <h2 className="desktop-location">
-            {t("address_about")}
-          </h2>
-         
+          <h2 className="desktop-location">{t("address_about")}</h2>
+
           <section className="about-subtext">
-          <p><Trans i18nKey="about_me_1" components={{ strong: <strong /> }} /></p>
-  <p><Trans i18nKey="about_me_2" components={{ strong: <strong /> }} /></p>
-  <p><Trans i18nKey="about_me_3" components={{ strong: <strong /> }} /></p>
-  <p><Trans i18nKey="about_me_4" components={{ strong: <strong /> }} /></p>
-  <ul>
-    <li><Trans i18nKey="about_me_list_1" components={{ strong: <strong /> }} /></li>
-    <li><Trans i18nKey="about_me_list_2" components={{ strong: <strong /> }} /></li>
-    <li><Trans i18nKey="about_me_list_3" components={{ strong: <strong /> }} /></li>
-    <li><Trans i18nKey="about_me_list_4" components={{ strong: <strong /> }} /></li>
-    <li><Trans i18nKey="about_me_list_5" components={{ strong: <strong /> }} /></li>
-    <li><Trans i18nKey="about_me_list_6" components={{ strong: <strong /> }} /></li>
-    <li><Trans i18nKey="about_me_list_7" components={{ strong: <strong /> }} /></li>
-  </ul>
-  <p><Trans i18nKey="about_me_5" components={{ strong: <strong /> }} /></p>
-  <p><Trans i18nKey="about_me_6" components={{ strong: <strong /> }} /></p>
+            <p>
+              <Trans i18nKey="about_me_1" components={{ strong: <strong /> }} />
+            </p>
+            <p>
+              <Trans i18nKey="about_me_2" components={{ strong: <strong /> }} />
+            </p>
+            <p>
+              <Trans i18nKey="about_me_3" components={{ strong: <strong /> }} />
+            </p>
+            <p>
+              <Trans i18nKey="about_me_4" components={{ strong: <strong /> }} />
+            </p>
+            <ul>
+              <li>
+                <Trans
+                  i18nKey="about_me_list_1"
+                  components={{ strong: <strong /> }}
+                />
+              </li>
+              <li>
+                <Trans
+                  i18nKey="about_me_list_2"
+                  components={{ strong: <strong /> }}
+                />
+              </li>
+              <li>
+                <Trans
+                  i18nKey="about_me_list_3"
+                  components={{ strong: <strong /> }}
+                />
+              </li>
+              <li>
+                <Trans
+                  i18nKey="about_me_list_4"
+                  components={{ strong: <strong /> }}
+                />
+              </li>
+              <li>
+                <Trans
+                  i18nKey="about_me_list_5"
+                  components={{ strong: <strong /> }}
+                />
+              </li>
+              <li>
+                <Trans
+                  i18nKey="about_me_list_6"
+                  components={{ strong: <strong /> }}
+                />
+              </li>
+              <li>
+                <Trans
+                  i18nKey="about_me_list_7"
+                  components={{ strong: <strong /> }}
+                />
+              </li>
+            </ul>
+            <p>
+              <Trans i18nKey="about_me_5" components={{ strong: <strong /> }} />
+            </p>
+            <p>
+              <Trans i18nKey="about_me_6" components={{ strong: <strong /> }} />
+            </p>
           </section>
-          <Link className="gallery-button" to="/Gallery">{t("about_me_action")} &#x2192;</Link>
+          <Link className="gallery-button" to="/Gallery">
+            {t("about_me_action")} &#x2192;
+          </Link>
         </section>
 
         <section className="double-image">
@@ -47,7 +94,7 @@ export default function About() {
           ></img>
         </section>
         <section className="hero-text-2">
-        {/* <section className="mobile-location">
+          {/* <section className="mobile-location">
           <h1>Location</h1>
           <p>
             Lado Gudiashvili Square
@@ -66,7 +113,6 @@ export default function About() {
               {t("saturday")}: 23:00 - 07:00
             </p>
           </section>
-         
         </section>
       </section>
     </article>
