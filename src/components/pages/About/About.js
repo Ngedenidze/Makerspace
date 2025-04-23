@@ -4,12 +4,13 @@ export default function About() {
   const { t, i18n } = useTranslation();
   return (
     <article className="about-us">
+      <section className="about-top-part-title">
+          <h1>Makerspace</h1>
+          <h2 className="desktop-location">{t("address_about")}</h2>
+          </section>
       <section className="about-top-part">
         <section className="hero-text">
-          <h1>Makerspace</h1>
-          <br />
-          <h2 className="desktop-location">{t("address_about")}</h2>
-
+          
           <section className="about-subtext">
             <p>
               <Trans i18nKey="about_me_1" components={{ strong: <strong /> }} />
@@ -70,28 +71,41 @@ export default function About() {
             <p>
               <Trans i18nKey="about_me_5" components={{ strong: <strong /> }} />
             </p>
-            <p>
+            <section className="hero-text-mobile">
+                  <h1>
               <Trans i18nKey="about_me_6" components={{ strong: <strong /> }} />
-            </p>
-          </section>
-          <Link className="gallery-button" to="/Gallery">
+            </h1>
+             <Link className="gallery-button" to="/Gallery">
             {t("about_me_action")} &#x2192;
           </Link>
-        </section>
+          </section>
+          </section>
+       
+        </section>     
 
         <section className="double-image">
-          <img
+    <img
             src="https://myphotostorage.blob.core.windows.net/mymakerphotos/badaca7a-094f-4b02-bdc3-d742dc39f888.jpeg"
             alt="Little Lemon Ingredients"
           ></img>
+          <section className="hero-text-desktop">
+                  <h1>
+              <Trans i18nKey="about_me_6" components={{ strong: <strong /> }} />
+            </h1>
+             <Link className="gallery-button" to="/Gallery">
+            {t("about_me_action")} &#x2192;
+          </Link>
+          </section>
         </section>
       </section>
       <section className="about-bottom-part">
         <section className="double-image">
-          <img
+   
+              <img
             src={require("../../../assets/outside.jpg")}
             alt="Little Lemon Ingredients"
           ></img>
+  
         </section>
         <section className="hero-text-2">
           {/* <section className="mobile-location">

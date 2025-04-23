@@ -58,7 +58,7 @@ const resources = {
 "about_me_list_6": "• <strong>Space to host up to 400 guests</strong>",
 "about_me_list_7": "• <strong>Professional Staff</strong>",
 "about_me_5": "By day, it’s a canvas for private and corporate events. By night, it transforms into the <strong>pulse of Tbilisi’s electronic culture</strong>, where local and international talent bring the night to life.",
-"about_me_6": "Whether you're here to celebrate, collaborate, or just lose yourself in the music, Makerspace is your space to make it happen.",
+"about_me_6": "Whether you're here to celebrate, collaborate, or just lose yourself in the music, Makerspace is your space to make it happen!",
  about_me_action:"Gallery",
       friday: "Friday",
       saturday: "Saturday",

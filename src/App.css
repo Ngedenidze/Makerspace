@@ -1106,7 +1106,7 @@ Link:link {
   justify-content: flex-start;
   padding: 1rem 0;       /* Universal padding */
   padding-top: 0;
-  margin: 3.25rem auto;
+  margin: 1.625rem auto;
   color: var(--seconday-text-color);
   z-index: 0;         /* Ensure the text sits above the ::before background */
   width: min(70vw, 1200px);
@@ -1400,48 +1400,49 @@ Link:link {
   position: relative; /* Needed so ::before is positioned relative to this container */
   background-color: transparent;
   display: flex;
-  box-sizing: border-box;
-  padding: 4rem;       /* Universal padding */
-  margin-bottom: -1rem;
-  margin: 0 auto;
+  flex-direction: column;
+  box-sizing: border-box; 
+  padding: 0rem;
+  margin: 1.625rem auto;
   color: var(--seconday-text-color);
   z-index: 0;         /* Ensure the text sits above the ::before background */
 }
 
-.about-us::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1; /* Place behind the .about-us content */
-  background: var(--main-color); /* Or use an image/gradient if desired */
-
-  /* Example: diagonal clip from top-left to halfway across the top,
-     then to the right side (cutting off the top-right corner).
-     Adjust the polygon points to get the exact shape you want. */
-  clip-path: polygon(3% 90% , 0% 0, 100% 10%, 100% 80%, 3% 90%);
-}
 
 .about-subtext {
   margin-bottom: 1rem;
   color: var(--light-text-color);
 }
+
 .about-us .about-top-part img{
   max-width: 550px;
 }
-.about-us .hero-text,
-.about-us .hero-text-2 {
+.about-us .hero-text{
   flex: 1 1 50%;
   max-width: 600px;
 }
+.about-us .hero-text-2 {
+  flex: 0 1 20%;    /* no grow, can shrink, basis 20% */
+  max-width: 20%;
+}
 
-.about-us .hero-text h1,
+.about-us .about-top-part-title h1,
 .about-us .hero-text-2 h1 {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   margin-bottom: 0;
   color: var(--light-text-color);
+}
+.desktop-location{
+  font-size: 1.225rem;
+  color: var(--highlighted-text-color-light);
+}
+.about-us .about-top-part-title{
+  position: relative;
+  padding: 2rem;
+  background: var(--main-color); /* Or use an image/gradient if desired */
+  width: 100%;
+
+  clip-path:polygon(0% -1%, 65% 0%, 85% 100%, 20% 100%, 0% 100%);
 }
 .about-us .hero-text .mobile-location{
   display: none;
@@ -1469,22 +1470,89 @@ Link:link {
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 .about-us .about-top-part .double-image{
-  margin-top: 5rem;
+margin: 0;
 }
 .about-us .double-image {
   flex: 1 1 40%;
   max-width: 500px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.about-us .about-bottom-part .double-image{
+  flex: 0 1 70%;
+  max-width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.double-image h1{
+  font-size: 1.2rem;
+  margin-bottom: 0;
+  color: var(--light-text-color);
 }
 .about-top-part,
 .about-bottom-part {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   gap: 2rem;
-  flex-wrap: wrap;
   margin-bottom: 4rem;
+}
+.about-top-part {
+  position: relative;       /* establish a containing block */
+  z-index: 1;               /* sit above its ::before */
+  padding: 2rem;
+  margin: 2px 0;
+  color: var(--light-text-color);
+  width: min(70vw, 1200px);
+  box-sizing: border-box;
+  /* remove background & clip-path from here */
+}
+
+.about-top-part::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: var(--main-color);
+  clip-path: polygon(
+    0%   100%,
+    100% 100%,
+    100% 20%,
+    90%  0%,
+    0%   0%
+  );
+  z-index: -1;     /* drop behind the .about-top-part content */
+}
+.about-bottom-part{
+  position: relative;
+  padding: 2rem;
+  margin: 2px 0;
+  color: var(--light-text-color);
+  width: min(70vw, 1200px);
+  box-sizing: border-box;
+  z-index: 1;
+}
+.about-bottom-part::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: var(--main-color);
+  clip-path: polygon(
+    0%   0%,
+    100% 0%,
+    100% 80%,
+    90%  100%,
+    0%   99%
+  );
+  z-index: -1;     /* drop behind the .about-top-part content */
+}
+.hero-text-mobile{
+  display: none;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -1805,30 +1873,11 @@ Link:link {
   .commercial-renting .commercial-renting-image img , .dj-booking .dj-booking-image img{
     max-height: 550px;
   }
-  .about-us{
-    flex-direction: column;
-    padding: 2rem;
-  }
-  .about-us::before{
-    height: 100%; 
-    clip-path: polygon(3% 100%, 0% 0, 100% 10%, 100% 100%);
-  }
   .about-us .about-top-part{
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
+    align-items: flex-start;
     padding: 0 2rem 0 2rem;
-  }
-  .about-us .about-bottom-part .double-image{
-    display: none;
-  }
-  .about-us .hero-text .desktop-location{
-    display: none;
-  }
-  .about-us .about-top-part .hero-text{
-    margin: 2rem 0;
-    width: 50%;
-    padding-right: 2rem;
   }
   .about-us .hero-text .about-subtext{
     margin: 1rem 0;
@@ -1838,10 +1887,15 @@ Link:link {
     display: flex;
     flex-direction: row;
     width: 100%;
+    max-width: 100%;
+    flex: 0 1 40%;
     justify-content: flex-start;
     align-items: flex-start;
     box-sizing: border-box;
    padding: 0 2rem;
+  }
+  .about-us .about-top-part-title h1{
+    margin-top: 0;
   }
   .about-us .hero-text h1, .about-us .hero-text-2 h1 {
     margin-top: 2rem;
@@ -1854,15 +1908,17 @@ Link:link {
     padding: 0;
   }
   .about-us .hero-text-2 .info-text, .about-us .hero-text-2 .mobile-location{
-    width: 50%;
+    width: 100%;
   }
-  .about-us .hero-text-2 .mobile-location{
-    display: block;
-    width: 50%;
+  .about-us .about-top-part-title{
+    clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 85% 0%, 0% 0);
+    width: auto;
   }
-  .about-us .hero-text-2 .info-text{
-   width: 50%;
+  .about-top-part::before{
+    clip-path: none;
   }
+
+
   /* .in-session, .events, .merch-display, .about-us {
     width: 75vw;
   } */
@@ -1884,14 +1940,14 @@ Link:link {
 }
 @media screen and (max-width: 1200px) {
   .in-session{
-    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
     margin-bottom: 0rem;
   }
   .in-session-box {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-height: 70vh;
+    height: 70vh;
     width: 100%;
   }
   .in-session-text{
@@ -1916,18 +1972,164 @@ Link:link {
     object-fit: cover;
     overflow: hidden;
   }
+  .double-image h1 {
+    font-size: 0.8rem;
+    margin-bottom: 0;
+    color: var(--light-text-color);
+  }
   
 }
 @media (max-width: 768px) { /* Tablet styles */
   .nav-title-logo{
     display: none;
   }
+  .about-us {
+    flex-direction: column;
+    padding: 0rem;
+  }
+  .about-us .about-top-part .hero-text {
+    padding: 0;
+  }
+  .about-us::before {
+    height: 0;
+  }
+
+.about-top-part::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1; /* Place behind the .about-us content */
+  background: var(--main-color); /* Or use an image/gradient if desired */
+
+  /* Example: diagonal clip from top-left to halfway across the top,
+     then to the right side (cutting off the top-right corner).
+     Adjust the polygon points to get the exact shape you want. */
+  clip-path:none;
+}
+.about-us .about-top-part {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0rem;
+  padding: 0;
+  width: 95vw;
+  margin-bottom: 1rem;
+}
+  .about-us .about-top-part .about-subtext{
+    margin: 0;
+    padding: 0;
+  }
+  .about-us .about-top-part .hero-text {
+    flex: 1 1 55%;
+    padding: 1rem;
+    min-width: 300px;
+  margin: 0;
+  }
+  .about-us .hero-text-desktop{
+    display: none;
+  }
+  .about-us .hero-text-mobile{
+    display: block;
+  }
+  .about-us .hero-text-mobile h1{
+    font-size: 0.9rem;
+  }
+  .about-us .about-top-part .hero-text h1{
+    font-size: 0.9rem;
+    margin: 0;
+    text-align: left;
+  }
+  .about-us .about-top-part .hero-text .gallery-button{
+    margin-bottom: 1rem;
+  }
+
+  .about-us .about-top-part .double-image {
+    flex: 1;
+    width: 100%;
+    max-width: 120%;
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .about-top-part .double-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  .about-us .about-top-part img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  .about-us .about-top-part-title {
+    width: auto;
+    padding: 2rem 1rem 0 1rem;
+    clip-path: none;
+    margin: 2px 0;
+  }
+  .about-us .about-top-part-title h1{
+    font-size: 1.5rem;
+    margin: 0;
+  }
+  .desktop-location{
+    font-size: 1rem;
+  }
+  .about-bottom-part{
+    position: relative;
+    width: 100%;
+    padding: 0;
+  }
+  .about-bottom-part::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 95%;
+    z-index: -1; /* Place behind the .about-us content */
+    background: var(--main-color); /* Or use an image/gradient if desired */
+    clip-path: none;
+  }
+  
+  .about-us .hero-text-2 {
+    padding: 1rem;
+    padding-bottom: 2rem;
+    width: 100%;
+    max-width: 100%;
+    flex: auto;
+    text-align: left;
+  }
+  .about-us .hero-text-2 .info-text{
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .about-us .hero-text-2 h1{
+    width: 100%;
+    text-align: left;
+    margin-top: 0;
+  }
+  .about-us .hero-text-2 .info-text p{
+    font-size: 0.75rem;
+    margin: 0;
+  }
+  .about-us .about-bottom-part .double-image {
+  display: none;
+  }
+  .about-us .about-top-part{
+    flex-direction: column;
+  }
 }
 @media screen and (max-width: 50rem) {
   
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   body{
     background-color: #191919;
   }
@@ -2222,104 +2424,6 @@ Link:link {
   }
   .commercial-renting .commercial-renting-text-container .special-button, .dj-booking .dj-booking-text-container .special-button{
     position: relative;
-  }
-  .about-us {
-    flex-direction: column;
-    padding: 0rem;
-  }
-  .about-us .about-top-part .hero-text {
-    padding: 0;
-  }
-  .about-us::before {
-    height: 0;
-  }
-.about-top-part::before{
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 70%;
-  z-index: -1; /* Place behind the .about-us content */
-  background: var(--main-color); /* Or use an image/gradient if desired */
-
-  /* Example: diagonal clip from top-left to halfway across the top,
-     then to the right side (cutting off the top-right corner).
-     Adjust the polygon points to get the exact shape you want. */
-  clip-path:none;
-}
-.about-us .about-top-part {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 0rem;
-  padding: 0;
-  margin-bottom: 1rem;
-}
-  .about-us .about-top-part .about-subtext{
-    margin: 0;
-    padding: 0;
-  }
-  .about-us .about-top-part .hero-text {
-    flex: 1 1 55%;
-    padding: 1rem;
-    min-width: 300px;
-  margin: 0;
-  }
-  .about-us .about-top-part .hero-text h1{
-    font-size: 1.5rem;
-    margin: 0;
-    text-align: center;
-  }
-  .about-us .about-top-part .hero-text .gallery-button{
-    margin-bottom: 1rem;
-  }
-
-  .about-us .about-top-part .double-image {
-    flex: 1 1 40%;
-    width: 100%;
-    margin-top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .about-top-part .double-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    object-fit: cover;
-  }
-  .about-bottom-part{
-    position: relative;
-  }
-  .about-bottom-part::before{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 95%;
-    z-index: -1; /* Place behind the .about-us content */
-    background: var(--main-color); /* Or use an image/gradient if desired */
-    clip-path: none;
-  }
-  
-  .about-us .hero-text-2 {
-    padding: 1rem;
-    padding-bottom: 2rem;
-  }
-  .about-us .hero-text-2 .info-text{
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .about-us .hero-text-2 h1{
-    width: 100%;
-    text-align: center;
-  }
-  .about-us .hero-text-2 .info-text p{
-    font-size: 0.75rem;
-    margin: 0;
   }
   
   
