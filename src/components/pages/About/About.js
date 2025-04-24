@@ -86,12 +86,12 @@ export default function About() {
         <section className="double-image">
     <img
             src="https://myphotostorage.blob.core.windows.net/mymakerphotos/badaca7a-094f-4b02-bdc3-d742dc39f888.jpeg"
-            alt="Little Lemon Ingredients"
+            alt="Makerspace logo"
           ></img>
           <section className="hero-text-desktop">
-                  <h1>
+                  <p>
               <Trans i18nKey="about_me_6" components={{ strong: <strong /> }} />
-            </h1>
+            </p>
              <Link className="gallery-button" to="/Gallery">
             {t("about_me_action")} &#x2192;
           </Link>
@@ -103,7 +103,7 @@ export default function About() {
    
               <img
             src={require("../../../assets/outside.jpg")}
-            alt="Little Lemon Ingredients"
+            alt="Makerspace Outside"
           ></img>
   
         </section>

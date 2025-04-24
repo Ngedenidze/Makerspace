@@ -1210,10 +1210,11 @@ Link:link {
   display: flex;
   flex: 1 1 40%;
   width: 100%;
-  margin-top: 0;
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 .dj-booking .dj-booking-image{
   z-index: 1;
@@ -1442,7 +1443,7 @@ Link:link {
 .about-us .about-top-part-title h1,
 .about-us .hero-text-2 h1 {
   font-size: 1.8rem;
-  margin-bottom: 0;
+  margin: 0;
   color: var(--light-text-color);
 }
 .desktop-location{
@@ -1454,8 +1455,8 @@ Link:link {
   padding: 2rem;
   background: var(--main-color); /* Or use an image/gradient if desired */
   width: 100%;
-
-  clip-path:polygon(0% -1%, 65% 0%, 85% 100%, 20% 100%, 0% 100%);
+  margin-bottom: 1px;
+  clip-path:polygon(0% -1%, 70% 0%, 85% 100%, 20% 100%, 0% 100%);
 }
 .about-us .hero-text .mobile-location{
   display: none;
@@ -1486,7 +1487,7 @@ Link:link {
 margin: 0;
 }
 .about-us .double-image {
-  flex: 1 1 40%;
+  flex: 1 1 50%;
   max-width: 500px;
   display: flex;
   flex-direction: column;
@@ -1512,13 +1513,12 @@ margin: 0;
   flex-direction: row;
   justify-content: space-between;
   gap: 2rem;
-  margin-bottom: 4rem;
 }
 .about-top-part {
   position: relative;       /* establish a containing block */
   z-index: 1;               /* sit above its ::before */
   padding: 2rem;
-  margin: 2px 0;
+  margin: 1px 0;
   color: var(--light-text-color);
   width: min(70vw, 1200px);
   box-sizing: border-box;
@@ -1543,7 +1543,7 @@ margin: 0;
 .about-bottom-part{
   position: relative;
   padding: 2rem;
-  margin: 2px 0;
+  margin: 1px 0;
   color: var(--light-text-color);
   width: min(70vw, 1200px);
   box-sizing: border-box;
