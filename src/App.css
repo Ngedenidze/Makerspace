@@ -298,6 +298,20 @@ Link:link {
   flex-direction: column;
   align-content: flex-start;
 }
+.footer-menu h2, .socials-section h2, .footer-lang h2{
+  font-size: 1rem;
+  color: #6f6f6f;
+  padding: 5px;
+  padding-bottom: 0;
+  margin-bottom: 5px;
+}
+.socials-section h2{
+  margin-bottom: 0;
+}
+.socials-section{
+  display: flex;
+  flex-direction: column;
+}
 .bar-info .footer-toggle-icon{
   display: none;
 }
@@ -315,7 +329,7 @@ Link:link {
 }
 .bar-info .footer-menu .footer-links h3 {
   color: var(--seconday-text-color);
-  font-size: 1rem;
+  font-size: 0.9rem;
   max-width: 30rem;
   text-overflow: clip;
   margin: 5px;
@@ -601,7 +615,6 @@ Link:link {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 1rem;
 }
 
 .socials > a {
@@ -2240,6 +2253,10 @@ margin: 0;
   }
   .navbar-menu .hover-effect h1{
     font-size: 1rem;
+  }
+  .hover-effect svg{
+    margin: 5px 10px;
+    margin-left: 0;
   }
   .nav-image{
     max-height: 50px;
