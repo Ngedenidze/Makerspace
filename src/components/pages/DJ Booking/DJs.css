@@ -253,6 +253,10 @@
   padding: 0;
   margin: 10px 0;
 }
+.djs-contact-form{
+  width: auto;
+  padding: 1rem;
+}
 .djs-contact h2{
   font-size: 1.2rem;
   text-align: center;
