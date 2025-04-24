@@ -20,7 +20,7 @@ export default function SpecialSlice(props) {
                     : `${floor}`;
                 return (<>
                    <p key={floor}>
-                    {stageLabel} {t("stage")}
+                    {stageLabel}
                   </p>
                   <h3>
                      {names.join(", ")}

@@ -20,7 +20,7 @@ function App() {
 
   return (
     <>
-      <BackgroundPoly />
+      {/* <BackgroundPoly /> */}
       <div className="layout-container">
         <aside className="header-menu">
           <Heading />
