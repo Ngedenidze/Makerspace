@@ -69,6 +69,42 @@ body {
   margin-right: 0.5rem;
   width: 1rem;
 }
+.info-tooltip {
+  display: inline-block;
+  margin-left: 0.4em;
+  cursor: help;
+  position: relative;
+  font-size: 0.9em;
+  line-height: 1;
+}
+
+/* the hidden tooltip text */
+.info-tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;                /* sit above the icon */
+  left: 50%;
+  transform: translateX(-45%) translateY(-6px);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 0.35em 0.6em;
+  border-radius: 0.25em;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+
+/* show on hover */
+.info-tooltip:hover::after {
+  opacity: 1;
+}
+.info-tooltip svg {
+  filter: grayscale(100%);
+  /* you can also tweak fill: #aaa; here */
+}
 .auth-button {
   width: 100%;
   background-color: #333;
@@ -93,8 +129,10 @@ body {
 @media screen and (max-width: 768px) {
   .auth-container{
     min-height: 50vh;
+    width: 95vw;
     align-items: flex-start;
-    padding-top: 2rem;
+    padding-top: 0;
+    margin: 10px 0;
   }
   .auth-box{
    position: relative;

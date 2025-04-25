@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SpecialCard from "../CardInfo/SpecialCard";
-import { useTranslation } from "react-i18next";
+import { useTranslation }  from "react-i18next";
+import i18n from "i18next"; // Import i18n for language detection
 
 export default function EventsGrid({ events }) {
   const { t } = useTranslation();
-  const currentLang = t("currentLang"); // e.g. "en" or "ka"
+  const currentLang = i18n.language; // e.g. "en" or "ka"
 
   if (!events || events.length === 0) {
     return (
@@ -78,7 +79,7 @@ export default function EventsGrid({ events }) {
               key={event.id}
               weekday={translatedWeekday}
               date={translatedDate}
-              eventName={event.name}
+              eventName={currentLang === "ka" ? event.name : event.nameLat}
               link={`/Events/${event.id}`}
             />
           );

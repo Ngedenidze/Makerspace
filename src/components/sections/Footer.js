@@ -79,7 +79,7 @@ export default function Footer() {
           </section>
 
           <section className="socials-section">
-            <h2>Socials</h2>
+            <h2>{t("socials")}</h2>
             <section className="socials">
               <a
                 className="hover-effect"
@@ -92,10 +92,10 @@ export default function Footer() {
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
                   y="0px"
-                  width="20"
+                  width="25"
                   fill="#FFFFFF"
                   stroke="currentColor"
-                  height="20"
+                  height="25"
                   viewBox="0 0 50 50"
                 >
                   <path d="M 16 3 C 8.8324839 3 3 8.8324839 3 16 L 3 34 C 3 41.167516 8.8324839 47 16 47 L 34 47 C 41.167516 47 47 41.167516 47 34 L 47 16 C 47 8.8324839 41.167516 3 34 3 L 16 3 z M 16 5 L 34 5 C 40.086484 5 45 9.9135161 45 16 L 45 34 C 45 40.086484 40.086484 45 34 45 L 16 45 C 9.9135161 45 5 40.086484 5 34 L 5 16 C 5 9.9135161 9.9135161 5 16 5 z M 37 11 A 2 2 0 0 0 35 13 A 2 2 0 0 0 37 15 A 2 2 0 0 0 39 13 A 2 2 0 0 0 37 11 z M 25 14 C 18.936712 14 14 18.936712 14 25 C 14 31.063288 18.936712 36 25 36 C 31.063288 36 36 31.063288 36 25 C 36 18.936712 31.063288 14 25 14 z M 25 16 C 29.982407 16 34 20.017593 34 25 C 34 29.982407 29.982407 34 25 34 C 20.017593 34 16 29.982407 16 25 C 16 20.017593 20.017593 16 25 16 z"></path>
@@ -112,8 +112,8 @@ export default function Footer() {
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
                   y="0px"
-                  width="20"
-                  height="20"
+                  width="25"
+                  height="25"
                   viewBox="0 0 30 30"
                   fill="currentColor"
                 >
@@ -131,8 +131,8 @@ export default function Footer() {
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
                   y="0px"
-                  width="20"
-                  height="20"
+                  width="25"
+                  height="25"
                   viewBox="0 0 50 50"
                   fill="currentColor"
                 >
@@ -142,7 +142,7 @@ export default function Footer() {
             </section>
           </section>
           <section className="footer-lang">
-            <h2>Language</h2>
+            <h2>{t('language')}</h2>
 
             <section className="translate-icon" ref={toggleRef}>
               <div style={{ display: "flex", alignItems: "center" }}>
@@ -150,8 +150,8 @@ export default function Footer() {
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
                   y="0px"
-                  width="20"
-                  height="20"
+                  width="25"
+                  height="25"
                   viewBox="0 0 50 50"
                   fill="currentColor"
                 >
@@ -192,6 +192,21 @@ export default function Footer() {
                           {/* Login icon SVG */}
                         </Link>
                       )}
+                    
+                        {token && (
+                      <Link className="hover-effect" to="/Cart">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="20 20 576 512"
+                          width="25"
+                          height="25"
+                          fill="currentColor"
+                        >
+                          <path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+                        </svg>
+                      </Link>
+                    )}
+    
                     </section>
                   </section>
                   <section className="footer-menu-mobile">
@@ -209,6 +224,7 @@ export default function Footer() {
                     </a>
                   </section>
                   <section className="socials-mobile">
+                    <h2>{t("socials")}</h2>
                     <a
                       className="hover-effect"
                       href="https://www.instagram.com/makerspace_club/"
@@ -220,10 +236,10 @@ export default function Footer() {
                         xmlns="http://www.w3.org/2000/svg"
                         x="0px"
                         y="0px"
-                        width="20"
+                        width="25"
                         fill="#FFFFFF"
                         stroke="currentColor"
-                        height="20"
+                        height="25"
                         viewBox="0 0 50 50"
                       >
                         <path d="M 16 3 C 8.8324839 3 3 8.8324839 3 16 L 3 34 C 3 41.167516 8.8324839 47 16 47 L 34 47 C 41.167516 47 47 41.167516 47 34 L 47 16 C 47 8.8324839 41.167516 3 34 3 L 16 3 z M 16 5 L 34 5 C 40.086484 5 45 9.9135161 45 16 L 45 34 C 45 40.086484 40.086484 45 34 45 L 16 45 C 9.9135161 45 5 40.086484 5 34 L 5 16 C 5 9.9135161 9.9135161 5 16 5 z M 37 11 A 2 2 0 0 0 35 13 A 2 2 0 0 0 37 15 A 2 2 0 0 0 39 13 A 2 2 0 0 0 37 11 z M 25 14 C 18.936712 14 14 18.936712 14 25 C 14 31.063288 18.936712 36 25 36 C 31.063288 36 36 31.063288 36 25 C 36 18.936712 31.063288 14 25 14 z M 25 16 C 29.982407 16 34 20.017593 34 25 C 34 29.982407 29.982407 34 25 34 C 20.017593 34 16 29.982407 16 25 C 16 20.017593 20.017593 16 25 16 z"></path>
@@ -240,8 +256,8 @@ export default function Footer() {
                         xmlns="http://www.w3.org/2000/svg"
                         x="0px"
                         y="0px"
-                        width="20"
-                        height="20"
+                        width="25"
+                        height="25"
                         viewBox="0 0 30 30"
                         fill="currentColor"
                       >
@@ -259,29 +275,18 @@ export default function Footer() {
                         xmlns="http://www.w3.org/2000/svg"
                         x="0px"
                         y="0px"
-                        width="20"
-                        height="20"
+                        width="25"
+                        height="25"
                         viewBox="0 0 50 50"
                         fill="currentColor"
                       >
                         <path d="M 44.898438 14.5 C 44.5 12.300781 42.601563 10.699219 40.398438 10.199219 C 37.101563 9.5 31 9 24.398438 9 C 17.800781 9 11.601563 9.5 8.300781 10.199219 C 6.101563 10.699219 4.199219 12.199219 3.800781 14.5 C 3.398438 17 3 20.5 3 25 C 3 29.5 3.398438 33 3.898438 35.5 C 4.300781 37.699219 6.199219 39.300781 8.398438 39.800781 C 11.898438 40.5 17.898438 41 24.5 41 C 31.101563 41 37.101563 40.5 40.601563 39.800781 C 42.800781 39.300781 44.699219 37.800781 45.101563 35.5 C 45.5 33 46 29.398438 46.101563 25 C 45.898438 20.5 45.398438 17 44.898438 14.5 Z M 19 32 L 19 18 L 31.199219 25 Z"></path>
                       </svg>
                     </a>
-                    {token && (
-                      <Link className="hover-effect" to="/Cart">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="20 20 576 512"
-                          width="20"
-                          height="20"
-                          fill="currentColor"
-                        >
-                          <path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
-                        </svg>
-                      </Link>
-                    )}
+                    
                   </section>
-
+                  <section className="footer-lang-mobile">
+                    <h2>{t("language")}</h2>
                   <div
                     ref={toggleRef}
                     style={{ display: "flex", alignItems: "center" }}
@@ -290,8 +295,8 @@ export default function Footer() {
                       xmlns="http://www.w3.org/2000/svg"
                       x="0px"
                       y="0px"
-                      width="20"
-                      height="20"
+                      width="25"
+                      height="25"
                       viewBox="0 0 50 50"
                       fill="currentColor"
                     >
@@ -304,6 +309,7 @@ export default function Footer() {
                       {otherLabel}
                     </button>{" "}
                   </div>
+                  </section>
                 </>
               </pre>
             </section>

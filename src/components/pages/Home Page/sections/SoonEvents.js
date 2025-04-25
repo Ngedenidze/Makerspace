@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SpecialCard from "../../../reusable/CardInfo/SpecialCard";
 import { useTranslation } from "react-i18next";
+import i18n from "i18next"; // Import i18n for language detection
 
 export default function SoonEvents({ events }) {
   const { t, i18n } = useTranslation();
@@ -105,13 +106,13 @@ export default function SoonEvents({ events }) {
             const djName =
               event.lineUps && event.lineUps.length > 0
                 ? event.lineUps[0].artistName
-                : event.name || "TBD";
+                : event.nameLat || "TBD";
             return (
               <SpecialCard
                 key={event.id || "placeholder-" + Math.random()}
                 weekday={translatedWeekday}
                 date={event.lineUps && event.lineUps.length > 0 ? date : "TBD"}
-                eventName={event.name}
+                eventName={currentLang == "ka" ? event.name : event.nameLat}
                 link={`/Events/${event.id}`}
               />
             );

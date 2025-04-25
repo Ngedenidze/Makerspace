@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import localImg from "../../../assets/cover-art-default.jpg";
 import SpecialSlice from "../../reusable/CardInfo/SpecialSlice";
 import { useTranslation } from "react-i18next";
+import i18n from "i18next"; // Import i18next for language detection
 
 export default function Events() {
   const { tab } = useParams(); // e.g. "upcoming" or "past"
@@ -12,7 +13,7 @@ export default function Events() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+ const currentLang = i18n.language; // e.g. "en" or "ka"
   // Use the environment variable; if using CRA, use process.env.REACT_APP_API_URL instead.
   const apiBaseUrl = process.env.REACT_APP_API_URL; 
 
@@ -112,23 +113,32 @@ export default function Events() {
 
   // Format event data using translation keys for weekday and month
   const formatEventData = (event) => {
-    const startDate = new Date(event.startDate);
-    const weekdayKey = weekdayKeys[startDate.getDay()];
-    const monthKey = monthKeys[startDate.getMonth()];
-    const day = startDate.getDate();
-    const year = startDate.getFullYear();
-    const time = startDate.toLocaleTimeString("en-GB", {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-    });
+    const start = new Date(event.startDate);
+  const day   = start.getDate();
+  const year  = start.getFullYear();
 
-    const translatedWeekday = t(`weekdays.${weekdayKey}`);
-    const translatedMonth = t(`months.${monthKey}`);
-    const formattedDate = `${translatedWeekday} ${translatedMonth} ${day}, ${year} ${t(
-      "starts_at"
-    )} ${time}`;
+  // look up your keys…
+  const weekdayKey = weekdayKeys[start.getDay()];
+  const monthKey   = monthKeys[start.getMonth()];
 
+  // translate them…
+  const weekday = t(`weekdays.${weekdayKey}`);
+  const month   = t(`months.${monthKey}`);
+
+  // pick the right date format per locale
+  const datePart = currentLang === "en"
+    ? `${month} ${day}, ${year}`
+    : `${day} ${month}, ${year}`;
+
+  // format the time once
+  const time = start.toLocaleTimeString("en-GB", {
+    hour:   "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+
+  // build the final string
+  const formattedDate =  `${weekday}, ${datePart} ${t("starts_at")} ${time}`;
     const stages = Object.entries(
       event.lineUps?.reduce((acc, lineUp) => {
         const stageKey = lineUp.floor;
@@ -150,7 +160,7 @@ export default function Events() {
         <SpecialSlice
           key={event.id}
           weekday={formattedDate}
-          eventName={event.name}
+          eventName={event.nameLat}
           stages={stages}
           link={`/Events/${event.id}`}
         />

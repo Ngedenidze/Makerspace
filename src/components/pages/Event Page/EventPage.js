@@ -6,6 +6,7 @@ import CartContext from "../Cart/CartContext";
 import api from "../authPage/utils/AxiosInstance";
 import Linkify from "react-linkify"; // Import react-linkify
 import "./EventPage.css";
+import i18n from "i18next"; // Import i18next for language detection
 
 export default function EventPage() {
   const { id } = useParams();
@@ -14,7 +15,7 @@ export default function EventPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { t } = useTranslation();
-
+  const currentLang = i18n.language;
   // State for ticket quantity
   const [ticketQuantity, setTicketQuantity] = useState(1);
 
@@ -122,12 +123,17 @@ export default function EventPage() {
   return (
     <div className="event-page">
       <div className="event-image-wrapper">
-        <img
-          className="event-image"
-          src={event ? event.eventPhotoUrl : localImg}
-          alt={event ? event.name : "Default"}
-          loading="lazy"
-        />
+      <img
+  className="event-image"
+  src={event?.eventPhotoUrl || localImg}
+  alt={event?.name || "Default"}
+  loading="lazy"
+  onError={({ currentTarget }) => {
+    // prevent infinite loop in case localImg also errors
+    currentTarget.onerror = null;
+    currentTarget.src     = localImg;
+  }}
+/>
       </div>
       <section className="event-info">
         {error ? (
@@ -140,7 +146,7 @@ export default function EventPage() {
               <p className="start-date">{formattedDate}</p>
             </section>
             <header className="event-header">
-              <h1 className="event-title">{event.name}</h1>
+              <h1 className="event-title">{currentLang === "ka" ? event.name : event.nameLat}</h1>
             </header>
             <section className="event-lineups">
               {Object.entries(groupedLineUps).map(([floorName, lineUps]) => (
@@ -188,7 +194,7 @@ export default function EventPage() {
                     </a>
                   )}
                 >
-                  {event.description}
+                  {currentLang === "en" ? event.descriptionLat : event.description}
                 </Linkify>
               </p>
             </section>

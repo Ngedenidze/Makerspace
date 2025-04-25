@@ -20,7 +20,7 @@ export default function CartPage() {
         const transformedItems = ticketItems.map((ticket) => ({
           ticketId: ticket.id,
           eventId: ticket.eventId,
-          eventName: ticket.event.name,
+          eventName: ticket.event.nameLat,
           description: ticket.event.description,
           image: ticket.event.eventPhotoUrl,
           quantity: ticket.quantity,

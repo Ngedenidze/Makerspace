@@ -68,7 +68,7 @@ export default function PastEvents({ events }) {
 
             const eventName =
               event.lineUps?.length > 0
-                ? event.name
+                ? event.nameLat
                 : "Event";
 
             return (
@@ -76,7 +76,7 @@ export default function PastEvents({ events }) {
                 key={event.id}
                 weekday={translatedWeekday}
                 date={translatedDate}
-                eventName={eventName}
+                eventName={currentLang === "ka" ? event.name : eventName}
                 link={`/Events/${event.id}`}
               />
             );
