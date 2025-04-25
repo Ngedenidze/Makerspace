@@ -161,6 +161,7 @@ function Profile() {
           <strong>{t("social_media_link")}:</strong>{" "}
           {profile.socialMediaProfileLink ? (
             <a
+             className="social-link"
               href={profile.socialMediaProfileLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -168,40 +169,13 @@ function Profile() {
               {profile.socialMediaProfileLink}
             </a>
           ) : (
-            t("n_a")
+            <span className="social-link na">{t("n_a")}</span>
           )}
         </p>
       </div>
 
       {/* Expandable/Collapsible "My Tickets" Section */}
-      <div className="my-tickets-section">
-       
-        {ticketsVisible && (
-          <div className="my-tickets">
-            {ticketsLoading ? (
-              <p>{t("loading_tickets")}</p>
-            ) : ticketsError ? (
-              <p className="error">
-                {t("tickets_error")}: {ticketsError}
-              </p>
-            ) : tickets && tickets.length > 0 ? (
-              tickets.map((ticket) => (
-                <div key={ticket.id} className="ticket-item">
-                  <p>
-                    <strong>{ "Ticket ID" || t("ticket_id")}:</strong> {ticket.id}
-                  </p>
-                  <p>
-                    <strong>{"Used" || t("ticket_used") }:</strong>{" "}
-                    {ticket.isUsedTicket ? (t("yes") || "Yes") : (t("no") || "No")}
-                  </p>
-                </div>
-              ))
-            ) : (
-              <p>{t("no_tickets")}</p>
-            )}
-          </div>
-        )}
-      </div>
+     
       <button
           onClick={() => setTicketsVisible((prevVisible) => !prevVisible)}
           className="toggle-tickets-button"
@@ -229,6 +203,34 @@ function Profile() {
       >
         {t("logout")}
       </button>
+      <div className="my-tickets-section">
+       
+       {ticketsVisible && (
+         <div className="my-tickets">
+           {ticketsLoading ? (
+             <p>{t("loading_tickets")}</p>
+           ) : ticketsError ? (
+             <p className="error">
+               {t("tickets_error")}: {ticketsError}
+             </p>
+           ) : tickets && tickets.length > 0 ? (
+             tickets.map((ticket) => (
+               <div key={ticket.id} className="ticket-item">
+                 <p>
+                   <strong>{ "Ticket ID" || t("ticket_id")}:</strong> {ticket.id}
+                 </p>
+                 <p>
+                   <strong>{"Used" || t("ticket_used") }:</strong>{" "}
+                   {ticket.isUsedTicket ? (t("yes") || "Yes") : (t("no") || "No")}
+                 </p>
+               </div>
+             ))
+           ) : (
+             <p>{t("no_tickets")}</p>
+           )}
+         </div>
+       )}
+     </div>
     </div>
   );
 }

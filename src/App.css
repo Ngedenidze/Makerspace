@@ -172,26 +172,30 @@ Link:link {
 /*  HOMEPAGE WRAPPER & HEADER                                                 */
 /* -------------------------------------------------------------------------- */
 .layout-container {
+  position: relative;       /* create positioning context */
+  z-index: 0;               /* ensure children/pseudo sit behind */
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   width: min(90vw, 1600px);
   margin: auto;
-  justify-content: center;
   height: 100%;
 }
+
 .layout-container::before {
   content: "";
-  position:fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #191919;
+  position: fixed;       /* remains locked in the viewport */
+  top: 50%;
+  left: 50%;
+  width: min(90vw, 1600px);
+  height: 100vh;
+  background: #191919;
   z-index: -1;
+  transform: translate(-50%, -50%) scale(1.05);
+  transform-origin: center center;
   -webkit-clip-path: polygon(
-    0%   15%,
+    0%   10%,
     20%  5%,
     50%  0%,
     80%  7%,
@@ -200,13 +204,13 @@ Link:link {
     0%   100%
   );
           clip-path: polygon(
-    2%   15%,
-    20%  5%,
-    50%  2%,
-    80%  7%,
-    98% 10%,
-    98% 100%,
-    2%   100%
+            0%   10%,
+            20%  5%,
+            50%  0%,
+            80%  7%,
+            100% 10%,
+            100% 100%,
+            0%   100%
   );
 }
 
@@ -247,7 +251,7 @@ Link:link {
   flex-direction: column;
   align-items: stretch;
   justify-content: space-around;
-  margin-top: 50px;
+  margin-top: 7vh 0;
   height: 100%;
   width: 10vw;
 }
@@ -329,17 +333,21 @@ Link:link {
 }
 .footer-menu h2, .socials-section h2, .footer-lang h2{
   font-size: 1rem;
+  display: fle;
   color: #6f6f6f;
   padding: 5px;
   padding-bottom: 0;
   margin-bottom: 5px;
 }
-.socials-section h2{
+.socials-section h2, .footer-lang h2{
   margin-bottom: 0;
 }
 .socials-section{
   display: flex;
   flex-direction: column;
+}
+.socials-section h2, .footer-lang h2{
+  display: flex;
 }
 .bar-info .footer-toggle-icon{
   display: none;
@@ -675,10 +683,10 @@ Link:link {
 }
 
 .nav-image {
-  max-height: 12vh;
+  max-height: 8rem;
 }
 .nav-title-logo{
-  max-height: 3rem;
+  max-height: 2.2rem;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -1331,14 +1339,24 @@ Link:link {
   width: 100%;
 }
 
-.events-slices .menu-card-link{
+.events-slices .menu-card-link:nth-child(odd) {
   width: 100%;
   margin:0;
   margin-bottom: 2px;
-  background-color: var(--main-color);
+  background-color: #1b263b;
   max-width: 100%;
   height: fit-content;
 }
+
+.events-slices .menu-card-link:nth-child(even) {
+  width: 100%;
+  margin:0;
+  margin-bottom: 2px;
+  background-color: #162442c0;
+  max-width: 100%;
+  height: fit-content;
+}
+
 .events-slices .menu-card-link .menu-card-content h2{
   color: #191919;
 }
@@ -1887,29 +1905,13 @@ margin: 0;
   }
   .layout-container{
     margin: 0rem;
+    padding: 0rem;
+
     width: 100%;
-    padding-left:1rem;
     box-sizing: border-box;
   }
   .layout-container::before{
-   -webkit-clip-path: polygon(
-      0%   15%,
-      20%  5%,
-      50%  0%,
-      80%  7%,
-      100% 10%,
-      100% 100%,
-      0%   100%
-    );
-            clip-path: polygon(
-      0%   15%,
-      20%  5%,
-      50%  0%,
-      80%  7%,
-      100% 10%,
-      100% 100%,
-      0%   100%
-    );;
+    width: 95vw;
   }
   
   .side-nav-bar{
@@ -2041,7 +2043,10 @@ margin: 0;
     margin-bottom: 0;
     color: var(--light-text-color);
   }
-  
+  .header-box{
+    left: 1rem;
+  }
+
 }
 @media (max-width: 768px) { /* Tablet styles */
   .nav-title-logo{
@@ -2240,6 +2245,7 @@ margin: 0;
     flex-direction: column;
     overflow: hidden;
     margin: 0;
+    padding-left: 0rem;
     background-color: #191919;
   }
   .main-content, .homepage, .in-session, .events, .merch-display, .about-us {
@@ -2303,7 +2309,8 @@ margin: 0;
     padding-left: 1.2rem;
   }
   .navbar-menu .hover-effect h1{
-    font-size: 1rem;
+      line-height: 1rem;
+      font-size: 1rem;
   }
   .hover-effect svg{
     margin: 5px 10px;
@@ -2315,6 +2322,10 @@ margin: 0;
   .three-dots-toggle{
     max-width: 50px;
     margin: 0;
+  }
+  .socials-section h2, .footer-lang h2{
+    margin-bottom: 0;
+    display: none;
   }
   .in-session{
 

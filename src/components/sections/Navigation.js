@@ -51,29 +51,11 @@ export default function Navigation({ device, onSpecialsClick, onAboutClick }) {
           </Link>
           {token ? (
               <Link className="hover-effect" to="/profile">
-                <svg
-                  fill="currentColor"
-                  width="25px"
-                  height="25px"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  {/* Profile icon SVG */}
-                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                </svg>
+                <h1>{t("profile")}</h1>
               </Link>
             ) : (
               <Link className="hover-effect" to="/login">
-                <svg
-                  fill="currentColor"
-                  width="25px"
-                  height="25px"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g>
-                    <path d="M0 0h24v24H0z" fill="none" />
-                    <path d="M4 15h2v5h12V4H6v5H4V3a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6zm6-4V8l5 4-5 4v-3H2v-2h8z" />
-                  </g>
-                </svg>
+                 <h1>{t("login")}</h1>
               </Link>
             )}
           {/* Render the Cart link only if the user is signed in (i.e. token exists) */}

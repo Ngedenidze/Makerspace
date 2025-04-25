@@ -31,6 +31,45 @@
   margin-right: 0.5rem;
 
 }
+/* base style for ALL social links */
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.3rem;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background 0.2s ease, opacity 0.2s ease;
+  color: currentColor;
+}
+
+/* N/A state */
+.social-link.na {
+  color: #aaa;
+  cursor: default;
+}
+/* Instagram styles */
+.social-link[href*="instagram.com"] {
+  color: #E1306C;
+  background-color: rgba(225, 48, 108, 0.1);
+}
+
+.social-link[href*="instagram.com"]:hover {
+  background-color: rgba(225, 48, 108, 0.2);
+}
+
+/* Facebook styles */
+.social-link[href*="facebook.com"] {
+  color: #1877F2;
+  background-color: rgba(24, 119, 242, 0.1);
+}
+
+.social-link[href*="facebook.com"]:hover {
+  background-color: rgba(24, 119, 242, 0.2);
+}
+
 
 /* Logout button styling */
 .profile-logout-button, .scan-qr-button {
@@ -135,10 +174,9 @@
   
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   .profile-container {
-    width: 99vw;
-    height: max-content;
+    width: 95vw;
     padding: 0;
     margin: 0 1px;
   }
