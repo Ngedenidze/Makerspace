@@ -123,17 +123,17 @@ export default function EventPage() {
   return (
     <div className="event-page">
       <div className="event-image-wrapper">
-      <img
-  className="event-image"
-  src={event?.eventPhotoUrl || localImg}
-  alt={event?.name || "Default"}
-  loading="lazy"
-  onError={({ currentTarget }) => {
-    // prevent infinite loop in case localImg also errors
-    currentTarget.onerror = null;
-    currentTarget.src     = localImg;
-  }}
-/>
+        <img
+          className="event-image"
+          src={event?.eventPhotoUrl || localImg}
+          alt={event?.name || "Default"}
+          loading="lazy"
+          onError={({ currentTarget }) => {
+            // prevent infinite loop in case localImg also errors
+            currentTarget.onerror = null;
+            currentTarget.src = localImg;
+          }}
+        />
       </div>
       <section className="event-info">
         {error ? (
@@ -146,7 +146,9 @@ export default function EventPage() {
               <p className="start-date">{formattedDate}</p>
             </section>
             <header className="event-header">
-              <h1 className="event-title">{currentLang === "ka" ? event.name : event.nameLat}</h1>
+              <h1 className="event-title">
+                {currentLang === "ka" ? event.name : event.nameLat}
+              </h1>
             </header>
             <section className="event-lineups">
               {Object.entries(groupedLineUps).map(([floorName, lineUps]) => (
@@ -154,29 +156,99 @@ export default function EventPage() {
                   <h3 className="floor-name">{floorName}</h3>
                   <ul className="lineups-list">
                     {lineUps.map((lineUp) => (
-                   <li key={lineUp.id} className="lineup-item">
-                   <div className="lineup-flex">
-                     <span className="lineup-artist">
-                       {lineUp.isHeaderLineUp ? (
-                         <strong>{lineUp.artistName}</strong>
-                       ) : (
-                         lineUp.artistName
-                       )}
-                     </span>
-                     <span className="lineup-time">
-                     {" "} {" - "}
-                      {new Date(lineUp.startTime).toLocaleTimeString([], {
-  hour: "2-digit",
-  minute: "2-digit",
-  hour12: false,
-})}
-                     </span>
-                   </div>
-                 </li>
+                      <li key={lineUp.id} className="lineup-item">
+                        <div className="lineup-flex">
+                          <span className="lineup-artist">
+                            {lineUp.isHeaderLineUp ? (
+                              <strong>{lineUp.artistName}</strong>
+                            ) : (
+                              lineUp.artistName
+                            )}
+                          </span>
+                          <span className="lineup-time">
+                            {" "}
+                            {" - "}
+                            {new Date(lineUp.startTime).toLocaleTimeString([], {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              hour12: false,
+                            })}
+                          </span>
+                        </div>
+                      </li>
                     ))}
                   </ul>
                 </div>
               ))}
+              <div className="ticket-price">
+                {t("price")}:{" "}
+                {event.price != null
+                  ? new Intl.NumberFormat(
+                      currentLang === "ka" ? "ka-GE" : "en-US",
+                      { style: "currency", currency: "USD" }
+                    ).format(event.price)
+                  : t("n_a")}
+              </div>
+              <section className="buy-ticket-section">
+                <label htmlFor="ticketQuantity">Buy Tickets:</label>
+                <div
+                  className={`quantity-minus ${
+                    ticketQuantity === 1 ? "disabled" : ""
+                  }`}
+                  onClick={() => {
+                    if (ticketQuantity > 1) {
+                      setTicketQuantity((q) => q - 1);
+                    }
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <g fill="none" fill-rule="evenodd">
+                      <path fill="none" d="M0 0H24V24H0z"></path>
+                      <path
+                        fill="currentColor"
+                        d="M18 11c.552 0 1 .448 1 1s-.448 1-1 1H6c-.552 0-1-.448-1-1s.448-1 1-1h12z"
+                      ></path>
+                    </g>
+                  </svg>
+                </div>
+                <input
+                  id="ticketQuantity"
+                  type="number"
+                  readOnly
+                  className="ticket-quantity-input"
+                  value={ticketQuantity}
+                  onChange={(e) =>
+                    setTicketQuantity(parseInt(e.target.value, 10) || 1)
+                  }
+                />
+                <div
+                  className="quantity-plus"
+                  onClick={() => setTicketQuantity((q) => q + 1)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <g fill="none" fill-rule="evenodd">
+                      <path fill="none" d="M0 0H24V24H0z"></path>
+                      <path
+                        fill="currentColor"
+                        d="M12 5c.552 0 1 .448 1 1v5h5c.552 0 1 .448 1 1s-.448 1-1 1h-5v5c0 .552-.448 1-1 1s-1-.448-1-1v-5H6c-.552 0-1-.448-1-1s.448-1 1-1h5V6c0-.552.448-1 1-1z"
+                      ></path>
+                    </g>
+                  </svg>
+                </div>
+                <button className="buy-ticket-button" onClick={handleBuyTicket}>
+                  Add to Cart
+                </button>
+              </section>
             </section>
             <section className="event-description">
               {/* Wrap description in Linkify to auto‑detect URLs */}
@@ -194,23 +266,11 @@ export default function EventPage() {
                     </a>
                   )}
                 >
-                  {currentLang === "en" ? event.descriptionLat : event.description}
+                  {currentLang === "en"
+                    ? event.descriptionLat
+                    : event.description}
                 </Linkify>
               </p>
-            </section>
-            <section className="buy-ticket-section">
-              <label htmlFor="ticketQuantity">Buy Tickets:</label>
-              <input
-                id="ticketQuantity"
-                type="number"
-                value={ticketQuantity}
-                onChange={(e) =>
-                  setTicketQuantity(parseInt(e.target.value, 10) || 1)
-                }
-              />
-              <button className="buy-ticket-button" onClick={handleBuyTicket}>
-                Add to Cart
-              </button>
             </section>
           </>
         )}

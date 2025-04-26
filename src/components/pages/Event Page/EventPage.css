@@ -132,32 +132,66 @@
   .buy-ticket-section {
     display: flex;
     gap: 5px;
-    justify-content: flex-end;
+    justify-content: flex-start;
     text-align: flex-end;
     align-items: center;
-    margin-top: 2rem;
+    margin: 1rem 0;
   }
   .buy-ticket-section label{
     color: var(--highlighted-text-color-light);
     font-size: 1rem;
   }
-  .buy-ticket-section input{
+  .ticket-quantity-input{
+    position: relative;
+    color: wheat;
+    background-color: transparent;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    margin: 0;
+    width: 15px;
+    cursor: pointer;
+    height: 15px;
+    border-radius: 50%;
+  }
+  .ticket-quantity-input:focus{
+    outline: none;
+    background-color: var(--main-color);
+    color: var(--light-text-color);
+  }
+  .ticket-price {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--light-text-color);
+    margin: 0.5rem 0;
+  }
+  .buy-ticket-section-input:hover{
     background-color: var( --light-text-color);
     color: var(--main-color);
     padding: 1rem;
     font-size: 1rem;
-    width: 20px;
-    cursor: pointer;
-    height: 10px;
-    border-radius: 0;
-  }
-  .buy-ticket-section input:hover{
-    background-color: var( --light-text-color);
-    color: var(--main-color);
-    padding: 1rem;
-    font-size: 1rem;
     cursor: pointer;
   }
+  .quantity-minus, .quantity-plus{
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--light-text-color);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 20px;
+    margin: 10px;
+  }
+  .quantity-minus{
+    margin-right: 0;
+  }
+  .quantity-plus{
+    margin-left: 0;
+  }
+ 
   .buy-ticket-button{
     background-color: var( --light-text-color);
     color: var(--main-color);
@@ -165,6 +199,16 @@
     font-size: 0.8rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+  }
+  .quantity-minus.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5; /* soften the look */
+    border-color: var(--light-text-color); /* or a more muted var */
+    color: var(--light-text-color);
+  }
+  .quantity-minus.disabled svg {
+    fill: currentColor;
   }
 
   @media screen and (max-width: 768px) {
