@@ -15,6 +15,11 @@ export default function EventPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { t } = useTranslation();
+  const todayMidnight = new Date();
+todayMidnight.setHours(0, 0, 0, 0);
+
+const eventDate = event ? new Date(event.startDate) : null;
+const showBuySection = eventDate && eventDate >= todayMidnight;
   const currentLang = i18n.language;
   // State for ticket quantity
   const [ticketQuantity, setTicketQuantity] = useState(1);
@@ -180,7 +185,7 @@ export default function EventPage() {
                   </ul>
                 </div>
               ))}
-       
+          {showBuySection && (
               <section className="buy-ticket-section">
               <div className="ticket-price">
                 {t("price")}:{" "}
@@ -252,6 +257,7 @@ export default function EventPage() {
                 </button>
               </div>
               </section>
+            )}
             </section>
             <section className="event-description">
               {/* Wrap description in Linkify to auto‑detect URLs */}
