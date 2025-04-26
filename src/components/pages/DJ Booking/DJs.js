@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./DJs.css";
 import { Trans } from "react-i18next";
-import coverImage from "./../../../assets/makerspace_logo_about.jpeg";  
-import stage1 from "./../../../assets/stage-1.jpeg";
-import stage2 from "./../../../assets/stage-2.jpeg"; 
+import coverImage from "./../../../assets/makerspace_logo_about.webp";  
+import stage1 from "./../../../assets/stage-1.webp";
+import stage2 from "./../../../assets/stage-2.webp"; 
 const DJs = () => {
   const { id } = useParams();
   const [images, setImages] = useState([]);

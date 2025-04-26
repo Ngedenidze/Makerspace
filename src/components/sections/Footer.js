@@ -72,6 +72,8 @@ export default function Footer() {
               className="footer-links"
               target="_blank"
               rel="noopener noreferrer"
+              area-label="Makerspace location"
+              alt="Makerspace location"
               href="https://www.google.com/maps/dir//Makerspace,+Lado+Gudiashvili+Square,+Tbilisi+0162,+Georgia/@41.6909958,44.8035254,17z/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x40440d9a3542444f:0xc579f4ed091da767!3e0?source=lnms"
             >
               <h3>{t("location")}</h3>
@@ -86,6 +88,8 @@ export default function Footer() {
                 href="https://www.instagram.com/makerspace_club/"
                 target="_blank"
                 rel="noopener noreferrer"
+                area-label="Makerspace Instagram"
+                alt="Makerspace Instagram"
                 name="instagram"
               >
                 <svg
@@ -105,7 +109,9 @@ export default function Footer() {
                 className="hover-effect"
                 href="https://www.facebook.com/Makerspacebar?mibextid=LQQJ4d"
                 target="_blank"
+                area-label="Makerspace Facebook"
                 rel="noopener noreferrer"
+                alt="Makerspace Facebook"
                 name="facebook"
               >
                 <svg
@@ -124,6 +130,8 @@ export default function Footer() {
                 className="hover-effect"
                 href="https://www.youtube.com/makerspacebar/"
                 target="_blank"
+                area-label="Makerspace Youtube"
+                alt="Makerspace Youtube"
                 rel="noopener noreferrer"
                 name="youtube"
               >
@@ -218,6 +226,8 @@ export default function Footer() {
                       className="footer-links"
                       target="_blank"
                       rel="noopener noreferrer"
+                      alt="Makerspace location"
+                      area-label="Makerspace location"
                       href="https://www.google.com/maps/dir//Makerspace,+Lado+Gudiashvili+Square,+Tbilisi+0162,+Georgia/@41.6909958,44.8035254,17z/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x40440d9a3542444f:0xc579f4ed091da767!3e0?source=lnms"
                     >
                       <h3>{t("location")}</h3>
@@ -230,6 +240,8 @@ export default function Footer() {
                       href="https://www.instagram.com/makerspace_club/"
                       target="_blank"
                       rel="noopener noreferrer"
+                      alt="Makerspace Instagram"
+                      area-label="Makerspace Instagram"
                       name="instagram"
                     >
                       <svg
@@ -250,6 +262,8 @@ export default function Footer() {
                       href="https://www.facebook.com/Makerspacebar?mibextid=LQQJ4d"
                       target="_blank"
                       rel="noopener noreferrer"
+                      area-label="Makerspace Facebook"
+                      alt="Makerspace Facebook"
                       name="facebook"
                     >
                       <svg
@@ -268,6 +282,8 @@ export default function Footer() {
                       className="hover-effect"
                       href="https://www.youtube.com/makerspacebar/"
                       target="_blank"
+                      area-label="Makerspace Youtube"
+                      alt="Makerspace Youtube"
                       rel="noopener noreferrer"
                       name="youtube"
                     >

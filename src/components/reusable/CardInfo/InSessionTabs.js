@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import localImage from "../../../assets/art-cover.jpg";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import defaultCover from "../../../assets/default_cover.jpg";
+import defaultCover from "../../../assets/default_cover.webp";
 import defaultOverlay from "../../../assets/ms-name-red.png";
 
 export default function InsessionTabs({ eventsData }) {

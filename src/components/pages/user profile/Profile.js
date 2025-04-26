@@ -5,7 +5,7 @@ import api from "../authPage/utils/AxiosInstance";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../authPage/utils/AuthProvider";
 import "./Profile.css";
-
+import profileCover from "./../../../assets/profile-cover.webp"; // Adjust the path as necessary
 function Profile() {
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -123,10 +123,15 @@ function Profile() {
 
   return (
     <div className="profile-container">
-      <h1 className="profile-header">
-        {t("welcome", { name: profile.firstName })}
-      </h1>
-
+      <div className="profile-image-wrapper">
+        <img
+          className="profile-cover-image"
+          src={profileCover}
+          alt={t("profile_cover_image")}
+          loading="lazy"
+        />
+     
+      </div>
       {/* Verification Status Block */}
       {profile.status === "Verified" && (
         <div className="verification-status verified">{t("verified")}</div>
@@ -139,6 +144,9 @@ function Profile() {
       )}
 
       <div className="profile-info">
+      <h1>
+        {t("welcome", { name: profile.firstName })}
+      </h1>
         <p>
           <strong>{t("name")}:</strong> {profile.firstName} {profile.lastName}
         </p>

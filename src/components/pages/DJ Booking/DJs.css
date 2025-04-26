@@ -15,7 +15,7 @@
   
   .djs-cover-image {
     display: block;
-    max-height: 500px;
+    height: 500px;
     width: 100%;
     object-fit: cover;
     transition: transform 0.2s, clip-path 0.2s;

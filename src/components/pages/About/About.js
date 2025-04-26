@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useTranslation, Trans } from "react-i18next";
-import makerSpaceLogoAbout from "./../../../assets/makerspace_logo_about.jpeg"
+import makerSpaceLogoAbout from "./../../../assets/makerspace_logo_about.webp"
 export default function About() {
   const { t, i18n } = useTranslation();
   return (

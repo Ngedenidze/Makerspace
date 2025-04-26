@@ -33,7 +33,7 @@
 :root {
   --main-color: #1b263b;
   --main-text-color: #778da9;
-  --seconday-text-color: #a7a7a7;
+  --seconday-text-color: #e1e1e1;
   --light-text-color: #c6ead6;
   --seconday-color: #415a77;
   --seconday-light-color: #e0e1dd;
@@ -844,7 +844,6 @@ Link:link {
   height: 100%;
   display: block;
  width: 100%;
-  overflow: visible;
   object-position:center;
 }
 
@@ -1905,8 +1904,8 @@ margin: 0;
     width: 95vw;
   }
   .layout-container{
-    margin: 0rem;
-    padding: 0rem;
+    margin: 0rem 1rem;
+    padding: 0rem 1rem;
 
     width: 100%;
     box-sizing: border-box;
@@ -2264,7 +2263,6 @@ margin: 0;
     flex-direction: column;
     overflow: hidden;
     margin: 0;
-    padding-left: 0rem;
     background-color: #191919;
   }
   .main-content, .homepage, .in-session, .events, .merch-display, .about-us {
