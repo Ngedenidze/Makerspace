@@ -4,11 +4,14 @@ import "./CartPage.css";
 import { Link } from "react-router-dom";
 import api from "../authPage/utils/AxiosInstance";
 import debounce from "lodash.debounce";
+import defaultImage from "./../../../assets/default_cover.webp"; // Default image path
 
 export default function CartPage() {
   const { cart, dispatch, removeItem } = useContext(CartContext);
   const [subTotal, setSubTotal] = useState(0);
   const [estimatedTotal, setEstimatedTotal] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImageSrc, setModalImageSrc] = useState(null);
 
   // On mount: fetch the cart data from the backend and set it.
   useEffect(() => {
@@ -35,7 +38,19 @@ export default function CartPage() {
         console.error("Error fetching cart:", err);
       });
   }, [dispatch]);
-
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setIsModalOpen(false);
+      }
+    };
+    if (isModalOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isModalOpen]);
   // Recalculate totals whenever the cart changes.
   useEffect(() => {
     let newSubTotal = 0;
@@ -46,6 +61,7 @@ export default function CartPage() {
     setSubTotal(newSubTotal);
     setEstimatedTotal(newSubTotal);
   }, [cart.items]);
+  
   const updateQuantityBackend = useCallback(
     debounce((item, newQuantity) => {
       api.post(`/Cart/update-ticket?eventId=${item.eventId}&quantity=${newQuantity}`)
@@ -95,6 +111,7 @@ export default function CartPage() {
   };
 
   return (
+    <>
     <div className="cart-container">
       <div className="cart-header">
         <h1 className="cart-title">
@@ -115,6 +132,10 @@ export default function CartPage() {
                     src={item.image}
                     alt={item.eventName}
                     className="cart-item-image"
+                    onClick={() => {
+                      setModalImageSrc(item.image);
+                      setIsModalOpen(true);
+                    }}
                   />
                   <div className="cart-item-info">
                     <h2 className="cart-item-name">{item.eventName}</h2>
@@ -210,5 +231,23 @@ export default function CartPage() {
         </div>
       </div>
     </div>
-  );
-}
+    {isModalOpen && (
+           <div
+             className="image-modal-overlay"
+             onClick={() => setIsModalOpen(false)}
+          >
+             <img
+              src={modalImageSrc}
+               alt="Full size"
+              className="image-modal-content"
+               onClick={e => e.stopPropagation()}
+             />
+             <button
+             className="image-modal-close"
+               onClick={() => setIsModalOpen(false)}
+           >&times;</button>
+          </div>
+         )}
+    </>
+         );
+       }
