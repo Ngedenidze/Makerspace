@@ -183,7 +183,7 @@ function Profile() {
       </div>
 
       {/* Expandable/Collapsible "My Tickets" Section */}
-     
+     <section className="profile-page-buttons">
       <button
           onClick={() => setTicketsVisible((prevVisible) => !prevVisible)}
           className="toggle-tickets-button"
@@ -211,6 +211,7 @@ function Profile() {
       >
         {t("logout")}
       </button>
+      </section>
       <div className="my-tickets-section">
        
        {ticketsVisible && (
