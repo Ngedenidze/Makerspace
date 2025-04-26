@@ -131,15 +131,23 @@
   }
   .buy-ticket-section {
     display: flex;
+    flex-direction: column;
     gap: 5px;
     justify-content: flex-start;
     text-align: flex-end;
-    align-items: center;
+    align-items: flex-start;
     margin: 1rem 0;
   }
   .buy-ticket-section label{
     color: var(--highlighted-text-color-light);
     font-size: 1rem;
+  }
+  .ticket-quantity{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
   }
   .ticket-quantity-input{
     position: relative;
@@ -159,9 +167,9 @@
     color: var(--light-text-color);
   }
   .ticket-price {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 500;
-    color: var(--light-text-color);
+    color: var(--main-text-color);
     margin: 0.5rem 0;
   }
   .buy-ticket-section-input:hover{

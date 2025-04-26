@@ -180,6 +180,8 @@ export default function EventPage() {
                   </ul>
                 </div>
               ))}
+       
+              <section className="buy-ticket-section">
               <div className="ticket-price">
                 {t("price")}:{" "}
                 {event.price != null
@@ -189,7 +191,7 @@ export default function EventPage() {
                     ).format(event.price)
                   : t("n_a")}
               </div>
-              <section className="buy-ticket-section">
+              <div className="ticket-quantity">
                 <label htmlFor="ticketQuantity">Buy Tickets:</label>
                 <div
                   className={`quantity-minus ${
@@ -248,6 +250,7 @@ export default function EventPage() {
                 <button className="buy-ticket-button" onClick={handleBuyTicket}>
                   Add to Cart
                 </button>
+              </div>
               </section>
             </section>
             <section className="event-description">
