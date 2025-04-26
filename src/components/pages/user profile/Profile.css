@@ -122,6 +122,64 @@
   font-weight: bold;
 }
 
+.icon-svg {
+  width: 1rem;
+  height: 1rem;
+  vertical-align: middle;
+  margin-left: 0.5rem;
+  fill: currentColor;
+}
+.form-input-editable::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-bottom: #00000069 1px solid;
+}
+.form-input-editable {
+  background-color: transparent;
+  border: none;
+  display: inline-block;    /* make it shrinkable */
+  width: auto;              /* shrink-to-fit its contents */
+  min-width: 1ch;           /* don’t collapse to zero when empty */
+  white-space: pre;         /* respect spaces if you have them */
+  font-size: 1rem;
+  line-height: 1rem;
+  height: 1rem;
+}
+.form-input-editable:focus {
+  outline: none;
+  border-bottom: #00000069 1px solid;
+  background-color: transparent;
+  color: #fff;
+}
+.form-input-editable {
+  user-select: none;   /* prevent manual text select if you want */
+}
+.profile-info .editing {
+  color: #fff; /* changes icon and text color via inheritance */
+}
+
+.profile-info .editing input {
+  color: var(--main-color);                /* input text */
+  border-bottom: #00000069 1px solid;
+  background-color: var(--main-text-color);
+  min-width: none;
+  height: 0.8rem;
+  padding: 4px 0;  /* input underline */
+}
+
+.save-button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--main-text-color);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.save-button:hover {
+  opacity: 0.9;
+}
 .verification-status.verified {
   background-color: green;
   color: white;
@@ -158,6 +216,11 @@
 
 .toggle-tickets-button:hover {
   background-color: #1976d2;
+}
+.icon-svg{
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0.5rem;
 }
 
 .my-tickets {
