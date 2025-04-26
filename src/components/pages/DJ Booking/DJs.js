@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./DJs.css";
 import { Trans } from "react-i18next";
-
+import coverImage from "./../../../assets/makerspace_logo_about.jpeg";  
+import stage1 from "./../../../assets/stage-1.jpeg";
+import stage2 from "./../../../assets/stage-2.jpeg"; 
 const DJs = () => {
   const { id } = useParams();
   const [images, setImages] = useState([]);
@@ -21,46 +23,9 @@ const DJs = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // Mock data structure for DJs compatible with ImageGrid
-  const mockDJs = [
-    {
-      id: 1,
-      title: "DJ Shadow",
-      description: "Master of underground beats.",
-      images: [
-        {
-          url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/a15aa0b9-127e-4089-81f2-090d2adcd862.jpg",
-          alt: "DJ Shadow",
-        },
-        {
-          url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/06f053e0-65a7-48f4-870c-e7e5a75c1110.jpg",
-          alt: "DJ Shadow Performance",
-        },
-      ],
-    },
-    {
-      id: 2,
-      title: "Neon Beats",
-      description: "Futuristic vibes and neon rhythms.",
-      images: [
-        {
-          url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/91028cc5-b14f-4a47-b4b2-f01ef4d5496b.jpg",
-          alt: "Neon Beats",
-        },
-        {
-          url: "https://myphotostorage.blob.core.windows.net/mymakerphotos/7fd3953c-2be8-4b6e-a14f-3b272a3b33d0.jpg",
-          alt: "Neon Beats Live",
-        },
-      ],
-    },
-  ];
+
 
   // Simulate fetching images
-  useEffect(() => {
-    const allImages = mockDJs.flatMap((dj) => dj.images);
-    setImages(allImages);
-  }, []);
-
   // Submit handler for the DJ form
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -124,7 +89,7 @@ const DJs = () => {
       <div className="djs-cover-image-wrapper">
         <img
           className="djs-cover-image"
-          src="https://myphotostorage.blob.core.windows.net/mymakerphotos/9c3df2a7-c1f9-47e4-9c42-010a74ccc92b.jpeg"
+          src={coverImage}
           alt="DJs Cover"
           loading="lazy"
         />
@@ -140,13 +105,13 @@ const DJs = () => {
       <div className="djs-stage-image-wrapper">
         <img
           className="djs-stage-image stage-1"
-          src="https://myphotostorage.blob.core.windows.net/mymakerphotos/31bf474b-1b6d-4cbd-b525-7e96924de72f.jpeg"
+          src={stage1}
           alt="DJs Cover"
           loading="lazy"
         />
         <img
           className="djs-stage-image stage-2"
-          src="https://myphotostorage.blob.core.windows.net/mymakerphotos/54373832-23cf-4c23-bd2a-7cdc23d13277.jpeg"
+          src={stage2}
           alt="DJs Cover"
           loading="lazy"
         />

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import localImage from "../../../assets/art-cover.jpg";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import defaultCover from "../../../assets/default_cover.jpg";
+import defaultOverlay from "../../../assets/ms-name-red.png";
 
 export default function InsessionTabs({ eventsData }) {
   const { t } = useTranslation();
@@ -114,14 +116,14 @@ export default function InsessionTabs({ eventsData }) {
           <section className="default-image">
             <div className="image-wrapper">
               <img
-                src="https://myphotostorage.blob.core.windows.net/mymakerphotos/bf080f0e-a1fb-430c-998d-cc336ace2fcd.jpg"
+                src={defaultCover}
                 alt={t("default_cover_art")}
                 loading="lazy"
               />
             </div>
             <div className="text-overlay">
               <img
-                src="https://myphotostorage.blob.core.windows.net/mymakerphotos/3a1c4464-b245-4ad5-ad09-a2b01fbbbe6b.png"
+                src={defaultOverlay}
                 alt={t("default_cover_art")}
                 loading="lazy"
               />

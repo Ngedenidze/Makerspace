@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useTranslation, Trans } from "react-i18next";
+import makerSpaceLogoAbout from "./../../../assets/makerspace_logo_about.jpeg"
 export default function About() {
   const { t, i18n } = useTranslation();
   return (
@@ -85,7 +86,7 @@ export default function About() {
 
         <section className="double-image">
     <img
-            src="https://myphotostorage.blob.core.windows.net/mymakerphotos/badaca7a-094f-4b02-bdc3-d742dc39f888.jpeg"
+            src={makerSpaceLogoAbout}
             alt="Makerspace logo"
           ></img>
           <section className="hero-text-desktop">

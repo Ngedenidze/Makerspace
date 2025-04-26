@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { useAuth } from "../pages/authPage/utils/AuthProvider";
 import CartContext from "../pages/Cart/CartContext";
+import logo from "./../../assets/ms_logo.jpg"
 
 export default function Navigation({ device, onSpecialsClick, onAboutClick }) {
   const { t } = useTranslation();
@@ -27,7 +28,7 @@ export default function Navigation({ device, onSpecialsClick, onAboutClick }) {
           <Link to="/">
             <img
               src={
-                "https://myphotostorage.blob.core.windows.net/mymakerphotos/7d69a115-b47f-4803-a627-485f86ef5c95.jpg"
+                logo
               }
               alt={t("little_lemon_logo")}
               className="nav-image"

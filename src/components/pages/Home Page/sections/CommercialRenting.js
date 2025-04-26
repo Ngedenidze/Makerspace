@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import commercialRentingImg from "./../../../../assets/space.jpg";
 
 const CommercialRenting = () => {
     const { t, i18n } = useTranslation();
@@ -17,7 +18,7 @@ const CommercialRenting = () => {
 
       <div className="commercial-renting-image">
         <img
-          src={require("../../../../assets/space.jpg")}
+          src={commercialRentingImg}
           alt="Commercial Space"
         ></img>
       </div>

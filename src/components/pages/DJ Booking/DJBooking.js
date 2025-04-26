@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import djBookingImg from "./../../../assets/dj_booking.jpeg";
 
 const DJBooking = () => {
     const { t, i18n } = useTranslation();
@@ -8,7 +9,7 @@ const DJBooking = () => {
     <section className="dj-booking">
     <div className="dj-booking-image">
         <img
-          src="https://myphotostorage.blob.core.windows.net/mymakerphotos/969ab696-226c-4b4f-8385-2d683e868612.jpeg"
+          src={djBookingImg}
           alt="DJ Stage"
         ></img>
       </div>
