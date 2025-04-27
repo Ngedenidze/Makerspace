@@ -19,40 +19,46 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
-
 api.interceptors.response.use(
-  (res) => res,
+  response => response,
   async (error) => {
     const originalRequest = error.config;
+    const status = error.response?.status;
+    const token = localStorage.getItem("accessToken");
 
+    // If it's a 401 on login or refresh endpoints, just reject
     if (
-      error.response?.status === 401 &&
-      originalRequest.url.includes("/auth/login")
+      status === 401 &&
+      (originalRequest.url.includes("/auth/login") ||
+       originalRequest.url.includes("/auth/refresh"))
     ) {
       return Promise.reject(error);
     }
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    // If 401 and there's no accessToken in localStorage, kick to login
+    if (status === 401 && !token) {
+      window.location.href = "/login";
+      return Promise.reject(error);
+    }
+
+    // If 401 and we *do* have a token and we haven't retried yet → try refresh
+    if (status === 401 && token && !originalRequest._retry) {
       originalRequest._retry = true;
-      console.log("Old token:", localStorage.getItem("accessToken"));
       try {
         const newToken = await refreshAccessToken();
         if (newToken) {
-          console.log("New token received:", newToken);
           originalRequest.headers.Authorization = `Bearer ${newToken}`;
           return api(originalRequest);
-        } else {
-          window.location.href = "/login";
         }
       } catch (refreshError) {
-        console.error("Token refresh failed:", refreshError);
-        window.location.href = "/login"; // Redirect to login on refresh failure
-        return Promise.reject(refreshError);
+        console.error("refresh failed", refreshError);
       }
+      window.location.href = "/login";
     }
 
     return Promise.reject(error);
   }
 );
+
 
 export default api;

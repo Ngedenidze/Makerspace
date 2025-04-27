@@ -6,6 +6,7 @@ import { useAuth } from "../authPage/utils/AuthProvider";
 import "./Profile.css";
 import profileCover from "./../../../assets/profile-cover.webp";
 
+
 function EditIcon({ className, onClick }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16" height="16" viewBox="0 0 30 30" className={className} onClick={onClick}>
@@ -14,6 +15,7 @@ function EditIcon({ className, onClick }) {
 }
 
 function Profile() {
+  
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [profile, setProfile] = useState(null);
@@ -116,6 +118,20 @@ function Profile() {
       .then(() => alert(t("profile_updated")))
       .catch((err) => console.error(err));
   };
+  const handleLogout = async () => {
+    try {
+      // 1) Invalidate refresh cookie on the server
+      await api.post("/auth/logout");
+    } catch (e) {
+      console.warn("Server logout failed:", e);
+    }
+    // 2) Clear client‐side tokens
+    clearToken();                       // drop React context
+    localStorage.removeItem("accessToken");
+    // 3) Send them to login
+    navigate("/login");
+  };
+  
 
   return (
     <div className="profile-container">
@@ -275,10 +291,7 @@ function Profile() {
         )}
         <button
           className="profile-logout-button"
-          onClick={() => {
-            localStorage.removeItem("accessToken");
-            window.location.reload();
-          }}
+          onClick={handleLogout}
         >
           {t("logout")}
         </button>
