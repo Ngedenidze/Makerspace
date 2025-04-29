@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./AuthForm.css";
 import api from "./utils/AxiosInstance";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "./utils/AuthProvider";
 
 const getFriendlyErrorMessage = (status, defaultMessage, t) => {
   switch (status) {
@@ -39,6 +40,7 @@ const AuthPage = ({ page }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
+  const { saveToken } = useAuth();
   const [countries, setCountries] = useState([]);
   const [errors, setErrors] = useState({});
   const [georgiaSelected, setGeorgiaSelected] = useState(false);
@@ -268,9 +270,8 @@ const AuthPage = ({ page }) => {
           password: form.password,
         });
         const { accessToken: token } = response.data;
-        localStorage.setItem("accessToken", token);
+        saveToken(token);
         navigate("/profile");
-        window.location.reload();
       } else if (page === "forgot-password") {
         response = await api.post("/auth/request-password-reset", {
           email: form.email,

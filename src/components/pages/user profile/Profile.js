@@ -126,9 +126,7 @@ function Profile() {
       console.warn("Server logout failed:", e);
     }
     // 2) Clear client‐side tokens
-    clearToken();                       // drop React context
-    localStorage.removeItem("accessToken");
-    // 3) Send them to login
+    clearToken();                 
     navigate("/login");
   };
   

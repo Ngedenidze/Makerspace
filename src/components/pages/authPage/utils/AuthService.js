@@ -5,8 +5,8 @@ export const refreshAccessToken = async () => {
     const { data } = await api.post("/auth/refresh");
     localStorage.setItem("accessToken", data.accessToken);
     return data.accessToken;
-  } catch {
-    localStorage.removeItem("accessToken");
+  } catch(error) {
+    console.warn("Refresh failed—keeping existing accessToken:", error);
     return null;
   }
 };
