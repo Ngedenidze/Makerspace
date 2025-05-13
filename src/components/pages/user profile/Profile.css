@@ -29,10 +29,12 @@
   margin: 0;
   padding: 1rem;
   text-align: center;
-  width: 100%;
   background-color: var(--main-color);
 }
-
+.profile-info{
+  display: flex;
+  flex-direction: column;;
+}
 /* Container for the user info fields */
 .profile-info p {
   margin: 0.5rem 0;
@@ -97,7 +99,7 @@
 /* Logout button styling */
 .profile-logout-button, .scan-qr-button {
   display: inline-block;
-  padding: 0.6rem 1.2rem;
+   padding: 0.6rem 1.2rem;
 
   background-color: #f44336;
   color: #fff;
@@ -121,7 +123,27 @@
   font-size: 1.5rem;
   font-weight: bold;
 }
-
+.edit-profile-button {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background-color: #2196F3;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.cancel-button {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background-color: #f44336;
+  color: #fff;
+  margin: 0 5px;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 600;
+}
 .icon-svg {
   width: 1rem;
   height: 1rem;
@@ -134,20 +156,15 @@
   border-bottom: #00000069 1px solid;
 }
 .form-input-editable {
-  background-color: transparent;
+  background-color: #5885aa;
+  color: var(--main-text-colorcolor);
   border: none;
   display: inline-block;    /* make it shrinkable */
-  width: auto;              /* shrink-to-fit its contents */
-  min-width: 1ch;           /* don’t collapse to zero when empty */
-  white-space: pre;         /* respect spaces if you have them */
-  font-size: 1rem;
-  line-height: 1rem;
-  height: 1rem;
+  width: fit-content;
 }
 .form-input-editable:focus {
   outline: none;
-  border-bottom: #00000069 1px solid;
-  background-color: transparent;
+
   color: #fff;
 }
 .form-input-editable {
@@ -157,8 +174,7 @@
   color: #fff; /* changes icon and text color via inheritance */
 }
 
-.profile-info .editing input {
-  color: var(--main-color);                /* input text */
+.profile-info .editing input {             /* input text */
   border-bottom: #00000069 1px solid;
   background-color: var(--main-text-color);
   min-width: none;
@@ -170,7 +186,7 @@
   display: inline-block;
   margin-top: 1rem;
   padding: 0.6rem 1.2rem;
-  background-color: var(--main-text-color);
+  background-color: #2196F3;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -206,7 +222,7 @@
 .toggle-tickets-button {
   background-color: #2196F3;
   color: #fff;
-  padding: 0.6rem 1.2rem;
+   padding: 0.6rem 1.2rem;
   border: none;
   cursor: pointer;
   text-transform: uppercase;
@@ -221,6 +237,9 @@
   width: 1.5rem;
   height: 1.5rem;
   margin-right: 0.5rem;
+}
+.profile-logout-button{
+     padding: 0.6rem 1.2rem;
 }
 
 .my-tickets {
@@ -265,14 +284,36 @@
 
 @media screen and (max-width: 768px) {
   .profile-container {
-    width: 95vw;
-    padding: 0;
-    margin: 0 1px;
-  
+    width: 95vw;         /* instead of 95vw */
+    margin: 0;  /* restore your original margins */
+    padding: 0;       /* whatever padding you like */
+  }
+  .profile-info{
+    padding: 1rem;
+  }
+  .profile-page-buttons{
+    width: 100%;
+    align-items: center;
+    gap: 1px;
+    justify-content: center;
   }
   .profile-image-wrapper img {
     height: 200px;
     clip-path: polygon(0 25%, 0 100%, 100% 100%, 100% 0, 100% 25%, 0% 0);
+  }
+  .toggle-tickets-button, .profile-logout-button, .scan-qr-button{
+  flex: 0 0 33.333%;
+  max-width: 33.333%;
+     padding: 8px 10px;
+  }
+  .toggle-tickets-button, .profile-logout-button, .scan-qr-button, .edit-profile-button, .cancel-button, .save-button {
+    font-size: 0.8rem;
+  }
+  .toggle-tickets-button{
+
+  }
+  .social-link{
+    font-size: 0.85rem;;
   }
   
 }

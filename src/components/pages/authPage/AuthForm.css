@@ -31,6 +31,20 @@ body {
   margin-bottom: 1rem;
   text-align: center;
 }
+.auth-links{
+  border-top: #2c2c2c solid 1px;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  padding: 1rem;
+  flex-direction: column;
+}
+.auth-link{
+  padding: 2px;
+  margin: 2px;
+}
 .auth-link a{
   color: #ccc;
   text-decoration: none;
@@ -123,7 +137,6 @@ body {
 .auth-link {
   text-align: center;
   color: #777;
-  margin-top: 1rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -134,7 +147,19 @@ body {
     padding-top: 0;
     margin: 10px 0;
   }
+  .auth-links{
+    padding: 1rem 0;
+  }
+  .auth-link{
+    font-size: 0.9rem;
+  }
+  .auth-link a{
+  display: inline-block;
+  white-space: nowrap;
+
+  }
   .auth-box{
    position: relative;
+   padding: 1.5rem;
   }
 }

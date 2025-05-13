@@ -1,46 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react"; // Added useRef
 import { useNavigate } from "react-router-dom";
 import api from "../authPage/utils/AxiosInstance";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../authPage/utils/AuthProvider";
-import "./Profile.css";
+import "./Profile.css"; // Ensure this CSS supports the new classes/structure
 import profileCover from "./../../../assets/profile-cover.webp";
 import Loader from "../../reusable/Loader/Loader";
+import { toast } from "react-toastify";
 
-function EditIcon({ className, onClick }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      x="0px"
-      y="0px"
-      width="16"
-      height="16"
-      viewBox="0 0 30 30"
-      className={className}
-      onClick={onClick}
-    >
-      <path d="M 22.828125 3 C 22.316375 3 21.804562 3.1954375 21.414062 3.5859375 L 19 6 L 24 11 L 26.414062 8.5859375 C 27.195062 7.8049375 27.195062 6.5388125 26.414062 5.7578125 L 24.242188 3.5859375 C 23.851688 3.1954375 23.339875 3 22.828125 3 z M 17 8 L 5.2597656 19.740234 C 5.2597656 19.740234 6.1775313 19.658 6.5195312 20 C 6.8615312 20.342 6.58 22.58 7 23 C 7.42 23.42 9.6438906 23.124359 9.9628906 23.443359 C 10.281891 23.762359 10.259766 24.740234 10.259766 24.740234 L 22 13 L 17 8 z M 4 23 L 3.0566406 25.671875 A 1 1 0 0 0 3 26 A 1 1 0 0 0 4 27 A 1 1 0 0 0 4.328125 26.943359 A 1 1 0 0 0 4.3378906 26.939453 L 4.3632812 26.931641 A 1 1 0 0 0 4.3691406 26.927734 L 7 26 L 5.5 24.5 L 4 23 z"></path>
-    </svg>
-  );
-}
+// EditIcon component is no longer needed here if not used elsewhere
 
 function Profile() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false); // For Save button loading state
 
-  // Tickets state
+  // Tickets state (remains the same)
   const [tickets, setTickets] = useState([]);
   const [ticketsVisible, setTicketsVisible] = useState(false);
   const [ticketsLoading, setTicketsLoading] = useState(false);
   const [ticketsError, setTicketsError] = useState(null);
 
   const { token, clearToken } = useAuth();
-  const [editingFields, setEditingFields] = useState({});
-  const toggleEditing = (field) => {
-    setEditingFields((prev) => ({ ...prev, [field]: !prev[field] }));
-  };
+
+  // Global edit mode state
+  const [isEditingMode, setIsEditingMode] = useState(false);
 
   // Form state for editable fields
   const [formData, setFormData] = useState({
@@ -48,34 +34,44 @@ function Profile() {
     lastName: "",
     phoneNumber: "",
     country: "",
-    birthdate: "",
+    birthdate: "", // Will store as YYYY-MM-DD for input
     socialMediaProfileLink: "",
   });
 
-  // Format date helper (unchanged)
+  // Refs for auto-focus (optional but good UX)
+  const firstNameInputRef = useRef(null);
+
+
+  // Format date helper
   const formatDate = (dateString) => {
+    if (!dateString) return t("n_a", "N/A");
     const date = new Date(dateString);
+    // Check if date is valid
+    if (isNaN(date.getTime())) {
+        return t("invalid_date", "Invalid Date");
+    }
     const day = date.getDate();
     const monthIndex = date.getMonth();
     const year = date.getFullYear();
 
     const monthKeys = [
-      "january",
-      "february",
-      "march",
-      "april",
-      "may",
-      "june",
-      "july",
-      "august",
-      "september",
-      "october",
-      "november",
-      "december",
+      "january", "february", "march", "april", "may", "june",
+      "july", "august", "september", "october", "november", "december",
     ];
     const monthTranslated = t(`months.${monthKeys[monthIndex]}`);
     return `${monthTranslated} ${day}, ${year}`;
   };
+
+  // Helper to format date for input type="date" (YYYY-MM-DD)
+  const formatDateForInput = (isoDateString) => {
+    if (!isoDateString) return "";
+    try {
+      return new Date(isoDateString).toISOString().split("T")[0];
+    } catch (e) {
+      return ""; // Handle invalid date strings gracefully
+    }
+  };
+
 
   // Fetch profile on mount
   useEffect(() => {
@@ -83,6 +79,7 @@ function Profile() {
       navigate("/login");
       return;
     }
+    setLoading(true); // Ensure loading is true at the start of fetch
     api
       .get("/auth/me", { headers: { Authorization: `Bearer ${token}` } })
       .then(({ data }) => {
@@ -93,192 +90,286 @@ function Profile() {
             lastName: data.lastName || "",
             phoneNumber: data.phoneNumber || "",
             country: data.country || "",
-            birthdate: data.birthdate || "",
+            birthdate: formatDateForInput(data.birthdate), // Format for date input
             socialMediaProfileLink: data.socialMediaProfileLink || "",
           });
         } else {
+          toast.error(t("error.load_profile_failed", "Failed to load profile. Please log in again."));
           clearToken();
           navigate("/login");
         }
       })
       .catch(() => {
+        toast.error(t("error.load_profile_failed", "Failed to load profile. Please log in again."));
         clearToken();
         navigate("/login");
       })
       .finally(() => setLoading(false));
   }, [token, navigate, clearToken, t]);
 
-  // Fetch tickets when expanded
+
+  // Auto-focus the first editable input when entering edit mode
   useEffect(() => {
-    if (ticketsVisible && tickets.length === 0) {
-      setTicketsLoading(true);
-      api
-        .get("/Tickets/my-tickets")
-        .then(({ data }) => setTickets(data))
-        .catch((err) =>
-          setTicketsError(err.response?.data?.message || err.message)
-        )
-        .finally(() => setTicketsLoading(false));
+    if (isEditingMode && firstNameInputRef.current) {
+      firstNameInputRef.current.focus();
     }
-  }, [ticketsVisible, tickets.length]);
+  }, [isEditingMode]);
 
-   if (loading) return <div className="profile-container"><Loader /></div>;
-  if (!profile) return <div className="profile-container">{t("profile_not_loaded")}</div>;
 
-  const createdAtFormatted = formatDate(profile.createdAt);
-  const birthdateFormatted = formatDate(profile.birthdate);
+  // Fetch tickets when expanded (remains the same)
+  useEffect(() => {
+    // Only fetch if:
+    // 1. The tickets section is meant to be visible.
+    // 2. We are not already loading tickets (to prevent concurrent fetches).
+    // 3. We don't have any tickets yet (tickets.length === 0). This means we fetch once
+    //    when the section becomes visible and is empty. If the API returns an empty array,
+    //    tickets.length will remain 0, and this logic will try to fetch again if ticketsVisible changes
+    //    or if the token changes. This is usually acceptable behavior.
 
-  // Handle edits
+    if (ticketsVisible && !ticketsLoading && tickets.length === 0) {
+      setTicketsLoading(true);
+      setTicketsError(null); // Reset error before a new fetch
+
+      api.get("/Tickets/my-tickets", { headers: { Authorization: `Bearer ${token}` } }) // Assuming token is needed for auth
+        .then(({ data }) => {
+          setTickets(Array.isArray(data) ? data : []);
+        })
+        .catch((err) => {
+          console.error("Error fetching tickets:", err);
+          setTicketsError(err.response?.data?.message || err.message || t("error.fetch_tickets", "Failed to fetch tickets."));
+          // Optionally setTickets([]) here if you want to clear on error,
+          // but be mindful if this could re-trigger fetches based on other conditions.
+          // For now, let the error state handle the display.
+        })
+        .finally(() => {
+          setTicketsLoading(false);
+        });
+    }
+    
+    // If ticketsVisible becomes false, you might want to clear the tickets
+    // if you don't want to cache them for the next time the section is opened.
+    // else if (!ticketsVisible) {
+    //   setTickets([]); // This would mean tickets are fetched fresh each time it's opened
+    // }
+
+  }, [ticketsVisible, token, t]); // Added token and t, ticketsLoading
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSave = () => {
-    api
-      .put("/auth/me", formData, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then(() => alert(t("profile_updated")))
-      .catch((err) => console.error(err));
+  const handleEditToggle = () => {
+    if (!isEditingMode && profile) {
+      // Entering edit mode, ensure formData is fresh from profile
+      setFormData({
+        firstName: profile.firstName || "",
+        lastName: profile.lastName || "",
+        phoneNumber: profile.phoneNumber || "",
+        country: profile.country || "",
+        birthdate: formatDateForInput(profile.birthdate),
+        socialMediaProfileLink: profile.socialMediaProfileLink || "",
+      });
+    }
+    setIsEditingMode((prev) => !prev);
   };
+
+  const handleCancelEdit = () => {
+    setIsEditingMode(false);
+    // Reset formData to original profile data
+    if (profile) {
+      setFormData({
+        firstName: profile.firstName || "",
+        lastName: profile.lastName || "",
+        phoneNumber: profile.phoneNumber || "",
+        country: profile.country || "",
+        birthdate: formatDateForInput(profile.birthdate),
+        socialMediaProfileLink: profile.socialMediaProfileLink || "",
+      });
+    }
+  };
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    // Ensure birthdate is in a format the backend expects, or remove if it shouldn't be sent as YYYY-MM-DD
+    // For example, if backend expects ISO string or null:
+    // const payload = {
+    //   ...formData,
+    //   birthdate: formData.birthdate ? new Date(formData.birthdate).toISOString() : null,
+    // };
+
+    try {
+      // Using formData directly if backend accepts YYYY-MM-DD for birthdate
+      const { data: updatedProfile } = await api.put("/auth/me", formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      toast.success(t("profile_updated", "Profile updated successfully!"));
+      setProfile(prevProfile => ({ ...prevProfile, ...formData })); // Optimistically update with formData
+      // Or, if API returns the full updated profile, use that:
+      // setProfile(updatedProfile);
+      // setFormData({ // Re-sync formData if necessary, especially if API cleans/transforms data
+      //   firstName: updatedProfile.firstName || "",
+      //   lastName: updatedProfile.lastName || "",
+      //   phoneNumber: updatedProfile.phoneNumber || "",
+      //   country: updatedProfile.country || "",
+      //   birthdate: formatDateForInput(updatedProfile.birthdate),
+      //   socialMediaProfileLink: updatedProfile.socialMediaProfileLink || "",
+      // });
+      setIsEditingMode(false);
+    } catch (err) {
+      console.error("Error updating profile:", err);
+      const errorMessage = err.response?.data?.message || t("error.profile_update_failed", "Failed to update profile. Please try again.");
+      toast.error(errorMessage);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   const handleLogout = async () => {
     try {
-      // 1) Invalidate refresh cookie on the server
       await api.post("/auth/logout");
     } catch (e) {
       console.warn("Server logout failed:", e);
     }
-    // 2) Clear client‐side tokens
     clearToken();
+    toast.info(t("logout_successful", "You have been logged out."));
     navigate("/login");
   };
+
+
+  if (loading) return <div className="profile-container"><Loader /></div>;
+  if (!profile) return <div className="profile-container page-message">{t("profile_not_loaded", "Profile could not be loaded.")}</div>;
+
+  // Display values should come from `profile` state when not editing
+  // Formatted dates for display
+  const displayBirthdateFormatted = profile.birthdate ? formatDate(profile.birthdate) : t("n_a", "N/A");
+  const createdAtFormatted = profile.createdAt ? formatDate(profile.createdAt) : t("n_a", "N/A");
+
 
   return (
     <div className="profile-container">
       <div className="profile-image-wrapper">
-        <img src={profileCover} alt={t("profile_cover_image")} />
+        <img src={profileCover} alt={t("profile_cover_image", "Profile cover")} />
       </div>
 
-      {/* Verification Status */}
-      {profile.status === "Verified" && (
-        <div className="verification-status verified">{t("verified")}</div>
-      )}
-      {profile.status === "Rejected" && (
-        <div className="verification-status rejected">{t("rejected")}</div>
-      )}
-      {profile.status === "Pending" && (
-        <div className="verification-status pending">{t("pending")}</div>
-      )}
+      {profile.status === "Verified" && (<div className="verification-status verified">{t("verified", "Verified")}</div>)}
+      {profile.status === "Rejected" && (<div className="verification-status rejected">{t("rejected", "Rejected")}</div>)}
+      {profile.status === "Pending" && (<div className="verification-status pending">{t("pending", "Pending")}</div>)}
 
       <div className="profile-info">
         <h1 className="profile-header">
-          {t("welcome", { name: profile.firstName })}
+          {t("welcome", "Welcome, {{name}}", { name: profile.firstName || "User" })}
         </h1>
 
-        <p className={editingFields.firstName ? "editing" : ""}>
+        {/* Edit/Save/Cancel Buttons */}
+        <div className="profile-edit-controls">
+          {!isEditingMode ? (
+            <button onClick={handleEditToggle} className="edit-profile-button">
+              {t("edit_profile", "Edit Profile")}
+            </button>
+          ) : (
+            <>
+              <button onClick={handleSave} className="save-button" disabled={isSaving}>
+                {isSaving ? t("saving", "Saving...") : t("save_changes", "Save Changes")}
+              </button>
+              <button onClick={handleCancelEdit} className="cancel-button" disabled={isSaving}>
+                {t("cancel", "Cancel")}
+              </button>
+            </>
+          )}
+        </div>
+
+        <p>
           <strong>{t("name")}:</strong>
-          {editingFields.firstName ? (
+          {isEditingMode ? (
             <input
+              ref={firstNameInputRef}
               type="text"
               name="firstName"
               className="form-input-editable"
               value={formData.firstName}
               onChange={handleChange}
-              readOnly={!editingFields.firstName}
             />
           ) : (
-            <span>{profile.firstName}</span>
+            <span>{profile.firstName || t("n_a", "N/A")}</span>
           )}
-          <EditIcon
-            className="icon-svg"
-            onClick={() => toggleEditing("firstName")}
-          />
         </p>
-        <p className={editingFields.lastName ? "editing" : ""}>
+        <p>
           <strong>{t("last_name")}:</strong>
-          {editingFields.lastName ? (
+          {isEditingMode ? (
             <input
               type="text"
               name="lastName"
               className="form-input-editable"
               value={formData.lastName}
               onChange={handleChange}
-              readOnly={!editingFields.lastName}
             />
           ) : (
-            <span>{profile.lastName}</span>
+            <span>{profile.lastName || t("n_a", "N/A")}</span>
           )}
-          <EditIcon
-            className="icon-svg"
-            onClick={() => toggleEditing("lastName")}
-          />
         </p>
 
-        <p>
-          <strong>{t("email")}:</strong> <span>{profile.email}</span>
-        </p>
-        <p>
-          <strong>{t("personal_number")}:</strong>{" "}
-          <span>{profile.personalNumber}</span>
-        </p>
+        <p><strong>{t("email")}:</strong> <span>{profile.email || t("n_a", "N/A")}</span></p>
+        <p><strong>{t("personal_number")}:</strong> <span>{profile.personalNumber || t("n_a", "N/A")}</span></p>
 
-        <p className={editingFields.phoneNumber ? "editing" : ""}>
+        <p>
           <strong>{t("phone")}:</strong>
-          {editingFields.phoneNumber ? (
+          {isEditingMode ? (
             <input
               type="tel"
               name="phoneNumber"
               className="form-input-editable"
               value={formData.phoneNumber}
               onChange={handleChange}
-              readOnly={!editingFields.phoneNumber}
             />
           ) : (
-            <span>{profile.phoneNumber}</span>
+            <span>{profile.phoneNumber || t("n_a", "N/A")}</span>
           )}
-          <EditIcon
-            className="icon-svg"
-            onClick={() => toggleEditing("phoneNumber")}
-          />
         </p>
-        <p className={editingFields.country ? "editing" : ""}>
+        <p>
           <strong>{t("country")}:</strong>
-          {editingFields.country ? (
+          {isEditingMode ? (
             <select
               name="country"
-              id="country"
               className="form-input-editable"
               onChange={handleChange}
               value={formData.country}
             >
-              <option value="">
-                {t("auth.select_country", "Select a country")}
-              </option>
+              <option value="">{t("auth.select_country", "Select a country")}</option>
+              {/* TODO: Populate with a dynamic list of countries if needed */}
               <option value="Georgia">Georgia</option>
+              <option value="USA">USA</option>
+              <option value="Germany">Germany</option>
               <option value="Other">Other</option>
             </select>
           ) : (
-            <span>{profile.country}</span>
+            <span>{profile.country || t("n_a", "N/A")}</span>
           )}
-          <EditIcon
-            className="icon-svg"
-            onClick={() => toggleEditing("country")}
-          />
         </p>
         <p>
-          <strong>{t("birthdate")}:</strong> {birthdateFormatted}
+          <strong>{t("birthdate")}:</strong>
+          {isEditingMode ? (
+            <input
+              type="date"
+              name="birthdate"
+              className="form-input-editable"
+              value={formData.birthdate} // Already formatted as YYYY-MM-DD
+              onChange={handleChange}
+            />
+          ) : (
+            <span>{displayBirthdateFormatted}</span>
+          )}
         </p>
-        <p className={editingFields.socialMediaProfileLink ? "editing" : ""}>
+        <p>
           <strong>{t("social_media_link")}:</strong>
-          {editingFields.socialMediaProfileLink ? (
+          {isEditingMode ? (
             <input
               type="url"
               name="socialMediaProfileLink"
               className="form-input-editable"
+              placeholder="https://example.com/profile"
               value={formData.socialMediaProfileLink}
               onChange={handleChange}
-              readOnly={!editingFields.socialMediaProfileLink}
             />
           ) : profile.socialMediaProfileLink ? (
             <a
@@ -290,68 +381,62 @@ function Profile() {
               {profile.socialMediaProfileLink}
             </a>
           ) : (
-            <span className="social-link na">{t("n_a")}</span>
+            <span className="social-link na">{t("n_a", "N/A")}</span>
           )}
-          <EditIcon
-            className="icon-svg"
-            onClick={() => toggleEditing("socialMediaProfileLink")}
-          />
         </p>
-
-        <button className="save-button" onClick={handleSave}>
-          {t("save_changes")}
-        </button>
+        <p><strong>{t("profile_created_on", "Profile Created On")}:</strong> <span>{createdAtFormatted}</span></p>
       </div>
 
-      {/* Buttons Section */}
+      {/* Buttons Section (Tickets, QR Scan, Logout) */}
       <section className="profile-page-buttons">
         <button
           onClick={() => setTicketsVisible((prev) => !prev)}
           className="toggle-tickets-button"
         >
-          {t(ticketsVisible ? "collapse_my_tickets" : "tickets")}
+          {t(ticketsVisible ? "collapse_my_tickets" : "my_tickets", ticketsVisible ? "Collapse" : "My Tickets")}
         </button>
         {profile.role === "Admin" && (
           <button
             className="scan-qr-button"
             onClick={() => navigate("/QRScan")}
           >
-            {t("scan_qr_code")}
+            {t("scan_qr_code", "Scan QR")}
           </button>
         )}
         <button className="profile-logout-button" onClick={handleLogout}>
-          {t("logout")}
+          {t("logout", "Logout")}
         </button>
       </section>
 
-      {/* Tickets Section */}
-      <div className="my-tickets-section">
-        {ticketsVisible && (
-          <div className="my-tickets">
+      {/* Tickets Section Display */}
+      {ticketsVisible && (
+         <div className="my-tickets-section">
+          <h2 className="my-tickets-header">{t("my_tickets_title", "My Tickets")}</h2>
+          <div className="my-tickets-list">
             {ticketsLoading ? (
-              <p>{t("loading_tickets")}</p>
+              <Loader />
             ) : ticketsError ? (
-              <p className="error">
-                {t("tickets_error")}: {ticketsError}
+              <p className="error-text">
+                {t("tickets_error", "Error loading tickets")}: {ticketsError}
               </p>
             ) : tickets.length > 0 ? (
               tickets.map((ticket) => (
                 <div key={ticket.id} className="ticket-item">
-                  <p>
-                    <strong>{t("ticket_id")}:</strong> {ticket.id}
-                  </p>
-                  <p>
-                    <strong>{t("ticket_used")}:</strong>{" "}
-                    {ticket.isUsedTicket ? t("yes") : t("no")}
-                  </p>
+                  {/* Display more ticket details as needed */}
+                  <p><strong>{t("ticket_event_name", "Event")}:</strong> {ticket.eventName || t("n_a")}</p>
+                  <p><strong>{t("ticket_id", "Ticket ID")}:</strong> {ticket.id}</p>
+                  <p><strong>{t("ticket_purchase_date", "Purchased")}:</strong> {ticket.purchaseDate ? formatDate(ticket.purchaseDate) : t("n_a")}</p>
+                  <p><strong>{t("ticket_price_paid", "Price Paid")}:</strong> ${ticket.pricePaid ? ticket.pricePaid.toFixed(2) : 'N/A'}</p>
+                  <p><strong>{t("ticket_used", "Used")}:</strong> {ticket.isUsedTicket ? t("yes", "Yes") : t("no", "No")}</p>
+                  {/* Add link to event, QR code display, etc. */}
                 </div>
               ))
             ) : (
-              <p>{t("no_tickets")}</p>
+              <p>{t("no_tickets_found", "You have no tickets.")}</p>
             )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

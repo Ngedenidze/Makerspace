@@ -411,6 +411,7 @@ const AuthPage = ({ page }) => {
         <button type="submit" className="auth-button" disabled={isSubmitting}>
           {t("auth.sign_in", "Sign in")}
         </button>
+        <section className="auth-links">
         <p className="auth-link">
           {t("auth.no_account", "Don't have an account?")}{" "}
           <Link to="/register">{t("auth.register_here", "Register here")}</Link>
@@ -419,7 +420,7 @@ const AuthPage = ({ page }) => {
           {t("auth.forgot_password", "Forgot your password?")}{" "}
           <Link to="/forgot-password">{t("auth.reset_here", "Reset here")}</Link>
         </p>
-       
+       </section>
       </form>
     </>
   );
