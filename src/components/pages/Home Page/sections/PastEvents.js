@@ -46,7 +46,7 @@ export default function PastEvents({ events }) {
             </div>
           </section>
           <section className="events-topbar-button">
-          <Link to="/AllEvents" className="view-more">
+          <Link to="/AllEvents/past" className="view-more">
   <strong className="chevron">&gt;&gt;</strong>
 </Link>
           </section>

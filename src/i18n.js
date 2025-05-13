@@ -145,6 +145,7 @@ const resources = {
   "pending": "Pending",
   "name": "Name",
   "email": "Email",
+  "register": "Register",
   "phone": "Phone",
   "country": "Country",
   "personal_number": "Personal Number",
@@ -161,6 +162,7 @@ const resources = {
       "network_error":"Network error",
       "generic":"Something went wrong",
       "fetching_countries":"Fetching countries",
+      "email_exists":"Email already exists",
     },
     validation:{
       "email_required":"Email is required",
@@ -252,6 +254,7 @@ const resources = {
       cart: "კალათა",
       scan_qr_code: "QR კოდის სკანირება",
       stage: "",
+      register: "რეგისტრაცია",
       collapse_my_tickets: "დახურვა",
       main_stage: "Main Stage",
       space_stage: "Space Stage",
@@ -396,6 +399,7 @@ const resources = {
         "network_error":"ქსელის შეცდომა",
         "generic":"ზოგადი შეცდომა",
         "fetching_countries":"ქვეყნების ჩამონათვალის მიღებისას მოხდა შეცდომა",
+        "email_exists":"ელფოსტის მისამართი უკვე არსებობს",
       },
       validation:{
         "email_required":"ელფოსტის მისამართი აუცილებელია",

@@ -7,6 +7,7 @@ import api from "../authPage/utils/AxiosInstance";
 import Linkify from "react-linkify"; // Import react-linkify
 import "./EventPage.css";
 import i18n from "i18next"; // Import i18next for language detection
+import Loader from "../../reusable/Loader/Loader";
 
 export default function EventPage() {
   const { id } = useParams();
@@ -63,7 +64,7 @@ const showBuySection = eventDate && eventDate >= todayMidnight;
       });
   }, [id]);
 
-  if (loading) return <p>Loading event...</p>;
+  if (loading) return <Loader />;
 
   // Group lineups by floor.
   const groupLineUpsByFloor = (lineUps) => {

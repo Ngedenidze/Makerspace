@@ -1,0 +1,27 @@
+/* Add this to your App.css file */
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40vh; /* Adjust as needed, or make it fill the profile container */
+  width: 100%;
+}
+
+.spinner {
+  border: 5px solid rgba(200, 200, 200, 0.2); /* Light grey for the track */
+  border-left-color: var(--blue-sky); /* Your theme's blue-sky color for the spinner */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  animation: spin 1s linear infinite; /* Changed to linear for smoother spin */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

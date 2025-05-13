@@ -5,6 +5,7 @@ import localImg from "../../../assets/cover-art-default.jpg";
 import SpecialSlice from "../../reusable/CardInfo/SpecialSlice";
 import { useTranslation } from "react-i18next";
 import i18n from "i18next"; // Import i18next for language detection
+import Loader from "../../reusable/Loader/Loader";
 
 export default function Events() {
   const { tab } = useParams(); // e.g. "upcoming" or "past"
@@ -79,7 +80,7 @@ export default function Events() {
     return data;
   });
 
-  if (loading) return <p>Loading event...</p>;
+  if (loading) return <p><Loader /></p>;
   if (error) return <p>Error: {error}</p>;
 
   const now = new Date();

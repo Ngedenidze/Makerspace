@@ -305,6 +305,9 @@ const AuthPage = ({ page }) => {
         // Use the network's error message if available.
         const errorMessage = error.response?.data?.message || "Wrong credentials";
         setErrors({ general: errorMessage });
+      } else if(status == 400 && page == "register"){
+        const errorMessage = error.response?.data?.message || t('error.email_exists');
+        setErrors({ general: errorMessage });
       } else if (error.response?.data?.errors) {
         setErrors(error.response.data.errors);
       } else {
@@ -367,9 +370,7 @@ const AuthPage = ({ page }) => {
     <>
       <h1 className="auth-title">{t("auth.login_title", "Login")}</h1>
       <form className="auth-form" onSubmit={handleSubmit}>
-        {errors.general && (
-          <div className="error-text">{t(errors.general, "An error occurred")}</div>
-        )}
+       
         <div className="form-group">
           <label htmlFor="email" className="form-label">
             {t("auth.email_label", "Email")}
@@ -404,6 +405,9 @@ const AuthPage = ({ page }) => {
             <div className="error-text">{t(errors.password, "Password is required.")}</div>
           )}
         </div>
+          {errors.general && (
+          <div className="error-text">{errors.general}</div>
+        )}
         <button type="submit" className="auth-button" disabled={isSubmitting}>
           {t("auth.sign_in", "Sign in")}
         </button>
@@ -415,6 +419,7 @@ const AuthPage = ({ page }) => {
           {t("auth.forgot_password", "Forgot your password?")}{" "}
           <Link to="/forgot-password">{t("auth.reset_here", "Reset here")}</Link>
         </p>
+       
       </form>
     </>
   );
@@ -431,10 +436,10 @@ const AuthPage = ({ page }) => {
 
     return (
       <>
-        <h1 className="auth-title">{t("auth.register_title", "Register")}</h1>
+        <h1 className="auth-title">{t("register")}</h1>
         <form className="auth-form" onSubmit={handleSubmit}>
           {errors.general && (
-            <div className="error-text">{t(errors.general, "An error occurred")}</div>
+            <div className="error-text">{errors.general}</div>
           )}
           {fields.map(({ name, label, type = "text" }) => (
             <div className="form-group" key={name}>
