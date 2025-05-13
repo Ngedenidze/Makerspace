@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import api from "../authPage/utils/AxiosInstance";
 import debounce from "lodash.debounce";
 import defaultImage from "./../../../assets/default_cover.webp"; // Default image path
+import {toast} from "react-toastify";
+import Loader from "../../reusable/Loader/Loader";
 
 export default function CartPage() {
   const { cart, dispatch, removeItem } = useContext(CartContext);
@@ -12,14 +14,18 @@ export default function CartPage() {
   const [estimatedTotal, setEstimatedTotal] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageSrc, setModalImageSrc] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+const [isCartLoading, setIsCartLoading] = useState(false); 
+const [cartFetchError, setCartFetchError] = useState(null);
+const [termsAccepted, setTermsAccepted] = useState(false);
 
-  // On mount: fetch the cart data from the backend and set it.
-  useEffect(() => {
-    api.get("/Cart/my-cart")
-      .then((res) => {
-        // Assume res.data.ticketItems is an array from the backend.
+useEffect(() => {
+  setIsCartLoading(true); // Start loading
+  setCartFetchError(null); // Reset error
+  api.get("/Cart/my-cart")
+    .then((res) => {
+      if (res.data && Array.isArray(res.data.ticketItems)) { // Add checks for data structure
         const ticketItems = res.data.ticketItems;
-        // Map backend structure to the expected local shape.
         const transformedItems = ticketItems.map((ticket) => ({
           ticketId: ticket.id,
           eventId: ticket.eventId,
@@ -28,16 +34,25 @@ export default function CartPage() {
           image: ticket.event.eventPhotoUrl,
           quantity: ticket.quantity,
           date: new Date(ticket.event.startDate).toLocaleString(),
-          // Optionally: price: ticket.event.price
+          price: ticket.event.price, // Make sure this path is correct and price is included
         }));
-
-        // Dispatch SET_CART if you have it or use your own custom update method.
         dispatch({ type: "SET_CART", payload: transformedItems });
-      })
-      .catch((err) => {
-        console.error("Error fetching cart:", err);
-      });
-  }, [dispatch]);
+      } else {
+        console.error("Unexpected cart data structure:", res.data);
+        setCartFetchError("Could not load cart items properly.");
+        dispatch({ type: "SET_CART", payload: [] }); // Clear cart or set to empty
+      }
+    })
+    .catch((err) => {
+      console.error("Error fetching cart:", err);
+      setCartFetchError(err.message || "Failed to fetch cart items. Please try again.");
+      // Optionally dispatch an action to clear the cart or handle the error in context
+      dispatch({ type: "SET_CART_ERROR" }); // Example
+    })
+    .finally(() => {
+      setIsCartLoading(false); // Stop loading
+    });
+}, [dispatch]);
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
@@ -62,18 +77,24 @@ export default function CartPage() {
     setEstimatedTotal(newSubTotal);
   }, [cart.items]);
   
-  const updateQuantityBackend = useCallback(
-    debounce((item, newQuantity) => {
-      api.post(`/Cart/update-ticket?eventId=${item.eventId}&quantity=${newQuantity}`)
-        .then((res) => {
-          console.log(`Backend updated: ticketId ${item.ticketId} now has quantity ${newQuantity}`);
-        })
-        .catch((error) => {
-          console.error("Error updating quantity on backend:", error);
-        });
-    }, 100), 
-    []
-  );
+const updateQuantityBackend = useCallback(
+  debounce(async (item, newQuantity) => { // Make it async
+    try {
+      await api.post(`/Cart/update-ticket?eventId=<span class="math-inline">\{item\.eventId\}&quantity\=</span>{newQuantity}`); // Or use item.ticketId if that's the correct identifier for backend
+      console.log(`Backend updated: eventId ${item.eventId} (or ticketId ${item.ticketId}) now has quantity ${newQuantity}`);
+    } catch (error) {
+      console.error("Error updating quantity on backend:", error);
+      toast.error(`Failed to update quantity for ${item.eventName}. Please try again.`);
+      // Potentially revert local state change here if it was optimistic
+      // Or dispatch an action to refetch the cart to ensure consistency
+      dispatch({ 
+        type: "UPDATE_QUANTITY", 
+        payload: { ticketId: item.ticketId, quantity: item.quantity } // Revert to original quantity
+      });
+    }
+  }, 500), // Increased debounce slightly
+  [dispatch] // Add dispatch if used for reverting
+);
 
   // Increase item quantity and schedule backend update.
   const handleIncrease = (item) => {
@@ -85,6 +106,48 @@ export default function CartPage() {
     updateQuantityBackend(item, newQuantity);
   };
 
+const handleCheckout = async () => {
+ if (isLoading) return;
+if (!termsAccepted) {
+  toast.warn("Please accept the terms and conditions to proceed.");
+  setIsLoading(false); // Stop loading if terms are not accepted
+  return;
+}
+  if (cart.items.length === 0) {
+  toast.warn("Your cart is empty. Please add items to your cart before checking out.");
+    return;
+  }
+
+   setIsLoading(true); 
+
+  try {
+    const response = await api.post("/Cart/checkout");
+
+    if (response.status >= 200 && response.status < 300 && response.data && response.data.redirectUrl) {
+      const redirectUrl = response.data.redirectUrl; // Corrected from response.data.redirect based on your description
+      toast.info("Redirecting to complete your checkout...");
+      window.location.href = redirectUrl;
+
+    } else {
+      console.error("Checkout initiation failed: No redirectUrl received or unexpected response structure.", response);
+       toast.error("Checkout initiation failed. Please try again or contact support.");
+       setIsLoading(false); // Stop loading in case of failure
+    }
+  } catch (error) {
+    console.error("Checkout error:", error);
+    let errorMessage = "Error during checkout. Please try again."; 
+    if (error.response && error.response.data && error.response.data.message) {
+      errorMessage = error.response.data.message;
+    } else if (error.message) { // Fallback to generic error message if no specific backend message
+      errorMessage = error.message;
+    }
+    toast.error(errorMessage);
+    setIsLoading(false); // Stop loading in case of failure
+
+  } finally{
+    setIsLoading(false);
+  }
+};
   // Decrease item quantity and schedule backend update.
   const handleDecrease = (item) => {
     if (item.quantity > 1) {
@@ -109,7 +172,8 @@ export default function CartPage() {
         alert("Error removing ticket from cart.");
       });
   };
-
+ if (isCartLoading) return <Loader />;
+ if (cartFetchError) return <p>Error: {cartFetchError}</p>;
   return (
     <>
     <div className="cart-container">
@@ -128,15 +192,22 @@ export default function CartPage() {
             cart.items.map((item) => (
               <div className="cart-row" key={item.ticketId}>
                 <div className="cart-item-left">
-                  <img
-                    src={item.image}
-                    alt={item.eventName}
-                    className="cart-item-image"
-                    onClick={() => {
-                      setModalImageSrc(item.image);
-                      setIsModalOpen(true);
-                    }}
-                  />
+              <img
+  src={item.image || defaultImage} // Provide defaultImage as initial src too if item.image can be falsy
+  alt={item.eventName}
+  className="cart-item-image"
+  onClick={() => {
+    setModalImageSrc(item.image || defaultImage);
+    setIsModalOpen(true);
+  }}
+  onError={(e) => {
+    // If the primary image fails to load, set it to the default image
+    if (e.target.src !== defaultImage) { // Prevent infinite loop if defaultImage also fails
+      e.target.onerror = null; // Prevent future error triggers on this element
+      e.target.src = defaultImage;
+    }
+  }}
+/>
                   <div className="cart-item-info">
                     <h2 className="cart-item-name">{item.eventName}</h2>
                     <p className="cart-item-desc">{item.description}</p>
@@ -184,7 +255,7 @@ export default function CartPage() {
               </div>
               <div className="terms-and-conditions">
                 <label htmlFor="termsCheckbox" className="terms-label">
-                  <input type="checkbox" required id="termsCheckbox" />
+                  <input type="checkbox" checked={termsAccepted}onChange={(e) => setTermsAccepted(e.target.checked)} id="termsCheckbox"  />
                   <span className="terms-checkbox"></span>
                   <span className="terms-text">
                     <span
@@ -224,7 +295,7 @@ export default function CartPage() {
           </div>
           <button
             className="checkout-btn"
-            onClick={() => alert("Proceeding to checkout page...")}
+            onClick={() => handleCheckout()}
           >
             Checkout
           </button>

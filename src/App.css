@@ -1764,6 +1764,42 @@ margin: 0;
   background-color: #495e57;
   text-decoration: underline;
 }
+/* Updated CSS for .footer-credit */
+.footer-credit {
+  border-top: 0.5px solid #cccccc21; /* Using a subtle separator color from your theme */
+  padding: 5px 0; /* Increased padding a bit for better spacing */
+  text-align: left;
+  white-space: nowrap;
+  overflow: visible;
+  word-break:keep-all;
+  font-size: 14px; /* 14px, good for footer text */
+  color: var(--seconday-text-color); /* Main text color for the credit section */
+  margin-top: 5px; /* Adds some space above this section */}
+
+
+.footer-credit p {
+  margin: 0.5rem 0; /* Add some space between lines if you have multiple <p> tags */
+}
+
+.footer-credit a {
+  color: var(--light-text-color); /* Make links a bit brighter */
+  text-decoration: none; /* Removing default underline, can add   hover effect */
+  font-weight: 500; /* Slightly bolder links */
+}
+
+.footer-credit a:hover {
+  text-decoration: underline;
+  color: var(--blue-sky); /* Optional: change color on hover for more feedback */
+}
+
+.footer-contact-email { /* Specific class for the contact email link */
+  color: var(--light-text-color);
+  font-weight: 500;
+}
+.footer-contact-email:hover {
+  color: var(--blue-sky);
+  text-decoration: underline;
+}
 
 .img-footer {
   display: flex;

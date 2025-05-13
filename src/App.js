@@ -6,6 +6,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { CartProvider } from "./components/pages/Cart/CartContext";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const queryClient = new QueryClient();
 
@@ -31,7 +33,15 @@ function App() {
           </main>
         </QueryClientProvider>
       </div>
-
+    <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        pauseOnHover
+        draggable
+      />
     </>
   );
 }

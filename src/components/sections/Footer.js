@@ -330,6 +330,11 @@ export default function Footer() {
               </pre>
             </section>
           )}
+           {/* <footer className="footer-credit"> 
+        <p>
+        <p>&copy; {new Date().getFullYear()} Synapse.</p> 
+        </p>
+      </footer> */}
         </section>
       </section>
     </>
