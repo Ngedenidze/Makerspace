@@ -11,7 +11,6 @@ export default function EventsGrid({ events }) {
   if (!events || events.length === 0) {
     return (
       <div>
-        <h2>{t("no_events_found")}</h2>
       </div>
     );
   }

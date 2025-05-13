@@ -67,9 +67,6 @@ export default function Homepage() {
   });
   
 
-  if (eventsError) return <div>Error: {eventsError.message}</div>;
-  if (soonError) return <div>Error: {soonError.message}</div>;
-  if (pastError) return <div>Error: {pastError.message}</div>;
 
   return (
     <main>
