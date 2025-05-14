@@ -338,6 +338,7 @@ console.log(response.data);
                 return (
                 <div className="cart-row" key={item.ticketId}>
                   <div className="cart-item-left">
+                    <div className="cart-image-container">
                     <img
                       src={item.image || defaultImage} // Provide defaultImage as initial src too if item.image can be falsy
                       alt={item.eventName}
@@ -355,19 +356,21 @@ console.log(response.data);
                         }
                       }}
                     />
+                    </div>
                     <div className="cart-item-info">
                       <h2 className="cart-item-name">{item.eventName}</h2>
+                       <div className="cart-price">
+                        <span>{t("cart.item_price_label", "Price:")}</span>{" "}
+                        {formattedPriceDisplay} {/* Use the fully formatted string */}
+                      </div>
                       <p className="cart-item-desc">{item.description}</p>
                       <p className="cart-item-stock">{item.date}</p>
                     </div>
                   </div>
                   <div className="cart-item-right">
-                     <div className="cart-price">
-                        <span>{t("cart.item_price_label", "Price:")}</span>{" "}
-                        {formattedPriceDisplay} {/* Use the fully formatted string */}
-                      </div>
+                    
                       <div className="cart-quantity">
-                      <button
+                      {/* <button
                         className="quantity-btn"
                         onClick={() => handleDecrease(item)}
                         disabled={item.quantity <= 1}
@@ -380,13 +383,15 @@ console.log(response.data);
                         onClick={() => handleIncrease(item)}
                       >
                         +
-                      </button>
+                      </button> */}
                     </div>
                     <button
                       className="remove-btn"
                       onClick={() => handleRemove(item)}
                     >
-                      Remove
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 30 30" fill="currentColor">
+<path d="M 13 3 A 1.0001 1.0001 0 0 0 11.986328 4 L 6 4 A 1.0001 1.0001 0 1 0 6 6 L 24 6 A 1.0001 1.0001 0 1 0 24 4 L 18.013672 4 A 1.0001 1.0001 0 0 0 17 3 L 13 3 z M 6 8 L 6 24 C 6 25.105 6.895 26 8 26 L 22 26 C 23.105 26 24 25.105 24 24 L 24 8 L 6 8 z"></path>
+</svg>
                     </button>
                   </div>
                 </div>
@@ -425,10 +430,6 @@ console.log(response.data);
                       <Link className="terms-link" to="/terms">
                         Terms and Conditions
                       </Link>
-                      . By placing an order for digital products, I explicitly
-                      agree that the contract will be fulfilled before the
-                      withdrawal period ends, and I understand that I cannot
-                      cancel or withdraw my purchase.
                     </span>
                   </label>
                 </div>

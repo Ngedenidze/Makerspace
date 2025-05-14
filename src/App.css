@@ -2717,6 +2717,7 @@ margin: 0;
 /* -------------------------------------------------------------------------- */
 .rentals-contact-form{
   padding: 1rem;
+  width: auto;
 }
 .rentals-contact-form form {
   flex-direction: column;

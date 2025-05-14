@@ -43,20 +43,27 @@ export const CartProvider = ({ children }) => {
 
   const addItem = (newItem) => {
     // Check if the item already exists in the cart by its ticketId.
-    const existingItem = state.items.find(
-      (item) => item.ticketId === newItem.ticketId
-    );
-    if (existingItem) {
-      // Merge the new item with the existing one by updating the quantity.
-      dispatch({
-        type: "UPDATE_QUANTITY",
-        payload: {
-          ticketId: newItem.ticketId,
-          quantity: existingItem.quantity + newItem.quantity,
-        },
-      });
+    if (newItem.itemType === 'ticket') {
+      // Ensure quantity is 1 if it's a ticket being added for the first time for that event
+      dispatch({ type: "ADD_ITEM", payload: { ...newItem, quantity: 1 } });
     } else {
-      dispatch({ type: "ADD_ITEM", payload: newItem });
+      // For other products, use existing logic to find and update quantity or add.
+      // This assumes non-ticket items have a different way to check for existence,
+      // e.g., using newItem.productId instead of newItem.ticketId.
+      const existingItem = state.items.find(
+        (item) => item.id === newItem.id && item.itemType !== 'ticket' // Example: check by a generic 'id' for products
+      );
+      if (existingItem) {
+        dispatch({
+          type: "UPDATE_QUANTITY",
+          payload: {
+            ticketId: existingItem.ticketId, // Or use the correct identifier for products
+            quantity: existingItem.quantity + newItem.quantity,
+          },
+        });
+      } else {
+        dispatch({ type: "ADD_ITEM", payload: newItem });
+      }
     }
   };
 

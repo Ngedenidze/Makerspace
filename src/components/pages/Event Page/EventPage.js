@@ -16,7 +16,7 @@ import { toast } from "react-toastify"; // Make sure react-toastify is set up
 export default function EventPage() {
   const GEL_TO_USD_RATE = 0.31;
   const { id } = useParams();
-  const { addItem } = useContext(CartContext);
+  const { cart, addItem } = useContext(CartContext);
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -31,7 +31,6 @@ export default function EventPage() {
 
   const currentLang = i18n.language.split('-')[0]; // Get base language e.g., "en" from "en-US"
 
-  const [ticketQuantity, setTicketQuantity] = useState(1);
 
   const weekdayKeys = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
   const monthKeys = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
@@ -128,66 +127,77 @@ export default function EventPage() {
     )} ${day}, ${year} ${t("starts_at", "starts at")} ${time}`;
   }
 
-  const handleBuyTicket = () => {
+  const handleBuyTicket = async () => {
+    const eventIdToAdd = String(event.id); // Ensure it's a string for comparison if item.eventId is stored as string
+
+    // Check if a ticket for this event (itemType: 'ticket') already exists in the cart
+    const existingTicketForEvent = cart.items.find(
+      item => String(item.eventId) === eventIdToAdd && item.itemType === 'ticket'
+    );
+
+    if (existingTicketForEvent) {
+      toast.warn(t("event_page.ticket_already_in_cart", "You already have a ticket for this event in your cart."));
+      return;
+    }
+
     if (currentEventPrice === null || currentEventPrice === undefined) {
       toast.error(t("error.price_not_available_cart", "Ticket price is currently not available. Cannot add to cart."));
       return;
     }
-    if (ticketQuantity <= 0) {
-        toast.warn(t("error.quantity_invalid", "Please select a valid ticket quantity."));
-        return;
-    }
+    
+    const quantityToAdd = 1; // For tickets, quantity is always 1
 
     const eventNameForCart = currentLang === "ka" ? event.name : event.nameLat;
-    const eventDescriptionForCart = currentLang === "ka" ? event.description : event.descriptionLat;
+    const eventDescriptionForCart = currentLang === "ka" ? event.description : event.descriptionLat; // Ensure these fields exist on `event`
     const eventImageForCart = event.eventPhotoUrl || localImg;
     
     let basketIdForTicket = null;
-    // TODO: When multiple baskets are supported, get the ID of the selected basket.
-    // For now, assuming the first basket if available.
     if (event.baskets && event.baskets.length > 0) {
         basketIdForTicket = event.baskets[0].id;
     }
 
-   
-
-    // The GET /Cart/my-cart call before adding might be for validation or to ensure cart is initialized.
-    // If it's not strictly necessary, you can remove it to simplify.
-    api.get("/Cart/my-cart")
-      .then(() => {
-        // Adjust the POST endpoint if it needs basketId
-        let addTicketUrl = `/Cart/add-ticket?eventId=${Number(id)}&quantity=${ticketQuantity}`;
-        // if (basketIdForTicket) {
-        //   addTicketUrl += `&basketId=${basketIdForTicket}`;
-        // }
+    // Consider a loading state for the button itself
+    // e.g. const [isAdding, setIsAdding] = useState(false); setIsAdding(true);
+    
+    try {
+      // This API call might be for session validation or cart pre-check.
+      // If not strictly necessary for adding an item, consider removing.
+      await api.get("/Cart/my-cart"); 
+      
+      let addTicketUrl = `/Cart/add-ticket?eventId=${Number(event.id)}&quantity=${quantityToAdd}`;
+      // If your backend needs basketId to correctly associate the price/ticket type:
+      // if (basketIdForTicket) {
+      //   addTicketUrl += `&basketId=${basketIdForTicket}`;
+      // }
      
-        return api.post(addTicketUrl);
-      })
-      .then((addTicketRes) => {
-        // Assuming addTicketRes.data contains the ID of the newly created ticket/cart item
-        // and potentially the confirmed price if the backend recalculates it.
-        const confirmedPrice = addTicketRes.data.price !== undefined ? addTicketRes.data.price : currentEventPrice;
+      const addTicketRes = await api.post(addTicketUrl);
 
-        addItem({
-          eventId: String(event.id), // Use event.id from the event object
-          ticketId: addTicketRes.data.ticketId, // This should be unique for the cart item
-          eventName: eventNameForCart,
-          price: confirmedPrice,
-          image: eventImageForCart,
-          description: eventDescriptionForCart,
-          quantity: ticketQuantity,
-          date: formattedDate, // This is the event start date, might just be for display in cart
-          // basketId: basketIdForTicket, // Optionally store which basket this ticket is from
-        });
-        toast.success(t("ticket_added_to_cart", "{{quantity}} ticket(s) for {{eventName}} added to cart!", { quantity: ticketQuantity, eventName: eventNameForCart }));
-        setTicketQuantity(1); // Reset quantity after adding to cart
-      })
-      .catch((error) => {
-        console.error("Ticket reservation error:", error);
-        const errorMessage = error.response?.data?.message || t("error.add_to_cart_failed", "Failed to add ticket(s) to cart. Please try again.");
-        toast.error(errorMessage);
+      // Use price from backend response if available (e.g., if backend confirms price based on basketId),
+      // otherwise use currentEventPrice determined from the event's first basket.
+      const confirmedPrice = addTicketRes.data.price !== undefined ? addTicketRes.data.price : currentEventPrice;
+
+      addItem({
+        eventId: eventIdToAdd,
+        ticketId: addTicketRes.data.ticketId, // Unique ID for this specific ticket instance
+        eventName: eventNameForCart,
+        price: confirmedPrice,
+        image: eventImageForCart,
+        description: eventDescriptionForCart,
+        quantity: quantityToAdd, // Always 1
+        date: formattedDate, // Event start date for display in cart
+        itemType: 'ticket', // Crucial for distinguishing from other products
+        // basketId: basketIdForTicket, // Optionally store which basket was used
       });
+      toast.success(t("ticket_added_to_cart_single", "{{eventName}} ticket added to your cart!", { eventName: eventNameForCart }));
+    } catch (error) {
+      console.error("Ticket reservation error:", error);
+      const errorMessage = error.response?.data?.message || t("error.add_to_cart_failed", "Failed to add ticket to cart.");
+      toast.error(errorMessage);
+    } finally {
+      // e.g. setIsAdding(false);
+    }
   };
+
 
   const eventNameDisplay = currentLang === "ka" ? event.name : event.nameLat;
   const eventDescriptionDisplay = currentLang === "en" ? event.descriptionLat : event.description;
@@ -272,7 +282,7 @@ export default function EventPage() {
   <section className="buy-ticket-panel">
    
    
-    <div className="ticket-quantity-selector">
+    {/* <div className="ticket-quantity-selector">
       <div className="quantity-controls">
         <button
           type="button"
@@ -308,7 +318,7 @@ export default function EventPage() {
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"/></svg>
         </button>
       </div>
-    </div>
+    </div> */}
 
     <button 
       className="add-to-cart-button" 
