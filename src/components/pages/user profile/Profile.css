@@ -242,17 +242,26 @@
      padding: 0.6rem 1.2rem;
 }
 
-.my-tickets {
-
-  padding: 0;
-  text-align: left;
+.ticket-item {
+  padding: 1rem;
+  border-bottom: #00000069 1px solid;
+  background-color: var(--main-color, #555); /* Dark background */
+  /* ... other styles ... */
+}
+.ticket-item p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #fff; /* White text */
+}
+.my-tickets-list {
+  display: grid;
+  /* Adjust minmax for desired card width, auto-fill creates responsive columns */
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+  gap: 1rem; /* Space between cards */
+  padding: 0; /* Remove padding if cards have their own */
   margin-top: 1rem;
-  max-height: 400px;
-  overflow-y: scroll;
-  scrollbar-width: thin;
-  scroll-behavior: smooth;
-  scrollbar-color: var(--main-text-color) var(--main-color);
-  border: var(--main-color) 0.5px solid;
+  /* Remove max-height and overflow-y from .my-tickets if using grid, 
+     unless you want a scrollable grid container. */
 }
 
 .ticket-item {

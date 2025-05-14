@@ -159,9 +159,7 @@ export default function CartPage() {
     debounce(async (item, newQuantity) => {
       // Make it async
       try {
-        await api.post(
-          `/Cart/update-ticket?eventId=<span class="math-inline">\{item\.eventId\}&quantity\=</span>{newQuantity}`
-        ); // Or use item.ticketId if that's the correct identifier for backend
+        await api.post(`/Cart/update-ticket?eventId=${item.eventId}&quantity=${newQuantity}`); // Or use item.ticketId if that's the correct identifier for backend
         console.log(
           `Backend updated: eventId ${item.eventId} (or ticketId ${item.ticketId}) now has quantity ${newQuantity}`
         );
@@ -290,7 +288,34 @@ console.log(response.data);
                 Go back to events
               </Link>
             ) : (
-              cart.items.map((item) => (
+              cart.items.map((item) => {
+                // --- START: Price Calculation and Formatting Logic for each item ---
+                const GEL_TO_USD_RATE = 0.37; // IMPORTANT: Manage this rate externally (config/API)
+                 let priceForFormatting = item.price; // Assumed to be in GEL from context
+                let displayCurrencyCode = '₾';
+                let displayLocale = i18n.language || 'ka-GE'; // Default to Georgian locale
+ if (typeof item.price !== 'number' || isNaN(item.price)) {
+                  console.warn(`CartPage: Invalid price for item ${item.ticketId}: ${item.price}. Using 0.`);
+                  priceForFormatting = 0; 
+                } if (currentLang === 'en') {
+                  priceForFormatting = item.price * GEL_TO_USD_RATE; // Convert GEL to USD
+                  displayCurrencyCode = 'USD';
+                  displayLocale = i18n.language || 'en-US'; // Locale for USD formatting
+                }
+                // For 'ka' (or other languages not 'en'), it defaults to GEL as set above
+
+                let formattedPriceDisplay;
+                try {
+                  formattedPriceDisplay = new Intl.NumberFormat(displayLocale, {
+                    style: 'currency',
+                    currency: displayCurrencyCode, // Dynamically 'GEL' or 'USD'
+                  }).format(priceForFormatting);
+                } catch (e) {
+                  console.error("Error formatting currency for item:", item, e);
+                  // Fallback display if Intl.NumberFormat fails (e.g., invalid locale/currency somehow)
+                  formattedPriceDisplay = `${priceForFormatting.toFixed(2)} ${displayCurrencyCode}`;
+                }
+                return (
                 <div className="cart-row" key={item.ticketId}>
                   <div className="cart-item-left">
                     <img
@@ -317,26 +342,11 @@ console.log(response.data);
                     </div>
                   </div>
                   <div className="cart-item-right">
-                    <div className="cart-price">
-                      <span>{t("cart.item_price_label", "Price:")}</span>{" "}
-                      {/* Using t() for the "Price:" label */}{" "}
-                      {/* Adds a space */}
-                      {new Intl.NumberFormat(
-                        // Determine locale: use full language tag from i18n if suitable, or fallback
-                        // e.g., i18n.language could be 'en-US', 'ka-GE'
-                        // If currentLang is just 'en' or 'ka', you might need a mapping or a default
-                        currentLang === "ka"
-                          ? "ka-GE"
-                          : i18n.language || "en-US",
-                        {
-                          style: "currency",
-                          currency: "USD", // IMPORTANT: Make this dynamic if your cart items can have different currencies
-                          // minimumFractionDigits: 2, // Usually handled by currency style, but can be explicit
-                          // maximumFractionDigits: 2,
-                        }
-                      ).format(item.price)}
-                    </div>
-                    <div className="cart-quantity">
+                     <div className="cart-price">
+                        <span>{t("cart.item_price_label", "Price:")}</span>{" "}
+                        {formattedPriceDisplay} {/* Use the fully formatted string */}
+                      </div>
+                      <div className="cart-quantity">
                       <button
                         className="quantity-btn"
                         onClick={() => handleDecrease(item)}
@@ -360,7 +370,8 @@ console.log(response.data);
                     </button>
                   </div>
                 </div>
-              ))
+              );
+})
             )}
             {cart.items.length === 0 ? (
               ""

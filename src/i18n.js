@@ -23,11 +23,13 @@ const resources = {
       tickets: "Tickets",
       collapse_my_tickets: "Collapse",
       rentals: "Our Space",
+      currency: "$",
       djs: "DJs",
       last_name: "Last Name",
       price: "Price",
       starting_soon: "Next Event",
       in_session: "Happening Now",
+      my_tickets: "My Tickets",
       ended: "Ended",
       main_stage: "Main Stage",
       space_stage: "Space Stage",
@@ -225,6 +227,9 @@ const resources = {
       "lowercase":"Password must contain at least one lowercase letter",
       "special":"Password must contain at least one special character",
   },
+  "cart":{
+    "item_price_label":"Price"
+  }
 }
  },
   ka: {
@@ -235,6 +240,7 @@ const resources = {
       gallery: "გალერეა",
       profile: "პროფილი",
       save_changes: "შენახვა",
+      currency:"₾",
       login: "შესვლა",
       company: "კომპანია",
       verified: "ვერიფიცირებული",
@@ -255,6 +261,7 @@ const resources = {
       scan_qr_code: "QR კოდის სკანირება",
       stage: "",
       register: "რეგისტრაცია",
+      my_tickets: "ჩემი ბილეთები",
       collapse_my_tickets: "დახურვა",
       main_stage: "Main Stage",
       space_stage: "Space Stage",
@@ -462,6 +469,9 @@ const resources = {
         "lowercase":"პაროლი უნდა შეიცავდეს მინიმუმ ერთ პატარა ასოს",
         "special":"პაროლი უნდა შეიცავდეს მინიმუმ ერთ სპეციალურ სიმბოლოს",
       },
+      "cart":{
+        "item_price_label":"ფასი"
+      }
     
     }
   }

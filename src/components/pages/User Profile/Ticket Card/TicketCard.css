@@ -1,0 +1,257 @@
+/* src/components/Profile/TicketCard.css */
+.ticket-card {
+  background-color: var(--main-color); /* From your App.css */
+  border: 1px solid var(--seconday-color); /* From your App.css */
+  border-radius: 12px; /* More rounded */
+  padding: 0; /* Inner sections will have padding */
+  margin-bottom: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  color: var(--seconday-text-color); /* From your App.css */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+   width: 100%; /* Makes card take full width of its grid cell */
+  max-width: 450px; /* Optional: Card itself won't exceed this width */
+  margin-left: auto; /* Center card in cell if max-width is hit and cell is wider */
+  margin-right: auto; /* Center card in cell */
+}
+
+.ticket-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Styling for 'used' tickets - add this class if ticket.isUsedTicket is true */
+.ticket-card.used {
+  opacity: 0.6;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(0,0,0,0.1) 10px,
+    rgba(0,0,0,0.1) 20px
+  ); /* Subtle pattern for used tickets */
+}
+
+
+.ticket-card-loader,
+.ticket-card-error {
+  padding: 2rem;
+  text-align: center;
+  min-height: 100px; /* Ensure it takes some space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ticket-card-error {
+  color: #ff7675; /* Softer red */
+}
+
+.ticket-card-header {
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem 1.5rem;
+  gap: 1rem;
+  background-color: rgba(0,0,0,0.1); /* Slightly different header background */
+  /* border-bottom: 1px solid var(--seconday-color); */
+}
+
+.ticket-event-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  border: 2px solid var(--seconday-light-color);
+}
+
+.ticket-header-info {
+  flex-grow: 1;
+}
+
+.ticket-header-info h3 {
+  margin: 0 0 0.3rem 0;
+  font-size: 1.25rem; /* Slightly larger */
+  color: var(--white-full);
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.ticket-event-date {
+  font-size: 0.8rem;
+  color: var(--seconday-light-color);
+  margin: 0 0 0.5rem 0;
+}
+
+.ticket-event-link {
+  font-size: 0.9rem;
+  color: var(--blue-sky);
+  text-decoration: none;
+  font-weight: 500;
+}
+.ticket-event-link:hover {
+  text-decoration: underline;
+}
+
+.ticket-card-body {
+  padding: 1rem 1.5rem;
+  flex-grow: 1; /* Allows body to take up space */
+}
+
+.ticket-card-body p {
+  margin: 0.6rem 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.ticket-card-body strong {
+  color: var(--light-text-color);
+  margin-right: 0.5em;
+  font-weight: 500;
+}
+
+.ticket-card-footer {
+  padding: 1rem 1.5rem;
+  text-align: center;
+  background-color: rgba(0,0,0,0.2); /* Darker footer background */
+  border-top: 1px solid var(--seconday-color);
+}
+.ticket-card-footer.no-qr {
+  font-style: italic;
+  color: var(--main-text-color);
+}
+
+.ticket-card-footer h4 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+  color: var(--white-full);
+  font-weight: 500;
+}
+
+.ticket-qr-code {
+  display: block;
+  width: 120px; /* Adjust for better visibility */
+  height: 120px;
+  margin: 0 auto 0.75rem auto;
+  background-color: white; /* QR codes need white background */
+  padding: 8px; /* Padding around QR if image itself is tight */
+  border: 1px solid var(--seconday-text-color);
+  border-radius: 4px;
+}
+
+.qr-instruct {
+  font-size: 0.8rem;
+  color: var(--main-text-color);
+}
+
+/* Add this to Profile.css to style the list container for ticket cards */
+.my-tickets-header {
+  font-size: 1.5rem;
+  color: var(--white-full);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--seconday-color);
+}
+.ticket-qr-code {
+  display: block;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 0.75rem auto;
+  background-color: white;
+  padding: 8px;
+  border: 1px solid var(--seconday-text-color);
+  border-radius: 4px;
+}
+
+.ticket-qr-code.clickable { /* Style for the clickable QR code */
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.ticket-qr-code.clickable:hover,
+.ticket-qr-code.clickable:focus { /* Added focus style */
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); /* Brighter glow for dark theme */
+  outline: 2px solid var(--blue-sky); /* Focus outline */
+}
+
+.qr-instruct {
+  font-size: 0.8rem;
+  color: var(--main-text-color);
+}
+
+.ticket-card-footer.no-qr p {
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+
+/* QR Code Modal Styles */
+.qr-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85); /* Darker overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050; /* Ensure it's above other content, typical modal z-index */
+  padding: 1rem;
+  cursor: pointer; /* Indicate overlay can be clicked to close */
+}
+
+.qr-modal-content {
+  background-color: #fff; /* White background for QR code readability */
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 90vw;
+  max-height: 90vh;
+  cursor: default; /* Reset cursor for content area */
+}
+
+.qr-modal-image {
+  display: block;
+  max-width: 100%;
+  max-height: calc(80vh - 60px); /* Adjusted for padding and potential close button */
+  width: auto; /* Default to auto, but can be fixed if preferred */
+  height: auto; /* Maintain aspect ratio */
+  min-width: 250px; /* Ensure it's a decent size */
+  min-height: 250px;
+}
+
+.qr-modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 2.2rem; /* Larger 'X' */
+  font-weight: bold;
+  color: #555; /* Darker grey for contrast on white */
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.25rem;
+}
+.qr-modal-close-button:hover {
+  color: #000;
+}
+
+/* Screen-reader only class for accessible modal title */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

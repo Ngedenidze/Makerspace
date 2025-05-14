@@ -7,6 +7,7 @@ import "./Profile.css"; // Ensure this CSS supports the new classes/structure
 import profileCover from "./../../../assets/profile-cover.webp";
 import Loader from "../../reusable/Loader/Loader";
 import { toast } from "react-toastify";
+import TicketCard from "./Ticket Card/TicketCard";
 
 // EditIcon component is no longer needed here if not used elsewhere
 
@@ -132,7 +133,17 @@ function Profile() {
 
       api.get("/Tickets/my-tickets", { headers: { Authorization: `Bearer ${token}` } }) // Assuming token is needed for auth
         .then(({ data }) => {
-          setTickets(Array.isArray(data) ? data : []);
+           if (Array.isArray(data)) {
+            // Sort the tickets here before setting state
+            // Create a new sorted array to avoid mutating the original response data directly (good practice)
+            const sortedTickets = [...data].sort((a, b) => b.id - a.id); // Sorts in descending order of id
+            setTickets(sortedTickets);
+
+        } else {
+            console.error("Fetched tickets data is not an array:", data);
+            setTickets([]); // Default to empty array if data is not in expected format
+            setTicketsError(t("error.fetch_tickets_format", "Unexpected format for ticket data."));
+          }
         })
         .catch((err) => {
           console.error("Error fetching tickets:", err);
@@ -421,19 +432,11 @@ function Profile() {
               </p>
             ) : tickets.length > 0 ? (
               tickets.map((ticket) => (
-                <div key={ticket.id} className="ticket-item">
-                  {/* Display more ticket details as needed */}
-                  <p><strong>{t("ticket_event_name", "Event")}:</strong> {ticket.eventName || t("n_a")}</p>
-                  <p><strong>{t("ticket_id", "Ticket ID")}:</strong> {ticket.id}</p>
-                  <p><strong>{t("ticket_purchase_date", "Purchased")}:</strong> {ticket.purchaseDate ? formatDate(ticket.purchaseDate) : t("n_a")}</p>
-                  <p><strong>{t("ticket_price_paid", "Price Paid")}:</strong> ${ticket.pricePaid ? ticket.pricePaid.toFixed(2) : 'N/A'}</p>
-                  <p><strong>{t("ticket_used", "Used")}:</strong> {ticket.isUsedTicket ? t("yes", "Yes") : t("no", "No")}</p>
-                  {/* Add link to event, QR code display, etc. */}
-                </div>
-              ))
-            ) : (
-              <p>{t("no_tickets_found", "You have no tickets.")}</p>
-            )}
+    <TicketCard key={ticket.id} ticket={ticket} formatDate={formatDate} />
+  ))
+) : (
+  <p>{t("no_tickets_found", "You have no tickets.")}</p>
+)}
           </div>
         </div>
       )}
