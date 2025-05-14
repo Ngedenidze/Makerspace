@@ -6,11 +6,15 @@ import CartContext from "../Cart/CartContext";
 import api from "../authPage/utils/AxiosInstance";
 import Linkify from "react-linkify";
 import "./EventPage.css";
+
+// Define a constant for GEL to USD conversion rate
+ // Example rate, replace with the actual rate if needed
 import i18n from "i18next"; // You can often get i18n instance from useTranslation too
 import Loader from "../../reusable/Loader/Loader";
 import { toast } from "react-toastify"; // Make sure react-toastify is set up
 
 export default function EventPage() {
+  const GEL_TO_USD_RATE = 0.31;
   const { id } = useParams();
   const { addItem } = useContext(CartContext);
   const [event, setEvent] = useState(null);
@@ -205,10 +209,25 @@ export default function EventPage() {
       <section className="event-info">
         <section className="event-dates">
           <p className="start-date">{formattedDate}</p>
+           <div className="ticket-price-display">
+      
+    </div>
         </section>
         <header className="event-header">
           <h1 className="event-title">{eventNameDisplay}</h1>
+                 <span className="price-label">{t("price", "Price")}: {" "}
+        {currentEventPrice !== null
+          ? new Intl.NumberFormat(
+              currentLang === "ka" ? "ka-GE" : (i18n.language || "en-US"),
+              { 
+                style: "currency", 
+                currency: currentLang === 'en' ? 'USD' : 'GEL' // Dynamic currency based on lang
+              }
+            ).format(currentLang === 'en' ? (currentEventPrice * GEL_TO_USD_RATE) : currentEventPrice) // GEL_TO_USD_RATE needs to be defined
+          : t("price_unavailable_display", "Price not available")}
+      </span>
         </header>
+        
         <section className="event-lineups">
           {Object.entries(groupedLineUps).map(([floorName, lineUpsOnFloor]) => ( // Renamed lineUps to lineUpsOnFloor
             <div key={floorName} className="lineup-floor">
@@ -234,53 +253,7 @@ export default function EventPage() {
               </ul>
             </div>
           ))}
-          {showBuySection && (
-            <section className="buy-ticket-section">
-              <div className="ticket-price">
-                {t("price", "Price")}:{" "}
-                {currentEventPrice !== null
-                  ? new Intl.NumberFormat(
-                      currentLang === "ka" ? "ka-GE" : "en-US",
-                      { style: "currency", currency: "USD" } // Assuming USD, or make currency dynamic from basket
-                    ).format(currentEventPrice)
-                  : t("price_unavailable_display", "Price not available")}
-              </div>
-              <div className="ticket-quantity">
-                <label htmlFor="ticketQuantity">{t("buy_tickets_label", "Buy Tickets")}:</label>
-                <div
-                  className={`quantity-control quantity-minus ${ticketQuantity === 1 ? "disabled" : ""}`}
-                  onClick={() => { if (ticketQuantity > 1) setTicketQuantity((q) => q - 1); }}
-                  role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && ticketQuantity > 1 && setTicketQuantity(q => q - 1)} // Accessibility
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <g fill="none" fillRule="evenodd"><path fill="none" d="M0 0H24V24H0z"></path><path fill="currentColor" d="M18 11c.552 0 1 .448 1 1s-.448 1-1 1H6c-.552 0-1-.448-1-1s.448-1 1-1h12z"></path></g>
-                  </svg>
-                </div>
-                <input
-                  id="ticketQuantity"
-                  type="number"
-                  readOnly // Keep readOnly if +/- buttons are the only way to change
-                  className="ticket-quantity-input"
-                  value={ticketQuantity}
-                  aria-label={t("ticket_quantity_aria_label", "Ticket Quantity")}
-                  // onChange is not strictly needed if readOnly and using buttons, but good for completeness if it were editable
-                  // onChange={(e) => setTicketQuantity(Math.max(1, parseInt(e.target.value, 10) || 1))}
-                />
-                <div
-                  className="quantity-control quantity-plus"
-                  onClick={() => setTicketQuantity((q) => q + 1)}
-                  role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && setTicketQuantity(q => q + 1)} // Accessibility
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <g fill="none" fillRule="evenodd"><path fill="none" d="M0 0H24V24H0z"></path><path fill="currentColor" d="M12 5c.552 0 1 .448 1 1v5h5c.552 0 1 .448 1 1s-.448 1-1 1h-5v5c0 .552-.448 1-1 1s-1-.448-1-1v-5H6c-.552 0-1-.448-1-1s.448-1 1-1h5V6c0-.552.448-1 1-1z"></path></g>
-                  </svg>
-                </div>
-                <button className="buy-ticket-button" onClick={handleBuyTicket}>
-                  {t("add_to_cart_button", "Add to Cart")}
-                </button>
-              </div>
-            </section>
-          )}
+         
         </section>
         <section className="event-description">
           <p className="description-text">
@@ -295,6 +268,58 @@ export default function EventPage() {
             </Linkify>
           </p>
         </section>
+        {showBuySection && (
+  <section className="buy-ticket-panel">
+   
+   
+    <div className="ticket-quantity-selector">
+      <div className="quantity-controls">
+        <button
+          type="button"
+          className={`quantity-button minus ${ticketQuantity <= 1 ? "disabled" : ""}`}
+          onClick={() => { if (ticketQuantity > 1) setTicketQuantity((q) => q - 1); }}
+          disabled={ticketQuantity <= 1}
+          aria-label={t('decrease_quantity', 'Decrease quantity')}
+        >
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19 13H5v-2h14v2Z"/></svg>
+        </button>
+        <input
+          id="ticketQuantity"
+          type="number"
+          className="ticket-quantity-input"
+          value={ticketQuantity}
+          onChange={(e) => {
+            const val = parseInt(e.target.value, 10);
+            if (val >= 1) {
+              setTicketQuantity(val);
+            } else if (e.target.value === "") {
+              setTicketQuantity(1); // Or handle empty differently if needed
+            }
+          }}
+          min="1"
+          aria-label={t("ticket_quantity_aria_label", "Ticket Quantity")}
+        />
+        <button
+          type="button"
+          className="quantity-button plus"
+          onClick={() => setTicketQuantity((q) => q + 1)}
+          aria-label={t('increase_quantity', 'Increase quantity')}
+        >
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <button 
+      className="add-to-cart-button" 
+      onClick={handleBuyTicket}
+      // disabled={isLoadingAddToCart} // If you add a loading state for this action
+    >
+      {/* {isLoadingAddToCart ? <Loader size="inline" /> : t("add_to_cart_button", "Add to Cart")} */}
+      {t("add_to_cart_button", "Add to Cart")}
+    </button>
+  </section>
+)}
       </section>
     </div>
   );

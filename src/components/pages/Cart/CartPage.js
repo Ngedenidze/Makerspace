@@ -19,8 +19,13 @@ export default function CartPage() {
   const [isCartLoading, setIsCartLoading] = useState(false);
   const [cartFetchError, setCartFetchError] = useState(null);
   const [termsAccepted, setTermsAccepted] = useState(false);
+
   const { t, i18n } = useTranslation();
   const currentLang = i18n.language.split("-")[0];
+    const [summaryLocale, setSummaryLocale] = useState({
+  locale: i18n.language || 'ka-GE',
+  currency: currentLang === 'en' ? 'USD' : 'GEL',
+});
   useEffect(() => {
     setIsCartLoading(true); // Start loading
     setCartFetchError(null); // Reset error
@@ -145,15 +150,30 @@ export default function CartPage() {
     };
   }, [isModalOpen]);
   // Recalculate totals whenever the cart changes.
-  useEffect(() => {
-    let newSubTotal = 0;
-    cart.items.forEach((item) => {
-      const itemPrice = parseFloat(item.price) || 0;
-      newSubTotal += itemPrice * (item.quantity || 1);
-    });
-    setSubTotal(newSubTotal);
-    setEstimatedTotal(newSubTotal);
-  }, [cart.items]);
+useEffect(() => {
+  // 1) Sum up the raw GEL total
+  const rawGELTotal = cart.items.reduce((sum, item) => {
+    const price = parseFloat(item.price) || 0;
+    return sum + price * (item.quantity || 1);
+  }, 0);
+
+  // 2) Choose conversion & locale based on language
+  const GEL_TO_USD_RATE = 0.37;
+  let converted = rawGELTotal;
+  let currency = 'GEL';
+  let locale   = 'ka-GE';
+
+  if (currentLang === 'en') {
+    converted = rawGELTotal * GEL_TO_USD_RATE;
+    currency  = 'USD';
+    locale    = 'en-US';
+  }
+
+  // 3) Store both the numeric total and the formatter info
+  setSubTotal(converted);
+  setEstimatedTotal(converted);
+  setSummaryLocale({ locale, currency });
+}, [cart.items, currentLang]);
 
   const updateQuantityBackend = useCallback(
     debounce(async (item, newQuantity) => {
@@ -420,17 +440,27 @@ console.log(response.data);
             <h2>Order Summary</h2>
             <div className="summary-row">
               <span>Subtotal:</span>
-              <span>${subTotal.toFixed(2)}</span>
-            </div>
+  <span>
+    {new Intl.NumberFormat(summaryLocale.locale, {
+      style: 'currency',
+      currency: summaryLocale.currency,
+    }).format(subTotal)}
+  </span>
+</div>
             <div className="summary-row">
               <span>Discount:</span>
               <span>$0.00</span>
             </div>
             <hr />
-            <div className="summary-row total-row">
-              <span>Estimated Total:</span>
-              <span>${estimatedTotal.toFixed(2)}</span>
-            </div>
+          <div className="summary-row total-row">
+  <span>Estimated Total:</span>
+  <span>
+    {new Intl.NumberFormat(summaryLocale.locale, {
+      style: 'currency',
+      currency: summaryLocale.currency,
+    }).format(estimatedTotal)}
+  </span>
+</div>
             <button className="checkout-btn" onClick={() => handleCheckout()}>
               Checkout
             </button>

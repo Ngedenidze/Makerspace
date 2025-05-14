@@ -60,6 +60,8 @@
   }
   
   .event-dates {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 0rem;
     font-size: 1.2rem;
     color: #e0e1dd;
@@ -218,7 +220,149 @@
   .quantity-minus.disabled svg {
     fill: currentColor;
   }
+  
+.buy-ticket-panel {
+  padding: 0;
+  margin: 1rem 0;
+  margin-top: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.25rem; /* Space between price, quantity, and button sections */
+  max-width: 400px; /* Constrain width for better appearance */
 
+}
+
+.ticket-price-display {
+  display: flex;
+  flex-direction: column; /* Stack "Price:" label and value */
+  align-items: flex-start;
+}
+
+.price-label {
+  color: #bcbebd; /* From your App.css */
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+.price-value {
+  font-size: 1.25rem; 
+  font-weight: 700;
+  color: #fff; /* From your App.css */
+}
+
+.ticket-quantity-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quantity-label {
+  font-size: 0.9rem;
+  color: var(--seconday-text-color);
+  font-weight: 500;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.quantity-button {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--seconday-text-color);
+  background-color: transparent;
+  color: var(--seconday-text-color);
+  border-radius: 50%; /* Circular buttons */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.5rem; /* For text +/- if not using SVG */
+  padding: 0;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.quantity-button svg {
+  width: 20px; /* Adjust SVG size as needed */
+  height: 20px;
+  fill: currentColor;
+}
+
+.quantity-button:hover:not(.disabled) {
+  background-color: var(--seconday-text-color);
+  color: var(--main-color);
+  border-color: var(--seconday-text-color);
+}
+
+.quantity-button.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: var(--main-text-color);
+  color: var(--main-text-color);
+}
+.quantity-button.disabled:hover {
+  background-color: transparent;
+}
+
+
+.ticket-quantity-input {
+  width: 30px; /* Sufficient for 2-3 digits */
+  height: 19px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: 1px solid var(--seconday-color);
+  background-color: var(--seconday-light-color);
+  color: var(--main-color); /* Dark text for contrast */
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  -moz-appearance: textfield; /* Remove spinner for Firefox */
+}
+.ticket-quantity-input::-webkit-outer-spin-button,
+.ticket-quantity-input::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* Remove spinner for Chrome, Safari, Edge */
+  margin: 0;
+}
+.ticket-quantity-input:focus {
+  outline: 2px solid var(--blue-sky); /* Focus indicator */
+  border-color: var(--blue-sky);
+}
+
+.add-to-cart-button {
+  background-color: var(--blue-sky); /* Use a prominent color from your theme */
+  color: var(--main-color); /* Or white, depending on blue-sky brightness */
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  width: 150px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem; /* If you add an icon */
+}
+
+.add-to-cart-button:hover:not(:disabled) {
+  background-color: var(--light-text-color); /* Lighter hover from your theme */
+  color: var(--main-color);
+  transform: translateY(-2px); /* Slight lift effect */
+}
+.add-to-cart-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.add-to-cart-button:disabled {
+  background-color: var(--main-text-color);
+  color: var(--seconday-color);
+  cursor: not-allowed;
+}
   @media screen and (max-width: 768px) {
     /* -------------------------------------------------------------------------- */
 /*  Events                                                                 */
