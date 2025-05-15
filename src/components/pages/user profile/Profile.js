@@ -23,7 +23,7 @@ function Profile() {
   const [ticketsVisible, setTicketsVisible] = useState(false);
   const [ticketsLoading, setTicketsLoading] = useState(false);
   const [ticketsError, setTicketsError] = useState(null);
-
+  const [profileErrors, setProfileErrors] = useState({});
   const { token, clearToken } = useAuth();
 
   // Global edit mode state
@@ -72,7 +72,86 @@ function Profile() {
       return ""; // Handle invalid date strings gracefully
     }
   };
+const validateProfileField = (name, value) => {
+let errorKey = null;
 
+  switch (name) {
+      case "firstName":
+        if (!value.trim()) {
+          errorKey = "validation.first_name_required";
+        } else if (!/^[a-zA-Z]+$/.test(value.trim())) { 
+          errorKey = "validation.name_invalid_chars"; 
+        }
+        break;
+
+      case "lastName":
+        if (!value.trim()) {
+          errorKey = "validation.last_name_required";
+        } else if (!/^[a-zA-Z]+$/.test(value.trim())) {
+          errorKey = "validation.name_invalid_chars"; // Can reuse the same error key
+        }
+        break;
+
+      case "phoneNumber":
+        if (!value.trim()) {
+          errorKey = "validation.phone_required";
+        }
+        else if (!/^[+]?[0-9\s\-()]{7,20}$/.test(value)) { // Optional format validation
+          errorKey = "validation.phone_format_invalid";
+        }
+        break;
+    case "country":
+      if (!value.trim()) errorKey = "validation.country_required";
+      break;
+    case "birthdate":
+      if (!value) {
+        errorKey = "validation.birthdate_required";
+      } else {
+        const birthDateObj = new Date(value);
+        const today = new Date();
+        // Clear time part for accurate age calculation and future date check
+        today.setHours(0, 0, 0, 0); 
+        // birthDateObj will be at midnight UTC due to YYYY-MM-DD format, 
+        // new Date(value) might be affected by timezone. For simplicity, direct comparison.
+        // Ensure value is YYYY-MM-DD format for consistent Date parsing.
+
+        if (isNaN(birthDateObj.getTime())) {
+            errorKey = "validation.birthdate_invalid";
+        } else if (birthDateObj > today) {
+            errorKey = "validation.birthdate_future";
+        } else {
+            let age = today.getFullYear() - birthDateObj.getFullYear();
+            const m = today.getMonth() - birthDateObj.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDateObj.getDate())) {
+              age--;
+            }
+            if (age < 18) { // Example age restriction
+              errorKey = "validation.age_requirement";
+            }
+        }
+      }
+      break;
+    case "socialMediaProfileLink":
+      if (value.trim()) { // Only validate if not empty, assuming it can be optional
+        const urlPattern = new RegExp(
+          "^(https?|ftp)://" + // protocol
+          "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+          "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+          "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+          "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+          "(\\#[-a-z\\d_]*)?$", // fragment locator
+          "i"
+        );
+        if (!urlPattern.test(value)) {
+          errorKey = "validation.social_media_invalid_url";
+        }
+      }
+      break;
+    default:
+      break;
+  }
+  return errorKey;
+};
 
   // Fetch profile on mount
   useEffect(() => {
@@ -168,6 +247,16 @@ function Profile() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    const fieldError = validateProfileField(name, value);
+  setProfileErrors((prevErrors) => {
+    const newErrors = { ...prevErrors };
+    if (fieldError) {
+      newErrors[name] = fieldError;
+    } else {
+      delete newErrors[name];
+    }
+    return newErrors;
+  });
   };
 
   const handleEditToggle = () => {
@@ -198,17 +287,26 @@ function Profile() {
         socialMediaProfileLink: profile.socialMediaProfileLink || "",
       });
     }
+    setProfileErrors({});
   };
 
   const handleSave = async () => {
-    setIsSaving(true);
-    // Ensure birthdate is in a format the backend expects, or remove if it shouldn't be sent as YYYY-MM-DD
-    // For example, if backend expects ISO string or null:
-    // const payload = {
-    //   ...formData,
-    //   birthdate: formData.birthdate ? new Date(formData.birthdate).toISOString() : null,
-    // };
+   setIsSaving(true);
 
+  // Validate all fields before submit
+  const fieldsToValidate = ["firstName", "lastName", "phoneNumber", "birthdate", "socialMediaProfileLink", "country"];
+  const errors = {};
+  for (const field of fieldsToValidate) {
+    const error = validateProfileField(field, formData[field]);
+    if (error) errors[field] = error;
+  }
+
+  if (Object.keys(errors).length > 0) {
+    setProfileErrors(errors);
+    setIsSaving(false);
+    toast.error(t("error.fix_form_errors", "Please fix the errors in the form."));
+    return;
+  }
     try {
       // Using formData directly if backend accepts YYYY-MM-DD for birthdate
       const { data: updatedProfile } = await api.put("/auth/me", formData, {
@@ -233,6 +331,7 @@ function Profile() {
       toast.error(errorMessage);
     } finally {
       setIsSaving(false);
+      setProfileErrors({});
     }
   };
 
@@ -293,6 +392,7 @@ function Profile() {
         <p>
           <strong>{t("name")}:</strong>
           {isEditingMode ? (
+            <>
             <input
               ref={firstNameInputRef}
               type="text"
@@ -301,6 +401,8 @@ function Profile() {
               value={formData.firstName}
               onChange={handleChange}
             />
+            {profileErrors.firstName && <div className="error-text">{t(profileErrors.firstName)}</div>}
+            </>
           ) : (
             <span>{profile.firstName || t("n_a", "N/A")}</span>
           )}
@@ -308,6 +410,7 @@ function Profile() {
         <p>
           <strong>{t("last_name")}:</strong>
           {isEditingMode ? (
+            <>
             <input
               type="text"
               name="lastName"
@@ -315,6 +418,7 @@ function Profile() {
               value={formData.lastName}
               onChange={handleChange}
             />
+            {profileErrors.lastName && <div className="error-text">{t(profileErrors.lastName)}</div>}</>
           ) : (
             <span>{profile.lastName || t("n_a", "N/A")}</span>
           )}
@@ -326,6 +430,7 @@ function Profile() {
         <p>
           <strong>{t("phone")}:</strong>
           {isEditingMode ? (
+            <>
             <input
               type="tel"
               name="phoneNumber"
@@ -333,6 +438,8 @@ function Profile() {
               value={formData.phoneNumber}
               onChange={handleChange}
             />
+            {profileErrors.phoneNumber && <div className="error-text">{t(profileErrors.phoneNumber)}</div>}
+            </>
           ) : (
             <span>{profile.phoneNumber || t("n_a", "N/A")}</span>
           )}
@@ -340,6 +447,7 @@ function Profile() {
         <p>
           <strong>{t("country")}:</strong>
           {isEditingMode ? (
+            <>
             <select
               name="country"
               className="form-input-editable"
@@ -353,6 +461,8 @@ function Profile() {
               <option value="Germany">Germany</option>
               <option value="Other">Other</option>
             </select>
+            {profileErrors.country && <div className="error-text">{t(profileErrors.country)}</div>}
+            </>
           ) : (
             <span>{profile.country || t("n_a", "N/A")}</span>
           )}
@@ -360,6 +470,7 @@ function Profile() {
         <p>
           <strong>{t("birthdate")}:</strong>
           {isEditingMode ? (
+            <>
             <input
               type="date"
               name="birthdate"
@@ -367,6 +478,8 @@ function Profile() {
               value={formData.birthdate} // Already formatted as YYYY-MM-DD
               onChange={handleChange}
             />
+            {profileErrors.birthdate && <div className="error-text">{t(profileErrors.birthdate)}</div>}
+            </>
           ) : (
             <span>{displayBirthdateFormatted}</span>
           )}
@@ -374,6 +487,7 @@ function Profile() {
         <p>
           <strong>{t("social_media_link")}:</strong>
           {isEditingMode ? (
+            <>
             <input
               type="url"
               name="socialMediaProfileLink"
@@ -382,6 +496,8 @@ function Profile() {
               value={formData.socialMediaProfileLink}
               onChange={handleChange}
             />
+            {profileErrors.socialMediaProfileLink && <div className="error-text">{t(profileErrors.socialMediaProfileLink)}</div>}
+            </>
           ) : profile.socialMediaProfileLink ? (
             <a
               href={profile.socialMediaProfileLink}

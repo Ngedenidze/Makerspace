@@ -167,6 +167,9 @@
 
   color: #fff;
 }
+.form-input-editable::placeholder{
+  color: #3e3d3d;
+}
 .form-input-editable {
   user-select: none;   /* prevent manual text select if you want */
 }

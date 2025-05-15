@@ -184,6 +184,8 @@ const resources = {
       "personal_number_format":"Personal Number must be a valid Georgian personal number",
       "personal_number_format_non_georgian": "Personal Number must be a valid personal number",
       "invalid_email":"Invalid email",
+      "phone_format_invalid":"Invalid phone number",
+      "social_media_invalid_url": "Invalid Social Media Link",
     },
     "success":{
       "registration":"Registration successful! Redirecting to login...",
@@ -288,7 +290,7 @@ const resources = {
         "rental_info_closer": "თუ გსურთ მთელი ღამის ცეკვის წვეულება ან მშვიდი კოქტეილის საღამო ახლო მეგობრებთან ერთად, <strong>მეიქერსფეისი</strong> მოერგება თქვენს ხედვას.",
         "rental_info_footer": "გაგვიზიარეთ თქვენი იდეები, და ჩვენ დაგეხმარებით მათ განხორციელებაში.",
       rental_action:"დაჯავშნა",
-      dj_booking_title: "გადმოყოლე სცენა მეიქერსფეისში",
+      dj_booking_title: "დაუკარი მეიქერსფეისში",
       dj_booking_info:"მზად ხარ, რომ გამოაჩინო შენი ნიჭი, ყველაზე დინამიურ გარემოში? თუ ხარ გამოცდილი DJ,ან გსურს საზოგადოებამ შენი მუსიკა კარგად გაიცნოს, გელოდებით ჩვენს სივრცეში, სადაც დაგხვდება  საუკეთესო ხმის სისტემები, ენერგიული საცეკვაო მოედანი და უმაგრესი მსმენელი. თუ მზად ხარ, რომ შენი კვალი დატოვო, თანამედროვე ელექტრონულ მუსიკაში  შეავსე ფორმა ან მოგვწერე მეილზე.",
       dj_booking_action:"დაჯავშნა",
      "about_me_1": "<strong>მეიქერსფეისი</strong> მარტო ღამის კლუბი არაა — ეს არის კრეატიული სივრცე სადაც ელექტრონული მუსიკა, თანამედროვე კულტურა და კარგი საზოგადოება იყრის თავს.",
@@ -425,8 +427,10 @@ const resources = {
         "age_requirement" :"თქვენ უნდა იყოთ მინიმუმ 18 წლის ან მეტის",
         "personal_number_format":"პირადი ნომერი უნდა შეიცავდეს 11 ციფრს",
         "personal_number_format_non_georgia":"პირადი ნომერი უნდა შეიცავდეს 7-ზე მეტ სიმბოლოს",
-        
+        "phone_format_invalid": "ტელეფონის ფორმატი არასწორია",
         "invalid_email":"არასწორი ელფოსტის ფორმატი",
+        "social_media_invalid_url": "სოციალური მედიის ბმული არასწორია",
+
       },
       "success":{
         "registration":"რეგისტრაცია წარმატებით დასრულდა",
