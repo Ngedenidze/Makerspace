@@ -31,9 +31,9 @@
   text-align: center;
   background-color: var(--main-color);
 }
-.profile-info{
+.profile-info {
   display: flex;
-  flex-direction: column;;
+  flex-direction: column;
 }
 /* Container for the user info fields */
 .profile-info p {
@@ -42,7 +42,7 @@
 }
 
 /* Label styling (optional) */
-.profile-info{
+.profile-info {
   background-color: var(--main-color);
   padding: 2rem;
 }
@@ -70,7 +70,7 @@
 }
 /* Instagram styles */
 .social-link[href*="instagram.com"] {
-  color: #E1306C;
+  color: #e1306c;
   background-color: rgba(225, 48, 108, 0.1);
 }
 
@@ -80,7 +80,7 @@
 
 /* Facebook styles */
 .social-link[href*="facebook.com"] {
-  color: #1877F2;
+  color: #1877f2;
   background-color: rgba(24, 119, 242, 0.1);
 }
 
@@ -88,7 +88,7 @@
   background-color: rgba(24, 119, 242, 0.2);
 }
 
-.profile-page-buttons{
+.profile-page-buttons {
   margin: 5px 0;
   padding: 0;
   display: flex;
@@ -97,9 +97,10 @@
   align-items: flex-start;
 }
 /* Logout button styling */
-.profile-logout-button, .scan-qr-button {
+.profile-logout-button,
+.scan-qr-button {
   display: inline-block;
-   padding: 0.6rem 1.2rem;
+  padding: 0.6rem 1.2rem;
 
   background-color: #f44336;
   color: #fff;
@@ -111,7 +112,8 @@
 .scan-qr-button {
   margin: 0 5px;
 }
-.profile-logout-button:hover, .scan-qr-button:hover {
+.profile-logout-button:hover,
+.scan-qr-button:hover {
   background-color: #d32f2f;
 }
 
@@ -126,7 +128,7 @@
 .edit-profile-button {
   display: inline-block;
   padding: 0.6rem 1.2rem;
-  background-color: #2196F3;
+  background-color: #2196f3;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -159,7 +161,7 @@
   background-color: #5885aa;
   color: var(--main-text-colorcolor);
   border: none;
-  display: inline-block;    /* make it shrinkable */
+  display: inline-block; /* make it shrinkable */
   width: fit-content;
 }
 .form-input-editable:focus {
@@ -167,29 +169,30 @@
 
   color: #fff;
 }
-.form-input-editable::placeholder{
+.form-input-editable::placeholder {
   color: #3e3d3d;
 }
 .form-input-editable {
-  user-select: none;   /* prevent manual text select if you want */
+  user-select: none; /* prevent manual text select if you want */
 }
 .profile-info .editing {
   color: #fff; /* changes icon and text color via inheritance */
 }
 
-.profile-info .editing input {             /* input text */
+.profile-info .editing input {
+  /* input text */
   border-bottom: #00000069 1px solid;
   background-color: var(--main-text-color);
   min-width: none;
   height: 0.8rem;
-  padding: 4px 0;  /* input underline */
+  padding: 4px 0; /* input underline */
 }
 
 .save-button {
   display: inline-block;
   margin-top: 1rem;
   padding: 0.6rem 1.2rem;
-  background-color: #2196F3;
+  background-color: #2196f3;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -223,9 +226,9 @@
 }
 
 .toggle-tickets-button {
-  background-color: #2196F3;
+  background-color: #2196f3;
   color: #fff;
-   padding: 0.6rem 1.2rem;
+  padding: 0.6rem 1.2rem;
   border: none;
   cursor: pointer;
   text-transform: uppercase;
@@ -236,13 +239,13 @@
 .toggle-tickets-button:hover {
   background-color: #1976d2;
 }
-.icon-svg{
+.icon-svg {
   width: 1.5rem;
   height: 1.5rem;
   margin-right: 0.5rem;
 }
-.profile-logout-button{
-     padding: 0.6rem 1.2rem;
+.profile-logout-button {
+  padding: 0.6rem 1.2rem;
 }
 
 .ticket-item {
@@ -259,7 +262,7 @@
 .my-tickets-list {
   display: grid;
   /* Adjust minmax for desired card width, auto-fill creates responsive columns */
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1rem; /* Space between cards */
   padding: 0; /* Remove padding if cards have their own */
   margin-top: 1rem;
@@ -288,22 +291,20 @@
   .profile-container {
     width: 70%;
   }
-  .profile-info{
-    
+  .profile-info {
   }
-  
 }
 
 @media screen and (max-width: 768px) {
   .profile-container {
-    width: 95vw;         /* instead of 95vw */
-    margin: 0;  /* restore your original margins */
-    padding: 0;       /* whatever padding you like */
+    width: 95vw; /* instead of 95vw */
+    margin: 0; /* restore your original margins */
+    padding: 0; /* whatever padding you like */
   }
-  .profile-info{
+  .profile-info {
     padding: 1rem;
   }
-  .profile-page-buttons{
+  .profile-page-buttons {
     width: 100%;
     align-items: center;
     gap: 1px;
@@ -313,19 +314,24 @@
     height: 200px;
     clip-path: polygon(0 25%, 0 100%, 100% 100%, 100% 0, 100% 25%, 0% 0);
   }
-  .toggle-tickets-button, .profile-logout-button, .scan-qr-button{
-  flex: 0 0 33.333%;
-  max-width: 33.333%;
-     padding: 8px 10px;
+  .toggle-tickets-button,
+  .profile-logout-button,
+  .scan-qr-button {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+    padding: 8px 10px;
   }
-  .toggle-tickets-button, .profile-logout-button, .scan-qr-button, .edit-profile-button, .cancel-button, .save-button {
+  .toggle-tickets-button,
+  .profile-logout-button,
+  .scan-qr-button,
+  .edit-profile-button,
+  .cancel-button,
+  .save-button {
     font-size: 0.8rem;
   }
-  .toggle-tickets-button{
-
+  .toggle-tickets-button {
   }
-  .social-link{
-    font-size: 0.85rem;;
+  .social-link {
+    font-size: 0.85rem;
   }
-  
 }

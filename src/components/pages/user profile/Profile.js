@@ -42,22 +42,31 @@ function Profile() {
   // Refs for auto-focus (optional but good UX)
   const firstNameInputRef = useRef(null);
 
-
   // Format date helper
   const formatDate = (dateString) => {
     if (!dateString) return t("n_a", "N/A");
     const date = new Date(dateString);
     // Check if date is valid
     if (isNaN(date.getTime())) {
-        return t("invalid_date", "Invalid Date");
+      return t("invalid_date", "Invalid Date");
     }
     const day = date.getDate();
     const monthIndex = date.getMonth();
     const year = date.getFullYear();
 
     const monthKeys = [
-      "january", "february", "march", "april", "may", "june",
-      "july", "august", "september", "october", "november", "december",
+      "january",
+      "february",
+      "march",
+      "april",
+      "may",
+      "june",
+      "july",
+      "august",
+      "september",
+      "october",
+      "november",
+      "december",
     ];
     const monthTranslated = t(`months.${monthKeys[monthIndex]}`);
     return `${monthTranslated} ${day}, ${year}`;
@@ -72,15 +81,15 @@ function Profile() {
       return ""; // Handle invalid date strings gracefully
     }
   };
-const validateProfileField = (name, value) => {
-let errorKey = null;
+  const validateProfileField = (name, value) => {
+    let errorKey = null;
 
-  switch (name) {
+    switch (name) {
       case "firstName":
         if (!value.trim()) {
           errorKey = "validation.first_name_required";
-        } else if (!/^[a-zA-Z]+$/.test(value.trim())) { 
-          errorKey = "validation.name_invalid_chars"; 
+        } else if (!/^[a-zA-Z]+$/.test(value.trim())) {
+          errorKey = "validation.name_invalid_chars";
         }
         break;
 
@@ -95,63 +104,68 @@ let errorKey = null;
       case "phoneNumber":
         if (!value.trim()) {
           errorKey = "validation.phone_required";
-        }
-        else if (!/^[+]?[0-9\s\-()]{7,20}$/.test(value)) { // Optional format validation
+        } else if (!/^[+]?[0-9\s\-()]{7,20}$/.test(value)) {
+          // Optional format validation
           errorKey = "validation.phone_format_invalid";
         }
         break;
-    case "country":
-      if (!value.trim()) errorKey = "validation.country_required";
-      break;
-    case "birthdate":
-      if (!value) {
-        errorKey = "validation.birthdate_required";
-      } else {
-        const birthDateObj = new Date(value);
-        const today = new Date();
-        // Clear time part for accurate age calculation and future date check
-        today.setHours(0, 0, 0, 0); 
-        // birthDateObj will be at midnight UTC due to YYYY-MM-DD format, 
-        // new Date(value) might be affected by timezone. For simplicity, direct comparison.
-        // Ensure value is YYYY-MM-DD format for consistent Date parsing.
-
-        if (isNaN(birthDateObj.getTime())) {
-            errorKey = "validation.birthdate_invalid";
-        } else if (birthDateObj > today) {
-            errorKey = "validation.birthdate_future";
+      case "country":
+        if (!value.trim()) errorKey = "validation.country_required";
+        break;
+      case "birthdate":
+        if (!value) {
+          errorKey = "validation.birthdate_required";
         } else {
+          const birthDateObj = new Date(value);
+          const today = new Date();
+          // Clear time part for accurate age calculation and future date check
+          today.setHours(0, 0, 0, 0);
+          // birthDateObj will be at midnight UTC due to YYYY-MM-DD format,
+          // new Date(value) might be affected by timezone. For simplicity, direct comparison.
+          // Ensure value is YYYY-MM-DD format for consistent Date parsing.
+
+          if (isNaN(birthDateObj.getTime())) {
+            errorKey = "validation.birthdate_invalid";
+          } else if (birthDateObj > today) {
+            errorKey = "validation.birthdate_future";
+          } else {
             let age = today.getFullYear() - birthDateObj.getFullYear();
             const m = today.getMonth() - birthDateObj.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < birthDateObj.getDate())) {
+            if (
+              m < 0 ||
+              (m === 0 && today.getDate() < birthDateObj.getDate())
+            ) {
               age--;
             }
-            if (age < 18) { // Example age restriction
+            if (age < 18) {
+              // Example age restriction
               errorKey = "validation.age_requirement";
             }
+          }
         }
-      }
-      break;
-    case "socialMediaProfileLink":
-      if (value.trim()) { // Only validate if not empty, assuming it can be optional
-        const urlPattern = new RegExp(
-          "^(https?|ftp)://" + // protocol
-          "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-          "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-          "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-          "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-          "(\\#[-a-z\\d_]*)?$", // fragment locator
-          "i"
-        );
-        if (!urlPattern.test(value)) {
-          errorKey = "validation.social_media_invalid_url";
+        break;
+      case "socialMediaProfileLink":
+        if (value.trim()) {
+          // Only validate if not empty, assuming it can be optional
+          const urlPattern = new RegExp(
+            "^(https?|ftp)://" + // protocol
+              "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+              "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+              "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+              "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+              "(\\#[-a-z\\d_]*)?$", // fragment locator
+            "i"
+          );
+          if (!urlPattern.test(value)) {
+            errorKey = "validation.social_media_invalid_url";
+          }
         }
-      }
-      break;
-    default:
-      break;
-  }
-  return errorKey;
-};
+        break;
+      default:
+        break;
+    }
+    return errorKey;
+  };
 
   // Fetch profile on mount
   useEffect(() => {
@@ -174,19 +188,28 @@ let errorKey = null;
             socialMediaProfileLink: data.socialMediaProfileLink || "",
           });
         } else {
-          toast.error(t("error.load_profile_failed", "Failed to load profile. Please log in again."));
+          toast.error(
+            t(
+              "error.load_profile_failed",
+              "Failed to load profile. Please log in again."
+            )
+          );
           clearToken();
           navigate("/login");
         }
       })
       .catch(() => {
-        toast.error(t("error.load_profile_failed", "Failed to load profile. Please log in again."));
+        toast.error(
+          t(
+            "error.load_profile_failed",
+            "Failed to load profile. Please log in again."
+          )
+        );
         clearToken();
         navigate("/login");
       })
       .finally(() => setLoading(false));
   }, [token, navigate, clearToken, t]);
-
 
   // Auto-focus the first editable input when entering edit mode
   useEffect(() => {
@@ -194,7 +217,6 @@ let errorKey = null;
       firstNameInputRef.current.focus();
     }
   }, [isEditingMode]);
-
 
   // Fetch tickets when expanded (remains the same)
   useEffect(() => {
@@ -210,23 +232,34 @@ let errorKey = null;
       setTicketsLoading(true);
       setTicketsError(null); // Reset error before a new fetch
 
-      api.get("/Tickets/my-tickets", { headers: { Authorization: `Bearer ${token}` } }) // Assuming token is needed for auth
+      api
+        .get("/Tickets/my-tickets", {
+          headers: { Authorization: `Bearer ${token}` },
+        }) // Assuming token is needed for auth
         .then(({ data }) => {
-           if (Array.isArray(data)) {
+          if (Array.isArray(data)) {
             // Sort the tickets here before setting state
             // Create a new sorted array to avoid mutating the original response data directly (good practice)
             const sortedTickets = [...data].sort((a, b) => b.id - a.id); // Sorts in descending order of id
             setTickets(sortedTickets);
-
-        } else {
+          } else {
             console.error("Fetched tickets data is not an array:", data);
             setTickets([]); // Default to empty array if data is not in expected format
-            setTicketsError(t("error.fetch_tickets_format", "Unexpected format for ticket data."));
+            setTicketsError(
+              t(
+                "error.fetch_tickets_format",
+                "Unexpected format for ticket data."
+              )
+            );
           }
         })
         .catch((err) => {
           console.error("Error fetching tickets:", err);
-          setTicketsError(err.response?.data?.message || err.message || t("error.fetch_tickets", "Failed to fetch tickets."));
+          setTicketsError(
+            err.response?.data?.message ||
+              err.message ||
+              t("error.fetch_tickets", "Failed to fetch tickets.")
+          );
           // Optionally setTickets([]) here if you want to clear on error,
           // but be mindful if this could re-trigger fetches based on other conditions.
           // For now, let the error state handle the display.
@@ -235,28 +268,27 @@ let errorKey = null;
           setTicketsLoading(false);
         });
     }
-    
+
     // If ticketsVisible becomes false, you might want to clear the tickets
     // if you don't want to cache them for the next time the section is opened.
     // else if (!ticketsVisible) {
     //   setTickets([]); // This would mean tickets are fetched fresh each time it's opened
     // }
-
   }, [ticketsVisible, token, t]); // Added token and t, ticketsLoading
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     const fieldError = validateProfileField(name, value);
-  setProfileErrors((prevErrors) => {
-    const newErrors = { ...prevErrors };
-    if (fieldError) {
-      newErrors[name] = fieldError;
-    } else {
-      delete newErrors[name];
-    }
-    return newErrors;
-  });
+    setProfileErrors((prevErrors) => {
+      const newErrors = { ...prevErrors };
+      if (fieldError) {
+        newErrors[name] = fieldError;
+      } else {
+        delete newErrors[name];
+      }
+      return newErrors;
+    });
   };
 
   const handleEditToggle = () => {
@@ -291,29 +323,38 @@ let errorKey = null;
   };
 
   const handleSave = async () => {
-   setIsSaving(true);
+    setIsSaving(true);
 
-  // Validate all fields before submit
-  const fieldsToValidate = ["firstName", "lastName", "phoneNumber", "birthdate", "socialMediaProfileLink", "country"];
-  const errors = {};
-  for (const field of fieldsToValidate) {
-    const error = validateProfileField(field, formData[field]);
-    if (error) errors[field] = error;
-  }
+    // Validate all fields before submit
+    const fieldsToValidate = [
+      "firstName",
+      "lastName",
+      "phoneNumber",
+      "birthdate",
+      "socialMediaProfileLink",
+      "country",
+    ];
+    const errors = {};
+    for (const field of fieldsToValidate) {
+      const error = validateProfileField(field, formData[field]);
+      if (error) errors[field] = error;
+    }
 
-  if (Object.keys(errors).length > 0) {
-    setProfileErrors(errors);
-    setIsSaving(false);
-    toast.error(t("error.fix_form_errors", "Please fix the errors in the form."));
-    return;
-  }
+    if (Object.keys(errors).length > 0) {
+      setProfileErrors(errors);
+      setIsSaving(false);
+      toast.error(
+        t("error.fix_form_errors", "Please fix the errors in the form.")
+      );
+      return;
+    }
     try {
       // Using formData directly if backend accepts YYYY-MM-DD for birthdate
       const { data: updatedProfile } = await api.put("/auth/me", formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success(t("profile_updated", "Profile updated successfully!"));
-      setProfile(prevProfile => ({ ...prevProfile, ...formData })); // Optimistically update with formData
+      setProfile((prevProfile) => ({ ...prevProfile, ...formData })); // Optimistically update with formData
       // Or, if API returns the full updated profile, use that:
       // setProfile(updatedProfile);
       // setFormData({ // Re-sync formData if necessary, especially if API cleans/transforms data
@@ -327,7 +368,12 @@ let errorKey = null;
       setIsEditingMode(false);
     } catch (err) {
       console.error("Error updating profile:", err);
-      const errorMessage = err.response?.data?.message || t("error.profile_update_failed", "Failed to update profile. Please try again.");
+      const errorMessage =
+        err.response?.data?.message ||
+        t(
+          "error.profile_update_failed",
+          "Failed to update profile. Please try again."
+        );
       toast.error(errorMessage);
     } finally {
       setIsSaving(false);
@@ -346,29 +392,58 @@ let errorKey = null;
     navigate("/login");
   };
 
-
-  if (loading) return <div className="profile-container"><Loader /></div>;
-  if (!profile) return <div className="profile-container page-message">{t("profile_not_loaded", "Profile could not be loaded.")}</div>;
+  if (loading)
+    return (
+      <div className="profile-container">
+        <Loader />
+      </div>
+    );
+  if (!profile)
+    return (
+      <div className="profile-container page-message">
+        {t("profile_not_loaded", "Profile could not be loaded.")}
+      </div>
+    );
 
   // Display values should come from `profile` state when not editing
   // Formatted dates for display
-  const displayBirthdateFormatted = profile.birthdate ? formatDate(profile.birthdate) : t("n_a", "N/A");
-  const createdAtFormatted = profile.createdAt ? formatDate(profile.createdAt) : t("n_a", "N/A");
-
+  const displayBirthdateFormatted = profile.birthdate
+    ? formatDate(profile.birthdate)
+    : t("n_a", "N/A");
+  const createdAtFormatted = profile.createdAt
+    ? formatDate(profile.createdAt)
+    : t("n_a", "N/A");
 
   return (
     <div className="profile-container">
       <div className="profile-image-wrapper">
-        <img src={profileCover} alt={t("profile_cover_image", "Profile cover")} />
+        <img
+          src={profileCover}
+          alt={t("profile_cover_image", "Profile cover")}
+        />
       </div>
 
-      {profile.status === "Verified" && (<div className="verification-status verified">{t("verified", "Verified")}</div>)}
-      {profile.status === "Rejected" && (<div className="verification-status rejected">{t("rejected", "Rejected")}</div>)}
-      {profile.status === "Pending" && (<div className="verification-status pending">{t("pending", "Pending")}</div>)}
+      {profile.status === "Verified" && (
+        <div className="verification-status verified">
+          {t("verified", "Verified")}
+        </div>
+      )}
+      {profile.status === "Rejected" && (
+        <div className="verification-status rejected">
+          {t("rejected", "Rejected")}
+        </div>
+      )}
+      {profile.status === "Pending" && (
+        <div className="verification-status pending">
+          {t("pending", "Pending")}
+        </div>
+      )}
 
       <div className="profile-info">
         <h1 className="profile-header">
-          {t("welcome", "Welcome, {{name}}", { name: profile.firstName || "User" })}
+          {t("welcome", "Welcome, {{name}}", {
+            name: profile.firstName || "User",
+          })}
         </h1>
 
         {/* Edit/Save/Cancel Buttons */}
@@ -379,10 +454,20 @@ let errorKey = null;
             </button>
           ) : (
             <>
-              <button onClick={handleSave} className="save-button" disabled={isSaving}>
-                {isSaving ? t("saving", "Saving...") : t("save_changes", "Save Changes")}
+              <button
+                onClick={handleSave}
+                className="save-button"
+                disabled={isSaving}
+              >
+                {isSaving
+                  ? t("saving", "Saving...")
+                  : t("save_changes", "Save Changes")}
               </button>
-              <button onClick={handleCancelEdit} className="cancel-button" disabled={isSaving}>
+              <button
+                onClick={handleCancelEdit}
+                className="cancel-button"
+                disabled={isSaving}
+              >
                 {t("cancel", "Cancel")}
               </button>
             </>
@@ -393,15 +478,17 @@ let errorKey = null;
           <strong>{t("name")}:</strong>
           {isEditingMode ? (
             <>
-            <input
-              ref={firstNameInputRef}
-              type="text"
-              name="firstName"
-              className="form-input-editable"
-              value={formData.firstName}
-              onChange={handleChange}
-            />
-            {profileErrors.firstName && <div className="error-text">{t(profileErrors.firstName)}</div>}
+              <input
+                ref={firstNameInputRef}
+                type="text"
+                name="firstName"
+                className="form-input-editable"
+                value={formData.firstName}
+                onChange={handleChange}
+              />
+              {profileErrors.firstName && (
+                <div className="error-text">{t(profileErrors.firstName)}</div>
+              )}
             </>
           ) : (
             <span>{profile.firstName || t("n_a", "N/A")}</span>
@@ -411,34 +498,45 @@ let errorKey = null;
           <strong>{t("last_name")}:</strong>
           {isEditingMode ? (
             <>
-            <input
-              type="text"
-              name="lastName"
-              className="form-input-editable"
-              value={formData.lastName}
-              onChange={handleChange}
-            />
-            {profileErrors.lastName && <div className="error-text">{t(profileErrors.lastName)}</div>}</>
+              <input
+                type="text"
+                name="lastName"
+                className="form-input-editable"
+                value={formData.lastName}
+                onChange={handleChange}
+              />
+              {profileErrors.lastName && (
+                <div className="error-text">{t(profileErrors.lastName)}</div>
+              )}
+            </>
           ) : (
             <span>{profile.lastName || t("n_a", "N/A")}</span>
           )}
         </p>
 
-        <p><strong>{t("email")}:</strong> <span>{profile.email || t("n_a", "N/A")}</span></p>
-        <p><strong>{t("personal_number")}:</strong> <span>{profile.personalNumber || t("n_a", "N/A")}</span></p>
+        <p>
+          <strong>{t("email")}:</strong>{" "}
+          <span>{profile.email || t("n_a", "N/A")}</span>
+        </p>
+        <p>
+          <strong>{t("personal_number")}:</strong>{" "}
+          <span>{profile.personalNumber || t("n_a", "N/A")}</span>
+        </p>
 
         <p>
           <strong>{t("phone")}:</strong>
           {isEditingMode ? (
             <>
-            <input
-              type="tel"
-              name="phoneNumber"
-              className="form-input-editable"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-            />
-            {profileErrors.phoneNumber && <div className="error-text">{t(profileErrors.phoneNumber)}</div>}
+              <input
+                type="tel"
+                name="phoneNumber"
+                className="form-input-editable"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+              />
+              {profileErrors.phoneNumber && (
+                <div className="error-text">{t(profileErrors.phoneNumber)}</div>
+              )}
             </>
           ) : (
             <span>{profile.phoneNumber || t("n_a", "N/A")}</span>
@@ -448,20 +546,24 @@ let errorKey = null;
           <strong>{t("country")}:</strong>
           {isEditingMode ? (
             <>
-            <select
-              name="country"
-              className="form-input-editable"
-              onChange={handleChange}
-              value={formData.country}
-            >
-              <option value="">{t("auth.select_country", "Select a country")}</option>
-              {/* TODO: Populate with a dynamic list of countries if needed */}
-              <option value="Georgia">Georgia</option>
-              <option value="USA">USA</option>
-              <option value="Germany">Germany</option>
-              <option value="Other">Other</option>
-            </select>
-            {profileErrors.country && <div className="error-text">{t(profileErrors.country)}</div>}
+              <select
+                name="country"
+                className="form-input-editable"
+                onChange={handleChange}
+                value={formData.country}
+              >
+                <option value="">
+                  {t("auth.select_country", "Select a country")}
+                </option>
+                {/* TODO: Populate with a dynamic list of countries if needed */}
+                <option value="Georgia">Georgia</option>
+                <option value="USA">USA</option>
+                <option value="Germany">Germany</option>
+                <option value="Other">Other</option>
+              </select>
+              {profileErrors.country && (
+                <div className="error-text">{t(profileErrors.country)}</div>
+              )}
             </>
           ) : (
             <span>{profile.country || t("n_a", "N/A")}</span>
@@ -471,14 +573,16 @@ let errorKey = null;
           <strong>{t("birthdate")}:</strong>
           {isEditingMode ? (
             <>
-            <input
-              type="date"
-              name="birthdate"
-              className="form-input-editable"
-              value={formData.birthdate} // Already formatted as YYYY-MM-DD
-              onChange={handleChange}
-            />
-            {profileErrors.birthdate && <div className="error-text">{t(profileErrors.birthdate)}</div>}
+              <input
+                type="date"
+                name="birthdate"
+                className="form-input-editable"
+                value={formData.birthdate} // Already formatted as YYYY-MM-DD
+                onChange={handleChange}
+              />
+              {profileErrors.birthdate && (
+                <div className="error-text">{t(profileErrors.birthdate)}</div>
+              )}
             </>
           ) : (
             <span>{displayBirthdateFormatted}</span>
@@ -488,15 +592,19 @@ let errorKey = null;
           <strong>{t("social_media_link")}:</strong>
           {isEditingMode ? (
             <>
-            <input
-              type="url"
-              name="socialMediaProfileLink"
-              className="form-input-editable"
-              placeholder="https://example.com/profile"
-              value={formData.socialMediaProfileLink}
-              onChange={handleChange}
-            />
-            {profileErrors.socialMediaProfileLink && <div className="error-text">{t(profileErrors.socialMediaProfileLink)}</div>}
+              <input
+                type="url"
+                name="socialMediaProfileLink"
+                className="form-input-editable"
+                placeholder="https://example.com/profile"
+                value={formData.socialMediaProfileLink}
+                onChange={handleChange}
+              />
+              {profileErrors.socialMediaProfileLink && (
+                <div className="error-text">
+                  {t(profileErrors.socialMediaProfileLink)}
+                </div>
+              )}
             </>
           ) : profile.socialMediaProfileLink ? (
             <a
@@ -511,7 +619,10 @@ let errorKey = null;
             <span className="social-link na">{t("n_a", "N/A")}</span>
           )}
         </p>
-        <p><strong>{t("profile_created_on", "Profile Created On")}:</strong> <span>{createdAtFormatted}</span></p>
+        <p>
+          <strong>{t("profile_created_on", "Profile Created On")}:</strong>{" "}
+          <span>{createdAtFormatted}</span>
+        </p>
       </div>
 
       {/* Buttons Section (Tickets, QR Scan, Logout) */}
@@ -520,7 +631,10 @@ let errorKey = null;
           onClick={() => setTicketsVisible((prev) => !prev)}
           className="toggle-tickets-button"
         >
-          {t(ticketsVisible ? "collapse_my_tickets" : "my_tickets", ticketsVisible ? "Collapse" : "My Tickets")}
+          {t(
+            ticketsVisible ? "collapse_my_tickets" : "my_tickets",
+            ticketsVisible ? "Collapse" : "My Tickets"
+          )}
         </button>
         {profile.role === "Admin" && (
           <button
@@ -537,8 +651,10 @@ let errorKey = null;
 
       {/* Tickets Section Display */}
       {ticketsVisible && (
-         <div className="my-tickets-section">
-          <h2 className="my-tickets-header">{t("my_tickets_title", "My Tickets")}</h2>
+        <div className="my-tickets-section">
+          <h2 className="my-tickets-header">
+            {t("my_tickets_title", "My Tickets")}
+          </h2>
           <div className="my-tickets-list">
             {ticketsLoading ? (
               <Loader />
@@ -548,11 +664,15 @@ let errorKey = null;
               </p>
             ) : tickets.length > 0 ? (
               tickets.map((ticket) => (
-    <TicketCard key={ticket.id} ticket={ticket} formatDate={formatDate} />
-  ))
-) : (
-  <p>{t("no_tickets_found", "You have no tickets.")}</p>
-)}
+                <TicketCard
+                  key={ticket.id}
+                  ticket={ticket}
+                  formatDate={formatDate}
+                />
+              ))
+            ) : (
+              <p>{t("no_tickets_found", "You have no tickets.")}</p>
+            )}
           </div>
         </div>
       )}
