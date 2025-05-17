@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-   width: 100%; /* Makes card take full width of its grid cell */
+  width: 100%; /* Makes card take full width of its grid cell */
   max-width: 450px; /* Optional: Card itself won't exceed this width */
   margin-left: auto; /* Center card in cell if max-width is hit and cell is wider */
   margin-right: auto; /* Center card in cell */
@@ -29,11 +29,10 @@
     45deg,
     transparent,
     transparent 10px,
-    rgba(0,0,0,0.1) 10px,
-    rgba(0,0,0,0.1) 20px
+    rgba(0, 0, 0, 0.1) 10px,
+    rgba(0, 0, 0, 0.1) 20px
   ); /* Subtle pattern for used tickets */
 }
-
 
 .ticket-card-loader,
 .ticket-card-error {
@@ -53,7 +52,12 @@
   align-items: flex-start;
   padding: 1rem 1.5rem;
   gap: 1rem;
-  background-color: rgba(0,0,0,0.1); /* Slightly different header background */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.1
+  ); /* Slightly different header background */
   /* border-bottom: 1px solid var(--seconday-color); */
 }
 
@@ -113,7 +117,7 @@
 .ticket-card-footer {
   padding: 1rem 1.5rem;
   text-align: center;
-  background-color: rgba(0,0,0,0.2); /* Darker footer background */
+  background-color: rgba(0, 0, 0, 0.2); /* Darker footer background */
   border-top: 1px solid var(--seconday-color);
 }
 .ticket-card-footer.no-qr {
@@ -163,13 +167,15 @@
   border-radius: 4px;
 }
 
-.ticket-qr-code.clickable { /* Style for the clickable QR code */
+.ticket-qr-code.clickable {
+  /* Style for the clickable QR code */
   cursor: pointer;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .ticket-qr-code.clickable:hover,
-.ticket-qr-code.clickable:focus { /* Added focus style */
+.ticket-qr-code.clickable:focus {
+  /* Added focus style */
   transform: scale(1.05);
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); /* Brighter glow for dark theme */
   outline: 2px solid var(--blue-sky); /* Focus outline */
@@ -184,7 +190,6 @@
   font-style: italic;
   font-size: 0.9rem;
 }
-
 
 /* QR Code Modal Styles */
 .qr-modal-overlay {
@@ -206,7 +211,7 @@
   background-color: #fff; /* White background for QR code readability */
   padding: 25px;
   border-radius: 8px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -219,7 +224,9 @@
 .qr-modal-image {
   display: block;
   max-width: 100%;
-  max-height: calc(80vh - 60px); /* Adjusted for padding and potential close button */
+  max-height: calc(
+    80vh - 60px
+  ); /* Adjusted for padding and potential close button */
   width: auto; /* Default to auto, but can be fixed if preferred */
   height: auto; /* Maintain aspect ratio */
   min-width: 250px; /* Ensure it's a decent size */
