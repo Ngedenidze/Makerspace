@@ -65,8 +65,6 @@ export default function Homepage() {
     // Map the soon events array to extract the inner event objects
     return data;
   });
-  
-
 
   return (
     <main>
