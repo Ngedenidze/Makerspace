@@ -21,6 +21,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   width: 100%;
+  min-width: 400px;
   max-width: 400px;
   transition: all 0.3s ease; 
 }
@@ -140,6 +141,9 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+  .auth-box{
+    min-width: 0px;
+  }
   .auth-container{
     min-height: 50vh;
     width: 95vw;

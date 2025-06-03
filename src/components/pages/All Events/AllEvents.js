@@ -6,12 +6,14 @@ import SpecialSlice from "../../reusable/CardInfo/SpecialSlice";
 import { useTranslation } from "react-i18next";
 import i18n from "i18next"; // Import i18next for language detection
 import Loader from "../../reusable/Loader/Loader";
+import { use } from "react";
 
 export default function Events() {
   const { tab } = useParams(); // e.g. "upcoming" or "past"
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [events, setEvents] = useState([]);
+  const [pastEventsData, setPastEventsData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
  const currentLang = i18n.language; // e.g. "en" or "ka"
@@ -51,6 +53,7 @@ export default function Events() {
       })
       .then((data) => {
         setEvents(data);
+            console.log("All events data:", data);
         setLoading(false);
       })
       .catch((err) => {
@@ -61,30 +64,33 @@ export default function Events() {
       });
   }, [apiBaseUrl]);
 
-  // Using react-query for past events
-  const {
-    data: pastEventsData,
-    isLoading: pastLoading,
-    error: pastError,
-  } = useQuery("pastEvents", async () => {
-    const pastEventsUrl =
+  useEffect(() => {
+     const pastEventsUrl =
       process.env.NODE_ENV === "production"
-        ? `${apiBaseUrl}/api/PastEvents`
+        ? `${apiBaseUrl}/api/Events/PastEvents`
         : "/api/Events/PastEvents";
-  
-    const res = await fetch(pastEventsUrl);
+
+    fetch(pastEventsUrl).then((res) => {
     if (!res.ok) {
-      throw new Error(`Network error: ${res.status}`);
+      throw new Error(`Network response was not ok. Status: ${res.status}`);
     }
-    const data = await res.json();
-    return data;
-  });
+    return res.json();
+  }).then((data) => {
+     setPastEventsData(data);
+     setLoading(false);
+    })
+  .catch((err) => {
+    console.error("Error fetching past events:", err);
+    setError(err.message);
+    setPastEventsData([]);
+    setLoading(false); });
+  },  []);
 
   if (loading) return <p><Loader /></p>;
   if (error) return <p>Error: {error}</p>;
 
   const now = new Date();
-  const upcomingEvents = events.filter((e) => new Date(e.startDate) >= now);
+  const upcomingEvents = events.filter((e) => new Date(e.startDate) >= now - 6 * 60 * 60 * 1000); // Filter events that are upcoming
   const pastEvents = pastEventsData || [];
 
   // Mapping arrays for translating numeric day/month values

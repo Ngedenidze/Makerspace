@@ -3,36 +3,38 @@ import React, { createContext, useReducer, useEffect } from "react";
 const CartContext = createContext();
 
 const initialState = {
-  items: JSON.parse(localStorage.getItem("cartItems")) || [],
+  items: [],
 };
 
 function cartReducer(state, action) {
   switch (action.type) {
     case "ADD_ITEM":
-      const updatedItems = [...state.items, action.payload];
-      localStorage.setItem("cartItems", JSON.stringify(updatedItems));
-      return { ...state, items: updatedItems };
+      return { ...state, items: [...state.items, action.payload] };
+
     case "REMOVE_ITEM":
-      const filteredItems = state.items.filter(
-        (item) => item.ticketId !== action.payload.ticketId
-      );
-      localStorage.setItem("cartItems", JSON.stringify(filteredItems));
-      return { ...state, items: filteredItems };
+      return {
+        ...state,
+        items: state.items.filter(
+          (item) => item.ticketId !== action.payload.ticketId
+        ),
+      };
+
     case "UPDATE_QUANTITY":
-      const modifiedItems = state.items.map((item) =>
-        item.ticketId === action.payload.ticketId
-          ? { ...item, quantity: action.payload.quantity }
-          : item
-      );
-      localStorage.setItem("cartItems", JSON.stringify(modifiedItems));
-      return { ...state, items: modifiedItems };
+      return {
+        ...state,
+        items: state.items.map((item) =>
+          item.ticketId === action.payload.ticketId
+            ? { ...item, quantity: action.payload.quantity }
+            : item
+        ),
+      };
+
     case "CLEAR_CART":
-      localStorage.removeItem("cartItems");
       return { ...state, items: [] };
-    // Add SET_CART if you're rehydrating the cart from the backend:
-    case "SET_CART":
-      localStorage.setItem("cartItems", JSON.stringify(action.payload));
-      return { ...state, items: action.payload };
+
+case "FETCH_CART_SUCCESS":
+  return { ...state, items: action.payload };
+
     default:
       return state;
   }

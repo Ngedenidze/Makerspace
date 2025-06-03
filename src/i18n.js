@@ -13,6 +13,7 @@ const resources = {
       company: "Company",
       pending: "Pending",
       events: "Events",
+      date_of_birth: "Date of Birth",
       save_changes: "Save Changes",
       cart: "Cart",
       expand: "Expand",
@@ -31,7 +32,7 @@ const resources = {
       in_session: "Happening Now",
       my_tickets: "My Tickets",
       ended: "Ended",
-      main_stage: "Main Stage",
+      main_stage: "Maker Stage",
       space_stage: "Space Stage",
       stage:"Stage",
       default_cover_art: "Default Cover Art",
@@ -230,7 +231,31 @@ const resources = {
       "special":"Password must contain at least one special character",
   },
   "cart":{
-    "item_price_label":"Price"
+    "item_price_label":"Price",
+    "cart": "Cart",
+    "cart_empty": "Your cart is empty",
+    "order_summary": "Order Summary",
+    "subtotal": "Subtotal",
+    "estimated_total": "Estimated Total",
+    "checkout": "Checkout",
+    "discount": "Discount",
+    "update_cart": "Update Cart",
+    "enter_discount_code": "Enter Discount Code",
+    "terms_and_conditions": "By proceeding, you agree to our",
+    "terms_and_conditions_2":"Terms and Conditions",  
+
+  },
+  "QRscan":{
+    "ticket_qr_scanner": "Ticket QR Scanner",
+    "select_decision": "Select Decision",
+    "accept": "Accept",
+    "reject": "Reject",
+    "scanning_for_qr_code": "Scanning for QR code...",
+    "scan_again": "Scan Again",
+    "fetching_user_info": "Fetching user information...",
+    "accepted": "Accepted",
+    "rejected": "Rejected",
+
   }
 }
  },
@@ -255,12 +280,13 @@ const resources = {
       rentals: "ჩვენი სივრცე",
       djs: "DJ-ები",
       tickets: "ბილეთები",
+      first_name: "სახელი",
       last_name: "გვარი",
       starting_soon: "შემდეგი ივენთი",  
       in_session: "მიმდინარე ივენთი",
       ended: "დასრულებული",
-      cart: "კალათა",
-      scan_qr_code: "QR კოდის სკანირება",
+      date_of_birth: "დაბადების თარიღი",
+      scan_qr_code: "QR სკანი",
       stage: "",
       register: "რეგისტრაცია",
       my_tickets: "ჩემი ბილეთები",
@@ -474,8 +500,31 @@ const resources = {
         "special":"პაროლი უნდა შეიცავდეს მინიმუმ ერთ სპეციალურ სიმბოლოს",
       },
       "cart":{
-        "item_price_label":"ფასი"
-      }
+        "cart":"კალათა",
+        "item_price_label":"ფასი",
+        "cart_empty":"თქვენი კალათა ცარიელია",
+        "order_summary": "შეკვეთის მიმოხილვა",
+    "subtotal": "ჯამური",
+    "estimated_total": "საბოლოო ფასი",
+    "checkout": "გადახდა",
+    "discount": "ფასდაკლება",
+    "update_cart": "კალათის განახლება",
+    "enter_discount_code": "შეიყვანეთ ფასდაკლების კოდი",
+    "terms_and_conditions": "მე ვეთანხმები",
+        "terms_and_conditions_2": "კლუბის წესებს და პირობებს",
+      },
+  "QRscan":{
+    "ticket_qr_scanner": "QR კოდის სკანერი",
+    "select_decision": "აირჩიეთ გადაწყვეტილება",
+    "accept": "მიღებულია",
+    "reject": "უარყოფილია",
+    "scanning_for_qr_code": "სკანირდება QR კოდი...",
+    "scan_again": "ხელახლა სკანირება",
+    "fetching_user_info": "მომხმარებლის ინფორმაციის იტვირთება...",
+    "accepted": "მიღებულია",
+    "rejected": "უარყოფილია",
+
+  }
     
     }
   }

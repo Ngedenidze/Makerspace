@@ -764,6 +764,7 @@ Link:link {
   width: 100%;
   height: 100%;
   padding: 0;
+  gap: 1rem;
   margin-top: 1rem;
 }
 .stage{
@@ -875,7 +876,7 @@ Link:link {
 .in-session .in-session-text h3 .djName{
   color: var(--highlighted-text-color);
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.05rem;
 }
 
 .in-session .in-session-text p {
@@ -1940,9 +1941,8 @@ margin: 0;
     width: 95vw;
   }
   .layout-container{
-    margin: 0rem 1rem;
-    padding: 0rem 1rem;
-
+    padding: 0rem 0.5rem;
+    margin-bottom: 1rem;
     width: 100%;
     box-sizing: border-box;
   }
@@ -2320,6 +2320,9 @@ margin: 0;
     margin: 0;
     background-color: #191919;
   }
+  .layout-container::before {
+    display: none;
+  }
   .main-content, .homepage, .in-session, .events, .merch-display, .about-us {
     width: 95vw;
     margin: 0;
@@ -2440,12 +2443,11 @@ margin: 0;
     flex: 1;
     width: 100%;
     height: 50%;
-    min-height: fit-content;
     overflow: hidden;
   }
 
   .in-session .in-session-text {
-    padding: 1rem;
+    padding: 0.8rem;
     overflow-y: auto;
   }
 
@@ -2458,6 +2460,9 @@ margin: 0;
   }
   .stage-tabs{
     margin: 5px;
+  }
+  .in-session-stages{
+    gap: 0.25rem;
   }
   .in-session .in-session-text h1 {
     font-size: 1.2rem;
@@ -2479,7 +2484,7 @@ margin: 0;
     width: 50%;
   }
   .in-session .in-session-text h3 .djName {
-    font-size: 0.875rem;
+    font-size: 0.75rem;
   }
   .events-topbar {
     margin: 2px;
@@ -2600,7 +2605,7 @@ margin: 0;
   }
   .main-content{
     width: 100%;
-
+    margin-bottom: 5rem;
   }
   /* -------------------------------------------------------------------------- */
 /*  All EVENT PAGE                                                                */

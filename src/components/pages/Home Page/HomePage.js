@@ -11,7 +11,6 @@ import SoonEvents from "./sections/SoonEvents";
 export default function Homepage() {
   const specialsRef = useRef(null);
   const aboutRef = useRef(null);
-
   const apiBaseUrl = process.env.REACT_APP_API_URL;
   // Fetch events data
   const {
@@ -65,7 +64,14 @@ export default function Homepage() {
     // Map the soon events array to extract the inner event objects
     return data;
   });
-
+  const now = new Date();
+  const sixHoursAgo = now.getTime() - 6 * 60 * 60 * 1000;
+  const nextUpEvents = Array.isArray(eventsData)
+    ? eventsData.filter((e) => {
+        const startMs = new Date(e.startDate).getTime();
+        return startMs >= sixHoursAgo;
+      })
+    : [];
   return (
     <main>
       <section className="homepage">
@@ -73,7 +79,7 @@ export default function Homepage() {
           <InsessionTabs eventsData={eventsData} />
 
           <section ref={specialsRef} className="events">
-            <EventsGrid events={eventsData} />
+            <EventsGrid events={nextUpEvents} />
           </section>
           <section className="events">
             <SoonEvents events={soonEventsData} />

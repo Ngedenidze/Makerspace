@@ -1,21 +1,100 @@
+/* SuccessPayment.css */
+
+/* 1) Full‐viewport container, centering the card */
 .success-payment-page {
-    max-width: 600px;
-    min-height: 100vh;
-    margin: 100px auto;
-    padding: 40px;
-    text-align: center;
-  }
-  .success-payment-content{
-    background-color: var(--main-color);
-    padding: 5rem;
-  }
-  .success-payment-content h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
+  display: flex;
   
-  .success-payment-content p {
-    font-size: 1.2rem;
-    color: var(--light-text-color);
-    margin: 0;
+  align-items: flex-start;
+  justify-content: center;
+  /* Optional: a light gradient background */
+  background: linear-gradient(
+    135deg,
+    var(--main-color) 0%,
+    var(--main-color-dark) 100%
+  );
+  margin-top: 5rem;
+  padding: 5rem;
+}
+
+/* 2) White card with rounded corners, shadow, and padding */
+.success-payment-card {
+  background-color: var(--forms-color);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 3) Circle behind the checkmark SVG */
+.success-icon {
+  background-color: var(--main-color, #2196f3);
+  border-radius: 50%;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 4) Heading style */
+.success-heading {
+  font-size: 1.75rem;
+  margin: 0;
+  color: #C5E7D6;
+  margin-bottom: 0.75rem;
+}
+
+/* 5) Body text style */
+.success-text {
+  font-size: 1rem;
+  color: var(--white-full, #555);
+  margin: 0;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+/* 6) Primary button */
+.success-button {
+  display: inline-block;
+  background-color: var(--main-color, #2196f3);
+  color: white;
+  text-decoration: none;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.success-button:hover {
+  background-color: var(--main-color-dark, #1976d2);
+}
+
+/* 7) Mobile adjustments */
+@media (max-width: 768px) {
+  .success-payment-page{
+    padding: 0.5rem;
+    margin-top: 1rem;
   }
+  .success-payment-card {
+    padding: 2rem 1.5rem;
+  }
+  .success-heading {
+    font-size: 1.5rem;
+  }
+  .success-text {
+    font-size: 0.95rem;
+  }
+  .success-button {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  .success-icon {
+    padding: 0.8rem;
+  }
+}

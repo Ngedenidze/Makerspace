@@ -367,6 +367,21 @@
   .event-page{
     margin: 0;
     width: 100%;
+    margin-bottom: 4rem;
+  }
+  .lineup-floor h3{
+     font-size: 1rem;
+     margin: 0.3rem 0;
+     text-decoration: underline 2px; 
+  }
+  .lineup-item {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  .lineup-artist{
+    font-size: 0.8rem;
+    white-space: normal;
+    min-width: 0;
   }
   .event-info{
     padding: 1rem;
@@ -384,10 +399,22 @@
     clip-path: none;
   }
   .event-page h1{
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
   .event-page h3{
     font-size: 1rem;
   }
-    
+  .description-text{
+    font-size: 1rem;
+    line-height: 1.4;
+    color: var(--light-text-color);
+  }
+  .event-title{
+    font-size: 1rem;
+    }
+  .price-label {
+    font-size: 1rem;
+    color: firebrick;
+  }
+
   }

@@ -301,18 +301,29 @@
     margin: 0; /* restore your original margins */
     padding: 0; /* whatever padding you like */
   }
+  .profile-header{
+    padding-top: 0;
+    font-size: 1.2rem;
+
+  }
   .profile-info {
     padding: 1rem;
+  }
+  .profile-info p{
+    font-size: 0.8rem;
+  }
+  .form-input-editable{
+    font-size: 0.8rem;
   }
   .profile-page-buttons {
     width: 100%;
     align-items: center;
     gap: 1px;
-    justify-content: center;
+    overflow: hidden;
   }
   .profile-image-wrapper img {
-    height: 200px;
-    clip-path: polygon(0 25%, 0 100%, 100% 100%, 100% 0, 100% 25%, 0% 0);
+    height: 120px;
+    clip-path: polygon(0 25%, 0 100%, 100% 100%, 100% 0, 100% 0%, 0% 0);
   }
   .toggle-tickets-button,
   .profile-logout-button,
@@ -327,7 +338,8 @@
   .edit-profile-button,
   .cancel-button,
   .save-button {
-    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
   }
   .toggle-tickets-button {
   }

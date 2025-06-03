@@ -158,20 +158,14 @@ useEffect(() => {
   }, 0);
 
   // 2) Choose conversion & locale based on language
-  const GEL_TO_USD_RATE = 0.37;
   let converted = rawGELTotal;
   let currency = 'GEL';
   let locale   = 'ka-GE';
 
-  if (currentLang === 'en') {
-    converted = rawGELTotal * GEL_TO_USD_RATE;
-    currency  = 'USD';
-    locale    = 'en-US';
-  }
 
   // 3) Store both the numeric total and the formatter info
-  setSubTotal(converted);
-  setEstimatedTotal(converted);
+  setSubTotal(rawGELTotal);
+  setEstimatedTotal(rawGELTotal);
   setSummaryLocale({ locale, currency });
 }, [cart.items, currentLang]);
 
@@ -298,7 +292,7 @@ console.log(response.data);
       <div className="cart-container">
         <div className="cart-header">
           <h1 className="cart-title">
-            {cart.items.length === 0 ? "Cart is Empty" : "Cart"}
+            {cart.items.length === 0 ? t('cart.cart_empty') : t('cart.cart')}
           </h1>
         </div>
         <div className="cart-main-body">
@@ -312,15 +306,14 @@ console.log(response.data);
                 // --- START: Price Calculation and Formatting Logic for each item ---
                 const GEL_TO_USD_RATE = 0.37; // IMPORTANT: Manage this rate externally (config/API)
                  let priceForFormatting = item.price; // Assumed to be in GEL from context
-                let displayCurrencyCode = '₾';
+                let displayCurrencyCode = 'GEL';
                 let displayLocale = i18n.language || 'ka-GE'; // Default to Georgian locale
  if (typeof item.price !== 'number' || isNaN(item.price)) {
                   console.warn(`CartPage: Invalid price for item ${item.ticketId}: ${item.price}. Using 0.`);
                   priceForFormatting = 0; 
                 } if (currentLang === 'en') {
-                  priceForFormatting = item.price * GEL_TO_USD_RATE; // Convert GEL to USD
-                  displayCurrencyCode = 'USD';
-                  displayLocale = i18n.language || 'en-US'; // Locale for USD formatting
+                  priceForFormatting = item.price; // Convert GEL to USD
+                
                 }
                 // For 'ka' (or other languages not 'en'), it defaults to GEL as set above
 
@@ -405,10 +398,10 @@ console.log(response.data);
                 <div className="discount-row">
                   <input
                     type="text"
-                    placeholder="Enter discount code"
+                    placeholder={t("cart.enter_discount_code", "Enter discount code")}
                     className="discount-input"
                   />
-                  <button className="apply-discount-btn">Update Cart</button>
+                  <button className="apply-discount-btn">{t("cart.update_cart", "Update Cart")}</button>
                 </div>
                 <div className="terms-and-conditions">
                   <label htmlFor="termsCheckbox" className="terms-label">
@@ -426,9 +419,13 @@ console.log(response.data);
                       >
                         *
                       </span>
-                      By proceeding to checkout, you agree to our{" "}
+                      {/* By proceeding to checkout, you agree to our{" "}
                       <Link className="terms-link" to="/terms">
                         Terms and Conditions
+                      </Link> */}
+                      {t("cart.terms_and_conditions", "By proceeding to checkout, you agree to our")}{" "}
+                      <Link className="terms-link" to="/terms">
+                        {t("cart.terms_and_conditions_2", "Terms and Conditions")}
                       </Link>
                     </span>
                   </label>
@@ -438,9 +435,9 @@ console.log(response.data);
           </div>
           {/* Summary Column */}
           <div className="cart-summary">
-            <h2>Order Summary</h2>
+            <h2>{t("cart.order_summary", "Order Summary")}</h2>
             <div className="summary-row">
-              <span>Subtotal:</span>
+              <span>{t("cart.subtotal", "Subtotal")}:</span>
   <span>
     {new Intl.NumberFormat(summaryLocale.locale, {
       style: 'currency',
@@ -449,12 +446,12 @@ console.log(response.data);
   </span>
 </div>
             <div className="summary-row">
-              <span>Discount:</span>
+              <span>{t("cart.discount", "Discount")}:</span>
               <span>$0.00</span>
             </div>
             <hr />
           <div className="summary-row total-row">
-  <span>Estimated Total:</span>
+  <span>{t("cart.estimated_total", "Total")}</span>
   <span>
     {new Intl.NumberFormat(summaryLocale.locale, {
       style: 'currency',
@@ -463,7 +460,7 @@ console.log(response.data);
   </span>
 </div>
             <button className="checkout-btn" onClick={() => handleCheckout()}>
-              Checkout
+              {t("cart.checkout", "Checkout")}
             </button>
           </div>
         </div>

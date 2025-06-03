@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import ScrollToTop from "./components/reusable/ScrollToTop";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider } from "./components/pages/authPage/utils/AuthProvider";
@@ -16,6 +17,7 @@ root.render(
 
     <AuthProvider>
       <Router>
+        <ScrollToTop />
         <App />
       </Router>
     </AuthProvider>

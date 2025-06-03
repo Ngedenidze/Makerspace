@@ -1,23 +1,98 @@
+/* FailPayment.css */
+
+/* 1) Full‐viewport container, centering the card loosely from top */
 .fail-payment-page {
-    min-height: 100vh;
-    max-width: 600px;
-    margin: 100px auto;
-    padding: 40px;
-    text-align: center;
-  }
-  
-  .fail-payment-content{
-    background-color: var(--main-color);
-    padding: 5rem;
+  display: flex;
+  align-items: flex-start; /* keep it a bit down from top */
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    var(--main-color) 0%,
+    var(--main-color-dark) 100%
+  );
+  margin-top: 5rem;
+  padding: 5rem;
 }
-  .fail-payment-content h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #d32f2f; /* Red color for the headline */
+
+/* 2) Card container uses your form‐color background */
+.fail-payment-card {
+  background-color: var(--forms-color, white);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 3) Red circle behind the “X” icon */
+.fail-icon {
+  background-color: #d32f2f; /* similar to your red error */
+  border-radius: 50%;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 4) Heading style for failure */
+.fail-heading {
+  font-size: 1.75rem;
+  margin: 0;
+  color: #d32f2f;
+  margin-bottom: 0.75rem;
+}
+
+/* 5) Body text style */
+.fail-text {
+  font-size: 1rem;
+  color: var(--light-text-color, #555);
+  margin: 0;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+/* 6) Primary “Browse Events” button */
+.fail-button {
+  display: inline-block;
+  background-color: #d32f2f; /* same red used above */
+  color: white;
+  text-decoration: none;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.fail-button:hover {
+  background-color: #b71c1c;
+}
+
+/* 7) Responsive adjustments */
+@media (max-width: 768px) {
+  .fail-payment-page {
+    padding: 0.5rem;
+    margin-top: 1rem;
   }
-  
-  .fail-payment-content p {
-    color: var(--light-text-color);
-    font-size: 1.2rem;
-    margin: 0;
+  .fail-payment-card {
+    padding: 2rem 1.5rem;
   }
+  .fail-heading {
+    font-size: 1.5rem;
+  }
+  .fail-text {
+    font-size: 0.95rem;
+  }
+  .fail-button {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  .fail-icon {
+    padding: 0.8rem;
+  }
+}

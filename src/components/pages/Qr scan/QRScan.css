@@ -143,8 +143,28 @@
     }
   }
   
-  @media screen and (max-width: 600px) {
-
+  @media screen and (max-width: 768px) {
+    .QRprofile-container {
+      width: 100%; /* instead of 95vw */
+      margin: 0; /* restore your original margins */
+      padding: 0.5rem 1rem;
+    }
+    .accept-btn, .reject-btn{
+      padding: 0.4rem 1rem;
+    }
+    .decision-selection{
+      flex-wrap: wrap;
+    }
+    .decision-selection button {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+    }
+    .decision-label {
+      font-size: 0.9rem;
+    }
+    .QRprofile-header {
+      font-size: 1.5rem;
+    }
   }
   
   

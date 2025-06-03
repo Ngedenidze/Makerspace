@@ -1,7 +1,9 @@
+// src/components/AdminQRScanner.js
 import React, { useState, useEffect, useRef } from "react";
 import jsQR from "jsqr";
 import api from "../authPage/utils/AxiosInstance";
 import "./QRScan.css"; // Contains your CSS
+import i18n from "../../../i18n";
 
 const AdminQRScanner = () => {
   const [scanResult, setScanResult] = useState(null);
@@ -10,9 +12,10 @@ const AdminQRScanner = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [ticketId, setTicketId] = useState(null);
   const [error, setError] = useState(null);
-  const [decision, setDecision] = useState(null); // Final decision ("accepted" or "rejected")
-  const [selectedDecision, setSelectedDecision] = useState("accepted"); // Pre-scan selection
+  const [decision, setDecision] = useState(null); // "accepted" or "rejected"
+  const [selectedDecision, setSelectedDecision] = useState("accepted"); // Defaults to accepted
 
+  const t = i18n.t; // Translation function
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const requestRef = useRef(null);
@@ -21,8 +24,8 @@ const AdminQRScanner = () => {
   const initVideo = async () => {
     try {
       if (videoRef.current && videoRef.current.srcObject) {
-        const oldStream = videoRef.current.srcObject;
-        oldStream.getTracks().forEach((track) => track.stop());
+        // Stop any existing stream
+        videoRef.current.srcObject.getTracks().forEach((track) => track.stop());
       }
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: "environment" },
@@ -34,47 +37,56 @@ const AdminQRScanner = () => {
     } catch (err) {
       console.error("Error accessing camera:", err);
       setError("Error accessing camera");
+      setScanning(false);
     }
   };
 
-  // Start video on mount.
+  const stopCamera = () => {
+    if (videoRef.current && videoRef.current.srcObject) {
+      videoRef.current.srcObject.getTracks().forEach((track) => track.stop());
+      videoRef.current.srcObject = null;
+    }
+    cancelAnimationFrame(requestRef.current);
+  };
+
+  // Start video on mount, and clean up on unmount or page unload
   useEffect(() => {
     initVideo();
+
+    const handleBeforeUnload = () => stopCamera();
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
     return () => {
-      if (videoRef.current && videoRef.current.srcObject) {
-        const stream = videoRef.current.srcObject;
-        stream.getTracks().forEach((track) => track.stop());
-      }
-      cancelAnimationFrame(requestRef.current);
+      stopCamera();
+      window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, []);
 
-  // Helper: Extract Ticket ID from raw data string.
-  // Example: "Ticket ID: 5, Event: string, User ID: 2"
+  // Helper: Extract Ticket ID from raw QR data string.
   const extractTicketId = (dataObj) => {
     console.log("Extracting Ticket ID from dataObj:", dataObj);
-    let ticketId = 0;
+    let tId = 0;
     if (dataObj && dataObj.raw) {
       const match = dataObj.raw.match(/Ticket\s*ID\s*:\s*(\d+)/i);
       if (match) {
-        ticketId = parseInt(match[1], 10);
+        tId = parseInt(match[1], 10);
       }
     }
-    console.log("Extracted Ticket ID:", ticketId);
-    return ticketId;
+    console.log("Extracted Ticket ID:", tId);
+    return tId;
   };
 
-  // Helper: Extract User ID from raw data string.
+  // Helper: Extract User ID from raw QR data string.
   const extractUserId = (dataObj) => {
     console.log("Extracting User ID from dataObj:", dataObj);
-    let userId = 0;
+    let uId = 0;
     if (dataObj && dataObj.raw) {
       const match = dataObj.raw.match(/User\s*ID\s*:\s*(\d+)/i);
       if (match) {
-        userId = parseInt(match[1], 10);
+        uId = parseInt(match[1], 10);
       }
     }
-    return userId;
+    return uId;
   };
 
   // Fetch user info from GET /users/GetUserbyId/{id}.
@@ -86,6 +98,33 @@ const AdminQRScanner = () => {
     } catch (err) {
       console.error("Error fetching user info:", err);
       setError("Error fetching user information");
+    }
+  };
+
+  // Function to handle sending the decision via API.
+  // We now inspect the server’s error payload to display "Invalid or tampered QR code!" when appropriate.
+  const sendDecision = async (ticketIdArg, isReject) => {
+    if (!ticketIdArg) {
+      setError("Ticket ID not found");
+      return;
+    }
+    console.log("Sending decision for ticketId:", ticketIdArg);
+    try {
+      const response = await api.post("/QRCode/scan", {
+        isReject,
+        ticketId: ticketIdArg,
+      });
+      console.log("Decision response:", response.data);
+      setDecision(isReject ? "rejected" : "accepted");
+    } catch (err) {
+      console.error("Error sending decision:", err);
+      // Check if the server responded with the specific “Invalid or tampered QR code!” message
+      const serverMessage = err?.response?.data?.message;
+      if (serverMessage === "Invalid or tampered QR code!") {
+        setError(serverMessage);
+      } else {
+        setError("Error sending decision");
+      }
     }
   };
 
@@ -107,29 +146,34 @@ const AdminQRScanner = () => {
             console.log("QR Code found:", code);
             setScanResult(code.data);
             console.log("Raw QR data:", code.data);
+
+            let parsedData;
             try {
-              const parsedData = JSON.parse(code.data);
+              parsedData = JSON.parse(code.data);
               console.log("Parsed QR data:", parsedData);
-              setScannedData(parsedData);
             } catch (e) {
-              // If the QR data is not valid JSON, store it as raw.
-              setScannedData({ raw: code.data });
+              parsedData = { raw: code.data };
             }
-            setScanning(false);
-            
-            // Extract User ID and fetch user info.
-            const userId = extractUserId({ raw: code.data });
-            if (userId) {
-              fetchUserInfo(userId);
+            setScannedData(parsedData);
+            setScanning(false); // stop the loop for now
+
+            // Extract and fetch user info:
+            const extractedUserId = extractUserId({ raw: code.data });
+            if (extractedUserId) {
+              fetchUserInfo(extractedUserId);
             } else {
               setError("Could not extract User ID from QR code");
             }
-            const ticketId = extractTicketId({ raw: code.data });
-            setTicketId(ticketId);
-            
-            // Automatically send decision using the pre-selected value.
-            sendDecision(selectedDecision === "rejected");
-            return; // Stop scanning once code is found.
+
+            // Extract Ticket ID locally (so we can pass it immediately to sendDecision)
+            const extractedTicketId = extractTicketId({ raw: code.data });
+            setTicketId(extractedTicketId);
+
+            // Immediately attempt to send decision. If it fails with “Invalid or tampered…”
+            // the catch block in sendDecision will setError appropriately.
+            sendDecision(extractedTicketId, selectedDecision === "rejected");
+
+            return; // stop scanning once code is found
           }
         }
       }
@@ -142,25 +186,9 @@ const AdminQRScanner = () => {
     return () => cancelAnimationFrame(requestRef.current);
   }, [scanning, selectedDecision]);
 
-  // Function to handle sending the decision via API.
-  const sendDecision = async (isReject) => {
-    if (!ticketId) {
-      setError("Ticket ID not found");
-      return;
-    }
-    console.log("Sending decision for ticketId:", ticketId);
-    try {
-      const response = await api.post("/QRCode/scan", { isReject, ticketId });
-      console.log("Decision response:", response.data);
-      setDecision(isReject ? "rejected" : "accepted");
-    } catch (error) {
-      console.error("Error sending decision:", error);
-      setError("Error sending decision");
-    }
-  };
-
   // Reset state, reinitialize video, and restart scanning.
   const handleScanAgain = async () => {
+    stopCamera();
     setScanResult(null);
     setScannedData(null);
     setUserInfo(null);
@@ -172,57 +200,66 @@ const AdminQRScanner = () => {
 
   return (
     <div className="QRprofile-container">
-      <h2 className="QRprofile-header">User Info QR Scanner</h2>
-      
-      {/* Decision selection UI always visible (before and during scanning) */}
+      <h2 className="QRprofile-header">{t("QRscan.ticket_qr_scanner")}</h2>
+
+      {/* Decision selection UI always visible */}
       <div className="decision-selection" style={{ marginBottom: "20px", textAlign: "center" }}>
-        <span style={{ marginRight: "10px" }}>Select Decision:</span>
+        <span className="decision-label">{t("QRscan.select_decision")}:</span>
+        <div className="decision-buttons">
         <button
           onClick={() => setSelectedDecision("accepted")}
           className={selectedDecision === "accepted" ? "active-decision" : ""}
           style={{ marginRight: "10px" }}
         >
-          Accept
+          {t("QRscan.accept")}
         </button>
         <button
           onClick={() => setSelectedDecision("rejected")}
           className={selectedDecision === "rejected" ? "active-decision" : ""}
         >
-          Reject
+          {t("QRscan.reject")}
         </button>
+        </div>
       </div>
-      
+
       {scanResult === null ? (
         <div className="scanner-container">
           <video ref={videoRef} style={{ width: "300px", border: "1px solid #ccc" }} />
           {/* Hidden canvas used only for frame processing */}
           <canvas ref={canvasRef} style={{ display: "none" }} />
-          <p>Scanning for QR code...</p>
+          <p>{t("QRscan.scanning_for_qr_code")}</p>
         </div>
       ) : (
         <div className="QRprofile-details">
-          {userInfo ? (
+          {/* If an error was set, show it immediately */}
+          {error ? (
+            <div className="qr-error-message">{error}</div>
+          ) : userInfo ? (
             <div className="QRprofile-info">
-              <p><strong>First Name:</strong> {userInfo.firstName}</p>
-              <p><strong>Last Name:</strong> {userInfo.lastName}</p>
+              <p><strong>{t("first_name")}:</strong> {userInfo.firstName}</p>
+              <p><strong>{t("last_name")}:</strong> {userInfo.lastName}</p>
               <p>
-                <strong>Date of Birth:</strong>{" "}
-                {new Date(userInfo.birthdate).toLocaleDateString()}
+                <strong>{t("date_of_birth")}:</strong> {new Date(userInfo.birthdate).toLocaleDateString()}
               </p>
             </div>
           ) : (
-            <p>Fetching user information...</p>
+            // No error and no userInfo yet → fetching
+            <p>{t("QRscan.fetching_user_info")}</p>
           )}
-          {/* Display final decision after scan and request */}
-          {decision ? (
-            <div className={`verification-statusQR ${decision === "accepted" ? "verified" : "rejected"}`}>
-              {decision === "accepted" ? "Accepted" : "Rejected"}
+
+          {/* Only show “Accepted/Rejected” once decision was successful and no error */}
+          {!error && decision && (
+            <div
+              className={`verification-statusQR ${
+                decision === "accepted" ? "verified" : "rejected"
+              }`}
+            >
+              {decision === "accepted" ? t("QRscan.accepted") : t("QRscan.rejected")}
             </div>
-          ) : (
-            <p>Processing decision...</p>
           )}
+
           <button className="scan-again-btn" onClick={handleScanAgain}>
-            Scan Again
+            {t("QRscan.scan_again")}
           </button>
         </div>
       )}

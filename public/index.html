@@ -2,7 +2,7 @@
 <html lang="en" style="background-color: rgb(44, 44, 44);">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="Classification" content="Business" />
     <meta name="HandheldFriendly" content="True" />
     <meta name="language" content="EN" />
@@ -23,7 +23,7 @@
       to welcome you!"
     />
     <meta name="author" content="Nika Gedenidze" />
-    <meta name="theme-color" content="#FFFFFF" />
+    <meta name="theme-color" content="#191919" />
 
     <!-- Open Graph Protocol -->
     <meta property="og:title" content="Makerspace" />
@@ -103,7 +103,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
 
-  <body>
+ <body style="
+  background-color: #121212;
+  padding-top: env(safe-area-inset-top);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  margin: 0;">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>

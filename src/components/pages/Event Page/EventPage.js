@@ -58,8 +58,9 @@ export default function EventPage() {
           setCurrentEventPrice(null); // No baskets or price info
         }
 
-        const eventDate = new Date(res.data.startDate);
-        setShowBuySection(eventDate >= todayMidnight);
+       const now = new Date();
+const eventEndDate = new Date(res.data.endDate);
+setShowBuySection(now < eventEndDate);
         // --- End Price and Buy Section Logic ---
 
       })
@@ -226,15 +227,12 @@ export default function EventPage() {
         <header className="event-header">
           <h1 className="event-title">{eventNameDisplay}</h1>
                  <span className="price-label">{t("price", "Price")}: {" "}
-        {currentEventPrice !== null
-          ? new Intl.NumberFormat(
-              currentLang === "ka" ? "ka-GE" : (i18n.language || "en-US"),
-              { 
-                style: "currency", 
-                currency: currentLang === 'en' ? 'USD' : 'GEL' // Dynamic currency based on lang
-              }
-            ).format(currentLang === 'en' ? (currentEventPrice * GEL_TO_USD_RATE) : currentEventPrice) // GEL_TO_USD_RATE needs to be defined
-          : t("price_unavailable_display", "Price not available")}
+      {currentEventPrice !== null
+  ? new Intl.NumberFormat("ka-GE", {
+      style: "currency",
+      currency: "GEL",
+    }).format(currentEventPrice)
+  : t("price_unavailable_display", "Price not available")}
       </span>
         </header>
         

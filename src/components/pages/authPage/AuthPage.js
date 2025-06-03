@@ -750,8 +750,14 @@ const AuthPage = ({ page }) => {
             id="confirmNewPassword"
             className="form-input"
             placeholder={t("auth.confirm_new_password", "Confirm New Password")}
-            value={form.confirmNewPassword || ""}
+            value={form.confirmNewPassword}
             disabled={isSubmitting}
+            onChange={(e) => {
+              handleChange(e);
+              if (!confirmPasswordTouched) {
+                setConfirmPasswordTouched(true);
+              }
+            }}
           />
           {errors.confirmNewPassword && (
             <div className="error-text">{t(errors.confirmNewPassword, "Please confirm your new password")}</div>
