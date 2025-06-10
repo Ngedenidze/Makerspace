@@ -81,9 +81,9 @@ export default function Homepage() {
           <section ref={specialsRef} className="events">
             <EventsGrid events={nextUpEvents} />
           </section>
-          <section className="events">
+          {/* <section className="events">
             <SoonEvents events={soonEventsData} />
-          </section>
+          </section> */}
           <section className="events">
             <PastEvents events={pastEventsData} />
           </section>
