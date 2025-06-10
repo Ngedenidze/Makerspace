@@ -34,7 +34,7 @@ export default function CartPage() {
       .then((res) => {
         if (res.data && Array.isArray(res.data.ticketItems)) {
           const ticketItems = res.data.ticketItems;
-          console.log("Raw ticketItems from /Cart/my-cart:", ticketItems); // For debugging
+
 
           const transformedItems = ticketItems.map((ticket) => {
             let itemPrice = 0; // Default price if not found or invalid
@@ -90,9 +90,6 @@ export default function CartPage() {
               );
               itemPrice = 0;
             } else {
-              console.log(
-                `Extracted valid price '${itemPrice}' for ticketId: ${ticket.id}.`
-              );
               itemPrice = numericPrice;
             }
 
@@ -111,13 +108,10 @@ export default function CartPage() {
               // basketId: chosenBasketId,
             };
           });
-          console.log("Transformed items for cart context:", transformedItems); // For debugging
+
           dispatch({ type: "FETCH_CART_SUCCESS", payload: transformedItems });
         } else {
-          console.error(
-            "Unexpected cart data structure from backend (/Cart/my-cart):",
-            res.data
-          );
+
           dispatch({
             type: "FETCH_CART_ERROR",
             payload: "Invalid cart data received.",
@@ -125,7 +119,7 @@ export default function CartPage() {
         }
       })
       .catch((err) => {
-        console.error("Error fetching cart:", err);
+
         setCartFetchError(
           err.message || "Failed to fetch cart items. Please try again."
         );
@@ -174,11 +168,9 @@ useEffect(() => {
       // Make it async
       try {
         await api.post(`/Cart/update-ticket?eventId=${item.eventId}&quantity=${newQuantity}`); // Or use item.ticketId if that's the correct identifier for backend
-        console.log(
-          `Backend updated: eventId ${item.eventId} (or ticketId ${item.ticketId}) now has quantity ${newQuantity}`
-        );
+
       } catch (error) {
-        console.error("Error updating quantity on backend:", error);
+
         toast.error(
           `Failed to update quantity for ${item.eventName}. Please try again.`
         );
@@ -221,7 +213,7 @@ useEffect(() => {
 
     try {
       const response = await api.post("/Cart/checkout");
-console.log(response.data);
+
       if (
         response.status >= 200 &&
         response.status < 300 &&
@@ -233,17 +225,14 @@ console.log(response.data);
         toast.info("Redirecting to complete your checkout...");
         window.location.href = redirectUrl;
       } else {
-        console.error(
-          "Checkout initiation failed: No redirectUrl received or unexpected response structure.",
-          response
-        );
+
         toast.error(
           "Checkout initiation failed. Please try again or contact support."
         );
         setIsLoading(false); // Stop loading in case of failure
       }
     } catch (error) {
-      console.error("Checkout error:", error);
+
       let errorMessage = "Error during checkout. Please try again.";
       if (
         error.response &&
@@ -281,7 +270,7 @@ console.log(response.data);
         dispatch({ type: "REMOVE_ITEM", payload: item });
       })
       .catch((error) => {
-        console.error("Ticket removal error:", error);
+
         toast.error("Error removing ticket from cart.");
       });
   };
@@ -324,7 +313,7 @@ console.log(response.data);
                     currency: displayCurrencyCode, // Dynamically 'GEL' or 'USD'
                   }).format(priceForFormatting);
                 } catch (e) {
-                  console.error("Error formatting currency for item:", item, e);
+
                   // Fallback display if Intl.NumberFormat fails (e.g., invalid locale/currency somehow)
                   formattedPriceDisplay = `${priceForFormatting.toFixed(2)} ${displayCurrencyCode}`;
                 }

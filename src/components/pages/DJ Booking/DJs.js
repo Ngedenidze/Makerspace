@@ -35,7 +35,7 @@ const DJs = () => {
 
     // Construct the concatenated string using a delimiter "||"
     const formDataString = `Full Name: ${fullName}||Stage Name: ${stageName}||Social Network Link: ${socialLink}||Music Platform Link: ${musicLink}||Motivation: ${motivation}`;
-    console.log("Form Data String:", formDataString);
+
 
     const apiUrl = "/api/email/DJRequest";
 
@@ -68,7 +68,7 @@ const DJs = () => {
         ? await response.json()
         : await response.text();
 
-      console.log("Submission successful:", responseData);
+
       setSuccess("Your request has been sent successfully!");
       // Clear form fields upon success
       setFullName("");
@@ -77,7 +77,7 @@ const DJs = () => {
       setMusicLink("");
       setMotivation("");
     } catch (err) {
-      console.error("Error submitting form:", err);
+
       setError("Failed to send your request. Please try again later.");
     } finally {
       setLoading(false);
