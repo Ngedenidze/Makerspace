@@ -242,7 +242,7 @@ const AuthPage = ({ page }) => {
       let response;
       if (page === "register") {
         response = await api.post("/auth/register", form);
-        console.log("Registration Successful:", response.data);
+
         setSuccess("success.registration");
         setForm({
           firstName: "",
@@ -276,7 +276,7 @@ const AuthPage = ({ page }) => {
         response = await api.post("/auth/request-password-reset", {
           email: form.email,
         });
-        console.log("Reset Email Sent:", response.data);
+
         setSuccess("success.reset_email_sent");
         setTimeout(() => {
           navigate("/login");
@@ -293,7 +293,7 @@ const AuthPage = ({ page }) => {
           token: token,
           newPassword: form.newPassword,
         });
-        console.log("Password Reset Successful:", response.data);
+
         setSuccess("success.password_reset");
         setTimeout(() => {
           navigate("/login");

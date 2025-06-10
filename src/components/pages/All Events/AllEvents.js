@@ -53,11 +53,9 @@ export default function Events() {
       })
       .then((data) => {
         setEvents(data);
-            console.log("All events data:", data);
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Error fetching events:", err);
         setError(err.message);
         setEvents([]);
         setLoading(false);
@@ -80,7 +78,6 @@ export default function Events() {
      setLoading(false);
     })
   .catch((err) => {
-    console.error("Error fetching past events:", err);
     setError(err.message);
     setPastEventsData([]);
     setLoading(false); });

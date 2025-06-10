@@ -1,6 +1,7 @@
 import "./App.css";
 import BackgroundPoly from "./components/reusable/Background/backgroundPoly";
 import Routing from "./Routing";
+import { useLocation } from "react-router-dom";
 import Heading from "./components/sections/Footer";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useTranslation } from "react-i18next";
@@ -14,12 +15,17 @@ const queryClient = new QueryClient();
 function App() {
   // Correctly destructure i18n from useTranslation
   const { i18n } = useTranslation();
+  const location = useLocation();
 
   useEffect(() => {
     // Update the <html> lang attribute when the language changes.
     document.documentElement.lang = i18n.language;
   }, [i18n.language]);
-
+  useEffect(() => {
+    if (window.fbq) {
+      window.fbq("track", "PageView");
+    }
+  }, [location]);
   return (
     <>
       {/* <BackgroundPoly /> */}

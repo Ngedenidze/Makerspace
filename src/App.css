@@ -427,6 +427,9 @@ Link:link {
   display: flex;
   align-items: center;
 }
+.hover-effect .only-mobile {
+  display: none;
+}
 .desktop-menu{
   display: flex;
   flex-direction: column;
@@ -2304,11 +2307,11 @@ margin: 0;
   }
   .footer-menu-mobile h3{
     margin: 5px 0;
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
   .socials-mobile h2{
     margin-bottom: 2px;
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
   .footer-lang-mobile h2{
     margin-bottom: 2px;
@@ -2382,13 +2385,16 @@ margin: 0;
     padding: 0;
     padding-left: 1.2rem;
   }
-  .navbar-menu .hover-effect h1{
+  .hover-effect h1{
       line-height: 1rem;
-      font-size: 1rem;
+      font-size: 0.9rem;
   }
   .hover-effect svg{
     margin: 5px 10px;
     margin-left: 0;
+  }
+  .hover-effect .only-mobile{
+    display: block;
   }
   .mobile-menu-login .hover-effect svg{
     margin: 5px;
