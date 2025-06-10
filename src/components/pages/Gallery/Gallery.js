@@ -25,7 +25,7 @@ const Gallery = () => {
         setImages((prev) => [...prev, ...newImages]);
         if (newImages.length < 20) setHasMore(false);
       } catch (error) {
-        console.error("Error fetching images:", error);
+
       }
     };
 

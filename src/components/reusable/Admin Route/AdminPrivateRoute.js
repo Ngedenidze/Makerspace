@@ -18,11 +18,10 @@ function AdminPrivateRoute({ children }) {
         // Use your axios instance instead of fetch.
         const response = await api.get("/users/me");
         const data = response.data;
-        console.log(token);
-        console.log(data);
+
         setIsAdmin(data.role === "Admin");
       } catch (error) {
-        console.error("Error fetching user:", error);
+
         setIsAdmin(false);
       }
     };

@@ -42,7 +42,7 @@ export default function EventPage() {
       .get(`/Events/${id}`)
       .then((res) => {
         setEvent(res.data);
-        console.log("Fetched Event Data:", res.data);
+
 
         // --- Price and Buy Section Logic ---
         if (res.data && res.data.baskets && res.data.baskets.length > 0) {
@@ -65,7 +65,7 @@ setShowBuySection(now < eventEndDate);
 
       })
       .catch((err) => {
-        console.error("Error fetching event:", err);
+
         setError(err.response?.data?.message || err.message || t("error.event_fetch_generic", "Could not load event details."));
         setCurrentEventPrice(null); // Reset price on error
         setShowBuySection(false);
@@ -191,7 +191,7 @@ setShowBuySection(now < eventEndDate);
       });
       toast.success(t("ticket_added_to_cart_single", "{{eventName}} ticket added to your cart!", { eventName: eventNameForCart }));
     } catch (error) {
-      console.error("Ticket reservation error:", error);
+
       const errorMessage = error.response?.data?.message || t("error.add_to_cart_failed", "Failed to add ticket to cart.");
       toast.error(errorMessage);
     } finally {
