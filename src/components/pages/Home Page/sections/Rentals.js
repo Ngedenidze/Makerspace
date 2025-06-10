@@ -82,7 +82,6 @@ const Rentals = () => {
 
     // Create the form data string
     const formDataString = `Name: ${name}||Email: ${email}||Event Description: ${eventDescription}`;
-    console.log("Form Data String:", formDataString);
 
     // Determine the API URL based on the environment
     const apiUrl =
@@ -122,7 +121,6 @@ const Rentals = () => {
         ? await response.json()
         : await response.text();
 
-      console.log("Submission successful:", responseData);
       setSuccess("Your message has been sent successfully!");
       // Optionally clear form fields upon success
       setName("");

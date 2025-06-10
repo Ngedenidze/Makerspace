@@ -35,7 +35,6 @@ const AdminQRScanner = () => {
         await videoRef.current.play();
       }
     } catch (err) {
-      console.error("Error accessing camera:", err);
       setError("Error accessing camera");
       setScanning(false);
     }
@@ -72,13 +71,11 @@ const AdminQRScanner = () => {
         tId = parseInt(match[1], 10);
       }
     }
-    console.log("Extracted Ticket ID:", tId);
     return tId;
   };
 
   // Helper: Extract User ID from raw QR data string.
   const extractUserId = (dataObj) => {
-    console.log("Extracting User ID from dataObj:", dataObj);
     let uId = 0;
     if (dataObj && dataObj.raw) {
       const match = dataObj.raw.match(/User\s*ID\s*:\s*(\d+)/i);
@@ -93,7 +90,6 @@ const AdminQRScanner = () => {
   const fetchUserInfo = async (userId) => {
     try {
       const response = await api.get(`/users/GetUserbyId/${userId}`);
-      console.log("User info:", response.data);
       setUserInfo(response.data);
     } catch (err) {
       console.error("Error fetching user info:", err);
@@ -108,13 +104,11 @@ const AdminQRScanner = () => {
       setError("Ticket ID not found");
       return;
     }
-    console.log("Sending decision for ticketId:", ticketIdArg);
     try {
       const response = await api.post("/QRCode/scan", {
         isReject,
         ticketId: ticketIdArg,
       });
-      console.log("Decision response:", response.data);
       setDecision(isReject ? "rejected" : "accepted");
     } catch (err) {
       console.error("Error sending decision:", err);
@@ -143,14 +137,12 @@ const AdminQRScanner = () => {
           const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
           const code = jsQR(imageData.data, imageData.width, imageData.height);
           if (code) {
-            console.log("QR Code found:", code);
             setScanResult(code.data);
-            console.log("Raw QR data:", code.data);
 
             let parsedData;
             try {
               parsedData = JSON.parse(code.data);
-              console.log("Parsed QR data:", parsedData);
+
             } catch (e) {
               parsedData = { raw: code.data };
             }
