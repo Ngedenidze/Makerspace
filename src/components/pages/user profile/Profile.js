@@ -655,7 +655,8 @@ function Profile() {
           <h2 className="my-tickets-header">
             {t("my_tickets_title", "My Tickets")}
           </h2>
-          <div className="my-tickets-list">
+          <div className="my-tickets-list"> 
+            
             {ticketsLoading ? (
               <Loader />
             ) : ticketsError ? (
